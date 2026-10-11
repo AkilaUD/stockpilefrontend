@@ -1,0 +1,426 @@
+{
+  "a11y": {
+    "skipToContent": "Skip to main content",
+    "mainNavigation": "Main navigation",
+    "userMenu": "Account menu",
+    "languageSwitcher": "Language",
+    "footer": "Site information",
+    "breadcrumb": "Breadcrumb",
+    "closeDialog": "Close dialog",
+    "openMenu": "Open menu",
+    "loading": "Loading",
+    "requiredField": "required",
+    "sortAscending": "Sorted ascending",
+    "sortDescending": "Sorted descending",
+    "notifications": "Notifications"
+  },
+
+  "common": {
+    "actions": {
+      "save": "Save",
+      "cancel": "Cancel",
+      "submit": "Submit",
+      "continue": "Continue",
+      "back": "Back",
+      "next": "Next",
+      "close": "Close",
+      "search": "Search",
+      "filter": "Filter",
+      "clear": "Clear",
+      "apply": "Apply",
+      "reset": "Reset",
+      "retry": "Try again",
+      "refresh": "Refresh",
+      "copy": "Copy",
+      "copied": "Copied",
+      "download": "Download",
+      "upload": "Upload",
+      "edit": "Edit",
+      "delete": "Delete",
+      "remove": "Remove",
+      "view": "View",
+      "viewAll": "View all",
+      "signIn": "Sign in",
+      "signOut": "Sign out",
+      "register": "Create account",
+      "contact": "Contact supplier",
+      "requestQuote": "Request a quote"
+    },
+
+    "labels": {
+      "email": "Email",
+      "password": "Password",
+      "newPassword": "New password",
+      "confirmPassword": "Confirm password",
+      "currentPassword": "Current password",
+      "fullName": "Full name",
+      "firstName": "First name",
+      "lastName": "Last name",
+      "companyName": "Company name",
+      "phone": "Phone",
+      "district": "District",
+      "address": "Address",
+      "role": "Role",
+      "status": "Status",
+      "quantity": "Quantity",
+      "unit": "Unit",
+      "price": "Price",
+      "total": "Total",
+      "date": "Date",
+      "reference": "Reference",
+      "category": "Category",
+      "description": "Description",
+      "notes": "Notes"
+    },
+
+    "states": {
+      "loading": "Loading…",
+      "saving": "Saving…",
+      "emptyTitle": "Nothing here yet",
+      "emptyBody": "Once there is something to show, it will appear here.",
+      "noResultsTitle": "No matches",
+      "noResultsBody": "No results for “{query}”. Try fewer or different terms.",
+      "offline": "You appear to be offline."
+    }
+  },
+
+  "nav": {
+    "home": "Home",
+    "products": "Products",
+    "suppliers": "Suppliers",
+    "categories": "Categories",
+    "rfqs": "Requests for quote",
+    "orders": "Orders",
+    "quotes": "Quotes",
+    "dashboard": "Dashboard",
+    "account": "Account",
+    "settings": "Settings",
+    "help": "Help",
+    "admin": "Administration",
+    "language": "Language",
+    "languageEnglish": "English",
+    "languageSinhala": "සිංහල",
+    "switchToEnglish": "Switch to English",
+    "switchToSinhala": "Switch to Sinhala",
+    "localeEnShort": "EN",
+    "localeSiShort": "සිංහල"
+  },
+
+  "footer": {
+    "tagline": "Business-to-business procurement for construction materials in Sri Lanka.",
+    "about": "About",
+    "contact": "Contact",
+    "terms": "Terms of service",
+    "privacy": "Privacy",
+    "helpCentre": "Help centre",
+    "rights": "All rights reserved.",
+    "accountGroup": "Account",
+    "siteGroup": "Site"
+  },
+
+  "home": {
+    "eyebrow": "Procurement · Sri Lanka",
+    "headline": "Build the list. Find the supply. Compare what actually matters.",
+    "lede": "A business-to-business desk for construction materials. List what the project needs, receive quotes you can put side by side, and place orders against a written record instead of a phone call.",
+    "hero": {
+      "cta": "Start an RFQ",
+      "searchLabel": "What are you sourcing?",
+      "searchSubmit": "Search",
+      "examples": [
+        "GI pipes, 2 inch, 150 lengths…",
+        "Cement OPC 42.5N, 500 bags…",
+        "12mm rebar by the tonne…",
+        "Emulsion paint, 20L buckets…",
+        "A supplier in Kandy…"
+      ],
+      "intentLabel": "Or start from an intent:",
+      "intentProducts": "Browse products",
+      "intentSuppliers": "Find suppliers",
+      "intentCategories": "Shop departments",
+      "materialFigure": "From the live catalogue",
+      "signalProducts": "Products listed",
+      "signalSuppliers": "Suppliers listed",
+      "signalDepartments": "Departments"
+    },
+    "trio": {
+      "label": "Ways to start",
+      "knowStep": "01",
+      "knowTitle": "I know what I need",
+      "knowBody": "Name it, spec it, and see who lists it — side by side.",
+      "knowLink": "Search the catalogue",
+      "browseStep": "02",
+      "browseTitle": "I want to browse",
+      "browseBody": "Walk the departments and compare materials at leisure.",
+      "browseLink": "Open the catalogue",
+      "suppliersStep": "03",
+      "suppliersTitle": "I want suppliers",
+      "suppliersBody": "Meet the directory first, then ask for quotes.",
+      "suppliersLink": "Meet suppliers"
+    },
+    "departments": {
+      "eyebrow": "Departments",
+      "title": "Shop by department",
+      "lede": "Twelve departments, one live catalogue. Pick a trade and start comparing."
+    },
+    "pulse": {
+      "products": "Products listed",
+      "suppliers": "Suppliers listed",
+      "departments": "Departments",
+      "districts": "Districts served",
+      "note": "Live catalogue figures — read from the platform on every visit, never printed."
+    },
+    "strip": {
+      "eyebrow": "Featured materials",
+      "title": "Fresh on the shelves",
+      "lede": "The newest listings with their real specifications. Drag through them, or open any card for the full sheet.",
+      "viewAll": "Open the catalogue"
+    },
+    "suppliers": {
+      "eyebrow": "Supplier directory",
+      "title": "Verified first, always",
+      "lede": "The directory leads with verified suppliers. Open a row for the full dossier.",
+      "viewAll": "View all suppliers",
+      "verified": "Verified",
+      "unverified": "Not yet verified",
+      "products": "products"
+    },
+    "field": {
+      "eyebrow": "Field proof",
+      "title": "Where the catalogue reaches",
+      "lede": "No case studies yet — so here is what the directory itself says: districts served, verified share, department depth.",
+      "districtsLabel": "Districts with listed suppliers",
+      "verifiedLabel": "Verified suppliers",
+      "departmentsLabel": "Departments covered"
+    },
+    "final": {
+      "title": "Put the next purchase on the record.",
+      "lede": "List what the site needs once, and let suppliers answer against the same lines.",
+      "primary": "Create a buyer account",
+      "secondary": "Browse suppliers first"
+    },
+    "workflow": {
+      "eyebrow": "How procurement runs",
+      "title": "Four steps, one record.",
+      "lede": "Each stage leaves something both sides can point back to.",
+      "step1Title": "List what the site needs",
+      "step1Body": "Add products with quantities and units, or upload a bill of quantities. Nothing leaves your account until you submit it.",
+      "step2Title": "Suppliers answer with quotes",
+      "step2Body": "Matched suppliers quote price, lead time, validity and terms against the same line items.",
+      "step3Title": "Compare like for like",
+      "step3Body": "Quotes line up item by item, so the differences that decide the purchase are visible rather than buried.",
+      "step4Title": "Place the order",
+      "step4Body": "Accept a quote and the order, its deliveries and its payments stay in one place."
+    }
+  },
+
+  "notFound": {
+    "eyebrow": "404 · Not found",
+    "title": "This page could not be found.",
+    "body": "The address may have been typed incorrectly, or the page may have moved. Nothing you were working on has been lost.",
+    "backHome": "Go to the home page"
+  },
+
+  "auth": {
+    "loginTitle": "Sign in to your account",
+    "loginSubtitle": "Continue to your procurement workspace.",
+    "registerTitle": "Create a buyer account",
+    "registerSubtitle": "Tell us who you are. Supplier accounts are reviewed separately.",
+    "forgotTitle": "Reset your password",
+    "forgotSubtitle": "We will email you a single-use link.",
+    "resetTitle": "Choose a new password",
+    "resetSubtitle": "The link is valid for a short time and can only be used once.",
+    "verifyTitle": "Confirm your email address",
+    "verifySubtitle": "Your account is activated once this address is confirmed.",
+    "verifyPending": "Check your inbox. We sent a confirmation link to {email}.",
+    "verifyPendingGeneric": "Check your inbox. We sent you a confirmation link when you signed up.",
+    "verifyResend": "Resend confirmation email",
+    "rememberMe": "Keep me signed in",
+    "phoneHint": "International format (+94 77 123 4567). Optional for now.",
+    "haveAccount": "Already have an account?",
+    "noAccount": "No account yet?",
+    "forgotLink": "Forgot your password?",
+    "sendResetLink": "Send reset link",
+    "backToSignIn": "Back to sign in",
+    "signOutEverywhere": "Sign out on all devices",
+    "reviewSessions": "Active sessions",
+    "resetSent": "If an account exists for that email, we sent a password reset link. The link works for a short time and can only be used once.",
+    "resetSuccessTitle": "Password changed",
+    "resetSuccessBody": "Your password has been updated. Sign in with your new password.",
+    "verifiedTitle": "Email confirmed",
+    "verifiedBody": "Your email address is now confirmed. Sign in to continue.",
+    "alreadyVerifiedTitle": "Already confirmed",
+    "alreadyVerifiedBody": "This email address was already confirmed. Sign in to continue.",
+    "resendSent": "We sent a new confirmation link to {email}.",
+    "validation": {
+      "emailRequired": "Enter your email address.",
+      "emailInvalid": "Enter a valid email address.",
+      "passwordRequired": "Enter your password.",
+      "passwordTooShort": "Use at least 10 characters.",
+      "passwordsDoNotMatch": "The two passwords do not match.",
+      "nameRequired": "Enter your full name.",
+      "companyRequired": "Enter your registered business name.",
+      "phoneRequired": "Enter a phone number.",
+      "phoneInvalid": "Enter a phone number in international format, for example +94 77 123 4567.",
+      "duplicateEmail": "An account with this email already exists. Sign in instead."
+    },
+    "strength": {
+      "label": "Password strength",
+      "weak": "Weak",
+      "fair": "Fair",
+      "good": "Good",
+      "strong": "Strong"
+    }
+  },
+
+  "workspace": {
+    "title": "Workspace",
+    "emptyTitle": "No activity yet",
+    "emptyBody": "Requests for quote, orders and projects will appear here as they come in.",
+    "supplierTitle": "Supplier desk",
+    "supplierEmptyTitle": "No buying leads yet",
+    "supplierEmptyBody": "Requests for quote addressed to your company will appear here.",
+    "adminTitle": "Administration",
+    "adminEmptyTitle": "No administration tasks yet",
+    "adminEmptyBody": "Platform administration functions will appear here."
+  },
+
+  "catalogue": {
+    "listing": {
+      "title": "Products",
+      "lede": "The construction catalogue — every product Stockpile.lk suppliers list, browsable by category and searchable by name, supplier or SKU.",
+      "emptyTitle": "No products match these filters",
+      "emptyBody": "Clear the filters or search with different terms to see products.",
+      "clearFilters": "Clear filters",
+      "searchEcho": "Matching “{query}”",
+      "sortLabel": "Sort",
+      "count": "{count, plural, =0 {No products} one {# product} other {# products}}",
+      "verifiedOnly": "Verified suppliers only",
+      "inStockOnly": "In stock only"
+    },
+    "sort": {
+      "relevance": "Relevance",
+      "newest": "Newest first",
+      "price_asc": "Price · low to high",
+      "price_desc": "Price · high to low",
+      "name": "Name A–Z"
+    },
+    "product": {
+      "priceOnRequest": "Price on request",
+      "minOrderLabel": "Minimum order",
+      "minOrder": "Min. order {quantity}",
+      "perUnit": "per {unit}",
+      "leadTimeLabel": "Lead time",
+      "leadTime": "{days, plural, one {# day} other {# days}} lead time",
+      "sku": "SKU {sku}",
+      "verified": "Verified supplier",
+      "unverified": "Not yet verified",
+      "brand": "Brand",
+      "countryOfOrigin": "Country of origin",
+      "countryOfManufacture": "Country of manufacture",
+      "about": "About this product",
+      "specifications": "Specifications",
+      "priceHistory": "Price history",
+      "onDate": "on {date}",
+      "related": "Related products",
+      "viewAllInCategory": "View all in {category}"
+    },
+    "stock": {
+      "InStock": "In stock",
+      "OutOfStock": "Out of stock",
+      "EnquireForAvailability": "Enquire for availability"
+    },
+    "category": {
+      "title": "Categories",
+      "lede": "Browse the catalogue by department.",
+      "subcategories": "Subcategories",
+      "products": "{count, plural, one {# product} other {# products}}"
+    },
+    "supplier": {
+      "title": "Suppliers",
+      "lede": "The companies that sell on Stockpile.lk.",
+      "count": "{count, plural, one {# supplier} other {# suppliers}}",
+      "verified": "Verified",
+      "unverified": "Not yet verified",
+      "products": "{count, plural, one {# product} other {# products}}",
+      "specialties": "Specialties",
+      "featured": "Featured products",
+      "contact": "Contact",
+      "phone": "Phone",
+      "email": "Email",
+      "website": "Website",
+      "story": "About",
+      "searchPlaceholder": "Search suppliers",
+      "searchSubmit": "Search",
+      "noMatchesTitle": "No suppliers match your search",
+      "noMatchesBody": "Try a broader name or browse the full directory.",
+      "memberSince": "Member since {date}",
+      "verifiedAt": "Verified {date}",
+      "viewSupplier": "View supplier",
+      "allProducts": "View all products"
+    },
+    "search": {
+      "prompt": "Search the catalogue",
+      "resultsFor": "Results for “{query}”",
+      "count": "{count} results",
+      "emptyTitle": "Nothing matches “{query}”",
+      "emptyBody": "Check the spelling, or try broader or different terms.",
+      "suggestions": "Try searching for",
+      "suggestedCategory": "Browse {name}"
+    },
+    "command": {
+      "trigger": "Search catalogue",
+      "placeholder": "Search products, categories, suppliers",
+      "products": "Products",
+      "categories": "Categories",
+      "suppliers": "Suppliers",
+      "seeAll": "See all results for “{query}”",
+      "empty": "Type to search the catalogue.",
+      "noResults": "No matches for “{query}”.",
+      "loading": "Searching…"
+    },
+    "menu": {
+      "browse": "Browse the catalogue",
+      "allCategories": "All categories",
+      "open": "Menu",
+      "close": "Close"
+    },
+    "facets": {
+      "title": "Assortment profile"
+    },
+    "pagination": {
+      "previous": "Previous",
+      "next": "Next",
+      "page": "Page {page} of {total}",
+      "pageAria": "Page {page}"
+    }
+  },
+
+  "errors": {
+    "unexpected": "We could not complete this. Quote reference {reference} when you contact support.",
+    "unexpectedNoReference": "We could not complete this action just now. Try again in a moment — if it keeps happening, note the time and let us know.",
+    "network": "We could not reach Stockpile.lk. Check your connection and try again.",
+    "timeout": "The request took too long. Try again — the action may still be running.",
+    "validation": "Check the highlighted fields and try again.",
+
+    "INVALID_CREDENTIALS": "That email and password combination is not correct. Check them and try again.",
+    "ACCOUNT_LOCKED": "Too many failed attempts. This account is temporarily locked — try again in a few minutes.",
+    "EMAIL_NOT_VERIFIED": "Confirm your email address before continuing. We can send the link again.",
+    "SESSION_EXPIRED": "Your session has expired. Sign in again to continue.",
+    "ANTIFORGERY_FAILED": "We could not verify this request. Reload the page and try again.",
+    "REFRESH_REUSED": "That sign-in was already used elsewhere, so we ended both sessions for safety. Sign in again.",
+    "INVALID_VERIFICATION_TOKEN": "That confirmation link is no longer valid.",
+    "INVALID_RESET_TOKEN": "That reset link is no longer valid. Request a new one.",
+
+    "INSUFFICIENT_CAPABILITY": "Your account does not include this action. Ask an administrator to grant it.",
+    "NOT_ORGANIZATION_MEMBER": "You are not a member of this organization.",
+    "RESOURCE_NOT_FOUND": "We could not find that. It may have been removed, or you may not have access to it.",
+    "CROSS_TENANT_DENIED": "That record belongs to another organization.",
+
+    "RATE_LIMITED": "You have made a lot of requests. Wait {seconds} seconds and try again.",
+    "VALIDATION_FAILED": "Some details are not valid yet. Fix the highlighted fields.",
+    "CONCURRENCY_CONFLICT": "Someone else changed this while you were editing. Reload to get the latest version.",
+    "IDEMPOTENCY_KEY_REQUIRED": "This action needs a retry key. Reload the page and try again.",
+    "IDEMPOTENCY_KEY_REUSE": "This retry key was already used with different details. Start the action again.",
+    "STATE_TRANSITION_INVALID": "This action is not available from the current status."
+  }
+}

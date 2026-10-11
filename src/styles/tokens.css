@@ -1,0 +1,263 @@
+/* =============================================================================
+   Stockpile.lk — Design tokens
+   Source of truth: docs/design-system.md §2 (palette), §4 (tokens).
+
+   THREE-LAYER CHAIN — this ordering is what keeps the layers from colliding:
+
+     --palette-*   raw swatches. No component may reference these directly.
+     --<semantic>  role assignment (--surface-page, --ink, --brand-primary…).
+                   Components use these.
+     --<utility>   Tailwind @theme aliases in globals.css, exposed as
+                   utilities (bg-surface-panel, text-ink-muted, rounded-md).
+
+   The layers MUST use distinct variable names. Tailwind v4 emits its @theme
+   block into :root, so `--color-success: var(--success)` where `--success`
+   resolves to `--color-success` would be a circular reference that silently
+   invalidates at computed-value time. The naming convention below exists to
+   make that class of bug structurally impossible.
+   ========================================================================== */
+
+:root {
+  /* ===========================================================================
+     LAYER 1 — PALETTE. Raw material swatches.
+
+     The exact five-colour construction core from the UI/UX master brief:
+
+       #d6d6d6  neutral       - page grounds, quiet sections, separators, bands
+       #ffee32  signal        - primary CTA, active procurement signals, counts
+       #ffd100  signal-soft   - secondary CTA, hover step on signal, progress
+       #202020  ink           - primary structural dark; nav, heroes, footer
+       #333533  ink-soft      - secondary structural dark; panels in the dark
+
+     Everything below the core is a *derived neutral* - a mix of core ink and
+     core neutral at a fixed ratio - so no hue is ever imported. One functional
+     exception exists: a danger red for error semantics (design-system.md §2.5).
+     Blues, greens and oranges are banned by the brief, full stop.
+     ======================================================================== */
+
+  /* core */
+  --palette-ink: #202020;
+  --palette-ink-soft: #333533;
+  --palette-signal: #ffee32;
+  --palette-signal-soft: #ffd100;
+  --palette-neutral: #ffffff;
+
+  /* derived neutrals (core mixes). Contrasts are cited against the ground
+     they sit on; AA pairs live in design-system.md §2.1/§2.3. */
+  --palette-neutral-elevated: #ffffff;   /* floating panels, inputs, menus */
+  --palette-neutral-recessed: #f5f5f5;   /* recessed wells, zebra bands */
+  --palette-neutral-muted: #6b7280;      /* AA muted ink - 4.6:1 on #ffffff */
+  --palette-neutral-faint: #9ca3af;      /* decorative tier only - never copy */
+  --palette-ink-deep: #f8f8f8;           /* recessed well inside dark grounds */
+
+  /* functional exception: danger (§2.5) - error semantics cannot be expressed
+     in the five-colour core for every ground, so this is the single imported
+     hue, kept to ~5.4:1 on the neutral field. */
+  --palette-danger: #9e2219;             /* 5.4:1 on #d6d6d6 */
+  --palette-danger-lift: #ff7b6e;        /* legible variant on #202020 grounds */
+
+  /* ===========================================================================
+     LAYER 2 — SEMANTIC. Role assignment. Components reference these only.
+     ======================================================================== */
+
+  /* surfaces — §4.1. The neutral field is the page; elevation is white; the
+     dark register is the two structural inks. */
+  --surface-page: var(--palette-neutral);
+  --surface-panel: var(--palette-neutral);
+  --surface-elevated: var(--palette-neutral-elevated);
+  --surface-recessed: var(--palette-neutral-recessed);
+  --surface-inverse: var(--palette-ink);
+  --surface-inverse-raised: var(--palette-ink-soft);
+
+  /* ink */
+  --ink: var(--palette-ink);
+  --ink-strong: var(--palette-ink-soft);
+  --ink-muted: var(--palette-neutral-muted);
+  /* Decorative tier only — never real copy. Measured ≈1.7:1 on the light
+     ground and ≈3.2:1 on `[data-surface="dark"]`, so it cannot carry text
+     that owes the reader 4.5:1 (§10). Rules, disabled labels, non-essential
+     ornament. The moment something is readable content it moves to
+     `--ink-muted`. */
+  --ink-faint: var(--palette-neutral-faint);
+  --ink-inverse: var(--palette-neutral);
+  --ink-accent: var(--palette-ink);    /* interactive text on light grounds */
+  /* Text that sits on a signal-yellow fill. #202020 in BOTH roles: a yellow
+     CTA takes dark text on every ground (§2.1 of the brief), so this token
+     is re-pinned to the palette in the dark block rather than re-rolled. */
+  --ink-on-signal: var(--palette-ink);
+  /* "needs attention" and "positive" text: on light grounds the only AA text
+     hues are the dark inks, so these resolve to `--ink` — the signal is
+     carried by the chip/icon next to them, never by yellow text on #d6d6d6. */
+  --ink-marker: var(--palette-ink);
+  --ink-oxide: var(--palette-ink);
+
+  /* lines — brief §89: thin #e5e7eb lines on #ffffff. */
+  --line: rgb(229 231 235 / 0.8);          /* quiet hairline */
+  --line-strong: rgb(209 213 219 / 0.9);   /* input borders, structural rules */
+  --line-interactive: var(--palette-ink);
+
+  /* brand — §14. The wordmark's own yellow (#F4D20F) and the UI signal
+     (#ffee32) are adjacents in one yellow family now: the mark stays
+     decorative, the UI signal carries function, and the two no longer compete
+     for attention. */
+  --brand-primary: var(--palette-signal);
+  --brand-primary-hover: var(--palette-signal-soft); /* brief §2.1 hover step */
+  --brand-secondary: var(--palette-signal-soft);
+  --brand-marker: var(--palette-signal-soft);
+
+  /* status — §2.2: icon + text + colour, never colour alone. */
+  --success: var(--palette-signal);      /* active / approved = signal marker */
+  --warning: var(--palette-signal-soft);
+  --danger: var(--palette-danger);
+  --info: var(--palette-ink);
+  --focus-ring: var(--palette-ink);      /* visible on every light ground */
+
+  /* ===========================================================================
+     SPACING — 4px base. Named by rhythm, not value, so a rebase does not
+     require touching components.
+     ======================================================================== */
+  --space-2xs: 0.125rem; /*  2px — hairline offsets */
+  --space-xs: 0.25rem; /*  4px — icon↔label */
+  --space-sm: 0.5rem; /*  8px — compact row internals */
+  --space-md: 0.75rem; /* 12px — between compact elements */
+  --space-base: 1rem; /* 16px — default */
+  --space-lg: 1.5rem; /* 24px — card internals */
+  --space-xl: 2rem; /* 32px — block separation */
+  --space-2xl: 3rem; /* 48px — section rhythm (operational) */
+  --space-3xl: 4rem; /* 64px — section rhythm (editorial) */
+  --space-4xl: 6rem; /* 96px — editorial section break */
+  --space-5xl: 8rem; /* 128px — editorial chapter break */
+
+  /* ===========================================================================
+     CORNERS — §4.1 "fewer, stronger radii". Hard edges in technical sections
+     are deliberate industrial language, not an omission.
+     Aliased into Tailwind's --radius-* namespace in globals.css.
+     ======================================================================== */
+  --corner-none: 0;
+  --corner-sm: 2px; /* inputs, chips */
+  --corner-md: 4px; /* buttons, panels */
+  --corner-lg: 6px; /* dialogs only */
+  --corner-round: 999px; /* ONLY avatars, status dots, text-bearing status pills */
+
+  /* ===========================================================================
+     ELEVATION — §4.2. Shadow means "temporarily above the page": dialogs,
+     popovers, dropdowns, sticky toolbars. Sections and list cards have none.
+     Aliased into Tailwind's --shadow-* namespace in globals.css.
+     ======================================================================== */
+  --elev-none: none;
+  --elev-sm: 0 1px 2px rgb(20 22 26 / 0.06);
+  --elev-md: 0 2px 8px rgb(20 22 26 / 0.08);
+  --elev-lg: 0 8px 24px rgb(20 22 26 / 0.1);
+  --elev-overlay: 0 12px 40px rgb(20 22 26 / 0.18);
+
+  /* ===========================================================================
+     MOTION — §7.3. Never used to block a business action.
+     ======================================================================== */
+  --dur-instant: 80ms; /* hover, press */
+  --dur-fast: 140ms; /* focus, chips, inline validation */
+  --dur-base: 220ms; /* dialogs, drawers, list transitions */
+  --dur-slow: 380ms; /* route, editorial reveal */
+  --motion-ease-standard: cubic-bezier(0.2, 0, 0, 1);
+  --motion-ease-out: cubic-bezier(0, 0, 0.2, 1);
+  --motion-ease-in: cubic-bezier(0.4, 0, 1, 1);
+
+  /* ===========================================================================
+     LAYOUT — §5.1
+     ======================================================================== */
+  --layout-max-public: 1440px;
+  --layout-max-workspace: 1680px;
+  --layout-rail-nav: 248px;
+  --layout-rail-context: 320px;
+  --layout-gutter: 1.5rem;
+
+  /* Content-driven breakpoints (§36). CSS media queries cannot consume custom
+     properties, so these are reference-only and must stay in sync with the
+     @media rules below. Each exists because content broke at that width, not
+     because a device has that name. */
+  --bp-xs: 360px;
+  --bp-sm: 480px;
+  --bp-md: 768px;
+  --bp-lg: 1024px;
+  --bp-xl: 1280px;
+  --bp-2xl: 1440px;
+  --bp-3xl: 1600px;
+
+  /* z-index — single scale. No ad-hoc values in components. */
+  --z-base: 0;
+  --z-raised: 10;
+  --z-sticky: 100;
+  --z-header: 200;
+  --z-drawer: 300;
+  --z-overlay: 400;
+  --z-modal: 500;
+  --z-toast: 600;
+  --z-tooltip: 700;
+}
+
+@media (min-width: 768px) {
+  :root {
+    --layout-gutter: 2rem;
+  }
+}
+
+@media (min-width: 1280px) {
+  :root {
+    --layout-gutter: 3rem;
+  }
+}
+
+/* =============================================================================
+   Dark surface — the public masthead and footer are dark command areas
+   (#202020), as is any public editorial section that wants contrast rhythm.
+   An opt-in workspace theme re-uses the same block (workspaces ship
+   light-first, docs/design-system.md §2.4 rule 4).
+
+   Overrides sit at the SEMANTIC layer only. The palette never changes, so a
+   dark section is a re-role of the same material rather than a second palette.
+   ========================================================================== */
+[data-surface="dark"] {
+  --surface-page: var(--palette-ink);
+  --surface-panel: var(--palette-ink);
+  --surface-elevated: var(--palette-ink-soft);
+  --surface-recessed: var(--palette-ink-deep);
+
+  --ink: var(--palette-neutral);
+  --ink-strong: #ffffff;
+  --ink-muted: #a6a6a6;                  /* 5.2:1 on #333533, 6.7:1 on #202020 */
+  --ink-faint: #737373;                  /* decorative tier only */
+  --ink-inverse: var(--palette-ink);
+  --ink-accent: var(--palette-signal);   /* links/labels on dark grounds */
+  /* Re-pinned, NOT re-rolled: signal fills take #202020 text on every ground. */
+  --ink-on-signal: var(--palette-ink);
+  --ink-marker: var(--palette-signal-soft);
+  --ink-oxide: var(--palette-neutral);
+
+  --line: rgb(214 214 214 / 0.2);
+  --line-strong: rgb(214 214 214 / 0.4);
+  --line-interactive: var(--palette-signal);
+
+  --brand-primary: var(--palette-signal);
+  --brand-primary-hover: var(--palette-signal-soft);
+  --brand-secondary: var(--palette-signal-soft);
+  --brand-marker: var(--palette-signal-soft);
+
+  --success: var(--palette-signal);
+  --warning: var(--palette-signal-soft);
+  --danger: var(--palette-danger-lift);  /* dark-ground legibility variant */
+  --info: var(--palette-neutral);
+  --focus-ring: var(--palette-signal);   /* visible on #202020 / #333533 */
+}
+
+/* =============================================================================
+   Forced-colors (Windows High Contrast / user-forced palettes).
+   Colour tokens are ignored by the OS here, so elevation and palette-derived
+   signals must not be the sole carrier of meaning (docs/design-system.md §10).
+   ========================================================================== */
+@media (forced-colors: active) {
+  :root {
+    --elev-sm: none;
+    --elev-md: none;
+    --elev-lg: none;
+    --elev-overlay: none;
+  }
+}

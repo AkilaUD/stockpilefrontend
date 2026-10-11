@@ -1,0 +1,260 @@
+/* =============================================================================
+   Stockpile.lk — Typography scale
+   Source of truth: docs/design-system.md §3.
+
+   Three families, no more:
+     Bricolage Grotesque  — the voice of statements (editorial display)
+     Instrument Sans      — the voice of UI (everything that does work)
+     IBM Plex Mono        — the voice of data (SKUs, quantities, prices,
+                            timestamps, reference codes, table headers)
+
+   Font variables are assigned in globals.css via @theme from `next/font`
+   downloads. Nothing here references a third-party font CDN — next/font
+   self-hosts the files under /_next/static/media, which satisfies the
+   `font-src 'self'` CSP (docs/security-threat-model.md §9).
+
+   The stacks themselves live in globals.css @theme (--font-display/body/mono)
+   so this stylesheet consumes the same variables the Tailwind utilities do —
+   `font-display` and `.type-display-xl` can never disagree.
+
+   -----------------------------------------------------------------------------
+   LAYERS ARE LOAD-BEARING HERE. Tailwind opens with
+   `@layer theme, base, components, utilities;`, and *unlayered* rules beat
+   every layer regardless of specificity. Written flat, this file's
+   `a { color: var(--ink-accent) }` outranks `text-ink-inverse` — so the label
+   on a primary button would render signal yellow on signal yellow, and no
+   `text-*` utility anywhere would ever win against `.type-label`.
+
+   So: element rules go in `base` (they must lose to utilities, must beat
+   preflight), type-scale classes go in `components` (utilities override them,
+   they override base). `:root` custom properties sit in `theme` alongside
+   Tailwind's own tokens.
+   ========================================================================== */
+
+@layer theme {
+  :root {
+    /* §3.1 scale. Sizes are rem so user font-size preference is respected. */
+    --type-display-xl: clamp(3.25rem, 7vw, 6.5rem);
+    --type-display-lg: clamp(2.5rem, 4.5vw, 4rem);
+    --type-display-md: clamp(1.75rem, 2.5vw, 2.5rem);
+    --type-title-lg: 1.625rem;
+    --type-title-md: 1.25rem;
+    --type-title-sm: 1.0625rem;
+    --type-body: 1rem;
+    --type-body-sm: 0.9375rem;
+    --type-meta: 0.8125rem;
+    --type-label: 0.6875rem;
+    --type-micro: 0.625rem;
+
+    --lh-display-xl: 0.96;
+    --lh-display-lg: 1.02;
+    --lh-display-md: 1.08;
+    --lh-title-lg: 1.35;
+    --lh-title-md: 1.35;
+    --lh-title-sm: 1.4;
+    --lh-body: 1.6;
+    --lh-body-tight: 1.55;
+    --lh-meta: 1.45;
+
+    --tr-display-xl: -0.035em;
+    --tr-display-lg: -0.03em;
+    --tr-display-md: -0.02em;
+    --tr-title-lg: -0.015em;
+    --tr-title-md: -0.01em;
+    --tr-meta: 0.01em;
+    --tr-label: 0.09em;
+    --tr-micro: 0.11em;
+
+    /* Measure — editorial body is bounded; operational body fills its panel. */
+    --measure-editorial: 62ch;
+  }
+}
+
+@layer base {
+  /* -----------------------------------------------------------------------------
+     Base type application
+     -------------------------------------------------------------------------- */
+  body {
+    font-family: var(--font-body);
+    font-size: var(--type-body);
+    line-height: var(--lh-body);
+    color: var(--ink);
+    background: var(--surface-page);
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* -----------------------------------------------------------------------------
+     Link treatment. On light grounds the only AA text hues are the dark inks:
+     #ffee32 text on #d6d6d6 measures ≈1.2:1 and is banned, so a link is
+     `--ink-accent` (= ink, underlined) stepping to `--ink-strong` on hover —
+     the palette values (`--palette-*`) are deliberately private to tokens.css,
+     so no component or base rule may name one (globals.css @theme). Under
+     `data-surface="dark"` the accent re-roles to signal yellow, which is the
+     only place link text is yellow; `--ink-strong` re-roles to white there.
+
+     A link carrying its own `text-*` utility keeps it on hover too — utilities
+     out-rank this rule, which is why hover styling belongs with the utility
+     (`hover:text-ink`) rather than here. This is the *default* link only.
+     -------------------------------------------------------------------------- */
+  a {
+    color: var(--ink-accent);
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.18em;
+  }
+
+  a:hover {
+    color: var(--ink-strong);
+  }
+
+  /* -----------------------------------------------------------------------------
+     Focus — §10 accessibility. Visible, always. `outline: none` without a
+     replacement is forbidden; this ring is the replacement and is never
+     disabled by a component.
+
+     No `border-radius` here: `outline` already traces the element's own
+     corners, and adding one would silently re-shape a square panel (and its
+     children's clipping) merely because it received focus.
+     -------------------------------------------------------------------------- */
+  :focus-visible {
+    outline: 2px solid var(--focus-ring);
+    outline-offset: 2px;
+  }
+
+  /* -----------------------------------------------------------------------------
+     Reduced motion — §7.2. Motion is never load-bearing for comprehension.
+     -------------------------------------------------------------------------- */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+@layer components {
+  /* -----------------------------------------------------------------------------
+     Display — Bricolage Grotesque. Editorial statements only; never in tables
+     or forms (docs/design-system.md §3.2).
+     -------------------------------------------------------------------------- */
+  .type-display-xl {
+    font-family: var(--font-display);
+    font-size: var(--type-display-xl);
+    line-height: var(--lh-display-xl);
+    letter-spacing: var(--tr-display-xl);
+    font-weight: 600;
+  }
+
+  .type-display-lg {
+    font-family: var(--font-display);
+    font-size: var(--type-display-lg);
+    line-height: var(--lh-display-lg);
+    letter-spacing: var(--tr-display-lg);
+    font-weight: 600;
+  }
+
+  .type-display-md {
+    font-family: var(--font-display);
+    font-size: var(--type-display-md);
+    line-height: var(--lh-display-md);
+    letter-spacing: var(--tr-display-md);
+    font-weight: 600;
+  }
+
+  /* -----------------------------------------------------------------------------
+     Titles — Instrument Sans. Used in workspaces so operational screens never
+     inherit the editorial voice.
+     -------------------------------------------------------------------------- */
+  .type-title-lg {
+    font-size: var(--type-title-lg);
+    line-height: var(--lh-title-lg);
+    letter-spacing: var(--tr-title-lg);
+    font-weight: 600;
+  }
+
+  .type-title-md {
+    font-size: var(--type-title-md);
+    line-height: var(--lh-title-md);
+    letter-spacing: var(--tr-title-md);
+    font-weight: 600;
+  }
+
+  .type-title-sm {
+    font-size: var(--type-title-sm);
+    line-height: var(--lh-title-sm);
+    letter-spacing: var(--tr-title-sm);
+    font-weight: 600;
+  }
+
+  /* -----------------------------------------------------------------------------
+     Body
+     -------------------------------------------------------------------------- */
+  .type-body {
+    font-size: var(--type-body);
+    line-height: var(--lh-body);
+  }
+
+  .type-body-sm {
+    font-size: var(--type-body-sm);
+    line-height: var(--lh-body-tight);
+  }
+
+  .type-meta {
+    font-size: var(--type-meta);
+    line-height: var(--lh-meta);
+    letter-spacing: var(--tr-meta);
+    color: var(--ink-muted);
+  }
+
+  /* -----------------------------------------------------------------------------
+     Labels & micro — IBM Plex Mono, uppercase. The technical register:
+     field labels, table column heads, spec chips, SKU, reference codes.
+     -------------------------------------------------------------------------- */
+  .type-label {
+    font-family: var(--font-mono);
+    font-size: var(--type-label);
+    line-height: 1.3;
+    letter-spacing: var(--tr-label);
+    text-transform: uppercase;
+    font-weight: 500;
+    color: var(--ink-muted);
+  }
+
+  .type-micro {
+    font-family: var(--font-mono);
+    font-size: var(--type-micro);
+    line-height: 1.3;
+    letter-spacing: var(--tr-micro);
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+
+  /* -----------------------------------------------------------------------------
+     Data register — mono, tabular. Every numeric table cell uses this so
+     columns align (docs/design-system.md §3.2, non-negotiable in workspaces).
+     -------------------------------------------------------------------------- */
+  .type-data {
+    font-family: var(--font-mono);
+    font-variant-numeric: tabular-nums;
+    font-feature-settings: "tnum" 1;
+  }
+
+  /* Money and quantities never wrap mid-figure. */
+  .type-money,
+  .type-quantity {
+    font-family: var(--font-mono);
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+  }
+
+  /* -----------------------------------------------------------------------------
+     Editorial measure — applied to long-form reading blocks only.
+     -------------------------------------------------------------------------- */
+  .measure-editorial {
+    max-width: var(--measure-editorial);
+  }
+}

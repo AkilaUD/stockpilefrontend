@@ -1,0 +1,562 @@
+@import "tailwindcss";
+
+/* Design tokens and type scale are plain CSS so they never depend on Tailwind
+   compiling. See docs/design-system.md §4 and §51. */
+@import "../styles/tokens.css";
+@import "../styles/typography.css";
+
+/* -----------------------------------------------------------------------------
+   Tailwind v4 theme bridge — LAYER 3 of the chain in tokens.css.
+
+   Every entry here aliases a layer-2 semantic variable under a distinct name.
+   Names must differ from their source: Tailwind emits this block into :root,
+   so a same-name alias would be a circular reference that invalidates at
+   computed-value time rather than failing loudly.
+
+   Result: a component can only express itself in design language —
+   `bg-surface-panel`, `text-ink-muted`, `rounded-md`. There is deliberately
+   no palette-named utility. Palette values stay private to tokens.css,
+   which is what stops ad-hoc colour creeping into components.
+
+   `static` matters: by default Tailwind only emits theme variables that some
+   generated utility actually consumed. design-system.md §4 names `--radius-md`,
+   `--shadow-*` and friends as *tokens*, so a component or stylesheet citing
+   `var(--radius-md)` directly would resolve to nothing until some page happened
+   to use `rounded-md`. `static` guarantees every documented name exists in
+   `:root` on every build.
+
+   `inline` matters more still, and it is the reason `bg-surface-page` can be
+   re-rolled by `[data-surface="dark"]`. Without it a utility is emitted as
+   `color: var(--color-ink-muted)`, and that alias is *declared on `:root`* —
+   custom-property substitution happens at the declaring element, so `:root`
+   folds `var(--color-ink-muted)` down to the light value once and every
+   descendant inherits that literal. Re-roleing `--ink-muted` deeper in the
+   tree then changes nothing a component can see. With `inline` the utility is
+   emitted as `color: var(--ink-muted)` instead, which is resolved *at the
+   element that uses it*, so the same subtree re-role takes effect. Every alias
+   below therefore must be a `var()` — never a literal — or `inline` bakes the
+   light value straight into the utility.
+   -------------------------------------------------------------------------- */
+@theme static inline {
+  /* surfaces */
+  --color-surface-page: var(--surface-page);
+  --color-surface-panel: var(--surface-panel);
+  --color-surface-elevated: var(--surface-elevated);
+  --color-surface-recessed: var(--surface-recessed);
+  --color-surface-inverse: var(--surface-inverse);
+  --color-surface-inverse-raised: var(--surface-inverse-raised);
+
+  /* ink */
+  --color-ink: var(--ink);
+  --color-ink-strong: var(--ink-strong);
+  --color-ink-muted: var(--ink-muted);
+  --color-ink-faint: var(--ink-faint);
+  --color-ink-inverse: var(--ink-inverse);
+  --color-ink-accent: var(--ink-accent);
+  --color-ink-marker: var(--ink-marker);
+  --color-ink-oxide: var(--ink-oxide);
+  --color-ink-on-signal: var(--ink-on-signal);
+
+  /* lines */
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
+  --color-line-interactive: var(--line-interactive);
+
+  /* brand */
+  --color-brand-primary: var(--brand-primary);
+  --color-brand-primary-hover: var(--brand-primary-hover);
+  --color-brand-secondary: var(--brand-secondary);
+  --color-brand-marker: var(--brand-marker);
+
+  /* status */
+  --color-success: var(--success);
+  --color-warning: var(--warning);
+  --color-danger: var(--danger);
+  --color-info: var(--info);
+  --color-focus: var(--focus-ring);
+
+  /* Type families → font-display / font-body / font-mono utilities.
+     Values are supplied by next/font in app/layout.tsx as --font-bricolage,
+     --font-instrument, --font-plex-mono; the fallbacks here are the last
+     resort if a font request fails. */
+  --font-display: var(--font-bricolage), system-ui, sans-serif;
+  --font-body: var(--font-instrument), system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: var(--font-plex-mono), ui-monospace, "Cascadia Mono", "SF Mono", monospace;
+  /* Tailwind's default `font-sans` would otherwise silently resolve to the
+     framework's own stack, so anything written as `font-sans` would be
+     Instrument Sans's *cousin* rather than Instrument Sans. Aliasing it to
+     `--font-body` makes the generic name and the token agree. */
+  --font-sans: var(--font-body);
+
+  /* Radii → rounded-* utilities (§4.1) */
+  --radius-none: var(--corner-none);
+  --radius-sm: var(--corner-sm);
+  --radius-md: var(--corner-md);
+  --radius-lg: var(--corner-lg);
+  --radius-full: var(--corner-round);
+
+  /* Elevation → shadow-* utilities (§4.2). Transient surfaces only. */
+  --shadow-elev-sm: var(--elev-sm);
+  --shadow-elev-md: var(--elev-md);
+  --shadow-elev-lg: var(--elev-lg);
+  --shadow-elev-overlay: var(--elev-overlay);
+
+  /* Motion → duration-* and ease-* utilities (§7) */
+  --duration-instant: var(--dur-instant);
+  --duration-fast: var(--dur-fast);
+  --duration-base: var(--dur-base);
+  --duration-slow: var(--dur-slow);
+  --ease-standard: var(--motion-ease-standard);
+  --ease-out: var(--motion-ease-out);
+  --ease-in: var(--motion-ease-in);
+}
+
+/* -----------------------------------------------------------------------------
+   Base layer — element defaults that are not component concerns.
+   -------------------------------------------------------------------------- */
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    min-height: 100dvh;
+  }
+
+  img,
+  picture,
+  video,
+  canvas,
+  svg {
+    display: block;
+    max-width: 100%;
+  }
+
+  /* Images keep their intrinsic aspect ratio so a slot's box never collapses
+     mid-load (CLS budget < 0.1 — docs/design-system.md §11). */
+  img {
+    height: auto;
+  }
+
+  input,
+  button,
+  textarea,
+  select {
+    font: inherit;
+    color: inherit;
+  }
+
+  /* Numbers in tables and forms are tabular so columns align. */
+  table,
+  input[type="number"] {
+    font-variant-numeric: tabular-nums;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  /* Skip link — first focusable element in the DOM, visible only on focus.
+     Landmarks are mandatory (docs/design-system.md §10). */
+  .skip-link {
+    position: absolute;
+    left: var(--space-base);
+    top: var(--space-base);
+    z-index: var(--z-tooltip);
+    padding: var(--space-sm) var(--space-base);
+    background: var(--surface-elevated);
+    color: var(--ink);
+    border: 1px solid var(--line-strong);
+    border-radius: var(--corner-md);
+    transform: translateY(-200%);
+    transition: transform var(--dur-fast) var(--motion-ease-out);
+  }
+
+  .skip-link:focus-visible {
+    transform: translateY(0);
+  }
+}
+
+/* -----------------------------------------------------------------------------
+   Utilities — small composable primitives shared by many components.
+   Anything used exactly once belongs in the component instead.
+   -------------------------------------------------------------------------- */
+
+/* Hairline structural rule without inventing a border colour at the call site. */
+@utility hairline {
+  border: 1px solid var(--line);
+}
+
+/* Tabular figures for mono data registers. */
+@utility tabular {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum" 1;
+}
+
+/* Visually hidden but reachable by assistive technology. */
+@utility sr-only-focusable {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+
+  &:focus-visible {
+    position: static;
+    width: auto;
+    height: auto;
+    margin: 0;
+    overflow: visible;
+    clip: auto;
+    white-space: normal;
+  }
+}
+
+/* Page shells (design-system.md §5.1). Written as utilities rather than a
+   component so layout width stays a token decision — a component would let a
+   call site pass an arbitrary max-width, which is the failure mode §51 guards
+   against. */
+@utility shell-public {
+  width: 100%;
+  max-width: var(--layout-max-public);
+  margin-inline: auto;
+  padding-inline: var(--layout-gutter);
+}
+
+@utility shell-workspace {
+  width: 100%;
+  max-width: var(--layout-max-workspace);
+  margin-inline: auto;
+  padding-inline: var(--layout-gutter);
+}
+
+/* Z-index is a single scale owned by tokens.css. These exist so a component
+   can name `z-header` rather than writing `z-[200]`, which is exactly the
+   ad-hoc value the scale is there to prevent. */
+@utility z-sticky {
+  z-index: var(--z-sticky);
+}
+@utility z-header {
+  z-index: var(--z-header);
+}
+@utility z-drawer {
+  z-index: var(--z-drawer);
+}
+@utility z-overlay {
+  z-index: var(--z-overlay);
+}
+@utility z-modal {
+  z-index: var(--z-modal);
+}
+@utility z-toast {
+  z-index: var(--z-toast);
+}
+@utility z-tooltip {
+  z-index: var(--z-tooltip);
+}
+
+/* -----------------------------------------------------------------------------
+   Overlay-primitive geometry (design-system.md §6.9) — written in the
+   `components` layer so a call site's utilities can still override it
+   (§4.3: layers are declared, and utilities beat components).
+
+   Transitions live here too, because Radix has no animation of its own: it
+   toggles `data-state` and waits for `animationend` before unmounting, so a
+   closing panel animates out instead of vanishing. Every rule below is
+   cancelled under `prefers-reduced-motion` (§7.2, §10).
+
+   Centering is `inset: 0; margin: auto` rather than a translate. A dialog
+   being able to `translate` itself would make it a containing block for any
+   `position: fixed` descendant (a nested menu, someday), and the margin trick
+   centres on both axes while keeping the panel a fixed, gutter-guarded width:
+
+     --dialog-width   a component-local layout decision — §4.1/§4.2 pin the
+                      radius and elevation for dialogs, not their measure, so
+                      the width is declared here (one place, overridable by a
+                      utility) instead of sprinkled as an arbitrary value.
+     gutter floor     `calc(100vw - 2 * var(--layout-gutter))` so a 360px
+                      viewport gets §5.1's own gutter rather than overflow
+                      (§16: 360 → 1600 no horizontal overflow).
+   -------------------------------------------------------------------------- */
+@layer components {
+  .dialog-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: var(--z-overlay);
+    background: var(--surface-inverse);
+    opacity: 0.6;
+    animation: overlay-in var(--dur-fast) var(--motion-ease-out);
+  }
+
+  .dialog-overlay[data-state="closed"] {
+    animation: overlay-out var(--dur-fast) var(--motion-ease-in);
+  }
+
+  .dialog-content {
+    --dialog-width: 28rem;
+
+    position: fixed;
+    inset: 0;
+    z-index: var(--z-modal);
+    margin: auto;
+    width: min(var(--dialog-width), calc(100vw - 2 * var(--layout-gutter)));
+    height: fit-content;
+    max-height: 85vh;
+    overflow-y: auto;
+    animation: dialog-in var(--dur-base) var(--motion-ease-out);
+  }
+
+  .dialog-content[data-state="closed"] {
+    animation: dialog-out var(--dur-base) var(--motion-ease-in);
+  }
+
+  .dropdown-content {
+    transform-origin: var(--radix-dropdown-menu-content-transform-origin, top center);
+    animation: menu-in var(--dur-fast) var(--motion-ease-out);
+  }
+
+  .dropdown-content[data-state="closed"] {
+    animation: menu-out var(--dur-fast) var(--motion-ease-in);
+  }
+
+  /* MobileMenu drawer (§6.1) — the drawer needs z below the page overlay
+     (drawer 300, overlay 400), so it gets its own dimmed floor: `z-header`
+     puts the floor above the scrolled page and the masthead, while the sheet
+     itself rides at `z-drawer`. Slides in from the right; the §7.2 /
+     prefers-reduced-motion block below cancels the translate. */
+  .drawer-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: var(--z-header);
+    background: var(--surface-inverse);
+    opacity: 0.6;
+    animation: overlay-in var(--dur-fast) var(--motion-ease-out);
+  }
+
+  .drawer-overlay[data-state="closed"] {
+    animation: overlay-out var(--dur-fast) var(--motion-ease-in);
+  }
+
+  .drawer-content {
+    position: fixed;
+    inset-block: 0;
+    inset-inline-end: 0;
+    z-index: var(--z-drawer);
+    width: min(24rem, calc(100vw - 2 * var(--layout-gutter)));
+    overflow-y: auto;
+    animation: drawer-in var(--dur-base) var(--motion-ease-out);
+  }
+
+  .drawer-content[data-state="closed"] {
+    animation: drawer-out var(--dur-base) var(--motion-ease-in);
+  }
+
+  /* Command-search palette (§6.1) — a top-anchored sheet, wider than the
+     centered dialog but still inside the §16 gutter floor. Sits above the
+     shared `.dialog-overlay` floor (z-modal > z-overlay). */
+  .command-content {
+    position: fixed;
+    inset-inline: 0;
+    top: clamp(var(--layout-gutter), 8vh, 4rem);
+    z-index: var(--z-modal);
+    margin-inline: auto;
+    width: min(42rem, calc(100vw - 2 * var(--layout-gutter)));
+    max-height: 75vh;
+    overflow-y: auto;
+    animation: dialog-in var(--dur-base) var(--motion-ease-out);
+  }
+
+  .command-content[data-state="closed"] {
+    animation: dialog-out var(--dur-base) var(--motion-ease-in);
+  }
+
+  @keyframes overlay-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 0.6;
+    }
+  }
+
+  @keyframes overlay-out {
+    from {
+      opacity: 0.6;
+    }
+    to {
+      opacity: 0;
+    }
+  }
+
+  @keyframes dialog-in {
+    from {
+      opacity: 0;
+      translate: 0 8px;
+    }
+    to {
+      opacity: 1;
+      translate: 0 0;
+    }
+  }
+
+  @keyframes dialog-out {
+    from {
+      opacity: 1;
+      translate: 0 0;
+    }
+    to {
+      opacity: 0;
+      translate: 0 8px;
+    }
+  }
+
+  @keyframes menu-in {
+    from {
+      opacity: 0;
+      transform: scale(0.96);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  @keyframes menu-out {
+    from {
+      opacity: 1;
+      transform: scale(1);
+    }
+    to {
+      opacity: 0;
+      transform: scale(0.96);
+    }
+  }
+
+  @keyframes drawer-in {
+    from {
+      opacity: 0;
+      translate: 100% 0;
+    }
+    to {
+      opacity: 1;
+      translate: 0 0;
+    }
+  }
+
+  @keyframes drawer-out {
+    from {
+      opacity: 1;
+      translate: 0 0;
+    }
+    to {
+      opacity: 0;
+      translate: 100% 0;
+    }
+  }
+
+  /* §7.2: reduced motion collapses transitions — panels simply appear and
+     disappear, nothing else changes (focus handling is Radix's, not the
+     animation's). */
+  @media (prefers-reduced-motion: reduce) {
+    .dialog-overlay,
+    .dialog-content,
+    .dropdown-content,
+    .drawer-overlay,
+    .drawer-content,
+    .command-content {
+      animation: none;
+    }
+  }
+}
+
+/* -----------------------------------------------------------------------------
+   Editorial motion (design-system.md §7) — CSS-owned entrances for public
+   pages. These run at first paint with no JavaScript, which is exactly why
+   the above-the-fold hero uses them instead of <Reveal> (whose effect runs
+   after first paint and would flash). JS-owned motion (GSAP strips,
+   mini-engine reveals) handles everything below the fold.
+
+   One-shot only: nothing here loops (§7.2 — no perpetual animation). The
+   staged RFQ signal lights its three nodes once, in order, then rests.
+   `prefers-reduced-motion` collapses every rule to its resting state.
+   -------------------------------------------------------------------------- */
+@layer components {
+  .hero-enter {
+    opacity: 0;
+    animation: hero-rise var(--dur-slow) var(--motion-ease-out) forwards;
+  }
+
+  .hero-enter-1 {
+    animation-delay: 60ms;
+  }
+
+  .hero-enter-2 {
+    animation-delay: 140ms;
+  }
+
+  .hero-enter-3 {
+    animation-delay: 220ms;
+  }
+
+  @keyframes hero-rise {
+    from {
+      opacity: 0;
+      translate: 0 14px;
+    }
+    to {
+      opacity: 1;
+      translate: 0 0;
+    }
+  }
+
+  /* RFQ signal — three nodes (RFQ → suppliers → quotes) that switch on in
+     sequence once, then hold. Colour is never the carrier: each node carries
+     its mono label and readout throughout (§10). */
+  .signal-node {
+    opacity: 0.35;
+    animation: signal-on var(--dur-base) var(--motion-ease-out) forwards;
+  }
+
+  .signal-node-1 {
+    animation-delay: 300ms;
+  }
+
+  .signal-node-2 {
+    animation-delay: 620ms;
+  }
+
+  .signal-node-3 {
+    animation-delay: 940ms;
+  }
+
+  @keyframes signal-on {
+    from {
+      opacity: 0.35;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero-enter,
+    .signal-node {
+      opacity: 1;
+      animation: none;
+      translate: 0 0;
+    }
+  }
+}
