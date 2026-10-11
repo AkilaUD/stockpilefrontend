@@ -1,4 +1,5 @@
 import { ApiClientError } from "./envelope";
+import { API_ORIGIN } from "./origin";
 import type {
   CatalogueSummary,
   CategoryDetailResponse,
@@ -25,8 +26,6 @@ import type {
  * catalogue is live platform state — exact totals, fresh audience policy —
  * never snapshot data.
  */
-
-const API_ORIGIN = process.env.API_ORIGIN ?? "http://localhost:5080";
 
 async function serverGet<T>(path: string): Promise<T> {
   const response = await fetch(`${API_ORIGIN}${path}`, {

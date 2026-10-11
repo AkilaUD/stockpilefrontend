@@ -6,6 +6,7 @@
 import "./scripts/swc-cache";
 import createNextIntlPlugin from "next-intl/plugin";
 import type { NextConfig } from "next";
+import { API_ORIGIN } from "./src/lib/api/origin";
 
 /*
  * The .NET API is never exposed to the browser as a second origin.
@@ -13,8 +14,6 @@ import type { NextConfig } from "next";
  * it to the API origin, which keeps cookies first-party and lets production run
  * with zero CORS (docs/architecture.md §4, security-threat-model §7).
  */
-const API_ORIGIN = process.env.API_ORIGIN ?? "http://localhost:5080";
-
 const withNextIntl = createNextIntlPlugin("./src/i18n/request.ts");
 
 /**

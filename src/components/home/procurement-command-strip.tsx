@@ -64,13 +64,13 @@ export function ProcurementCommandStrip({
   signal,
 }: ProcurementCommandStripProps) {
   return (
-    <section aria-label={eyebrow} className="bg-surface-dark">
+    <section aria-label={eyebrow} className="bg-surface-page">
       <div className="shell-public grid grid-cols-[minmax(0,1fr)] gap-10 py-14 md:py-20 lg:grid-cols-12 lg:gap-8">
         {/* Narrative — span 5 */}
         <div className="lg:col-span-5">
-          <p className="hero-enter type-label font-mono text-yellow">{eyebrow}</p>
-          <h1 className="hero-enter hero-enter-1 type-display-xl mt-4 text-white">{headline}</h1>
-          <p className="hero-enter hero-enter-2 type-body mt-5 max-w-xl text-white/80">{lede}</p>
+          <p className="hero-enter type-label font-mono text-ink-accent">{eyebrow}</p>
+          <h1 className="hero-enter hero-enter-1 type-display-xl mt-4 text-ink">{headline}</h1>
+          <p className="hero-enter hero-enter-2 type-body mt-5 max-w-xl text-ink-muted">{lede}</p>
           <div className="hero-enter hero-enter-3 mt-8">
             <ButtonLink href={ctaHref} variant="primary" size="lg">
               {ctaLabel}
@@ -130,8 +130,8 @@ export function ProcurementCommandStrip({
                 key={node.label}
                 className={`signal-node signal-node-${index + 1} flex items-baseline justify-between gap-3 rounded-sm border border-line bg-surface-panel px-3 py-2`}
               >
-                <span className="type-meta font-mono text-white/70">{node.label}</span>
-                <span className="type-meta font-mono font-semibold text-yellow">{node.value}</span>
+                <span className="type-meta font-mono text-ink-muted">{node.label}</span>
+                <span className="type-meta font-mono font-semibold text-ink">{node.value}</span>
               </li>
             ))}
           </ol>

@@ -41,7 +41,7 @@ export async function SiteFooter() {
         <div className="grid gap-10 md:grid-cols-12 md:gap-8">
           <div className="md:col-span-6">
             <Image
-              src="/brand/stockpile-logo-yellow.png"
+              src="/brand/stockpile-logo-ink.png"
               alt="Stockpile.lk"
               width={300}
               height={73}

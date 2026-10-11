@@ -15,17 +15,17 @@ interface PulseMetric {
 
 export function ProcurementPulse({ metrics, note }: { metrics: PulseMetric[]; note: string }) {
   return (
-    <section aria-label={note} className="bg-surface-dark">
+    <section aria-label={note} className="bg-surface-page">
       <div className="shell-public py-12 md:py-16">
         <dl className="grid grid-cols-2 gap-8 lg:grid-cols-4">
           {metrics.map((metric) => (
             <div key={metric.label} className="border-l-2 border-brand-primary pl-4">
-              <dd className="type-display-md font-mono tabular text-white">{metric.value}</dd>
-              <dt className="type-meta mt-1 font-mono uppercase tracking-wide text-white/70">{metric.label}</dt>
+              <dd className="type-display-md font-mono tabular text-ink">{metric.value}</dd>
+              <dt className="type-meta mt-1 font-mono uppercase tracking-wide text-ink-muted">{metric.label}</dt>
             </div>
           ))}
         </dl>
-        <p className="type-meta mt-8 font-mono text-white/50">{note}</p>
+        <p className="type-meta mt-8 font-mono text-ink-muted">{note}</p>
       </div>
     </section>
   );
