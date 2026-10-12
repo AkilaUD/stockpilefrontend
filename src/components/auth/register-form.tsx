@@ -4,14 +4,8 @@
  * Why this file is a client component (§15 rule 3): submit, strength-meter
  * reaction to typing, session token hand-off — interactivity.
  *
- * Step 1 of the staged buyer flow ONLY (business-flows §2): identity fields.
- * Profile, organisation and preferences are separate later calls, so an
- * abandoned registration never creates half an account. POST /auth/register
- * does NOT sign in — the session endpoint still answers 401 (api.md §2.1) —
- * so this form routes the buyer to the verify-email pending screen carrying
- * the address, and hands the response's minted requestToken back to the
- * session provider (§1.10: the newest token always wins — the next unsafe
- * verb would otherwise carry a stale claim against the rotated cookie).
+ * Email is the username. Signup creates an active buyer account without
+ * proving mailbox ownership; users sign in after the account is created.
  *
  * Hand-rolled state, not react-hook-form: PUBLIC route budget
  * (design-system §11) — the library stack costs ~100 KB gzip for five
@@ -33,10 +27,7 @@ import {
 } from "@/lib/validation/auth";
 
 interface RegisterValues {
-  firstName: string;
-  lastName: string;
   email: string;
-  phone: string;
   password: string;
 }
 
@@ -49,17 +40,11 @@ export function RegisterForm() {
   const tLabels = useTranslations("common.labels");
   const tActions = useTranslations("common.actions");
   const tA11y = useTranslations("a11y");
-  const firstNameId = useId();
-  const lastNameId = useId();
   const emailId = useId();
-  const phoneId = useId();
   const passwordId = useId();
 
   const [values, setValues] = useState<RegisterValues>({
-    firstName: "",
-    lastName: "",
     email: "",
-    phone: "",
     password: "",
   });
   const [fieldErrors, setFieldErrors] = useState<FieldFailures>({});
@@ -83,7 +68,7 @@ export function RegisterForm() {
     try {
       const response = await authApi.register(values, await csrfToken());
       storeMintedToken(response.requestToken);
-      router.replace(`/verify-email?email=${encodeURIComponent(values.email)}`);
+      router.replace("/login");
     } catch (error) {
       if (error instanceof ApiClientError && error.envelope?.code === "VALIDATION_FAILED") {
         const server = fieldErrorsToRecord(error.envelope.fieldErrors, tValidation);
@@ -106,48 +91,6 @@ export function RegisterForm() {
       )}
 
       <div className="flex flex-col gap-5">
-        <div className="grid gap-5 sm:grid-cols-2">
-          <FormField
-            id={firstNameId}
-            label={tLabels("firstName")}
-            required
-            requiredText={tA11y("requiredField")}
-            error={fieldErrors.firstName}
-          >
-            {(control) => (
-              <input
-                {...control}
-                type="text"
-                autoComplete="given-name"
-                value={values.firstName}
-                onChange={setField("firstName")}
-                disabled={submitting}
-                className={fieldControlClassName}
-              />
-            )}
-          </FormField>
-
-          <FormField
-            id={lastNameId}
-            label={tLabels("lastName")}
-            required
-            requiredText={tA11y("requiredField")}
-            error={fieldErrors.lastName}
-          >
-            {(control) => (
-              <input
-                {...control}
-                type="text"
-                autoComplete="family-name"
-                value={values.lastName}
-                onChange={setField("lastName")}
-                disabled={submitting}
-                className={fieldControlClassName}
-              />
-            )}
-          </FormField>
-        </div>
-
         <FormField
           id={emailId}
           label={tLabels("email")}
@@ -163,25 +106,6 @@ export function RegisterForm() {
               inputMode="email"
               value={values.email}
               onChange={setField("email")}
-              disabled={submitting}
-              className={fieldControlClassName}
-            />
-          )}
-        </FormField>
-
-        <FormField
-          id={phoneId}
-          label={tLabels("phone")}
-          hint={tAuth("phoneHint")}
-          error={fieldErrors.phone}
-        >
-          {(control) => (
-            <input
-              {...control}
-              type="tel"
-              autoComplete="tel"
-              value={values.phone}
-              onChange={setField("phone")}
               disabled={submitting}
               className={fieldControlClassName}
             />

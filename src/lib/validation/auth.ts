@@ -35,14 +35,10 @@ export type AuthValidationCode =
   | "passwordRequired"
   | "passwordTooShort"
   | "passwordsDoNotMatch"
-  | "phoneInvalid"
   | "duplicateEmail";
 
 /* FluentValidation's EmailAddress semantics, kept intentionally close. */
 const emailPattern = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
-/* E.164 — the registration validator's exact regexp. */
-const e164Pattern = /^\+[1-9]\d{1,14}$/;
-
 /** Per-field failure messages; fields that pass are simply absent. */
 export type FieldFailures = Record<string, string | undefined>;
 
@@ -52,10 +48,7 @@ export interface LoginValues {
 }
 
 interface RegisterValues {
-  firstName: string;
-  lastName: string;
   email: string;
-  phone: string;
   password: string;
 }
 
@@ -103,10 +96,7 @@ export function validateForgot(values: ForgotValues, t: Translate): FieldFailure
 
 export function validateRegister(values: RegisterValues, t: Translate): FieldFailures {
   const failing: FieldFailures = {};
-  if (values.firstName.length === 0) failing.firstName = t("nameRequired");
-  if (values.lastName.length === 0) failing.lastName = t("nameRequired");
   checkEmail(values.email, t, failing);
-  if (values.phone.length > 0 && !e164Pattern.test(values.phone)) failing.phone = t("phoneInvalid");
   checkPassword(values.password, t, failing);
   return failing;
 }
