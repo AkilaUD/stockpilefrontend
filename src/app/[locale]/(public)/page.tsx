@@ -51,7 +51,7 @@ function imageUrl(srcset: string | null | undefined): string | null {
 export default async function HomePage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "home" });
-  const tCat = await getTranslations({ locale, namespace: "catalogue" });
+  const tProduct = await getTranslations({ locale, namespace: "catalogue.product" });
 
   const [tree, newest, directory, summary] = await Promise.all([
     getCategoryTree(),
@@ -67,7 +67,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
   const verifiedCount = directory.items.filter((s) => s.verified).length;
 
   const formatCount = (n: number): string => n.toLocaleString(locale);
-  const priceOnRequest = tCat("listing.priceOnRequest");
+  const priceOnRequest = tProduct("priceOnRequest");
 
   const heroMaterial = featured.find((item) => imageUrl(item.image?.srcset));
   const materialSrc = imageUrl(heroMaterial?.image?.srcset);
