@@ -36,7 +36,12 @@ import {
   validateLogin,
 } from "@/lib/validation/auth";
 
-export function LoginForm() {
+/*
+ * `registerHref` exists because one identity system serves both audiences
+ * (see /supplier-login): the supplier-framed sign-in must offer supplier
+ * registration, not the buyer form. Default keeps the buyer page unchanged.
+ */
+export function LoginForm({ registerHref = "/register" }: { registerHref?: string }) {
   const { login } = useSession();
   const router = useRouter();
   const tValidation = useTranslations("auth.validation");
@@ -147,7 +152,7 @@ export function LoginForm() {
 
       <p className="type-body-sm border-t border-line pt-4 text-ink-muted">
         {tAuth("noAccount")}{" "}
-        <Link href="/register" className="font-medium text-ink underline underline-offset-2 hover:text-ink-strong">
+        <Link href={registerHref} className="font-medium text-ink underline underline-offset-2 hover:text-ink-strong">
           {tActions("register")}
         </Link>
       </p>

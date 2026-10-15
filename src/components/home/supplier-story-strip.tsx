@@ -38,7 +38,11 @@ export function SupplierStoryStrip({ suppliers }: { suppliers: StorySupplier[] }
             <span className="type-meta font-mono text-ink-muted sm:col-span-2">
               {supplier.productCount ?? 0} {supplier.productsLabel}
             </span>
-            <span className="sm:col-span-2 sm:text-right">
+            {/* The status cell is 2/12 of the row, and a Sinhala verification
+                phrase is one long word (e.g. "සත්‍යාපනය බලාපොරොත්තුවෙන්") that is
+                wider than that at 768px. Left alone it pushes the document
+                sideways; `break-words` keeps it inside the cell. */}
+            <span className="min-w-0 break-words sm:col-span-2 sm:text-right">
               {supplier.verified ? (
                 <span className="inline-flex items-center gap-1.5 type-meta font-medium text-ink">
                   <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2" className="size-3.5 text-success" aria-hidden="true">

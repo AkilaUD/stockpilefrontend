@@ -30,8 +30,10 @@ export interface ButtonStyleProps {
 
 const BASE: ClassValue = [
   "relative inline-flex items-center justify-center gap-2",
-  "font-body font-semibold whitespace-nowrap",
-  "rounded-md select-none",
+  "font-body font-medium whitespace-nowrap",
+  /* Reference buttons (measured 2026-10-14): `.action.primary` is 3px
+     rounded at 16px/500 — a 6px radius reads as a different system. */
+  "rounded-[3px] select-none",
   "transition-colors duration-instant ease-standard",
   /* §10's ring, verbatim: 2px `--color-focus` at 2px offset. The explicit
    * `outline-focus` is load-bearing — an unset outline colour inherits
@@ -50,8 +52,15 @@ const VARIANTS: Record<ButtonVariant, ClassValue> = {
    * every ground — `text-ink-inverse` would re-role to light text under
    * `data-surface="dark"` and produce light-on-yellow. Hover steps to the
    * secondary signal #ffd100 (brief §2.1: hover/active variations).
+   *
+   * The 1px ink rules top and bottom are the reference's own
+   * (`a.action.primary`: borderBlock 1px #020202) — they are what makes the
+   * signal block read as a printed button rather than a highlight.
    */
-  primary: ["bg-brand-primary text-ink-on-signal", "hover:bg-brand-primary-hover"],
+  primary: [
+    "border-y border-ink bg-brand-primary text-ink-on-signal",
+    "hover:bg-brand-primary-hover",
+  ],
 
   /* Outline that fills on hover — reads as deliberate rather than as a
    * disabled primary. Border uses `ink-strong`, not `line`, so it is a
@@ -66,11 +75,11 @@ const VARIANTS: Record<ButtonVariant, ClassValue> = {
 
 const SIZES: Record<ButtonSize, ClassValue> = {
   // 36px — dense rows and dialog footers.
-  sm: "h-9 px-3.5 text-sm",
+  sm: "h-9 px-[15px] text-sm",
   // 44px — default; comfortably clears WCAG 2.2 §2.5.8 target size.
-  md: "h-11 px-5 text-sm",
+  md: "h-11 px-[15px] text-base",
   // 48px — editorial calls to action only.
-  lg: "h-12 px-7 text-base",
+  lg: "h-12 px-[15px] text-base",
 };
 
 export function buttonClassName({

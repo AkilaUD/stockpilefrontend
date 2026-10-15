@@ -9,10 +9,11 @@ import { cx } from "@/lib/cx";
  * tokens"). Composed here, not imported from Radix at call sites, so the
  * restyle and the §13.10 focus contract live in exactly one place.
  *
- * The mega-menu uses it as a disclosure anchored to the masthead: the panel
- * is portaled to <body>, which also resolves its semantic tokens against the
- * LIGHT page (not the header's `data-surface="dark"` subtree) — a floating
- * panel over the page reads as a page surface.
+ * The DepartmentMenu uses it as a disclosure anchored to the masthead's
+ * "Shop By Department" block: the panel is portaled to <body>, which also
+ * resolves its semantic tokens against the LIGHT page (not the header's
+ * `data-surface="dark"` subtree) — a floating panel over the page reads as
+ * a page surface.
  *
  * Radix owns open state, outside-pointer/Escape dismissal, arrow-key
  * interaction and focus return; the classes supply tokens and motion

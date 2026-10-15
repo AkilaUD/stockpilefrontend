@@ -76,16 +76,18 @@
   --color-focus: var(--focus-ring);
 
   /* Type families → font-display / font-body / font-mono utilities.
-     Values are supplied by next/font in app/layout.tsx as --font-bricolage,
-     --font-instrument, --font-plex-mono; the fallbacks here are the last
-     resort if a font request fails. */
-  --font-display: var(--font-bricolage), system-ui, sans-serif;
-  --font-body: var(--font-instrument), system-ui, -apple-system, "Segoe UI", sans-serif;
-  --font-mono: var(--font-plex-mono), ui-monospace, "Cascadia Mono", "SF Mono", monospace;
+     Values are supplied by next/font in app/layout.tsx as
+     --font-open-sans-display/body/data — all three resolve to Open Sans, the
+     reference typeface; the fallbacks here are the last resort if a font
+     request fails. The mono role is collapsed into Open Sans for the
+     reference reconstruction (no more generic mono accent). */
+  --font-display: var(--font-open-sans-display), system-ui, sans-serif;
+  --font-body: var(--font-open-sans-body), system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: var(--font-open-sans-data), ui-sans-serif, system-ui, sans-serif;
   /* Tailwind's default `font-sans` would otherwise silently resolve to the
-     framework's own stack, so anything written as `font-sans` would be
-     Instrument Sans's *cousin* rather than Instrument Sans. Aliasing it to
-     `--font-body` makes the generic name and the token agree. */
+     framework's own stack, so anything written as `font-sans` would be a
+     different family than the token. Aliasing it to `--font-body` makes the
+     generic name and the token agree. */
   --font-sans: var(--font-body);
 
   /* Radii → rounded-* utilities (§4.1) */
@@ -233,7 +235,7 @@
   width: 100%;
   max-width: var(--layout-max-public);
   margin-inline: auto;
-  padding-inline: var(--layout-gutter);
+  padding-inline: var(--layout-gutter-public);
 }
 
 @utility shell-workspace {
@@ -241,6 +243,81 @@
   max-width: var(--layout-max-workspace);
   margin-inline: auto;
   padding-inline: var(--layout-gutter);
+}
+
+/* The reference's "Shop By Department" block column (MageBig layout05's
+   `.col-logo` / `.mb-navigation`): it owns the menu row on its own below 768px,
+   keeps the theme's `col-md-3` width from 768px, and becomes the measured 300px
+   `col-lg-3` column at the reference's own flip point — 1200px, which is NOT
+   Tailwind's `xl` (1280), so it cannot be a named breakpoint.
+
+   It is a utility rather than a `md:w-[270px] min-[1200px]:w-[300px]` pair in
+   the component because Tailwind v4 emits arbitrary `min-[1200px]:` blocks
+   BEFORE the named `md:` block: that pair silently resolves to 270px at every
+   width (measured in the built stylesheet, not assumed). */
+@utility department-block {
+  width: 100%;
+
+  @media (min-width: 768px) {
+    width: 270px;
+  }
+  @media (min-width: 1200px) {
+    width: 300px;
+  }
+}
+
+/* The home product grid's column ladder — six across from 1200px, which is the
+   reference's own cell width (measured 2026-10-14: 163.33px square images in an
+   1130px band, i.e. six `col-lg-2` cells with the theme's 30px gutters).
+
+   Same reason as `department-block` above for being a utility rather than
+   `md:grid-cols-3 lg:grid-cols-4 min-[1200px]:grid-cols-6`: Tailwind v4 emits
+   the arbitrary `min-[1200px]:` block BEFORE the named `lg:` block, so that
+   chain resolves to four across at every width (verified in the built
+   stylesheet, not assumed). */
+@utility home-product-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+
+  @media (min-width: 768px) {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  @media (min-width: 1024px) {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+  @media (min-width: 1200px) {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+  }
+}
+
+/* The reference's own page title (`.page-title`) and block title
+   (`.block-title`) on the templates ours mirror. Both were measured on the
+   live site 2026-10-14 — `/en/building-materials.html` and
+   `/en/mm-distributors-tv-wall-installation.html` — and written once here so
+   the five templates that carry them cannot drift apart:
+
+     .page-title   24px / 400, 33px line, `#020202`, Open Sans, capitalize
+     .block-title  16px / 400, 22px line, `#020202`, UPPERCASE
+
+   `capitalize` is the reference's own value on `.page-title` and is safe on
+   supplier-owned names: it uppercases first letters only and never touches the
+   rest of a word, so `DEYI`, `GPV` and `MDFWPSTWI` render unchanged. */
+@utility page-title {
+  font-family: var(--font-body);
+  font-size: 1.5rem;
+  line-height: 2.0625rem;
+  font-weight: 400;
+  color: var(--ink);
+  text-transform: capitalize;
+}
+
+@utility block-title {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.375rem;
+  font-weight: 400;
+  text-transform: uppercase;
+  color: var(--ink);
 }
 
 /* Z-index is a single scale owned by tokens.css. These exist so a component
@@ -559,4 +636,33 @@
       translate: 0 0;
     }
   }
+}
+
+/* -----------------------------------------------------------------------------
+   A button label that may wrap.
+
+   The shared button chain is deliberately `whitespace-nowrap`: right for the
+   short action labels it was written for, where a break is a layout accident.
+   It stops being right for a *translated* label — the Sinhala "add a team
+   member" is about twice the English — because a nowrap label is a min-content
+   floor, and a flex column cannot shrink an item below its min-content. At 360px
+   that put the buyer wizard's team-members box 25px wider than the viewport
+   (design-system §12: horizontal overflow is a bug, not a design choice).
+
+   UNLAYERED ON PURPOSE — the one departure from this file's layering, for the
+   reason typography.css documents at the top: unlayered rules beat every
+   `@layer`, so this wins over the utility chain without `!important`. Height
+   goes `auto` because the fixed `h-11` would clip a second line; `min-height`
+   holds the 44px touch target when the label still fits on one. `text-align`
+   keeps a wrapped line off the left edge of a centred button.
+
+   The point is to be safe by construction, not by measuring: Sinhala is not
+   covered by the self-hosted Open Sans, so it renders in whichever system
+   Sinhala face the visitor has, and those metrics differ per machine.
+   -------------------------------------------------------------------------- */
+.label-wrap {
+  white-space: normal;
+  text-align: center;
+  height: auto;
+  min-height: 2.75rem;
 }

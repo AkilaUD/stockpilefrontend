@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import { setRequestLocale, getTranslations } from "next-intl/server";
 import { getPathname } from "@/i18n/navigation";
 import { Link } from "@/i18n/navigation";
-import { getSearchResults } from "@/lib/api/catalogue-server";
+import { getSearchResults, CATALOGUE_PAGE_SIZE } from "@/lib/api/catalogue-server";
+import { categoryHref } from "@/lib/navigation/navigation";
 import { ProductCard } from "@/components/catalogue/product-card";
 import { Pagination } from "@/components/catalogue/pagination";
 import { FacetSummary } from "@/components/catalogue/facet-summary";
@@ -86,7 +87,7 @@ export default async function SearchPage({
   }
 
   const data = await getSearchResults({ q, page });
-  const totalPages = Math.max(1, Math.ceil(data.total / 24));
+  const totalPages = Math.max(1, Math.ceil(data.total / CATALOGUE_PAGE_SIZE));
   // The backend serves empty items past the last page; the pager must not say
   // "page 98 of 97".
   const shownPage = Math.min(page, totalPages);
@@ -94,7 +95,7 @@ export default async function SearchPage({
   return (
     <div className="shell-public py-8 md:py-12">
       <header className="max-w-3xl">
-        <h1 className="type-display-md text-ink">{t("resultsFor", { query: data.query })}</h1>
+        <h1 className="page-title">{t("resultsFor", { query: data.query })}</h1>
         <p className="mt-3 type-body text-ink-muted" aria-live="polite">
           {t("count", { count: data.total })}
         </p>
@@ -125,7 +126,7 @@ export default async function SearchPage({
               {data.zeroResultBridge.categorySuggestion && (
                 <div className="mt-4">
                   <ButtonLink
-                    href={`/categories/${data.zeroResultBridge.categorySuggestion.slug}`}
+                    href={categoryHref(data.zeroResultBridge.categorySuggestion.slug)}
                     variant="secondary"
                     size="sm"
                   >
@@ -140,7 +141,7 @@ export default async function SearchPage({
 
       {data.suggestions.length > 0 && (
         <section className="mt-10">
-          <h2 className="type-label text-ink-accent">{t("suggestions")}</h2>
+          <h2 className="block-title">{t("suggestions")}</h2>
           <ul className="mt-3 flex flex-wrap gap-2">
             {data.suggestions.map((suggestion) => (
               <li key={suggestion}>
@@ -166,7 +167,7 @@ export default async function SearchPage({
         <div className="mt-10">
           <Pagination
             page={shownPage}
-            pageSize={24}
+            pageSize={CATALOGUE_PAGE_SIZE}
             total={data.total}
             basePath="/search"
             params={{ q }}

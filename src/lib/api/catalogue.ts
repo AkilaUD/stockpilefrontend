@@ -31,6 +31,14 @@ export interface CategoryRef {
   name: string;
 }
 
+/** Unit-of-measure reference row (api.md §2.3 `GET /catalog/units`, Contracts.Catalogue.UnitOfMeasureRef). */
+export interface UnitOfMeasureRef {
+  code: string;
+  name: string;
+  pluralName: string;
+  dimensionKind: string;
+}
+
 export interface ProductAttributeValueRef {
   code: string;
   label: string;

@@ -13,6 +13,7 @@
  */
 
 import { useTranslations } from "next-intl";
+import { Link } from "@/i18n/navigation";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -32,6 +33,7 @@ export function AccountMenu({
   onSignOut: () => void;
 }) {
   const tActions = useTranslations("common.actions");
+  const tNav = useTranslations("nav");
 
   return (
     <DropdownMenu>
@@ -41,6 +43,9 @@ export function AccountMenu({
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
+        <DropdownMenuItem asChild>
+          <Link href="/workspace">{tNav("workspace")}</Link>
+        </DropdownMenuItem>
         <DropdownMenuItem disabled={signOutBusy} onSelect={onSignOut}>
           {tActions("signOut")}
         </DropdownMenuItem>

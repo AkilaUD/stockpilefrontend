@@ -5,6 +5,7 @@ import { Link } from "@/i18n/navigation";
 import { getCategoryDetail, getCategoryTree } from "@/lib/api/catalogue-server";
 import type { CategoryDetailResponse, CategoryNode } from "@/lib/api/catalogue";
 import { ApiClientError } from "@/lib/api/envelope";
+import { categoryHref } from "@/lib/navigation/navigation";
 import { ProductCard } from "@/components/catalogue/product-card";
 import { Pagination } from "@/components/catalogue/pagination";
 import { ButtonLink } from "@/components/ui/button";
@@ -95,7 +96,7 @@ export default async function CategoryPage({
           <span key={ancestor.slug} className="inline-flex items-center">
             <span aria-hidden="true" className="mx-2 text-ink-faint">/</span>
             <Link
-              href={`/categories/${ancestor.slug}`}
+              href={categoryHref(ancestor.slug)}
               className="text-ink-muted transition-colors duration-instant ease-standard hover:text-ink"
             >
               {ancestor.name}
@@ -105,7 +106,7 @@ export default async function CategoryPage({
       </nav>
 
       <header className="mt-6 max-w-2xl">
-        <h1 className="type-display-md text-ink">{category.name}</h1>
+        <h1 className="page-title">{category.name}</h1>
         <p className="mt-3 type-body text-ink-muted">{t("products", { count: detail.totalProducts })}</p>
         <div className="mt-4">
           <ButtonLink href={`/products?category=${encodeURIComponent(slug)}`} variant="secondary" size="sm">
@@ -116,12 +117,12 @@ export default async function CategoryPage({
 
       {childCount > 0 && (
         <section className="mt-10">
-          <h2 className="type-label text-ink-accent">{t("subcategories")}</h2>
+          <h2 className="block-title">{t("subcategories")}</h2>
           <ul className="mt-4 flex flex-wrap gap-2">
             {category.children.map((child) => (
               <li key={child.slug}>
                 <Link
-                  href={`/categories/${child.slug}`}
+                  href={categoryHref(child.slug)}
                   className="type-meta inline-block rounded-full border border-line px-3 py-1.5 text-ink-muted transition-colors duration-instant ease-standard hover:border-line-strong hover:text-ink"
                 >
                   {child.name}
@@ -157,7 +158,7 @@ export default async function CategoryPage({
             page={page}
             pageSize={24}
             total={detail.totalProducts}
-            basePath={`/categories/${slug}`}
+            basePath={categoryHref(slug)}
             labels={{
               previous: tPager("previous"),
               next: tPager("next"),

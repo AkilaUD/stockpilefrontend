@@ -1,7 +1,7 @@
 "use client";
 
 /*
- * Lazy mount points for the three masthead islands (design-system §11 —
+ * Lazy mount points for the masthead/dock islands (design-system §11 —
  * public first-load stays ≤ 200 KB gzip).
  *
  * Why this file is a Client Component: next/dynamic with `ssr: false` is
@@ -19,52 +19,72 @@
 
 import dynamic from "next/dynamic";
 import { useTranslations } from "next-intl";
+import { ReferenceIcon } from "@/components/ui/reference-icon";
 
 function CommandSearchFallback() {
-  const t = useTranslations("catalogue.command");
-  return (
-    <button
-      type="button"
-      aria-label={t("trigger")}
-      className="inline-flex h-11 items-center gap-2 rounded-sm bg-surface-elevated px-3 text-ink-muted transition-colors duration-instant ease-standard hover:bg-surface-recessed hover:text-ink focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus"
-    >
-      <svg aria-hidden="true" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5" className="size-4">
-        <circle cx="7" cy="7" r="4.25" />
-        <path d="m10.5 10.5 2.75 2.75" strokeLinecap="round" />
-      </svg>
-    </button>
-  );
-}
-
-function MegaMenuFallback() {
   const tNav = useTranslations("nav");
   return (
     <button
       type="button"
-      className="font-body text-sm font-medium text-ink transition-colors duration-instant ease-standard hover:text-ink-accent focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus"
+      aria-label={tNav("searchSubmit")}
+      className="inline-flex h-[42px] w-full items-center gap-2 rounded-l-[3px] border border-line bg-surface-panel px-[15px] text-ink-muted transition-colors duration-instant ease-standard hover:text-ink focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus"
     >
-      <span className="inline-flex items-center gap-1">
-        {tNav("categories")}
-        <svg aria-hidden="true" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5" className="size-3">
-          <path d="m4 6 4 4 4-4" strokeLinecap="round" strokeLinejoin="round" />
-        </svg>
+      <ReferenceIcon name="mbi-magnifier" className="size-4" />
+      <span className="hidden truncate text-base xl:inline">{tNav("searchPlaceholder")}</span>
+      <span className="ml-auto hidden items-center self-stretch rounded-r-[3px] border-y border-ink bg-brand-primary px-[15px] font-body text-base font-medium text-ink-on-signal xl:inline-flex">
+        {tNav("searchSubmit")}
       </span>
     </button>
   );
 }
 
-function MobileMenuFallback() {
-  const t = useTranslations("catalogue.menu");
+function DepartmentMenuFallback() {
+  const tNav = useTranslations("nav");
   return (
     <button
       type="button"
-      aria-label={t("open")}
-      className="inline-flex size-11 items-center justify-center rounded-sm text-ink transition-colors duration-instant ease-standard hover:bg-surface-elevated focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus"
+      className="department-block inline-flex h-[50px] w-full items-center justify-center bg-transparent px-0 font-body text-base font-medium text-ink transition-opacity duration-instant ease-standard hover:opacity-70 focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-focus md:justify-start"
     >
-      <svg aria-hidden="true" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5" className="size-5">
-        <path d="M2 4.5h12M2 8h12M2 11.5h12" strokeLinecap="round" />
-      </svg>
+      <span>{tNav("shopByDepartment")}</span>
     </button>
+  );
+}
+
+function MobileMenuFallback() {
+  const tA11y = useTranslations("a11y");
+  return (
+    <button
+      type="button"
+      aria-label={tA11y("openMenu")}
+      className="inline-flex size-11 items-center justify-center rounded-sm text-ink transition-colors duration-instant ease-standard hover:bg-surface-recessed focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus"
+    >
+      <ReferenceIcon name="mbi-menu" className="size-5" />
+    </button>
+  );
+}
+
+function MobileDockFallback() {
+  const tNav = useTranslations("nav");
+  const tA11y = useTranslations("a11y");
+  const items = [
+    { label: tNav("menu"), icon: "mbi-menu" },
+    { label: tNav("searchSubmit"), icon: "mbi-magnifier" },
+    { label: tNav("home"), icon: "mbi-home3" },
+    { label: tNav("myOrder"), icon: "mbi-bag2" },
+    { label: tNav("me"), icon: "mbi-user" },
+  ] as const;
+  return (
+    <nav
+      aria-label={tA11y("mainNavigation")}
+      className="fixed inset-x-0 bottom-0 z-sticky flex border-t border-line bg-surface-panel pb-[env(safe-area-inset-bottom)] md:hidden"
+    >
+      {items.map((item) => (
+        <span key={item.label} className="flex min-w-0 flex-1 flex-col items-center justify-center gap-1 py-2 font-body text-[11px] font-medium text-ink-muted">
+          <ReferenceIcon name={item.icon} className="size-5" />
+          <span>{item.label}</span>
+        </span>
+      ))}
+    </nav>
   );
 }
 
@@ -73,12 +93,17 @@ export const LazyCommandSearch = dynamic(
   { ssr: false, loading: CommandSearchFallback },
 );
 
-export const LazyMegaMenu = dynamic(
-  () => import("./mega-menu").then((module) => module.MegaMenu),
-  { ssr: false, loading: MegaMenuFallback },
+export const LazyDepartmentMenu = dynamic(
+  () => import("./department-menu").then((module) => module.DepartmentMenu),
+  { ssr: false, loading: DepartmentMenuFallback },
 );
 
 export const LazyMobileMenu = dynamic(
   () => import("./mobile-menu").then((module) => module.MobileMenu),
   { ssr: false, loading: MobileMenuFallback },
+);
+
+export const LazyMobileDock = dynamic(
+  () => import("./mobile-dock").then((module) => module.MobileDock),
+  { ssr: false, loading: MobileDockFallback },
 );

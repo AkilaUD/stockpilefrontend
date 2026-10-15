@@ -87,7 +87,7 @@ export default async function ProductsPage({
   return (
     <div className="shell-public py-8 md:py-12">
       <header className="max-w-2xl">
-        <h1 className="type-display-md text-ink">{t("title")}</h1>
+        <h1 className="page-title">{t("title")}</h1>
         <p className="mt-3 type-body text-ink-muted">{t("lede")}</p>
         {q && (
           <p className="mt-2 type-body-sm text-ink-muted">

@@ -86,7 +86,7 @@ export default async function SupplierPage({
         <>
           <header className="mt-6 flex flex-wrap items-start justify-between gap-4">
             <div>
-              <h1 className="type-display-md text-ink">{detail.name}</h1>
+              <h1 className="page-title">{detail.name}</h1>
               {(detail.district || detail.location) && (
                 <p className="mt-2 type-body text-ink-muted">
                   {[detail.district, detail.location].filter(Boolean).join(" · ")}
@@ -102,14 +102,14 @@ export default async function SupplierPage({
             <div className="mt-8 grid gap-8 md:grid-cols-2">
               {detail.story && (
                 <section>
-                  <h2 className="type-label text-ink-accent">{t("story")}</h2>
+                  <h2 className="block-title">{t("story")}</h2>
                   <p className="mt-3 type-body text-ink">{detail.story}</p>
                 </section>
               )}
 
               {detail.categories.length > 0 && (
                 <section>
-                  <h2 className="type-label text-ink-accent">{t("specialties")}</h2>
+                  <h2 className="block-title">{t("specialties")}</h2>
                   <ul className="mt-3 flex flex-wrap gap-2">
                     {detail.categories.map((name) => (
                       <li key={name} className="type-meta rounded-full border border-line px-3 py-1.5 text-ink-muted">
@@ -122,7 +122,7 @@ export default async function SupplierPage({
 
               {(detail.contactPerson || detail.phone || detail.email || detail.website) && (
                 <section>
-                  <h2 className="type-label text-ink-accent">{t("contact")}</h2>
+                  <h2 className="block-title">{t("contact")}</h2>
                   <dl className="mt-3 space-y-2">
                     {detail.contactPerson && (
                       <div>

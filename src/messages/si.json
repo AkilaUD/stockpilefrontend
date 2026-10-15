@@ -2,7 +2,9 @@
   "a11y": {
     "skipToContent": "ප්‍රධාන අන්තර්ගතයට යන්න",
     "mainNavigation": "ප්‍රධාන සැරිසැල්ල",
+    "mobileDockNavigation": "ජංගම ඉක්මන් සැරිසැල්ල",
     "userMenu": "ගිණුම් මෙනුව",
+    "mostSearchedDescription": "Stockpile හි බහුලව සෙවූ නිෂ්පාදන, ඒවායේ ප්‍රවර්ගවලට සම්බන්ධ වේ",
     "languageSwitcher": "භාෂාව",
     "footer": "අඩවි තොරතුරු",
     "breadcrumb": "පිටු මාර්ගය",
@@ -14,7 +16,6 @@
     "sortDescending": "අවරෝහණ අනුපිළිවෙලින්",
     "notifications": "දැනුම්දීම්"
   },
-
   "common": {
     "actions": {
       "save": "සුරකින්න",
@@ -44,9 +45,10 @@
       "signOut": "ඉවත් වන්න",
       "register": "ගිණුමක් සාදන්න",
       "contact": "සැපයුම්කරුට අමතන්න",
-      "requestQuote": "මිල ඉල්ලීමක් කරන්න"
+      "requestQuote": "මිල ඉල්ලීමක් කරන්න",
+      "registerAsSupplier": "සැපයුම්කරු ලෙස ලියාපදිංචි වන්න",
+      "working": "සකසමින්…"
     },
-
     "labels": {
       "email": "විද්‍යුත් තැපෑල",
       "password": "මුරපදය",
@@ -57,6 +59,8 @@
       "firstName": "මුල් නම",
       "lastName": "වාසගම",
       "companyName": "සමාගමේ නම",
+      "registrationNumber": "ව්‍යාපාර ලියාපදිංචි අංකය",
+      "website": "වෙබ් අඩවිය",
       "phone": "දුරකථනය",
       "district": "දිස්ත්‍රික්කය",
       "address": "ලිපිනය",
@@ -72,7 +76,6 @@
       "description": "විස්තරය",
       "notes": "සටහන්"
     },
-
     "states": {
       "loading": "පූරණය වෙමින්…",
       "saving": "සුරකිමින්…",
@@ -83,7 +86,6 @@
       "offline": "ඔබ සබැඳියකින් තොරව සිටින බව පෙනේ."
     }
   },
-
   "nav": {
     "home": "මුල් පිටුව",
     "products": "නිෂ්පාදන",
@@ -94,6 +96,7 @@
     "quotes": "මිල ගණන්",
     "dashboard": "පාලක පුවරුව",
     "account": "ගිණුම",
+    "workspace": "මගේ වැඩබිම",
     "settings": "සැකසුම්",
     "help": "සහාය",
     "admin": "පරිපාලනය",
@@ -103,123 +106,958 @@
     "switchToEnglish": "ඉංග්‍රීසියට මාරු වන්න",
     "switchToSinhala": "සිංහලට මාරු වන්න",
     "localeEnShort": "EN",
-    "localeSiShort": "සිංහල"
+    "localeSiShort": "සිංහල",
+    "utilityTagline": "ඉදිකිරීම් ද්‍රව්‍ය මිලදී ගැනීමේ වේදිකාව",
+    "shopByDepartment": "අංශය අනුව සොයන්න",
+    "allDepartments": "සියලුම අංශ",
+    "getQuotes": "මිල ගණන් ලබා ගන්න",
+    "howItWorks": "එය ක්‍රියා කරන ආකාරය",
+    "news": "පුවත්",
+    "pricing": "මිල ගණන්",
+    "aboutUs": "අප ගැන",
+    "supplierBenefits": "සැපයුම්කරු ප්‍රතිලාභ",
+    "registerAsSupplier": "සැපයුම්කරු ලෙස ලියාපදිංචි වන්න",
+    "logIn": "පිවිසෙන්න",
+    "register": "ලියාපදිංචි වන්න",
+    "supplierLogin": "සැපයුම්කරු පිවිසුම",
+    "supplierRegistration": "සැපයුම්කරු ලියාපදිංචිය",
+    "userGuide": "පරිශීලක මාර්ගෝපදේශය",
+    "sitemap": "අඩවි සිතියම",
+    "termsOfUse": "භාවිත කොන්දේසි",
+    "requestForQuote": "මිල ඉල්ලීම",
+    "forSuppliers": "සැපයුම්කරුවන් සඳහා",
+    "ourSuppliers": "අපගේ සැපයුම්කරුවන්",
+    "contact": "අමතන්න",
+    "supplierList": "සැපයුම්කරු ලැයිස්තුව",
+    "myOrder": "මගේ ඇණවුම",
+    "me": "මම",
+    "menu": "මෙනුව",
+    "searchPlaceholder": "මම සොයන්නේ…",
+    "searchSubmit": "සොයන්න",
+    "viewAllDepartments": "සියල්ල බලන්න"
   },
-
   "footer": {
     "tagline": "ශ්‍රී ලංකාවේ ඉදිකිරීම් ද්‍රව්‍ය සඳහා ව්‍යාපාරික මට්ටමේ මිලදී ගැනීම්.",
-    "about": "අප ගැන",
-    "contact": "අමතන්න",
-    "terms": "සේවා කොන්දේසි",
-    "privacy": "පෞද්ගලිකත්වය",
-    "helpCentre": "සහාය මධ්‍යස්ථානය",
+    "contactGroup": "අප අමතන්න",
+    "stockpileGroup": "Stockpile",
+    "companyGroup": "සමාගම",
+    "supportGroup": "සහාය",
+    "ownerLine": "Construction Trade Technologies (Pvt) Ltd. හි නිෂ්පාදනයකි",
+    "hours": "සඳුදා–සෙනසුරාදා පෙ.ව. 9 – ප.ව. 5",
+    "phoneLabel": "011-xxx-xxxx (ඇමතීමට ක්ලික් කරන්න)",
+    "email": "info@stockpile.lk",
     "rights": "සියලුම හිමිකම් ඇවිරිණි.",
-    "accountGroup": "ගිණුම",
-    "siteGroup": "අඩවිය"
+    "termsNote": "මෙම අඩවිය භාවිතය භාවිත කොන්දේසිවලට යටත් වේ.",
+    "copyright": "© {year} Stockpile, Construction Trade Technologies (Pvt) Ltd.",
+    "linkedin": "LinkedIn",
+    "facebook": "Facebook",
+    "instagram": "Instagram",
+    "youtube": "YouTube"
   },
-
   "home": {
-    "eyebrow": "මිලදී ගැනීම් · ශ්‍රී ලංකාව",
-    "headline": "ලැයිස්තුව සකසන්න. සැපයුම සොයන්න. වැදගත් දේ ඇත්තෙන්ම සසඳන්න.",
-    "lede": "ගොඩනැගිලි ද්‍රව්‍ය සඳහා ව්‍යාපාර අතර මිලදී ගැනීම් මේසයකි. ව්‍යාපෘතියට අවශ්‍ය දේ ලියා තබන්න, එක පිටිපසින් එකට තැබිය හැකි මිල ගණන් ලබා ගන්න, දුරකථන ඇමතුමකට වඩා ලිඛිත වාර්තාවක් මත පදනම්ව ඇණවුම් කරන්න.",
+    "meta": {
+      "title": "ඉදිකිරීම් ද්‍රව්‍ය මිලදී ගැනීමේ වේදිකාව",
+      "description": "එක් වේදිකාවක් මත ඉදිකිරීම් ද්‍රව්‍ය සොයන්න, මිල ගණන් සසඳන්න, සත්‍යාපිත ශ්‍රී ලාංකික සැපයුම්කරුවන්ගෙන් ඇණවුම් කරන්න."
+    },
     "hero": {
-      "cta": "RFQ එකක් අරඹන්න",
-      "searchLabel": "ඔබ සොයන්නේ කුමක්ද?",
-      "searchSubmit": "සොයන්න",
-      "examples": [
-        "GI පයිප්ප, අඟල් 2, දිග 150…",
-        "සිමෙන්ති OPC 42.5N, බෑග් 500…",
-        "12mm යකඩ ටොන් ගණනින්…",
-        "ඉමල්ෂන් තීන්ත, ලීටර් 20…",
-        "මහනුවර සැපයුම්කරුවෙක්…"
-      ],
-      "intentLabel": "නැතහොත් අරමුණකින් අරඹන්න:",
-      "intentProducts": "නිෂ්පාදන බලන්න",
-      "intentSuppliers": "සැපයුම්කරුවන් සොයන්න",
-      "intentCategories": "අංශවලින් සොයන්න",
-      "materialFigure": "සජීවී නාමාවලියෙන්",
-      "signalProducts": "ලැයිස්තුගත නිෂ්පාදන",
-      "signalSuppliers": "ලැයිස්තුගත සැපයුම්කරුවන්",
-      "signalDepartments": "අංශ"
+      "headline": "ලැයිස්තුව හදාගන්න. නුවණින් මිලදී ගන්න.",
+      "bannerCta": "Stockpile ක්‍රියා කරන ආකාරය දැනගන්න",
+      "bannerAlt": "Stockpile — ඉදිකිරීම් ද්‍රව්‍ය මිලදී ගැනීම්"
     },
-    "trio": {
-      "label": "ආරම්භ කළ හැකි ක්‍රම",
-      "knowStep": "01",
-      "knowTitle": "මට අවශ්‍ය දේ දනිමි",
-      "knowBody": "නම කියන්න, විස්තරය දෙන්න — ලැයිස්තු කරන්නේ කවුදැයි එක ළඟ එක බලන්න.",
-      "knowLink": "නාමාවලිය සොයන්න",
-      "browseStep": "02",
-      "browseTitle": "බලමින් යන්නට කැමතියි",
-      "browseBody": "අංශ දිගේ ඇවිද, ද්‍රව්‍ය සන්සුන්ව සසඳන්න.",
-      "browseLink": "නාමාවලිය අරින්න",
-      "suppliersStep": "03",
-      "suppliersTitle": "සැපයුම්කරුවන් අවශ්‍යයි",
-      "suppliersBody": "පළමුව නාමාවලිය හඳුනාගන්න, පසුව මිල ගණන් අසන්න.",
-      "suppliersLink": "සැපයුම්කරුවන් හමුවන්න"
-    },
-    "departments": {
-      "eyebrow": "අංශ",
-      "title": "අංශය අනුව සොයන්න",
-      "lede": "අංශ දොළහක්, එකම සජීවී නාමාවලියක්. වෘත්තිය තෝරා සසඳීම අරඹන්න."
-    },
-    "pulse": {
-      "products": "ලැයිස්තුගත නිෂ්පාදන",
-      "suppliers": "ලැයිස්තුගත සැපයුම්කරුවන්",
+    "stats": {
+      "products": "නිෂ්පාදන",
+      "suppliers": "සැපයුම්කරුවෝ",
       "departments": "අංශ",
-      "districts": "සේවය කරන දිස්ත්‍රික්ක",
-      "note": "සජීවී නාමාවලි සංඛ්‍යා — සෑම පිටු බැලීමකදීම වේදිකාවෙන් කියවයි, මුද්‍රණය නොකරයි."
+      "categories": "ප්‍රවර්ග"
     },
-    "strip": {
-      "eyebrow": "විශේෂ ද්‍රව්‍ය",
-      "title": "රාක්කවල අලුත්ම දේ",
-      "lede": "සැබෑ විස්තර සමඟ අලුත්ම ලැයිස්තු. දිගේ අදින්න, හෝ සම්පූර්ණ පත්‍රිකාවට කාඩ්පතක් අරින්න.",
-      "viewAll": "නාමාවලිය අරින්න"
+    "mostSearched": {
+      "title": "වැඩියෙන්ම සොයන නිෂ්පාදන",
+      "t1": "GI සහ වානේ බොක්ස් බාර්",
+      "t2": "GI සහ වානේ පයිප්ප",
+      "t3": "දාම වැට (Chain Link Fences)",
+      "t4": "ඇලුමිනියම් ක්ලැඩින්",
+      "t5": "PVC ඉකෝ බෝඩ්",
+      "t6": "කෙම්පාස්"
     },
-    "suppliers": {
-      "eyebrow": "සැපයුම්කරු නාමාවලිය",
-      "title": "සත්‍යාපිත අය පළමුව",
-      "lede": "නාමාවලිය සත්‍යාපිත සැපයුම්කරුවන් ඉදිරියෙන් තබයි. සම්පූර්ණ ලේඛනයට පේළියක් අරින්න.",
-      "viewAll": "සියලුම සැපයුම්කරුවන් බලන්න",
+    "featured": {
+      "title": "විශේෂාංග නිෂ්පාදන",
+      "viewAll": "සියල්ල බලන්න"
+    },
+    "newestSuppliers": {
+      "title": "අලුත්ම සැපයුම්කරුවන්",
+      "viewAll": "සියල්ල බලන්න",
       "verified": "සත්‍යාපිතයි",
-      "unverified": "තවම සත්‍යාපනය නැත",
+      "unverified": "සත්‍යාපනය බලාපොරොත්තුවෙන්",
       "products": "නිෂ්පාදන"
     },
-    "field": {
-      "eyebrow": "ක්ෂේත්‍ර සාක්ෂිය",
-      "title": "නාමාවලිය ළඟා වන්නේ කොහිද",
-      "lede": "තවම සිද්ධි අධ්‍යයන නැත — එබැවින් නාමාවලියම කියන දේ මෙන්න: සේවය කරන දිස්ත්‍රික්ක, සත්‍යාපන අනුපාතය, අංශ ගැඹුර.",
-      "districtsLabel": "ලැයිස්තුගත සැපයුම්කරුවන් සිටින දිස්ත්‍රික්ක",
-      "verifiedLabel": "සත්‍යාපිත සැපයුම්කරුවන්",
-      "departmentsLabel": "ආවරණය වන අංශ"
+    "becomeSupplier": {
+      "title": "යෝජනා විධිමත් කිරීමෙන් ඔබේ ඉදිකිරීම් ලාභ වැඩි කර ගැනීමට Stockpile ඔබට උදව් වේවා.",
+      "lede": "ඔබේ නිෂ්පාදනවලට ගැළපෙන ව්‍යාපෘති අවශ්‍යතා — පෙරා, වර්ග කර, කෙලින්ම ඔබට එවනු ලැබේ.",
+      "cta": "සැපයුම්කරුවන් සඳහා Stockpile",
+      "pricingCta": "මිල ගණන් බලන්න"
     },
-    "final": {
-      "title": "මීළඟ මිලදී ගැනීම වාර්තාවට දමන්න.",
-      "lede": "ව්‍යාපෘතියට අවශ්‍ය දේ වරක් ලියන්න, සැපයුම්කරුවන්ට එකම පේළිවලට පිළිතුරු දෙන්න ඉඩ දෙන්න.",
-      "primary": "ගැනුම්කරු ගිණුමක් සාදන්න",
-      "secondary": "පළමුව සැපයුම්කරුවන් බලන්න"
-    },
-    "workflow": {
-      "eyebrow": "මිලදී ගැනීම ක්‍රියාත්මක වන ආකාරය",
-      "title": "පියවර හතරක්, වාර්තාවක්.",
-      "lede": "සෑම අදියරක්ම දෙපාර්ශ්වයටම ආපසු යොමු විය හැකි දෙයක් ඉතිරි කරයි.",
-      "step1Title": "ව්‍යාපෘතියට අවශ්‍ය දේ ලියන්න",
-      "step1Body": "නිෂ්පාදන, ප්‍රමාණ සහ ඒකක සමඟ ලැයිස්තුවක් සාදන්න, නැතහොත් බිල් ප්‍රමාණය (BOQ) උඩුගත කරන්න. ඔබ ඉදිරිපත් නොකරන තුරු කිසිවක් ඔබේ ගිණුමෙන් පිටතට යන්නේ නැත.",
-      "step2Title": "සැපයුම්කරුවෝ මිල ගණන් ඉදිරිපත් කරති",
-      "step2Body": "සම්බන්ධ විය යුතු සැපයුම්කරුවෝ එකම පේළි අංශ වලට මිල, බෙදාහැරීමේ කාලය, වලංගු කාලය සහ කොන්දේසි ඉදිරිපත් කරති.",
-      "step3Title": "සෘජුව සසඳන්න",
-      "step3Body": "මිල ගණන් අංශයෙන් අංශයට පේළි වන නිසා, තීරණයට බලපාන වෙනස්කම් සැඟවෙනවා වෙනුවට පැහැදිලිව දිස්වේ.",
-      "step4Title": "ඇණවුම කරන්න",
-      "step4Body": "මිල ගණනක් පිළිගත් පසු, ඇණවුම, එහි බෙදාහැරීම් සහ ගෙවීම් එකම තැනක පවතී."
+    "newestProducts": {
+      "title": "අලුත්ම නිෂ්පාදන",
+      "viewAll": "සියලුම අලුත් නිෂ්පාදන බලන්න"
     }
   },
-
+  "pages": {
+    "common": {
+      "breadcrumbHome": "මුල් පිටුව"
+    },
+    "quotations": {
+      "title": "මිල ගණන් සහ ඇස්තමේන්තු",
+      "subtitle": "සරල පියවර 3කින් මිල ගණන්.",
+      "lede": "ඔබේ භාණ්ඩ ලැයිස්තුව හෝ BOQ එක අපට එවන්න. අප එය ශ්‍රී ලාංකික සැපයුම්කරුවන්ගේ ජාලයට බෙදා හරිමු — ඔවුන් ඔබට කෙලින්ම මිල ගණන් ලබා දෙයි. සැමවිටම නොමිලේ.",
+      "steps": [
+        {
+          "label": "ඔබ එවන්න",
+          "title": "ඔබේ RFQ එක අපට එවන්න",
+          "body": "භාණ්ඩ ලැයිස්තුවක් හෝ BOQ එකක් — ඊමේල් හෝ උඩුගත කිරීමෙන් එවන්න. නිවැරදිව යොමු කිරීම සඳහා ඔබේ නම, ලිපිනය, දුරකථන අංකය, සමාගමේ නම සහ අවශ්‍ය නිෂ්පාදන හා ප්‍රමාණ ඇතුළත් කරන්න."
+        },
+        {
+          "label": "අප යොමු කරමු",
+          "title": "අප එය සැපයුම්කරුවන් වෙත යොමු කරමු",
+          "body": "ඔබේ RFQ එක අපගේ පද්ධතියට උඩුගත වී ජාලයේ සියලුම අදාළ සැපයුම්කරුවන් වෙත යැවේ."
+        },
+        {
+          "label": "ඔබට ලැබේ",
+          "title": "මිල ගණන් කෙලින්ම ලැබේ",
+          "body": "සැපයුම්කරුවෝ ඔබට කෙලින්ම පිළිතුරු දෙති. මිල සහ ලැබීමේ කාල සසඳා, විශ්වාසයෙන් ඇණවුම් කරන්න."
+        }
+      ],
+      "onlineCta": "ඔබේ මිල ඉල්ලීම මාර්ගගතව යවන්න",
+      "emailLabel": "ඊමේල් කරන්න",
+      "email": "rfq@stockpile.lk",
+      "orLabel": "හෝ",
+      "uploadLabel": "ඔබේ RFQ ලේඛනය උඩුගත කරන්න",
+      "freeBadge": "නොමිලේ",
+      "freeAlways": "සැමවිටම",
+      "categoriesValue": "190+",
+      "categoriesLabel": "කාණ්ඩ",
+      "suppliersValue": "40+",
+      "suppliersLabel": "සැපයුම්කරුවෝ",
+      "uploadCta": "ඔබේ RFQ එක උඩුගත කරන්න"
+    },
+    "howItWorks": {
+      "title": "එය ක්‍රියා කරන ආකාරය",
+      "lede": "ඉදිකිරීම් ද්‍රව්‍ය සෙවීමට සහ වෙළඳාම සඳහා Stockpile ඔබේ පූර්ණ විසඳුමයි. නිවැරදි නිෂ්පාදන සොයා ගැනීමට, මිල ගණන් ලබා ගැනීමට සහ පහසුවෙන් ඇණවුම් කිරීමට අප ගැනුම්කරුවන් සහ සැපයුම්කරුවන් සම්බන්ධ කරමු.",
+      "buyersTitle": "ගැනුම්කරුවන් සඳහා",
+      "buyersBody": "ඔබ ගෘහ නිර්මාණ ශිල්පියෙක්, උපදේශකයෙක්, කොන්ත්‍රාත්කරුවෙක්, සංවර්ධකයෙක් හෝ ඉදිකිරීම් ද්‍රව්‍ය සොයන කෙනෙක්ද? Stockpile ඔබට උදව් කරන ආකාරය බැලීමට පහළ ක්ලික් කරන්න.",
+      "buyersCta": "ගැනුම්කරුවන් සඳහා Stockpile",
+      "suppliersTitle": "සැපයුම්කරුවන් සඳහා",
+      "suppliersBody": "ඔබ ඉදිකිරීම් ද්‍රව්‍ය හෝ සේවා සැපයුම්කරුවෙක්ද? Stockpile ඔබ වෙනුවෙන් ක්‍රියා කරන ආකාරය බැලීමට පහළ ක්ලික් කරන්න.",
+      "suppliersCta": "සැපයුම්කරුවන් සඳහා Stockpile"
+    },
+    "supplierBenefits": {
+      "title": "සැපයුම්කරුවන් සඳහා Stockpile",
+      "eyebrow": "සැපයුම්කරුවන් සඳහා STOCKPILE",
+      "lede": "කිසිදු ව්‍යාපෘති අවශ්‍යතාවක් නැවත කිසිදා අතපසු නොකරන්න.",
+      "intro": "Stockpile වෙත අවශ්‍යතාවක් ලැබෙන විට, අප ඒවා ඔබේ නිෂ්පාදනවලට ගැළපෙන පරිදි පෙරා, ඉල්ලීම කෙලින්ම ඔබ වෙත එවමු — එවිට වටිනා කාලය සහ සම්පත් නාස්ති කිරීමට ඔබට සිදු නොවේ.",
+      "cards": [
+        {
+          "title": "ක්ෂණිකව මිල ගණන් ඉදිරිපත් කරන්න",
+          "body": "සියලුම ගැනුම්කරු අවශ්‍යතා ඔබේ විශේෂත්වයට ගැළපෙන පරිදි පෙරා ඇති නිසා කාලය ඉතිරි වේ. හොඳම නිෂ්පාදනය විශේෂ තොග මිල සමඟ යෝජනා කර ගැනුම්කරුවන්ගේ සලකා බැලීමට ඉදිරිපත් කරන්න."
+        },
+        {
+          "title": "ඵලදායීව කේවල් කරන්න",
+          "body": "සාකච්ඡා මත පදනම්ව ඕනෑම සංශෝධන ගණනක් ඉදිරිපත් කරන්න. වට්ටම් සහ විශේෂ දීමනා පහසුවෙන් කළමනාකරණය කරන්න."
+        },
+        {
+          "title": "විකුණුම අවසන් කරන්න",
+          "body": "ඇණවුමක් ඉදිරිපත් වූ පසු ඔබේ අභ්‍යන්තර අවශ්‍යතා සපුරා ගැනීම සඳහා ගැනුම්කරුගේ PO එක සත්‍යාපනය කරන්න. ඇණවුම සකසන අතරතුර ගනුදෙනුකරුවා යාවත්කාලීනව තබා ගන්න."
+        }
+      ],
+      "moreTitle": "තවත් මොනවද?",
+      "features": [
+        {
+          "title": "ඔබේ ප්‍රේක්ෂකයින් තෝරන්න",
+          "body": "ඔබේ මිල ආරක්ෂා කරන්න. ඔබේ නිෂ්පාදන සහ මිල දැකිය හැක්කේ කාටද යන්න තෝරන්න. කොන්ත්‍රාත්කරුවන්, ගෘහ නිර්මාණ ශිල්පීන්, උපදේශකයින්, හෝ සියල්ලන්ම."
+        },
+        {
+          "title": "ගනුදෙනු ගාස්තු නැත.",
+          "body": "බොහෝ වේදිකා මෙන් Stockpile ගනුදෙනු ගාස්තුවක් අය නොකරයි. ඔබේ ලාභ ඔබටමයි."
+        },
+        {
+          "title": "සැපයුම්කරු තීක්ෂණ බුද්ධිය",
+          "body": "ඔබේ නිෂ්පාදන වැඩිපුරම බැලූ අය, වෙළඳපල ඉල්ලුම සහ තවත් බොහෝ විස්තර ලබා ගැනීමට Supplier Insights වෙත දායක වන්න."
+        },
+        {
+          "title": "ඔබේ නිෂ්පාදන ප්‍රවර්ධනය කරන්න",
+          "body": "නව නිෂ්පාදනයක් දියත් කරනවද? සතිපතා පුවත් ලිපිය හරහා එය ප්‍රවර්ධනය කර ගෘහ නිර්මාණ ශිල්පීන්, උපදේශකයින් සහ කොන්ත්‍රාත්කරුවන් වෙත කෙලින්ම ළඟා වන්න. වඩා හොඳ ප්‍රදර්ශනය සඳහා අපගේ මුල් පිටුවේ ප්‍රදර්ශනය කරන්න."
+        },
+        {
+          "title": "ප්‍රචාරණය (ඉක්මනින්)",
+          "body": "ඔබේ ඉලක්ක ප්‍රේක්ෂකයින් මෙහි සිටී! ඔබේ නිෂ්පාදන ප්‍රචාරණය කර ඔවුන් වෙත කෙලින්ම ළඟා වන්න."
+        }
+      ],
+      "partnersEyebrow": "අපගේ හවුල්කාර ගැනුම්කරුවන්",
+      "ctaTitle": "ඔබේ ජීවිතය පහසු කර ගැනීමට සූදානම්ද? 0114-222-555 අමතන්න හෝ පහළ ලියාපදිංචි වන්න.",
+      "ctaBody": "අපගේ විශේෂඥයෙකු ඔබට ආරම්භ කිරීමට උදව් කරනු ඇත.",
+      "registerCta": "සැපයුම්කරු ලෙස ලියාපදිංචි වන්න",
+      "pricingCta": "මිල ගණන් බලන්න"
+    },
+    "pricing": {
+      "title": "මිල ගණන්",
+      "lede": "ඔබ සැපයුම්කරුවෙක්ද? ඔබට ගැළපෙන මාසික සැලැස්මක් තෝරන්න.",
+      "sublede": "ඔබේ නිෂ්පාදන නිවැරදි ගැනුම්කරුවන් වෙත ළඟා කරවන දායක සැලසුම් තුනෙන් එකක් තෝරන්න, නැතහොත් ඔබේ අවශ්‍යතා අනුව සකස් කළ එකක් ලබා ගන්න.",
+      "perMonth": "/මාසය",
+      "tiers": [
+        {
+          "name": "Starter",
+          "price": "රු. 10,000",
+          "features": [
+            "සෘජු ගනුදෙනුකරු ඇමතුම්",
+            "ඇමතුම් 100 ක් දක්වා",
+            "නිෂ්පාදන උඩුගත - 5",
+            "සැපයුම්කරු පිවිසුම",
+            "සඳ–සිකු පෙ.ව. 9 – ප.ව. 5 පාරිභෝගික සහාය"
+          ]
+        },
+        {
+          "name": "Standard",
+          "price": "රු. 15,000",
+          "features": [
+            "සෘජු ගනුදෙනුකරු ඇමතුම්",
+            "ඇමතුම් 200 ක් දක්වා",
+            "සමාජ මාධ්‍ය දැන්වීම් - මූලික",
+            "Google දැන්වීම් - සම්මත",
+            "සවිස්තර වාර්තාව",
+            "නිෂ්පාදන උඩුගත - 5",
+            "සැපයුම්කරු පිවිසුම",
+            "සඳ–සිකු පෙ.ව. 9 – ප.ව. 5 පාරිභෝගික සහාය"
+          ]
+        },
+        {
+          "name": "Enterprise",
+          "price": "රු. 20,000",
+          "features": [
+            "සෘජු ගනුදෙනුකරු ඇමතුම්",
+            "අසීමිත ඇමතුම්",
+            "සමාජ මාධ්‍ය දැන්වීම් - උසස්",
+            "Google දැන්වීම් - උසස්",
+            "සවිස්තර වාර්තාව",
+            "නිෂ්පාදන උඩුගත - 10",
+            "Whatsapp දැනුම්දීම්",
+            "සැපයුම්කරු පිවිසුම",
+            "සඳ–සිකු පෙ.ව. 9 – ප.ව. 5 පාරිභෝගික සහාය"
+          ]
+        }
+      ],
+      "customName": "අභිරුචි",
+      "customBody": "තවත් ප්‍රතිලාභ අවශ්‍යද? අපට ඔබේ අවශ්‍යතා සඳහා ඇසුරුමක් සකස් කළ හැක.",
+      "customEmail": "info@stockpile.lk",
+      "customPhone": "0114-222-555",
+      "callCta": "අද ලියාපදිංචි වීමට අපට අමතන්න 0114-222-555",
+      "learnMore": "Stockpile ඔබේ ව්‍යාපාරයට උදව් කරන ආකාරය දැන ගැනීමට මෙහි ක්ලික් කරන්න.",
+      "registerCta": "සැපයුම්කරු ලෙස ලියාපදිංචි වන්න"
+    },
+    "about": {
+      "title": "අප ගැන",
+      "subtitle": "සොයන්න. සසඳන්න. කේවල් කරන්න. මිලදී ගන්න.",
+      "tagline": "Stockpile: ඉදිකිරීම් ද්‍රව්‍ය මිලදී ගැනීමේ කාර්යක්ෂම ක්‍රමය.",
+      "body": [
+        "Stockpile යනු ඉදිකිරීම් සමාගම් සහ කර්මාන්ත වෘත්තිකයන් සඳහා වන සම්පූර්ණ මිලදී ගැනීම් වේදිකාවකි — තොග මිල ලබා ගැනීමට, නිෂ්පාදන පිරිවිතර බැලීමට සහ ඉදිකිරීම් ද්‍රව්‍ය මෙන්ම මුළුතැන්ගෙයි, සනීපාරක්ෂක සහ ජලනල උපාංග, යකඩ භාණ්ඩ, ජල ආරක්ෂණ, ආකලන, සෙවිලි, බිම් ආවරණ, විදුලි සවිකිරීම් වැනි දේ සඳහා ඇණවුම් කිරීමට අතුරු මුහුණතක් සපයයි.",
+        "Stockpile කොන්ත්‍රාත්කරුවන්ට, සංවර්ධකයින්ට, ගෘහ නිර්මාණ ශිල්පීන්ට සහ උපදේශකයින්ට වෙළඳපොලේ ඇති හොඳම ඉදිකිරීම් ද්‍රව්‍ය තේරීම් සහ විනිවිද පෙනෙන මිල ගණන් සඳහා පිවිසුම ලබා දෙයි. මෙය සැසඳීම් සහ තීරණ ගැනීමේ ක්‍රියාවලිය සරල කරන අතර ද්‍රව්‍ය මිලදී ගැනීමේ ක්‍රියාවලිය සැලකිය යුතු ලෙස වේගවත් කරයි.",
+        "තොග මිලදී ගැනීම් සඳහා පමණක් ලබා ගත හැකි, මෙම වේදිකාවේ ඇති ඉදිකිරීම් ද්‍රව්‍ය අත්තිවාරම දැමීමේ සිට ගොඩනැගිල්ලේ අභ්‍යන්තර නිමාවන් දක්වා ඉදිකිරීම් වෘත්තිකයන් සන්නද්ධ කිරීම සඳහා ප්‍රවේශමෙන් තෝරා ඇත. කාර්යක්ෂම ව්‍යාපෘති කළමනාකරණය, කාල ඉතිරිය සහ වඩා හොඳ ලාභ සඳහා ඔබේ අත්දැකීම අඛණ්ඩව වැඩිදියුණු කිරීමට අප කැපවී සිටිමු.",
+        "Stockpile යනු 2021 දී ස්ථාපිත Construction Trade Technologies (pvt) Ltd. හි ව්‍යාපාරයකි. ඉදිකිරීම් කර්මාන්තයේ අපගේ අත්දැකීම් ස්වයංක්‍රීයකරණය සහ තොරතුරු තාක්ෂණයේ අපගේ අත්තිවාරම් සමඟ සම්බන්ධ කරයි. ශ්‍රී ලංකාවේ මීළඟ පරම්පරාවේ ඉංජිනේරුවන්ගේ සහ ඉදිකිරීම්කරුවන්ගේ ගැටලු කතා කිරීමට හා සාකච්ඡා කිරීමට පිහිටුවා ඇති Young Constructors' Forum (YCF) සමඟ අපගේ සහයෝගීතාවය ඉදිකිරීම් කර්මාන්තයේ ඇති තීරණාත්මක ගැටලු සහ ප්‍රායෝගික ගැටළු පිළිබඳ අවබෝධය අපට ලබා දුන්නේය. ඉන් පසුව, අප ද්‍රව්‍ය මිලදී ගැනීමේ සම්පූර්ණ ජීවන චක්‍රය විශ්ලේෂණය කර, තොග සෙවීම, වෙළෙන්දන් සමඟ සම්බන්ධීකරණය සහ ඉදිකිරීම් සඳහා ද්‍රව්‍ය මිලදී ගැනීමේ සෑම පියවරකම ක්‍රමානුකූල වැඩිදියුණු කිරීම් සිදු කරමින් අකාර්යක්ෂමතා අඩු කිරීමට Stockpile සංවර්ධනය කළෙමු."
+      ],
+      "closing": "එක් වේදිකාවක මත ඉදිකිරීම් ද්‍රව්‍ය සොයා, සසඳා, මිලදී ගැනීමෙන් කාලය ඉතිරි කර කාර්යක්ෂමව ගොඩනඟන්න — ඔබ වෙනුවෙන් පමණක් තෝරාගත්."
+    },
+    "contact": {
+      "title": "අප අමතන්න",
+      "questionsTitle": "ඕනෑම ප්‍රශ්නයක් සඳහා",
+      "questionsEmail": "info@stockpile.lk",
+      "quotesTitle": "අපගේ සැපයුම්කරුවන්ගෙන් මිල ගණන් අවශ්‍යද?",
+      "quotesEmail": "rfq@stockpile.lk",
+      "callTitle": "ඇමතීමට",
+      "callBody": "නිෂ්පාදන හෝ කාණ්ඩ පිටුවල ඇති ඇමතුම් බොත්තම ක්ලික් කරන්න.",
+      "hqTitle": "ප්‍රධාන කාර්යාලය (අප මෙහි කිසිදු නිෂ්පාදනයක් අලෙවි නොකරයි)",
+      "hqAddress": "132 පැරණි කෝට්ටේ පාර, වැලිකඩ, රාජගිරිය",
+      "workTitle": "අප සමඟ වැඩ කරන්න",
+      "workBody": "අපගේ රැකියා අවස්ථා බලන්න:",
+      "workLink": "Stockpile රැකියා",
+      "getInTouchTitle": "සම්බන්ධ වන්න",
+      "emailUs": "අපට ඊමේල් කරන්න",
+      "callUs": "අපට අමතන්න"
+    },
+    "terms": {
+      "title": "භාවිත කොන්දේසි",
+      "body": [
+        "මෙම භාවිත කොන්දේසි (\"ගිවිසුම\") යනු විද්‍යුත් ගනුදෙනු පනත, අංක 19, 2006 සහ එයට අදාළ නීතිවලට අනුව විද්‍යුත් වාර්තාවකි. Stockpile.lk හි සියලුම පරිශීලකයින් මෙම භාවිත කොන්දේසිවලට බැඳී සිටී.",
+        "Stockpile.lk (මෙතැන් සිට \"Stockpile\", \"අඩවිය\", \"අප\" සහ \"අපි\" ලෙස හැඳින්වේ) යනු ගනුදෙනුකරුවන් සහ සැපයුම්කරුවන් සම්බන්ධ කිරීමට අපේක්ෂා කරන වේදිකාවකි. ගනුදෙනුකරුවන්ට නිෂ්පාදන තොරතුරු, මිල ගණන් සහ වෙනත් පිරිවිතර ලබා ගත හැකි අතර විකුණුම්කරුවන්ට ඒවා සැපයිය හැක. අඩවිය හිමිකරගෙන මෙහෙයවනු ලබන්නේ Construction Trade Technologies (Private) Limited (මෙතැන් සිට \"CTT\") විසිනි.",
+        "අප පිරිනමන ඇතැම් සේවාවන්ට පිවිසීමට පරිශීලකයින් Stockpile සමඟ ගිණුමක් සෑදිය යුතුය. ගිණුමක් සෑදීමට ඔබට ආයතනික සහ/හෝ පුද්ගලික තොරතුරු ලබා දීමට සිදු විය හැකි අතර, ඔබේ අනන්‍යතාවය සත්‍යාපනය කිරීමේදී අප ඔබව සම්බන්ධ කර ගත හැක. Stockpile සමඟ ගිණුමක් සෑදූ පසු ඔබට පරිශීලක ID සහ මුරපදයක් ලබා දෙනු ඇත. ඔබේ පරිශීලක ID, මුරපදය සහ අනෙකුත් ගිණුම් විස්තරවල රහස්‍යභාවය සහ ආරක්ෂාව සඳහා ඔබම වගකිව යුතුය.",
+        "ගනුදෙනුකරුවන්ට සැපයුම්කරුවන් විසින් ලැයිස්තුගත කර ඇති ද්‍රව්‍ය සහ/හෝ වෙනත් භාණ්ඩ පරීක්ෂා කළ හැකි අතර, අවශ්‍ය නිෂ්පාදන සඳහා මිල ගණන් ලබා ගැනීමේදී සැපයුම්කරුවන් සමඟ සන්නිවේදනය කිරීමට තෝරා ගත හැක.",
+        "Construction Trade Technologies (Private) Limited ඔබට මෙම අඩවිය ඔබේ පෞද්ගලික භාවිතය සඳහා බැලීමට සහ භාවිතා කිරීමට අවසර ලබා දෙයි, මෙහි දක්වා ඇති කොන්දේසි ඔබ පිළිගන්නේ නම් සහ වෙනස් කිරීමකින් තොරව පිළිගන්නේ නම් පමණි. මෙම අඩවියෙන් ඕනෑම තොරතුරක්, ද්‍රව්‍යයක්, මෘදුකාංගයක්, නිෂ්පාදනයක් හෝ සේවාවක් පිටපත් කිරීම, බෙදා හැරීම, සම්ප්‍රේෂණය, සංදර්ශනය, වෙනස් කිරීම, ප්‍රතිනිෂ්පාදනය, ප්‍රකාශනය, බලපත්‍රය, ව්‍යුත්පන්න කෘති නිර්මාණය, මාරු කිරීම හෝ විකිණීම ඔබට සිදු නොකළ හැක.",
+        "Stockpile සහ CTT අඩවිය භාවිතයෙන් පරිශීලකයින් සම්බන්ධ කිරීමෙන් සේවා සපයන්නන් ලෙස පමණක් ක්‍රියා කරයි. මෙම අඩවියේ ඇති නිෂ්පාදනවල යෝග්‍යතාවය පිළිබඳව Stockpile සහ CTT කිසිදු නියෝජනයක් නොකරයි. එවැනි සියලුම නිෂ්පාදන සැපයුම්කරුවන් විසින් ලබා දෙන අතර, Stockpile හෝ CTT විසින් කිසිදු ආකාරයක වගකීමක් (ප්‍රකාශිත හෝ ඇඟවුම්) නොමැතිව සපයයි. මෙම අඩවිය භාවිතය ඔබේම අවදානමකි.",
+        "Stockpile ගනුදෙනුකරු සහ සැපයුම්කරු අතර සන්නිවේදනය සහ ව්‍යාපාර සම්බන්ධීකරණය පහසු කරයි. ගනුදෙනුකරු සහ සැපයුම්කරු අතර ඇති වන ඕනෑම ව්‍යාපාරික ගනුදෙනුවක් එම පාර්ශ්වයන් අතර ගිවිසුමක් ලෙස පවතින අතර, එවැනි පාර්ශ්වයන් විසින් එකඟ වූ කොන්දේසිවලට යටත් වේ.",
+        "ගනුදෙනුකරුවන් සැමවිටම Stockpile නිර්මාණය කිරීමේදී සහ භාවිතා කිරීමේදී අපට සත්‍ය සහ නිවැරදි තොරතුරු ලබා දිය යුතුය. ගනුදෙනුකරුවන් යහපත් චේතනාවෙන් ක්‍රියා කළ යුතුය. ගනුදෙනුකරු සැපයුම්කරු සමඟ පැහැදිලිව සන්නිවේදනය කළ යුතුය.",
+        "සැපයුම්කරුවන් සැමවිටම Stockpile නිර්මාණය කිරීමේදී සහ භාවිතා කිරීමේදී අපට සත්‍ය සහ නිවැරදි තොරතුරු ලබා දිය යුතුය. සැපයුම්කරු නිෂ්පාදන ලැයිස්තු සත්‍ය සහ නිවැරදි බවට සහතික විය යුතු අතර නිෂ්පාදන පිරිවිතර, විස්තරය සහ දත්ත අඩංගු විය යුතුය. සැපයුම්කරු නිෂ්පාදන සහ තොග පැවැත්ම පිළිබඳ සත්‍ය සහ නිවැරදි තොරතුරු නිරූපණය කිරීම සැමවිටම සහතික කළ යුතුය. සැපයුම්කරුවන් යහපත් චේතනාවෙන් ක්‍රියා කළ යුතුය.",
+        "ඔබේ අඩවි භාවිතය Stockpile හි රහස්‍යතා ප්‍රතිපත්තිය මගින් සම්පූර්ණයෙන්ම පාලනය වේ. ඔබ ඉදිරිපත් කරන සියලුම හඳුනාගැනීම්, පරිශීලක ක්‍රියාකාරකම්, වාණිජ තොරතුරු සහ අන්තර්ගතය Stockpile සහ CTT හි අභිමතය පරිදි බලයලත් තෙවන පාර්ශ්වයන් සමඟ භාවිතා කර බෙදා ගත හැක.",
+        "අඩවියට ඕනෑම අන්තර්ගතයක් ඉදිරිපත් කිරීමෙන්, ඔබ එහි බුද්ධිමය දේපළ අයිතිවාසිකම්වල එකම කතෘ සහ හිමිකරු බව සහ/හෝ එය භාවිතා කිරීමට එවැනි හිමිකරුගේ අවසරය ඇති බව නියෝජනය කර සහතික කරයි. අඩවියට ඉදිරිපත් කරන ලද සහ/හෝ පළ කරන ලද සියලුම අන්තර්ගතයන්, ඔබගෙන් Stockpile සහ CTT වෙත ස්ථිර, ආපසු හැරවිය නොහැකි, කාර්යාල ගාස්තු රහිත, පැවරිය හැකි අයිතිය සහ බලපත්‍රයක් ලෙස සැලකේ.",
+        "ගනුදෙනුකරුවන්ට සැපයුම්කරුවන් ඇගයීමට සුදුසුකම් ඇති අතර, එසේ කිරීමට දිරිමත් කරනු ලැබේ. අඩවියේ ඉදිරිපත් කරන ලද සියලුම සමාලෝචන Stockpile විසින් සත්‍යාපනය කිරීමෙන් පසුව පමණක් ප්‍රකාශයට පත් කෙරේ.",
+        "ඉහත දක්වා ඇති ඔබේ වගකීම් උල්ලංඝනය කිරීමකින් හෝ ඕනෑම නීතියක් හෝ තෙවන පාර්ශ්වයක අයිතිවාසිකම් උල්ලංඝනය කිරීමෙන් පැන නගින සියලුම හිමිකම්, ඉල්ලීම් සහ හානිවලින්, නීතිමය ගාස්තු ඇතුළුව, Stockpile සහ CTT (සහ එහි නිලධාරීන්, අධ්‍යක්ෂවරුන්, නියෝජිතයන්, අනුබද්ධිත, හවුල් ව්‍යාපාර, සේවකයින් සහ තෙවන පාර්ශ්ව සේවා සපයන්නන්) ආරක්ෂා කිරීමට සහ නිදහස් කිරීමට ඔබ එකඟ වේ.",
+        "මෙම අඩවිය, එහි මෘදුකාංගය සහ Stockpile වෙත යොමු කරන වෙළඳ ලකුණු සහ/හෝ යොමු කිරීම් Stockpile සහ CTT හි බුද්ධිමය දේපළ වේ.",
+        "මෙම ගිවිසුම සහ මෙම අඩවියේ ඔබේ භාවිතය ශ්‍රී ලංකාවේ නීති මගින් පාලනය වන බවට ඔබ එකඟ වේ. මෙම අඩවියට සහ/හෝ මෙම ගිවිසුමට අදාළ සියලුම ආරවුල්වලදී ශ්‍රී ලංකාවේ අධිකරණවල ඒකාධිකාර අධිකරණ බලයට ඔබ එකඟ වේ."
+      ]
+    },
+    "help": {
+      "title": "පරිශීලක මාර්ගෝපදේශය සහ සහාය",
+      "lede": "Stockpile.lk වලින් උපරිම ප්‍රයෝජන ලබා ගැනීමට අවශ්‍ය සියල්ල. ඔබට මෙහි පිළිතුරක් සොයාගත නොහැකි නම්, අප හා සම්බන්ධ වන්න — අපි ඔබට පුද්ගලිකව උදව් කරමු.",
+      "groups": [
+        {
+          "title": "නාමාවලිය සෙවීම",
+          "items": [
+            "නිෂ්පාදන, කාණ්ඩ හෝ සැපයුම්කරුවන් නම, ද්‍රව්‍ය හෝ SKU අනුව සෙවීමට හිස්තැනේ ඇති සෙවුම් කොටුව භාවිතා කරන්න.",
+            "\"අංශය අනුව සොයන්න\" මෙනුවෙන් අංශය අනුව බලන්න, නැතහොත් මුල් පිටුවේ \"වැඩියෙන්ම සොයන නිෂ්පාදන\" පුවරු වලින් ආරම්භ කරන්න.",
+            "කාණ්ඩය, සැපයුම්කරු, මිල සහ තොග පැවැත්ම අනුව පටු කිරීමට නිෂ්පාදන පිටුවේ ඇති පෙරහන් භාවිතා කරන්න."
+          ]
+        },
+        {
+          "title": "මිල ගණන් ලබා ගැනීම",
+          "items": [
+            "ඔබේ භාණ්ඩ ලැයිස්තුව හෝ BOQ එක Get Quotes පිටුව හරහා එවන්න — අප එය නොමිලේ අදාළ සැපයුම්කරුවන් වෙත බෙදා හරිමු.",
+            "ගැනුම්කරු ගිණුමක් සෑදීමට පිවිසෙන්න, ඉන්පසු මිල ඉල්ලීම් ඉදිරිපත් කර ඔබේ වැඩබිමේ සැපයුම්කරු ප්‍රතිචාර නිරීක්ෂණය කරන්න.",
+            "සැපයුම්කරුවෝ ඔබට කෙලින්ම පිළිතුරු දෙති, එබැවින් ඇණවුම් කිරීමට පෙර මිල, ලැබීමේ කාල සහ කොන්දේසි සැසඳිය හැක."
+          ]
+        },
+        {
+          "title": "ඔබේ ගිණුම",
+          "items": [
+            "මිල ගණන් ඉල්ලීමට, ඇණවුම් කිරීමට සහ ඔබේ නිෂ්පාදන ලැයිස්තුව කළමනාකරණය කිරීමට නොමිලේ ගිණුමක් සාදන්න.",
+            "ඔබේ වැඩබිමට ළඟා වීමට ජංගම දුරකථනයේ \"මම\" බොත්තම (හෝ ඩෙස්ක්ටොප් එකේ හිස්තැනේ ඇති ගිණුම් මෙනුව) භාවිතා කරන්න.",
+            "සැපයුම්කරුවන්ට සහ අපගේ කණ්ඩායමට ඔබ වෙත ළඟා විය හැකි වන පරිදි ඔබේ ඊමේල් ලිපිනය සහ දුරකථන අංකය යාවත්කාලීනව තබා ගන්න."
+          ]
+        },
+        {
+          "title": "සැපයුම්කරුවන් සඳහා",
+          "items": [
+            "සැපයුම්කරු ලෙස ලියාපදිංචි වී සැලැස්මක් තෝරන්න — Starter, Standard, Enterprise සහ අභිරුචි විකල්ප සඳහා මිල ගණන් පිටුව බලන්න.",
+            "ඔබේ නිෂ්පාදන එක් වරක් උඩුගත කරන්න — ඒවා ඔබේ පැතිකඩ සමඟ නාමාවලියේ දිස්වේ.",
+            "සැපයුම්කරු ගිණුම් අනුමැතියට පෙර සමාලෝචනය වේ — වෙළඳපොල විශ්වාසදායක ලෙස තබා ගැනීමට අප අනන්‍යතා සත්‍යාපනය කරමු."
+          ]
+        },
+        {
+          "title": "තවමත් ගැටලුවක්ද?",
+          "items": [
+            "info@stockpile.lk වෙත ඊමේල් කරන්න හෝ 0114-222-555 අමතන්න (සඳුදා–සෙනසුරාදා පෙ.ව. 9 – ප.ව. 5).",
+            "ඔබේ ව්‍යාපෘති සඳහා මිල ගණන් සඳහා, ඔබේ භාණ්ඩ ලැයිස්තුව හෝ BOQ එක සමඟ rfq@stockpile.lk වෙත කෙලින්ම ඊමේල් කරන්න."
+          ]
+        }
+      ]
+    },
+    "sitemap": {
+      "title": "අඩවි සිතියම",
+      "lede": "Stockpile.lk හි සෑම පොදු පිටුවක්ම, එක තැනක.",
+      "mainTitle": "ප්‍රධාන",
+      "shopTitle": "සාප්පුව",
+      "companyTitle": "සමාගම",
+      "supportTitle": "සහාය"
+    },
+    "howItWorksForBuyers": {
+      "title": "Stockpile works to find you the right product at the right price, quickly and efficiently in 3 simple steps.",
+      "eyebrow": "STOCKPILE FOR BUYERS",
+      "steps": [
+        {
+          "label": "1. Submit your RFQ",
+          "body": "A single Request For Quotation (RFQ) from you gets sent to every supplier registered in the categories you select. You won't have to worry about missing anyone out."
+        },
+        {
+          "label": "2. Review your quotes",
+          "body": "Use the Quote Comparison feature to quickly compare selected quotations side-by-side to help you evaluate faster and negotiate directly with the suppliers."
+        },
+        {
+          "label": "3. Confirm your order",
+          "body": "When you are ready to confirm your order, simply Add-To-Order and Check-Out. Upload your company Purchase Order (PO) to comply with your corporate procedures. Payment can be made directly to the supplier using your method of choice."
+        }
+      ],
+      "moreTitle": "But There''s more!",
+      "features": [
+        {
+          "title": "Match Specifications",
+          "body": "Use our search and Fiters to browse and identity products that meet your specifications"
+        },
+        {
+          "title": "Growing Supplier Base",
+          "body": "Our growing number of suppliers means that you will get quotations from more suppliers without any extra effort"
+        },
+        {
+          "title": "Be Informed",
+          "body": "Get to know about the latest products. suppliers and technologies featured in our weekly newsletter"
+        }
+      ],
+      "partnersEyebrow": "FEATURED SUPPLIERS",
+      "ctaTitle": "Ready to make your life easier? Get started by registering now.",
+      "ctaBody": "One of our experts will contact you to complete your registration.",
+      "registerCta": "Register Now"
+    },
+    "userGuide": {
+      "title": "Learn How To Use Stockpile",
+      "lede": "Congratulations on selecting Stockpile, the only service which offers a complete solution to discover, quote and receive orders from Architects, Consultants, Contractors and Developers. Use the navigation menu on the left to find the guide",
+      "navLabel": "User guide contents",
+      "prevTopic": "Prev Topic",
+      "nextTopic": "Next Topic",
+      "topicNavLabel": "Topic navigation",
+      "nav": [
+        {
+          "label": "Introduction",
+          "href": "/user-guide"
+        },
+        {
+          "title": "Stockpile for Buyers",
+          "items": [
+            {
+              "label": "Buyer Registration"
+            },
+            {
+              "label": "Updating Buyer Profile"
+            },
+            {
+              "label": "Creating an RFQ",
+              "href": "/user-guide-customer-creating-rfqs"
+            },
+            {
+              "label": "Viewing Quotations",
+              "href": "/user-guide-customer-viewing-quotations"
+            }
+          ]
+        },
+        {
+          "title": "Stockpile for Suppliers",
+          "href": "/user-guide-supplier-registration",
+          "items": [
+            {
+              "label": "Supplier Registration",
+              "href": "/user-guide-supplier-registration"
+            },
+            {
+              "label": "Product Creation",
+              "href": "/user-guide-product-creation"
+            },
+            {
+              "label": "Product Specifications",
+              "href": "/user-guide-product-specifications"
+            },
+            {
+              "label": "Submitting Quotations",
+              "href": "/user-guide-supplier-quotation"
+            }
+          ]
+        },
+        {
+          "label": "Conversion Tables",
+          "href": "/conversion-tables"
+        },
+        {
+          "label": "Glossary",
+          "href": "/user-guide-glossary"
+        }
+      ]
+    },
+    "guideSupplierRegistration": {
+      "title": "Supplier Registration",
+      "lede": "Never miss out on any project requirements ever again. When Stockpile receives a requirement, we filter them to match your products, and send the request straight to you so that you don''t have to waste valuable time and resources anymore.",
+      "sections": [
+        {
+          "body": "Start by navigating to the Supplier Registration page.",
+          "link": {
+            "label": "Supplier Registration page",
+            "href": "/supplier-register"
+          }
+        },
+        {
+          "title": "EMAIL ADDRESS",
+          "body": "Enter your official company email address. This will be used for all notifications about your account, orders, RFQs and newsletters."
+        },
+        {
+          "title": "PASSWORD",
+          "body": "Your password must have a minimum length of 8, and must contain 3 of the following 4:",
+          "bullets": ["Lower Case letter", "Upper Case letter", "Digit", "Special Character"],
+          "footer": "Click on Proceed to continue to the 2nd Page."
+        },
+        {
+          "title": "CONTACT INFORMATION",
+          "body": "Enter your contact details and Company Name."
+        },
+        {
+          "title": "COMPANY URL",
+          "body": "This is your Stockpile Site Url – This will be the direct link on Stockpile for your company. Use your company name without legal terms like (pvt), Ltd., LLC, etc., replacing spaces with dash (-).",
+          "footer": "In the following example, the link to the seller's profile page will be http://stockpile.lk/bluewire-electrical-systems"
+        },
+        {
+          "title": "ADDRESS INFORMATION",
+          "body": "Enter your company's operating address details. If you have a secondary operational address, it can be added later through the Supplier Dashboard."
+        },
+        {
+          "body": "Once you have successfully submitted your request, you will receive an email from support@stockpile.lk to Verify Your Account. Completing this step will help us in the first step of verifying your identity. Thereafter, one of our representatives will contact you to gather more information required for the verifciation process."
+        },
+        {
+          "title": "SUPPLIER ONBOARDING QUESTIONNAIRE",
+          "body": "In order to expedite the on-boarding process, please complete the Supplier Onboarding Questionnaire available here.",
+          "link": {
+            "label": "Supplier Onboarding Questionnaire",
+            "href": "https://forms.office.com/r/T8ALh7i1VR"
+          }
+        }
+      ]
+    },
+    "guideSupplierQuotation": {
+      "title": "Supplier - Quoting for an RFQ",
+      "lede": "This video shows the following:",
+      "bullets": [
+        "Email notification when you get an RFQ",
+        "How to find new RFQs which are called Buying Leads",
+        "How to create a quotation for an RFQ",
+        "How to view all quotations you have created"
+      ]
+    },
+    "guideCustomerCreatingRfqs": {
+      "title": "Customer - Creating an RFQ",
+      "lede": "This video shows how the customer can log into Stockpile and create a Request For Quotation (RFQ) so that all the registered suppliers for the required product categories will get the request."
+    },
+    "guideCustomerViewingQuotations": {
+      "title": "Customer - Viewing Quotations",
+      "lede": "This video shows how the customer can log into Stockpile and view quotations that have been received for a Request For Quotation (RFQ) that the customer has created."
+    },
+    "guideProductCreation": {
+      "title": "Product Creation",
+      "sections": [
+        {
+          "body": "In this video we will demonstrate the method to create a new product on Stockpile. First click on the user icon on the top right, and then click on Supplier Login. Enter your registered email address and password. You will then be redirected to your Supplier Dashboard."
+        },
+        {
+          "body": "Click on Products and then click on Add Products.",
+          "link": {
+            "label": "Add Products",
+            "href": "/supplier"
+          }
+        },
+        {
+          "title": "ATTRIBUTE SET",
+          "body": "First you will have to select the attribute set most suitable for your product. When some products have specifications that are important to highlight, then we will create an attribute set for those. If you don't find an attribute set made for your product type, then select the General attribute set."
+        },
+        {
+          "title": "PRODUCT TYPE",
+          "body": "Select the Simple product type and click continue. If you want to learn about creating a configurable product and it's benefits, read our guide on Creating a Configurable Product."
+        },
+        {
+          "title": "PRODUCT CATEGORY",
+          "body": "Select the Product Category that most closely matches your product. For example if you want to upload a product that matches Wooden Flooring, then under Building Materials you can select Timber. Do not select the parent category which is Building Materials, your product will automatically be show in the selected category and all parent categories. You can also see that under Flooring, there is a sub-category called Wooden which can be selected. This will list your product under Timber Building Products, and Wooden Flooring.",
+          "footer": "You can use the search bar to try and find a suitable category."
+        },
+        {
+          "title": "PRODUCT NAME",
+          "body": "Next enter your Product Name. Please use the following convention for naming your products\n\n[brand] + [model/product type] + [key attributes]\n\nExample:",
+          "bullets": [
+            "Gibraltar Teak Wooden Flooring 24mm",
+            "Stanley Philips Screwdriver 6.5Mmx200Mm",
+            "Grundfos Self Priming Jet Pump JP3-42-PTV (Flow 57 LPM)"
+          ]
+        },
+        {
+          "title": "DESCRIPTION",
+          "body": "The production description should include the following mandatory information. Including this will assist your buyers in obtaining all of the necessary details without having to contact you, thereby expediting the procurement process."
+        },
+        {
+          "title": "PRODUCT SUMMARY:",
+          "body": "This should be a detailed description of the product, it's advantages, applications, etc."
+        },
+        {
+          "title": "GENERAL SPECIFICATIONS:",
+          "body": "Include all specifications for the product in a well formatted layout. Refer the MINIMUM REQUIRED SPECIFICATIONS for your product. If your product is not listed, contact support to obtain the list of required specifications. You must list the minimum specifications in the same order it is given in the link above. If you have additional specifications you may include them after listing the minimum required specifciations.",
+          "link": {
+            "label": "MINIMUM REQUIRED SPECIFICATIONS",
+            "href": "/user-guide-product-specifications"
+          }
+        },
+        {
+          "title": "CLIENT RESPONSIBILITIES",
+          "body": "List all responsibilities not included with the product. This can include but not limited to cranes for unloading at the delivery location, product assembly, insurance, etc."
+        },
+        {
+          "title": "COMPLETED PROJECTS:",
+          "body": "A list of all projects this product has successfully been used. You should have the right to list the said projects."
+        },
+        {
+          "title": "TERMS OF SALE:",
+          "body": "All terms of sale should be included."
+        },
+        {
+          "title": "SHORT DESCRIPTION:",
+          "body": "This should be a 1-2 sentence brief about the product. It will be shown on category pages listings."
+        },
+        {
+          "title": "SKU (STOCK KEEPING UNIT):",
+          "body": "If you have internal product SKUs we suggest using those with the addition of two letters in front, indicating the name of your company (this will be provided to you). Otherwise, please follow this format for creating a SKU.\n\nAABBCCDDEE",
+          "bullets": [
+            "[AA-AAA] - 2-3 letters uniquly indicating your company name (This will be provided to you).",
+            "[BB] - Product brand or manufacturer name. If it's generic, use GN",
+            "[CC] - Type of material (Ex: WP - Wood Polymer, GL - Glass, PL - Plastic, SS - Stainless Steel)",
+            "[DD-DDD] - 2 or 3 letters describing the product (Ex: MC - Manhole Cover, FWP for Fluted Wall Panel, etc.)",
+            "[EE-EEEEE] - 2 or more letters describing a model number or important specification (such as size). If none of the above applies, then a two digit index of this item (ex: 01, 02)."
+          ]
+        },
+        {
+          "title": "PRICE:",
+          "body": "This is your list or catalog price."
+        },
+        {
+          "title": "SPECIAL PRICE, SPECIAL PRICE TO, SPECIAL PRICE FROM:",
+          "body": "Leave blank."
+        },
+        {
+          "title": "STOCK:",
+          "body": "Your actual stock value. If a customer places an order through Stockpile, this value will be deducted by the volume of the order. Therefore availability will be affected by customer orders. It is important that the stock quantity is kept updated, especially if a customer has accepted your quotation and is making arragements to place the order through Stockpile."
+        },
+        {
+          "title": "STOCK AVAILABILITY:",
+          "body": "Select In stock if the item is available. Items Out of Stock will not be displayed on the catalog, and will not be available for providing quotes."
+        },
+        {
+          "title": "VISIBILITY:",
+          "bullets": [
+            "Not Visible Individually — The product will not appear anywhere on Stockpile",
+            "Catalog — The product page can be seen individually and on category pages",
+            "Search — The product will show in search results",
+            "Catalog, Search — The product page can be seen individually, on category pages and search results"
+          ],
+          "footer": "In most cases you would want to select Catalog, Search."
+        },
+        {
+          "title": "TAX CLASS:",
+          "body": "Select between VAT if your company is VAT registered and liable to pay VAT, and Non-VAT otherwise."
+        },
+        {
+          "title": "WEIGHT (KGs):",
+          "body": "This is for a future feature. If you are unsure of the weight, please estimate it as accurately as possible."
+        },
+        {
+          "title": "URL KEY:",
+          "body": "This will be the direct link to the item under https://stockpile.lk. It is generally good practice to use the name of the product with hyphen/dash '-' in place of spaces.\n\nConsider the following example",
+          "bullets": [
+            "Product Name: Gibraltar Teak Wooden Flooring 24mm",
+            "Supplier Name: Stockpile Supplier",
+            "URL Key: stockpile-supplier-gibraltar-teak-wooden-flooring-24mm",
+            "Link on Stockpile: https://stockpile.lk/stockpile-supplier-gibraltar-teak-wooden-flooring-24mm.html"
+          ]
+        },
+        {
+          "title": "SEARCH ENGINE OPTIMIZATION (SEO) ITEMS",
+          "body": "META TITLE: Make this the same as your Product Name.\n\nMETA KEYWORKS: Include specific keywords that would help a search engine like Google categorize this product. WARNING: Using unrelated keywords will result in unrelated inquiries and may reduce the accuracy of search results. If you are unsure leave this blank.\n\nMETA DESCRIPTION: Use the same text from the Short Description."
+        },
+        {
+          "title": "PRODUCT IMAGES:",
+          "body": "Upload images in JPG, JPEG, and PNG format. If you have any product material in PDF format, it is recommended to use a PDF to Image converter like https://pdftoimage.com/ and upload the documents in image format. You must ensure that you have the authority to use all uploaded images."
+        },
+        {
+          "title": "ADD VIDEO:",
+          "body": "If you have a video hosted on YouTube or Vimeo, you can link it to the product.",
+          "bullets": [
+            "Url: Paste the link to the video and press the tab key or click outside the field. The following fields should automatically fill using the details from the video",
+            "Title: You can include or amend the video title",
+            "Description: You can include or amend the video description.",
+            "Preview Image: You can change the thumbnail of the video",
+            "Role: Select MIB Hover only."
+          ],
+          "footer": "Click Save to continue editing the product."
+        },
+        {
+          "title": "MANUFACTURER:",
+          "body": "Select the manufacturer of the product. If the manufacturer is not included in the list, please contact support@stockpile.lk and request the name to be added. If you wish to withold the manufacturer you may select Generic"
+        },
+        {
+          "title": "COLOUR:",
+          "body": "Select the most suitable colour. If the specific colour is not included in the list, please contact support@stockpile.lk and request it to be added."
+        },
+        {
+          "title": "PRIMARY MATERIAL:",
+          "body": "Select the primary material of the product. If the specific material is not included in the list, please contact support@stockpile.lk and request it to be added."
+        },
+        {
+          "title": "LEAD TIME IN DAYS:",
+          "body": "If the product is manufactured to order or provided by your supplier/manufacturer after order placement, mention the average lead time to deliver the product to the buyer."
+        },
+        {
+          "title": "WARRANTY MONTHS:",
+          "body": "The default warranty period for the product."
+        },
+        {
+          "title": "MIN QTY REQUIRED PER ORDER:",
+          "body": "If you want to accept only bulk orders and have a minimum order quantity (MOQ) enter that number here. You will be able to quote for smaller numbers, but you won't be able to accept orders below this quantity."
+        },
+        {
+          "title": "IS FEATURED PRODUCT:",
+          "body": "Select Y if you want this product to be available to be featured by Stockpile. Otherwise select N."
+        },
+        {
+          "title": "RELATED PRODUCTS:",
+          "body": "Select which of your products are related to this product. These will show at the bottom of the product page."
+        },
+        {
+          "title": "UP-SELL PRODUCTS:",
+          "body": "An up-sell item is offered to the customer as a pricier or higher-quality alternative to the product the customer is looking at. Select which of your products are higher alternatives to this product. These will show at the bottom of the product page."
+        },
+        {
+          "body": "Once you have completed the form, click on Save. This will submit the product for approval by Stockpile. You will receive a notification by email once the product has been reviewed and approved."
+        },
+        {
+          "body": "If you have an almost identical product that you would like to add next, you can click Save & Duplicate. This will submit the first product for approval and fill the form for you to create another product. Carefully review and complete all of the fields before submitting the 2nd product."
+        }
+      ]
+    },
+    "guideProductSpecifications": {
+      "title": "Product Specifications",
+      "lede": "By including the important specifications of your product in the description, your customers will be able to easily find and verify the suitability of the product for their project. Therefore, Stockpile requires the following specifications to be included in your product listings.",
+      "tocTitle": "Table of Content",
+      "attributeHeader": "Attribute",
+      "inputTypeHeader": "Input Type",
+      "examplesHeader": "Examples"
+    },
+    "guideGlossary": {
+      "title": "Glossary",
+      "sections": [
+        {
+          "title": "CUTTING/GRINDING WHEELS",
+          "definitions": [
+            {
+              "term": "Abrasive Wheel",
+              "body": "A rotating accessory designed to grind, cut, or remove stock from various materials such as metal or concrete. (reference)"
+            },
+            {
+              "term": "Type 27 Wheel",
+              "body": "A saucer/center depressed shaped wheel intended for grinding on the face of the wheel is used with angle grinders fitted with the appropriate guard."
+            },
+            {
+              "term": "Type 41 Wheel",
+              "body": "Formerly Type 1A cutting wheel. A disc shaped wheel intended for cutting by the periphery of the wheel used with abrasive cut off machines or angle grinders fitted with the appropriate guard."
+            },
+            {
+              "term": "A24",
+              "body": "Abrasive material with a grit of 24, meaning there are 24 grains per inch of the grinding wheel's surface."
+            },
+            {
+              "term": "PBF",
+              "body": "PBF stands for Precision Bonding Format. PBF grinding wheels are commonly used in applications where tight tolerances and fine surface finishes are required, such as in the aerospace, automotive, and medical industries. They are also used in applications where grinding of hard materials is necessary, such as in the production of cutting tools and precision components."
+            }
+          ]
+        },
+        {
+          "title": "FIBERGLASS",
+          "definitions": [
+            {
+              "term": "Bulk Molding Compound (BMC)",
+              "body": "BMC stands for Bulk Molding Compound, which is a composite material made from a mixture of resin, glass fibers, and other additives. BMC Gully Covers are strong and durable, resistant to corrosion, and often used for heavy-duty applications."
+            },
+            {
+              "term": "Sheet Molding Compound (SMC)",
+              "body": "SMC stands for Sheet Molding Compound, another composite material composed of resin, glass fibers, and fillers. SMC Gully Covers are known for their excellent strength-to-weight ratio, resistance to chemicals and weathering, and suitability for various industries."
+            }
+          ]
+        },
+        {
+          "title": "SCREWS",
+          "definitions": [
+            {
+              "term": "Drywall Screws",
+              "body": "Drywall screws are self-tapping, so you don't need to pre-drill holes. They have a sharp point that helps them to penetrate wood and metal easily. They have coarse threads that provide a good grip on the material. They are available in a variety of lengths and sizes, including short screws for light applications and long screws for heavy-duty applications. And they are relatively inexpensive."
+            }
+          ]
+        },
+        {
+          "title": "TARPAULIN",
+          "definitions": [
+            {
+              "term": "Tarpaulin",
+              "body": "Polypropylene (PP), Polyethylene (PE), and polythene are all types of thermoplastic polymers that are made from petroleum. They are all widely used in a variety of applications, including construction, packaging, and consumer goods.\n\nTarpaulin is typically made with Polyethylene (PE) because it needs to be strong, durable, and waterproof. Polyethylene (PE) is also resistant to UV degradation, which is important for a tarp that will be exposed to sunlight."
+            }
+          ]
+        }
+      ]
+    },
+    "conversionTables": {
+      "title": "Conversions",
+      "firstSectionTitle": "GAUGE TO THICKNESS"
+    },
+    "careers": {
+      "title": "Join Our Growing Team",
+      "lede": "DO YOU HAVE WHAT IT TAKES?",
+      "body": "Construction Trade Technologies (Pvt) Ltd. is a revolutionary start-up with the intent of modernizing the material procurement practices for the construction sector. We are looking for eligible candidates who have hands-on experience in the Sri Lankan construction industry.\n\nCheck out our vacancies and apply directly by clicking on the link below",
+      "link": {
+        "label": "Click to see Careers At Stockpile",
+        "href": "https://odoo.stockpile.lk/jobs"
+      },
+      "outro": "Join our team and be part of the revolution!"
+    },
+    "returnPolicy": {
+      "title": "Return Policy",
+      "lede": "When an order is placed on Stockpile, it is fulfilled separately by the registered suppliers of the products in the order. Each supplier maintains their own return policy, which you can view by navigating to the supplier''s profile and scrolling to the Policies section.",
+      "sections": [
+        {
+          "title": "Eligibility",
+          "body": "Returns are subject to the individual supplier's policy. Generally, the following conditions apply:",
+          "bullets": [
+            "Items must be returned in their original, unused condition and original packaging.",
+            "Return requests must be raised within the timeframe specified by the supplier.",
+            "Bulk or custom orders (including cut-to-size, mixed, or specially sourced materials) may not be eligible for return — confirm with the supplier before ordering.",
+            "Perishable or hygroscopic materials (such as cement, lime, and similar products) are typically non-returnable once delivered, due to the risk of quality degradation."
+          ]
+        },
+        {
+          "title": "How to Request a Return",
+          "body": "Contact the supplier directly using the contact details on their profile page. When raising a return request, provide your order number, a description of the issue, and supporting photographs where applicable."
+        },
+        {
+          "title": "Refunds",
+          "body": "If a return is approved by the supplier and payment was made online through Stockpile, the refund will be processed within 2 business days of the supplier confirming the return. Refunds will be credited to the original payment method.\n\nStockpile does not process refunds for orders paid directly to suppliers outside of the platform."
+        },
+        {
+          "title": "Damaged or Incorrect Goods",
+          "body": "If you receive goods that are damaged in transit or materially different from what was ordered, contact the supplier immediately upon delivery. Document the condition of the goods with photographs before accepting or rejecting the delivery."
+        },
+        {
+          "title": "Disputes",
+          "body": "If a return or refund dispute cannot be resolved directly with the supplier, contact Stockpile support at support@stockpile.lk and we will assist in facilitating a resolution."
+        }
+      ],
+      "footer": "To view a supplier''s return policy, visit the list of suppliers and click on the relevant supplier, then on Policies.",
+      "footerLink": {
+        "label": "list of suppliers",
+        "href": "/suppliers"
+      }
+    },
+    "dataDeletion": {
+      "title": "Data Deletion Instructions",
+      "body": "Users who wish to have their data deleted from our website can email us at support@stockpile.lk"
+    },
+    "privacyPolicy": {
+      "title": "Privacy and Cookie Policy",
+      "lede": "This privacy policy sets out how this website (hereafter \"the Store\") uses and protects any information that you give the Store while using this website. The Store is committed to ensuring that your privacy is protected. Should we ask you to provide certain information by which you can be identified when using this website, then you can be assured that it will only be used in accordance with this privacy statement. The Store may change this policy from time to time by updating this page. You should check this page from time to time to ensure that you are happy with any changes.",
+      "sections": [
+        {
+          "title": "What we collect",
+          "body": "We may collect the following information:",
+          "bullets": [
+            "name",
+            "contact information including email address",
+            "demographic information such as postcode, preferences and interests",
+            "other information relevant to customer surveys and/or offers"
+          ],
+          "footer": "For the exhaustive list of cookies we collect see the List of cookies we collect section."
+        },
+        {
+          "title": "What we do with the information we gather",
+          "body": "We require this information to understand your needs and provide you with a better service, and in particular for the following reasons:",
+          "bullets": [
+            "Internal record keeping.",
+            "We may use the information to improve our products and services.",
+            "We may periodically send promotional emails about new products, special offers or other information which we think you may find interesting using the email address which you have provided.",
+            "From time to time, we may also use your information to contact you for market research purposes. We may contact you by email, phone, fax or mail. We may use the information to customise the website according to your interests."
+          ]
+        },
+        {
+          "title": "Security",
+          "body": "We are committed to ensuring that your information is secure. In order to prevent unauthorised access or disclosure, we have put in place suitable physical, electronic and managerial procedures to safeguard and secure the information we collect online."
+        },
+        {
+          "title": "How we use cookies",
+          "body": "A cookie is a small file which asks permission to be placed on your computer's hard drive. Once you agree, the file is added and the cookie helps analyse web traffic or lets you know when you visit a particular site. Cookies allow web applications to respond to you as an individual. The web application can tailor its operations to your needs, likes and dislikes by gathering and remembering information about your preferences.\n\nWe use traffic log cookies to identify which pages are being used. This helps us analyse data about web page traffic and improve our website in order to tailor it to customer needs. We only use this information for statistical analysis purposes and then the data is removed from the system.\n\nOverall, cookies help us provide you with a better website, by enabling us to monitor which pages you find useful and which you do not. A cookie in no way gives us access to your computer or any information about you, other than the data you choose to share with us. You can choose to accept or decline cookies. Most web browsers automatically accept cookies, but you can usually modify your browser setting to decline cookies if you prefer. This may prevent you from taking full advantage of the website."
+        },
+        {
+          "title": "Links to other websites",
+          "body": "Our website may contain links to other websites of interest. However, once you have used these links to leave our site, you should note that we do not have any control over that other website. Therefore, we cannot be responsible for the protection and privacy of any information which you provide whilst visiting such sites and such sites are not governed by this privacy statement. You should exercise caution and look at the privacy statement applicable to the website in question."
+        },
+        {
+          "title": "Controlling your personal information",
+          "body": "You may choose to restrict the collection or use of your personal information in the following ways:",
+          "bullets": [
+            "whenever you are asked to fill in a form on the website, look for the box that you can click to indicate that you do not want the information to be used by anybody for direct marketing purposes",
+            "if you have previously agreed to us using your personal information for direct marketing purposes, you may change your mind at any time by letting us know using our Contact Us information"
+          ],
+          "footer": "We will not sell, distribute or lease your personal information to third parties unless we have your permission or are required by law to do so. We may use your personal information to send you promotional information about third parties which we think you may find interesting if you tell us that you wish this to happen.\n\nYou may request details of personal information which we hold about you under the Data Protection Act 1998. A small fee will be payable. If you would like a copy of the information held on you please email us this request using our Contact Us information.\n\nIf you believe that any information we are holding on you is incorrect or incomplete, please write to or email us as soon as possible, at the above address. We will promptly correct any information found to be incorrect."
+        }
+      ],
+      "cookiesTitle": "List of cookies we collect",
+      "cookiesLede": "The table below lists the cookies we collect and what information they store.",
+      "cookieNameHeader": "Cookie Name",
+      "cookieDescriptionHeader": "Cookie Description",
+      "cookies": [
+        {
+          "term": "FORM_KEY",
+          "body": "Stores randomly generated key used to prevent forged requests."
+        },
+        {
+          "term": "PHPSESSID",
+          "body": "Your session ID on the server."
+        },
+        {
+          "term": "GUEST-VIEW",
+          "body": "Allows guests to view and edit their orders."
+        },
+        {
+          "term": "PERSISTENT_SHOPPING_CART",
+          "body": "A link to information about your cart and viewing history, if you have asked for this."
+        },
+        {
+          "term": "STF",
+          "body": "Information on products you have emailed to friends."
+        },
+        {
+          "term": "STORE",
+          "body": "The store view or language you have selected."
+        },
+        {
+          "term": "USER_ALLOWED_SAVE_COOKIE",
+          "body": "Indicates whether a customer allowed to use cookies."
+        },
+        {
+          "term": "MAGE-CACHE-SESSID",
+          "body": "Facilitates caching of content on the browser to make pages load faster."
+        },
+        {
+          "term": "MAGE-CACHE-STORAGE",
+          "body": "Facilitates caching of content on the browser to make pages load faster."
+        },
+        {
+          "term": "MAGE-CACHE-STORAGE-SECTION-INVALIDATION",
+          "body": "Facilitates caching of content on the browser to make pages load faster."
+        },
+        {
+          "term": "MAGE-CACHE-TIMEOUT",
+          "body": "Facilitates caching of content on the browser to make pages load faster."
+        },
+        {
+          "term": "SECTION-DATA-IDS",
+          "body": "Facilitates caching of content on the browser to make pages load faster."
+        },
+        {
+          "term": "PRIVATE_CONTENT_VERSION",
+          "body": "Facilitates caching of content on the browser to make pages load faster."
+        },
+        {
+          "term": "X-MAGENTO-VARY",
+          "body": "Facilitates caching of content on the server to make pages load faster."
+        },
+        {
+          "term": "MAGE-TRANSLATION-FILE-VERSION",
+          "body": "Facilitates translation of content to other languages."
+        },
+        {
+          "term": "MAGE-TRANSLATION-STORAGE",
+          "body": "Facilitates translation of content to other languages."
+        }
+      ]
+    },
+    "newestProducts": {
+      "title": "Newest Products",
+      "lede": "See the latest products added by our suppliers on Stockpile."
+    }
+  },
   "notFound": {
     "eyebrow": "404 · සොයාගත නොහැක",
     "title": "මෙම පිටුව හමු නොවීය.",
     "body": "ඔබ ඇතුළත් කළ ලිපිනය වැරදි වී ඇති විය හැක, නැතහොත් එම පිටුව වෙනත් තැනකට ගෙන ගොස් ඇති විය හැක. ඔබ කරමින් සිටි කටයුතු මත එය බලපා නැත.",
     "backHome": "මුල් පිටුව වෙත යන්න"
   },
-
   "auth": {
     "loginTitle": "ඔබේ ගිණුමට පිවිසෙන්න",
     "loginSubtitle": "ඔබේ මිලදී ගැනීම් පහසුකම් වෙත ඉදිරියට යන්න.",
@@ -251,17 +1089,74 @@
     "alreadyVerifiedTitle": "දැනටමත් තහවුරු කර ඇත",
     "alreadyVerifiedBody": "මෙම ඊමේල් ලිපිනය දැනටමත් තහවුරු කර ඇත. ඉදිරියට යාමට පිවිසෙන්න.",
     "resendSent": "අප {email} වෙත නව තහවුරු කිරීමේ සබැඳියක් යැව්වෙමු.",
+    "supplierRegisterTitle": "සැපයුම්කරු ලෙස ලියාපදිංචි වන්න",
+    "supplierRegisterSubtitle": "ඔබේ සමාගම් පැතිකඩ සාදන්න, ඔබ සපයන අංශ තෝරන්න, සහ ගැනුම්කරු ඉල්ලීම් සඳහා මිල ගණන් ඉදිරිපත් කරන්න.",
+    "supplierLoginTitle": "සැපයුම්කරු පිවිසුම",
+    "supplierLoginSubtitle": "ඔබේ සමාගම් පැතිකඩ, නිෂ්පාදන සහ මිල ගණන් කළමනාකරණය කිරීමට පිවිසෙන්න.",
+    "supplierDepartmentsLegend": "ඔබ සපයන අංශ",
+    "supplierDepartmentsHint": "ඔබේ නාමාවලිය ආවරණය කරන සෑම අංශයක්ම තෝරන්න. ගැනුම්කරුවන් ඔවුන්ගේ ඉල්ලීම් ඔබට ගැලපීමට මෙය භාවිතා කරයි.",
+    "supplierHaveAccount": "දැනටමත් සැපයුම්කරුවෙකු ලෙස ලියාපදිංචි වී තිබේද?",
+    "supplierSetup": {
+      "stepsLabel": "සැපයුම්කරු සැකසුම් පියවර",
+      "stepOf": "පියවර {current} / {total}",
+      "steps": {
+        "profile": "සමාගම් විස්තර",
+        "serviceAreas": "සේවා ප‍්‍රදේශ",
+        "categories": "වර්ග"
+      },
+      "noSupplier": {
+        "title": "මෙම ගිණුමට සැපයුම්කරු පැතිකඩක් නොමැත",
+        "body": "මෙම ගිණුමට තවම සැපයුම්කරු සමාගමක් නොමැත. එහි පැතිකඩ, සේවා ප‍්‍රදේශ සහ වර්ග සැකසීමට එකක් සාදන්න.",
+        "cta": "සැපයුම්කරුවෙකු ලෙස ලියාපදිංචි වන්න"
+      },
+      "profile": {
+        "title": "සමාගම් විස්තර",
+        "description": "ඔබේ පොදු පැතිකඩේ ගැනුම්කරුවන් දකින සම්බන්ධතා පුද්ගලයා සහ ව්‍යාපාරික අනන්‍යතාව. සෑම පියවරක්ම වෙන වෙනම සුරැකේ, එබැවින් නවතා නැවත පැමිණිය හැක.",
+        "companyName": "ලියාපදිංචි ව්‍යාපාරික නම",
+        "registrationNumber": "ව්‍යාපාර ලියාපදිංචි අංකය",
+        "registrationHint": "විකල්පීය — ලියාපදිංචියේ සාක්ෂියක් ලෙස ගැනුම්කරුවන්ට පෙන්වයි.",
+        "website": "වෙබ් අඩවිය",
+        "websiteHint": "විකල්පීය — http:// හෝ https:// ඇතුළත් කරන්න.",
+        "contactPerson": "සම්බන්ධතා පුද්ගලයා",
+        "phone": "දුරකථනය",
+        "email": "විද්‍යුත් තැපෑල",
+        "saving": "සුරකිමින්…",
+        "continue": "සුරැක ඉදිරියට"
+      },
+      "serviceAreas": {
+        "title": "සේවා ප‍්‍රදේශ",
+        "description": "ඔබේ සමාගම සේවය කරන දිස්ත්‍රික්ක. ගැනුම්කරුවන්ගේ ඉල්ලීම් මෙම ලැයිස්තුවට ගැලපේ.",
+        "hint": "ඔබට බෙදාහැරිය හැකි සෑම දිස්ත්‍රික්කයක්ම සලකුණු කරන්න. සුරැකීමෙන් මුළු ලැයිස්තුවම ප‍්‍රතිස්ථාපනය වේ.",
+        "districtsLabel": "ඔබ සේවය කරන දිස්ත්‍රික්ක",
+        "defaultLabel": "පෙරනිමි දිස්ත්‍රික්කය",
+        "defaultNone": "පෙරනිමි දිස්ත්‍රික්කයක් නොමැත",
+        "defaultHint": "ඔබේ පොදු පැතිකඩේ පළමුව පෙන්වන දිස්ත්‍රික්කය.",
+        "saving": "සුරකිමින්…",
+        "continue": "සුරැක ඉදිරියට"
+      },
+      "categories": {
+        "title": "වර්ග",
+        "description": "ඔබේ නාමාවලිය ආවරණය කරන නිෂ්පාදන වර්ග. ගැනුම්කරුවන් ඔවුන්ගේ ඉල්ලීම් ඔබට ගැලපීමට මේවා භාවිතා කරයි.",
+        "hint": "ඔබ සපයන සෑම වර්ගයක්ම සලකුණු කරන්න. සෑම වෙනසක්ම වහාම සුරැකේ.",
+        "legend": "ඔබ සපයන වර්ග",
+        "empty": "වර්ග ලැයිස්තුව දැන් නොමැත. ටික වේලාවකින් නැවත උත්සාහ කරන්න.",
+        "saving": "සුරකිමින්…",
+        "finish": "සුරැක අවසන් කරන්න"
+      }
+    },
     "validation": {
       "emailRequired": "ඔබේ විද්‍යුත් තැපෑල ඇතුළත් කරන්න.",
       "emailInvalid": "වලංගු විද්‍යුත් තැපෑලක් ඇතුළත් කරන්න.",
       "passwordRequired": "ඔබේ මුරපදය ඇතුළත් කරන්න.",
       "passwordTooShort": "අවම වශයෙන් අකුරු 10ක් භාවිතා කරන්න.",
+      "currentPasswordRequired": "ඔබේ වත්මන් මුරපදය ඇතුළත් කරන්න.",
       "passwordsDoNotMatch": "මුරපද දෙක නොගැලපේ.",
       "nameRequired": "ඔබේ සම්පූර්ණ නම ඇතුළත් කරන්න.",
       "companyRequired": "ලියාපදිංචි ව්‍යාපාරික නම ඇතුළත් කරන්න.",
       "phoneRequired": "දුරකථන අංකයක් ඇතුළත් කරන්න.",
       "phoneInvalid": "ජාත්‍යන්තර ආකෘතියෙන් දුරකථන අංකයක් ඇතුළත් කරන්න. උදා: +94 77 123 4567.",
-      "duplicateEmail": "මෙම ඊමේල් ලිපිනය සමඟ ගිණුමක් දැනටමත් පවතී. ඒ වෙනුවට පිවිසෙන්න."
+      "duplicateEmail": "මෙම ඊමේල් ලිපිනය සමඟ ගිණුමක් දැනටමත් පවතී. ඒ වෙනුවට පිවිසෙන්න.",
+      "categoriesRequired": "ඔබ සපයන අවම වශයෙන් එක් අංශයක් තෝරන්න."
     },
     "strength": {
       "label": "මුරපද ශක්තිය",
@@ -269,11 +1164,111 @@
       "fair": "සාමාන්‍යයි",
       "good": "හොඳයි",
       "strong": "ශක්තිමත්යි"
+    },
+    "profile": {
+      "roleLabel": "ඔබේ භූමිකාව",
+      "rolePlaceholder": "ඔබේ භූමිකාව තෝරන්න",
+      "role": {
+        "procurementManager": "මිලදී ගැනීම් කළමනාකරු",
+        "projectManager": "ව්‍යාපෘති කළමනාකරු",
+        "ownerDirector": "හිමිකරු / අධ්‍යක්ෂ",
+        "other": "වෙනත්"
+      },
+      "locationsLabel": "මිලදී ගැනීම ස්ථාන",
+      "locationsPlaceholder": "නගරය/දිස්ත්‍රික්කය ඇතුළත් කර Enter ඔබන්න",
+      "locationsHint": "ඔබ මිලදී ගැනීම් සඳහා සෑම ස්ථානයක්ම එක් කරන්න. එක්සියට පසු Enter ඔබන්න.",
+      "interestsLabel": "ව්‍යාපෘති අවශ්‍යතා",
+      "interestsPlaceholder": "ව්‍යාපෘති වර්ගයක් ඇතුළත් කර Enter ඔබන්න",
+      "interestsHint": "ඔබ අවශ්‍ය ව්‍යාපෘති වර්ග එක් කරන්න. එක්සියට පසු Enter ඔබන්න.",
+      "removeItem": "ඉවත් කරන්න",
+      "saving": "සුරකින්නට...",
+      "continue": "ඉදිරියට"
+    },
+    "preferences": {
+      "localeLabel": "අයිස් භාෂාව",
+      "locale": {
+        "en": "English",
+        "si": "සිංහල"
+      },
+      "quoteNotificationsLabel": "මගේ RFQ ගැන නව මිල ගණන් ගැන දැනුවත් කරන්න",
+      "saving": "සුරකින්නට...",
+      "continue": "ඉදිරියට"
+    },
+    "notificationPreferences": {
+      "description": "සැපයුම්කරුවන් ඔබේ ඉල්ලීම්වලට මිල ගණන් යවන විට ඔබට දැනුවත් කිරීමේ ආකාරය තෝරන්න.",
+      "emailLabel": "විද්‍යුත් තැපෑල",
+      "smsLabel": "SMS",
+      "whatsappLabel": "WhatsApp",
+      "whatsappNote": "WhatsApp දැනුවත්කළු වේදිකා පරිපාලකවරයා WhatsApp Business API වෙත් වෙන්කර නැති විට මෙම චැනල් සක්‍රීය නොවේ.",
+      "completing": "සම්පූර්ණ කරන්නට...",
+      "completeSetup": "සැකසීම සම්පූර්ණ කරන්න"
+    },
+    "organization": {
+      "alreadySetUp": "ඔබ දැනටමත් {name} සංවිධානයේ සාමාජිකයෙකි. මෙහි නිර්මාණය කිරීමට කිසිවක් නැත.",
+      "companyNameLabel": "ලියාපදිංචි ව්‍යාපාර නාමය",
+      "registrationNumberLabel": "ව්‍යාපාර ලියාපදිංචි අංකය",
+      "taxIdLabel": "බදු හැඳුනුම් අංකය (TIN)",
+      "websiteLabel": "වෙබ් අඩවිය",
+      "websiteHint": "විකල්පයි. සම්පූර්ණ ලිපිනය ඇතුළත් කරන්න, උදා: https://example.lk.",
+      "addressLegend": "ව්‍යාපාරික ලිපිනය",
+      "addressToggle": "දැන් ව්‍යාපාරික ලිපිනයක් එක් කරන්න",
+      "line1Label": "ලිපින පේළිය 1",
+      "line2Label": "ලිපින පේළිය 2",
+      "cityLabel": "නගරය / ගම්මානය",
+      "postalCodeLabel": "තැපැල් කේතය",
+      "districtLabel": "දිස්ත්‍රික්කය",
+      "districtPlaceholder": "දිස්ත්‍රික්කයක් තෝරන්න",
+      "line1Required": "ලිපිනයේ පළමු පේළිය ඇතුළත් කරන්න.",
+      "cityRequired": "නගරය හෝ ගම්මානය ඇතුළත් කරන්න.",
+      "districtRequired": "දිස්ත්‍රික්කයක් තෝරන්න.",
+      "membersLegend": "කණ්ඩායම් සාමාජිකයන්",
+      "membersHint": "විකල්පයි. දැනටමත් Stockpile ගිණුමක් ඇති සගයන්ට ආරාධනා කරන්න; ඔවුන් පිළිගත් පසු තහවුරු වේ.",
+      "memberEmailLabel": "සගයාගේ විද්‍යුත් තැපෑල",
+      "memberRoleLabel": "භූමිකාව",
+      "role": {
+        "buyer": "ගැනුම්කරු",
+        "buyerAdmin": "ගැනුම්කරු පරිපාලක"
+      },
+      "addMember": "සාමාජිකයෙක් එක් කරන්න",
+      "removeMember": "ඉවත් කරන්න",
+      "saving": "සුරකින්නට...",
+      "continue": "ඉදිරියට"
+    },
+    "wizard": {
+      "stepsLabel": "ගිණුම් සැකසීමේ පියවර",
+      "stepOf": "පියවර {current} / {total}",
+      "steps": {
+        "profile": "පැතිකඩ",
+        "organization": "සංවිධානය",
+        "preferences": "අභිරුචි",
+        "notificationPreferences": "දැනුවත් කිරීම්"
+      },
+      "profile": {
+        "title": "වෘත්තීය පැතිකඩ",
+        "description": "සැපයුම්කරුවන්ට නිවැරදි අවස්ථා ගැළපීමට ඔබේ භූමිකාව අපට කියන්න."
+      },
+      "organization": {
+        "title": "ඔබේ සංවිධානය",
+        "description": "ඔබ මිලදී ගන්නා සමාගම ලියාපදිංචි කර එහි ඉල්ලීම් බැලිය යුතු සගයන්ට ආරාධනා කරන්න."
+      },
+      "preferences": {
+        "title": "අභිරුචි",
+        "description": "ඔබ කැමති භාෂාව සහ නව මිල ගණන් ගැන දැනගැනීමට අවශ්‍යද යන්න තෝරන්න."
+      },
+      "notificationPreferences": {
+        "title": "දැනුවත් කිරීම්",
+        "description": "ඔබ වෙත ළඟා වීමට භාවිත කළ හැකි මාර්ග තීරණය කරන්න."
+      }
     }
   },
-
   "workspace": {
     "title": "වැඩබිම",
+    "setupTitle": "ගිණුම් සැකසීම",
+    "setupBody": "ඔබේ පැතිකඩ, සංවිධානය, අභිරුචි සහ දැනුවත් කිරීමේ මාර්ග — කෙටි පියවර හතරක්; සෑම පියවරක්ම වෙන වෙනම සුරැකේ.",
+    "setupCta": "සැකසීම විවෘත කරන්න",
+    "supplierSetupTitle": "ඔබේ සැපයුම්කරු පැතිකඩ සම්පූර්ණ කරන්න",
+    "supplierSetupBody": "සමාගම් විස්තර, ඔබ සේවය කරන දිස්ත්‍රික්ක සහ ඔබ ආවරණය කරන වර්ග — කෙටි පියවර තුනක්, එකින් එක සුරැකේ.",
+    "supplierSetupCta": "සැපයුම්කරු සැකසුම විවෘත කරන්න",
     "emptyTitle": "තවම ක්‍රියාකාරකම් නැත",
     "emptyBody": "මිලදී ගැනීම් ඉල්ලීම්, ඇණවුම් සහ ව්‍යාපෘති ලැබුණු විට මෙහි දිස්වනු ඇත.",
     "supplierTitle": "සැපයුම්කරු අංශය",
@@ -281,9 +1276,43 @@
     "supplierEmptyBody": "ඔබේ සමාගමට යොමු කළ මිලදී ගැනීම් ඉල්ලීම් මෙහි දිස්වනු ඇත.",
     "adminTitle": "පරිපාලනය",
     "adminEmptyTitle": "තවම පරිපාලන කාර්යයන් නැත",
-    "adminEmptyBody": "වේදිකා පරිපාලන කාර්යයන් මෙහි දිස්වනු ඇත."
+    "adminEmptyBody": "වේදිකා පරිපාලන කාර්යයන් මෙහි දිස්වනු ඇත.",
+    "accessDeniedTitle": "මෙම ප්‍රදේශයට පිවිසීමට ඔබට අවසර නැත",
+    "accessDeniedBody": "මෙම පිටුව සඳහා අවශ්‍ය අවසර ඔබේ ගිණුමේ නොමැත. අනෙක් පිටු ඔබට විවෘතව පවතී.",
+    "accountTitle": "ගිණුම",
+    "verified": "විද්‍යුත් තැපෑල තහවුරු කර ඇත",
+    "unverified": "විද්‍යුත් තැපෑල තවමත් තහවුරු කර නැත",
+    "unverifiedHint": "මිලදී ගැනීම් ඉල්ලීම් ලැබීමට ඔබේ විද්‍යුත් තැපෑල තහවුරු කරන්න.",
+    "rolesTitle": "භූමිකාව",
+    "roleLabels": {
+      "buyer": "ගැනුම්කරු",
+      "buyerAdmin": "ගැනුම්කරු පරිපාලක",
+      "supplierOwner": "සැපයුම්කරු හිමිකරු",
+      "supplierUser": "සැපයුම්කරු පරිශීලක",
+      "platformAdministrator": "වේදිකා පරිපාලක"
+    },
+    "securityTitle": "ආරක්ෂාව",
+    "changePasswordTitle": "මුරපදය වෙනස් කරන්න",
+    "changePasswordHint": "මුරපදය වෙනස් කිරීම අනෙක් සියලුම උපාංග ඉවත් කරයි, නමුත් මෙම උපාංගය පිවිසුම් තත්ත්වයේ තබයි.",
+    "passwordChangedTitle": "මුරපදය වෙනස් කර ඇත",
+    "passwordChangedBody": "ඔබේ මුරපදය යාවත්කාලීන කර ඇත. අනෙක් සියලුම සැසි ඉවත් කර ඇත.",
+    "sessionsHint": "සැසි ලැයිස්තුගත වන්නේ අලුත්ම ක්‍රියාකාරකම් පළමුවෙනි ලෙසය; “මෙම උපාංගය” ලෙස සලකුණු කළ සැසිය ඔබ දැන් භාවිතා කරන බ්‍රවුසරයයි.",
+    "currentSession": "මෙම උපාංගය",
+    "sessionIssued": "{date} දින පිවිසුණා",
+    "sessionLastSeen": "අවසන් වරට {date}",
+    "revokeSession": "මෙම උපාංගයෙන් ඉවත් වන්න",
+    "sessionRevoked": "එම සැසිය ඉවත් කර ඇත.",
+    "signedOutEverywhere": "සියලුම සැසි දැන් ඉවත් කර ඇත.",
+    "sessionsEmpty": "වෙනත් උපාංග කිසිවක් පිවිසුම් තත්ත්වයේ නොමැත.",
+    "sessionUnknownDevice": "නොදන්නා උපාංගයක්"
   },
-
+  "content": {
+    "news": "පුවත්",
+    "tags": "ටැග්",
+    "readMore": "වැඩිදුර කියවන්න",
+    "emptyTitle": "තවම ප්‍රකාශිත කිසිවක් නැත",
+    "emptyBody": "ලිපි ප්‍රකාශයට පත් වූ පසු මෙහි දිස්වේ."
+  },
   "catalogue": {
     "listing": {
       "title": "නිෂ්පාදන",
@@ -322,7 +1351,8 @@
       "priceHistory": "මිල ඉතිහාසය",
       "onDate": "{date} දින",
       "related": "අදාළ නිෂ්පාදන",
-      "viewAllInCategory": "{category} හි සියල්ල බලන්න"
+      "viewAllInCategory": "{category} හි සියල්ල බලන්න",
+      "requestQuoteHint": "මෙම නිෂ්පාදනය මිල ඉල්ලීම් පිටුව හරහා අපගේ කණ්ඩායමට යවන්න — අපි එය සුදුසු සැපයුම්කරුවන් වෙත යොමු කරමු."
     },
     "stock": {
       "InStock": "තොගයේ ඇත",
@@ -394,14 +1424,58 @@
       "pageAria": "පිටුව {page}"
     }
   },
-
+  "rfq": {
+    "title": "මිල ඉල්ලීම",
+    "lede": "ඔබට අවශ්‍ය දෙපාර්තමේන්තු ආවරණය කරන සියලුම සැපයුම්කරුවන්ට එක් ලැයිස්තුවක් යවන්න — ඔවුන් ඔබට සෘජුවම මිල දෙයි. සෑම විටම නොමිලේ.",
+    "signInTitle": "මිල ඉල්ලීම් කිරීමට පිවිසෙන්න",
+    "signInBody": "මිල ඉල්ලීම් ඔබේ ගැනුම්කරු ගිණුමට අයත් බැවින්, කවුරුන් මිලදී ගන්නවාද සහ මිල කොහේ යවන්නද යන්න අපි දනිමු.",
+    "notBuyerTitle": "මෙය ගැනුම්කරු ක්‍රියාවකි",
+    "notBuyerBody": "මිල ඉල්ලීම කිරීම ගැනුම්කරු ගිණුම් සිදු කරන දෙයකි. ඔබ පිවිසී ඇත්තේ සැපයුම්කරු ගිණුමකින් බැවින්, මෙතැනින් මෙම ඉල්ලීම යැවිය නොහැක — ගැනුම්කරු ගිණුමකින් පිවිසෙන්න, නැතහොත් එකක් සාදන්න.",
+    "notBuyerCta": "ගැනුම්කරු ගිණුමක් සාදන්න",
+    "titleLabel": "ඉල්ලීමේ මාතෘකාව",
+    "companyLegend": "ඔබේ සමාගම",
+    "companyHint": "පළමු වතාවද? ඔබ කා වෙනුවෙන් මිලදී ගන්නවාද යන්න කියන්න — මෙම ඉල්ලීම මගින් ඔබේ ගැනුම්කරු ගිණුමේ සමාගම නිර්මාණය වේ.",
+    "deliveryLocationLabel": "බෙදාහැරීමේ ස්ථානය",
+    "specialInstructionsLabel": "විශේෂ උපදෙස්",
+    "specificationLabel": "විස්තර",
+    "specificationHint": "ශ්‍රේණිය, නිමාව, වෙළඳ නාමය හෝ වෙනත් අවශ්‍යතාවක්.",
+    "expiryDaysLabel": "මිල වසා දමන කාලය (දින)",
+    "expiryDaysHint": "සති දෙකක් සඳහා මිල පිළිගැනීමට මෙය එසේම තබන්න.",
+    "substitutionsLabel": "හරියටම ගැළපීමක් නොමැති විට සැපයුම්කරුවන්ට සමීප විකල්පයක් යෝජනා කළ හැක.",
+    "itemsLegend": "ඔබට අවශ්‍ය කුමක්ද?",
+    "itemLegend": "අයිතමය {number}",
+    "addItem": "තවත් අයිතමයක් එක් කරන්න",
+    "unitAny": "— ඕනෑම ඒකකයක් —",
+    "categoryAny": "— ඕනෑම දෙපාර්තමේන්තුවක් —",
+    "submitCta": "ඉල්ලීම සැපයුම්කරුවන්ට යවන්න",
+    "submitting": "ඔබේ ඉල්ලීම යවමින්…",
+    "successTitle": "ඉල්ලීම යවන ලදී",
+    "successBody": "ඔබේ යොමු අංකය {reference}. අපි එය ඔබේ දෙපාර්තමේන්තු වලට ගැළපෙන සැපයුම්කරුවන්ට යැව්වෙමු.",
+    "successMatches": "{count, plural, =0 {තවම සැපයුම්කරුවෙකු නොගැළපුණි — අපි දිගටම සොයමු.} one {සැපයුම්කරු 1ක් ගැළපුණි.} other {සැපයුම්කරු #ක් ගැළපුණි.}}",
+    "sendAnother": "තවත් ඉල්ලීමක් යවන්න",
+    "recentTitle": "ඔබේ ඉල්ලීම්",
+    "recentMatches": "{count, plural, =0 {ගැළපීම් නැත} one {ගැළපීම 1} other {ගැළපීම් #}}",
+    "statusDraft": "කෙටුම්පත",
+    "statusSubmitted": "ඉදිරිපත් කළා",
+    "statusMatching": "ගැළපමින්",
+    "statusDispatched": "යවන ලදී",
+    "statusCancelled": "අවලංගු කළා",
+    "statusClosed": "වසා ඇත",
+    "statusAwarded": "පිරිනමන ලදී",
+    "statusExpired": "කල් ඉකුත් විය",
+    "validation": {
+      "titleRequired": "ඔබේ ඉල්ලීමට කෙටි මාතෘකාවක් දෙන්න.",
+      "companyRequired": "ඔබ කුමන සමාගමක් වෙනුවෙන් මිලදී ගන්නවාද යන්න කියන්න.",
+      "itemDescriptionRequired": "ඔබට අවශ්‍ය අයිතමය විස්තර කරන්න.",
+      "quantityInvalid": "බිංදුවට වඩා වැඩි ප්‍රමාණයක් ඇතුළත් කරන්න."
+    }
+  },
   "errors": {
     "unexpected": "අපට මෙය සම්පූර්ණ කළ නොහැකි විය. අප අමතන විට උපකරණ අංකය {reference} යොදන්න.",
     "unexpectedNoReference": "මෙම ක්‍රියාව දැන් සම්පූර්ණ කළ නොහැකි විය. මොහොතකින් නැවත උත්සාහ කරන්න — නැවත නැවත සිදුවුවහොත්, වේලාව සටහන් කර අපට දන්වන්න.",
     "network": "අපට Stockpile.lk වෙත සම්බන්ධ විය නොහැකි විය. ඔබේ සම්බන්ධතාවය පරීක්ෂා කර නැවත උත්සාහ කරන්න.",
     "timeout": "ඉල්ලීමට දිගු කාලයක් ගියේය. නැවත උත්සාහ කරන්න — ක්‍රියාව තවම ක්‍රියාත්මක විය හැක.",
     "validation": "හැඳුනුම්පත් කළ ක්ෂේත්‍ර පරීක්ෂා කර නැවත උත්සාහ කරන්න.",
-
     "INVALID_CREDENTIALS": "ඒ විද්‍යුත් තැපෑල සහ මුරපද යුගලය නිවැරදි නොවේ. ඒවා පරීක්ෂා කර නැවත උත්සාහ කරන්න.",
     "ACCOUNT_LOCKED": "අසාර්ථක උත්සාහ බොහෝ වූ නිසා මෙම ගිණුම තාවකාලිකව අගුළු දමා ඇත. මොහොතකට පසු නැවත උත්සාහ කරන්න.",
     "EMAIL_NOT_VERIFIED": "ඉදිරියට යාමට පෙර ඔබේ විද්‍යුත් තැපෑල තහවුරු කරන්න. අපට සබැඳිය නැවත යවන්න හැක.",
@@ -410,12 +1484,10 @@
     "REFRESH_REUSED": "මෙම පිවිසුම වෙනත් තැනක දැනටමත් භාවිතා වී ඇති නිසා, ආරක්ෂාව සඳහා අප දෙකම අවසන් කළෙමු. නැවත පිවිසෙන්න.",
     "INVALID_VERIFICATION_TOKEN": "එම තහවුරු කිරීමේ සබැඳිය තවදුරටත් වලංගු නොවේ.",
     "INVALID_RESET_TOKEN": "එම යළි පිහිටුවීමේ සබැඳිය තවදුරටත් වලංගු නොවේ. නව එකක් ඉල්ලන්න.",
-
     "INSUFFICIENT_CAPABILITY": "ඔබේ ගිණුමට මෙම ක්‍රියාව අඩංගු නොවේ. එය ලබා දීමට පරිපාලකයෙකුගෙන් ඉල්ලන්න.",
     "NOT_ORGANIZATION_MEMBER": "ඔබ මෙම සංවිධානයේ සාමාජිකයෙකු නොවේ.",
     "RESOURCE_NOT_FOUND": "අපට ඒක හමු නොවීය. එය ඉවත් කර ඇතිවිය හැක, නැතහොත් ඔබට එයට පිවිසීමට අවසර නොමැතිවිය හැක.",
     "CROSS_TENANT_DENIED": "මෙම වාර්තාව අන් සංවිධානයකට අයත්ය.",
-
     "RATE_LIMITED": "ඔබ ඉල්ලීම් බොහෝ සිදු කර ඇත. තත්පර {seconds} කට පසු නැවත උත්සාහ කරන්න.",
     "VALIDATION_FAILED": "සමහර විස්තර තවම වලංගු නොවේ. හැඳුනුම්පත් කළ ක්ෂේත්‍ර නිවැරදි කරන්න.",
     "CONCURRENCY_CONFLICT": "ඔබ සංස්කරණය කරන අතරතුර අන් අයෙක් මෙය වෙනස් කර ඇත. නවතම සංස්කරණය ලබා ගැනීමට නැවත පූරණය කරන්න.",

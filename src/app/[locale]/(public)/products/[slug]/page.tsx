@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { setRequestLocale, getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
+import { ButtonLink } from "@/components/ui/button";
 import { getProductDetail } from "@/lib/api/catalogue-server";
 import type { ProductDetailResponse } from "@/lib/api/catalogue";
 import { ApiClientError } from "@/lib/api/envelope";
@@ -66,6 +67,7 @@ export default async function ProductDetailPage({
   const t = await getTranslations({ locale, namespace: "catalogue.product" });
   const tCat = await getTranslations({ locale, namespace: "catalogue" });
   const tListing = await getTranslations({ locale, namespace: "catalogue.listing" });
+  const tActions = await getTranslations({ locale, namespace: "common.actions" });
 
   const src = imageUrl(detail.media[0]?.srcset);
   const price = detail.price;
@@ -79,7 +81,7 @@ export default async function ProductDetailPage({
 
   return (
     <div className="shell-public py-8 md:py-12">
-      <nav aria-label="breadcrumb" className="type-meta">
+      <nav aria-label="breadcrumb" className="text-sm leading-[19px] text-ink-muted">
         <Link href="/products" className="text-ink-muted transition-colors duration-instant ease-standard hover:text-ink">
           {tListing("title")}
         </Link>
@@ -107,24 +109,31 @@ export default async function ProductDetailPage({
 
         <aside className="flex flex-col gap-6">
           <div>
-            <p className="type-label text-ink-accent">{detail.sku}</p>
-            <h1 className="mt-2 type-display-md text-ink">{detail.name}</h1>
+            <p className="text-base leading-[22px] text-ink-muted">{detail.sku}</p>
+            <h1 className="page-title mt-2">{detail.name}</h1>
           </div>
 
           <div className="flex items-start justify-between gap-4">
             {pricePublic ? (
-              <p className="type-title-lg text-ink tabular">
+              <p className="text-2xl leading-6 font-medium text-ink tabular">
                 {formatMoney({ amount: price.amount as number, currency: price.currency, locale })}
                 {taxLabel && (
                   <span className="type-meta text-ink-muted"> {taxLabel}</span>
                 )}
               </p>
             ) : (
-              <p className="type-title-md text-ink-muted">{t("priceOnRequest")}</p>
+              <p className="text-2xl leading-6 font-medium text-ink-muted">{t("priceOnRequest")}</p>
             )}
             <StatusPill tone={STOCK_TONES[detail.stock?.state ?? ""] ?? "neutral"}>
               {stockLabel(detail.stock?.state ?? "")}
             </StatusPill>
+          </div>
+
+          <div className="border-t border-line pt-5">
+            <ButtonLink href="/quotations-and-estimations" fullWidth>
+              {tActions("requestQuote")}
+            </ButtonLink>
+            <p className="mt-2 type-meta text-ink-muted">{t("requestQuoteHint")}</p>
           </div>
 
           <dl className="space-y-3 border-t border-line pt-5">
@@ -179,7 +188,7 @@ export default async function ProductDetailPage({
 
       {(detail.summary || detail.description) && (
         <section className="mt-12 max-w-prose">
-          <h2 className="type-title-md text-ink">{t("about")}</h2>
+          <h2 className="text-xl font-medium text-ink">{t("about")}</h2>
           {detail.summary && <p className="mt-3 type-body text-ink">{detail.summary}</p>}
           {detail.description && <p className="mt-3 type-body text-ink">{detail.description}</p>}
         </section>
@@ -187,11 +196,11 @@ export default async function ProductDetailPage({
 
       {detail.specifications && detail.specifications.sections.length > 0 && (
         <section className="mt-12">
-          <h2 className="type-title-md text-ink">{t("specifications")}</h2>
+          <h2 className="text-xl font-medium text-ink">{t("specifications")}</h2>
           <div className="mt-4 grid gap-8 md:grid-cols-2">
             {detail.specifications.sections.map((section) => (
               <div key={section.label}>
-                <h3 className="type-label text-ink-accent">{section.label}</h3>
+                <h3 className="block-title">{section.label}</h3>
                 <dl className="mt-3 divide-y divide-line border-y border-line">
                   {section.attributes.map((row) => (
                     <div key={row.code} className="flex justify-between gap-6 py-2.5">
@@ -211,7 +220,7 @@ export default async function ProductDetailPage({
 
       {detail.priceHistory && detail.priceHistory.length > 0 && (
         <section className="mt-12 max-w-2xl">
-          <h2 className="type-title-md text-ink">{t("priceHistory")}</h2>
+          <h2 className="text-xl font-medium text-ink">{t("priceHistory")}</h2>
           <ul className="mt-4 divide-y divide-line border-y border-line">
             {detail.priceHistory.map((entry) => (
               <li key={entry.at} className="flex items-center justify-between gap-6 py-2.5">
@@ -227,7 +236,7 @@ export default async function ProductDetailPage({
 
       {related.length > 0 && (
         <section className="mt-12">
-          <h2 className="type-title-md text-ink">{t("related")}</h2>
+          <h2 className="text-xl font-medium text-ink">{t("related")}</h2>
           <Reveal className="mt-6 grid grid-cols-2 gap-x-4 gap-y-8 md:grid-cols-4">
             {related.map((item) => (
               <ProductCard

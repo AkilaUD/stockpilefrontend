@@ -21,25 +21,27 @@
   /* ===========================================================================
      LAYER 1 — PALETTE. Raw material swatches.
 
-     The exact five-colour construction core from the UI/UX master brief:
+     The original Stockpile.lk (Magento/MageBig Martfury layout05) colour
+     family, mapped onto the token system in place of the generic master-brief
+     palette (reference reconstruction: "map original colours #f6e71d yellow
+     and #020202 ink onto the existing tokens"):
 
-       #d6d6d6  neutral       - page grounds, quiet sections, separators, bands
-       #ffee32  signal        - primary CTA, active procurement signals, counts
-       #ffd100  signal-soft   - secondary CTA, hover step on signal, progress
-       #202020  ink           - primary structural dark; nav, heroes, footer
+       #f6e71d  signal        - original top bar / hub bar / signal yellow
+       #fcb800  signal-soft   - original CTA amber (buttons, links)
+       #020202  ink           - original structural dark; masthead, heroes
        #333533  ink-soft      - secondary structural dark; panels in the dark
 
      Everything below the core is a *derived neutral* - a mix of core ink and
      core neutral at a fixed ratio - so no hue is ever imported. One functional
      exception exists: a danger red for error semantics (design-system.md §2.5).
-     Blues, greens and oranges are banned by the brief, full stop.
+     Blues and greens are banned by the reference palette, full stop.
      ======================================================================== */
 
-  /* core */
-  --palette-ink: #202020;
+  /* core — reference brand colours */
+  --palette-ink: #020202;
   --palette-ink-soft: #333533;
-  --palette-signal: #ffee32;
-  --palette-signal-soft: #ffd100;
+  --palette-signal: #f6e71d;
+  --palette-signal-soft: #fcb800;
   --palette-neutral: #ffffff;
 
   /* derived neutrals (core mixes). Contrasts are cited against the ground
@@ -101,7 +103,7 @@
      decorative, the UI signal carries function, and the two no longer compete
      for attention. */
   --brand-primary: var(--palette-signal);
-  --brand-primary-hover: var(--palette-signal-soft); /* brief §2.1 hover step */
+  --brand-primary-hover: var(--palette-signal-soft); /* hover step on signal */
   --brand-secondary: var(--palette-signal-soft);
   --brand-marker: var(--palette-signal-soft);
 
@@ -134,7 +136,7 @@
      Aliased into Tailwind's --radius-* namespace in globals.css.
      ======================================================================== */
   --corner-none: 0;
-  --corner-sm: 2px; /* inputs, chips */
+  --corner-sm: 3px; /* inputs, chips — the reference layout's 3px radius */
   --corner-md: 4px; /* buttons, panels */
   --corner-lg: 6px; /* dialogs only */
   --corner-round: 999px; /* ONLY avatars, status dots, text-bearing status pills */
@@ -164,10 +166,17 @@
   /* ===========================================================================
      LAYOUT — §5.1
      ======================================================================== */
-  --layout-max-public: 1440px;
+  /* The public shell is the reference's own frame, measured 2026-10-14: a
+     Bootstrap container capped at 1200px with 15px side padding (`.container`
+     → `max-width:1200px; padding:0 15px` at ≥1200px; 720px at the md step).
+     It is deliberately NOT `--layout-gutter`: that token also floors the
+     overlay widths below (`calc(100vw - 2 * var(--layout-gutter))`), and 15px
+     would push dialogs/sheets to the viewport edge. */
+  --layout-max-public: 1200px;
   --layout-max-workspace: 1680px;
   --layout-rail-nav: 248px;
   --layout-rail-context: 320px;
+  --layout-gutter-public: 0.9375rem;
   --layout-gutter: 1.5rem;
 
   /* Content-driven breakpoints (§36). CSS media queries cannot consume custom
@@ -207,8 +216,8 @@
 }
 
 /* =============================================================================
-   Dark surface — the public masthead and footer are dark command areas
-   (#202020), as is any public editorial section that wants contrast rhythm.
+   Dark surface — the public masthead is a dark command area (#020202), as is
+   any public editorial section that wants contrast rhythm.
    An opt-in workspace theme re-uses the same block (workspaces ship
    light-first, docs/design-system.md §2.4 rule 4).
 
@@ -223,7 +232,7 @@
 
   --ink: var(--palette-neutral);
   --ink-strong: #ffffff;
-  --ink-muted: #a6a6a6;                  /* 5.2:1 on #333533, 6.7:1 on #202020 */
+  --ink-muted: #aaaaaa;                  /* 5.5:1 on #333533, ~8:1 on #020202 */
   --ink-faint: #737373;                  /* decorative tier only */
   --ink-inverse: var(--palette-ink);
   --ink-accent: var(--palette-signal);   /* links/labels on dark grounds */
@@ -245,7 +254,7 @@
   --warning: var(--palette-signal-soft);
   --danger: var(--palette-danger-lift);  /* dark-ground legibility variant */
   --info: var(--palette-neutral);
-  --focus-ring: var(--palette-signal);   /* visible on #202020 / #333533 */
+  --focus-ring: var(--palette-signal);   /* visible on #020202 / #333533 */
 }
 
 /* =============================================================================

@@ -2,7 +2,9 @@
   "a11y": {
     "skipToContent": "Skip to main content",
     "mainNavigation": "Main navigation",
+    "mobileDockNavigation": "Mobile quick navigation",
     "userMenu": "Account menu",
+    "mostSearchedDescription": "Top searched products on Stockpile, linking to their categories",
     "languageSwitcher": "Language",
     "footer": "Site information",
     "breadcrumb": "Breadcrumb",
@@ -44,7 +46,9 @@
       "signOut": "Sign out",
       "register": "Create account",
       "contact": "Contact supplier",
-      "requestQuote": "Request a quote"
+      "requestQuote": "Request a quote",
+      "registerAsSupplier": "Register as a supplier",
+      "working": "Working…"
     },
 
     "labels": {
@@ -57,6 +61,8 @@
       "firstName": "First name",
       "lastName": "Last name",
       "companyName": "Company name",
+      "registrationNumber": "Business registration number",
+      "website": "Website",
       "phone": "Phone",
       "district": "District",
       "address": "Address",
@@ -94,6 +100,7 @@
     "quotes": "Quotes",
     "dashboard": "Dashboard",
     "account": "Account",
+    "workspace": "My workspace",
     "settings": "Settings",
     "help": "Help",
     "admin": "Administration",
@@ -103,113 +110,896 @@
     "switchToEnglish": "Switch to English",
     "switchToSinhala": "Switch to Sinhala",
     "localeEnShort": "EN",
-    "localeSiShort": "සිංහල"
+    "localeSiShort": "සිංහල",
+
+    "utilityTagline": "Construction Material Procurement Platform",
+    "shopByDepartment": "Shop By Department",
+    "allDepartments": "All Departments",
+    "getQuotes": "Get Quotes",
+    "howItWorks": "How It Works",
+    "news": "News",
+    "pricing": "Pricing",
+    "aboutUs": "About Us",
+    "supplierBenefits": "Supplier Benefits",
+    "registerAsSupplier": "Register As A Supplier",
+    "logIn": "Log In",
+    "register": "Register",
+    "supplierLogin": "Supplier Login",
+    "supplierRegistration": "Supplier Registration",
+    "userGuide": "User Guide",
+    "sitemap": "Sitemap",
+    "termsOfUse": "Terms of Use",
+    "requestForQuote": "Request For Quote",
+    "forSuppliers": "For Suppliers",
+    "ourSuppliers": "Our Suppliers",
+    "contact": "Contact",
+    "supplierList": "Supplier List",
+    "myOrder": "My Order",
+    "me": "Me",
+    "menu": "Menu",
+    "searchPlaceholder": "I''m looking for…",
+    "searchSubmit": "Search",
+    "viewAllDepartments": "View All"
   },
 
   "footer": {
     "tagline": "Business-to-business procurement for construction materials in Sri Lanka.",
-    "about": "About",
-    "contact": "Contact",
-    "terms": "Terms of service",
-    "privacy": "Privacy",
-    "helpCentre": "Help centre",
+    "contactGroup": "Contact Us",
+    "stockpileGroup": "Stockpile",
+    "companyGroup": "Company",
+    "supportGroup": "Support",
+    "ownerLine": "A product of Construction Trade Technologies (Pvt) Ltd.",
+    "hours": "Monday–Saturday 9am–5pm",
+    "phoneLabel": "011-xxx-xxxx (Click to Show)",
+    "email": "info@stockpile.lk",
     "rights": "All rights reserved.",
-    "accountGroup": "Account",
-    "siteGroup": "Site"
+    "termsNote": "Use of this site is subject to Terms Of Use.",
+    "copyright": "© {year} Stockpile, Construction Trade Technologies (Pvt) Ltd.",
+    "linkedin": "LinkedIn",
+    "facebook": "Facebook",
+    "instagram": "Instagram",
+    "youtube": "YouTube"
   },
 
   "home": {
-    "eyebrow": "Procurement · Sri Lanka",
-    "headline": "Build the list. Find the supply. Compare what actually matters.",
-    "lede": "A business-to-business desk for construction materials. List what the project needs, receive quotes you can put side by side, and place orders against a written record instead of a phone call.",
+    "meta": {
+      "title": "Construction Material Procurement Platform",
+      "description": "Find construction material, compare quotations and order from verified Sri Lankan suppliers on one platform."
+    },
     "hero": {
-      "cta": "Start an RFQ",
-      "searchLabel": "What are you sourcing?",
-      "searchSubmit": "Search",
-      "examples": [
-        "GI pipes, 2 inch, 150 lengths…",
-        "Cement OPC 42.5N, 500 bags…",
-        "12mm rebar by the tonne…",
-        "Emulsion paint, 20L buckets…",
-        "A supplier in Kandy…"
-      ],
-      "intentLabel": "Or start from an intent:",
-      "intentProducts": "Browse products",
-      "intentSuppliers": "Find suppliers",
-      "intentCategories": "Shop departments",
-      "materialFigure": "From the live catalogue",
-      "signalProducts": "Products listed",
-      "signalSuppliers": "Suppliers listed",
-      "signalDepartments": "Departments"
+      "headline": "Build the list. Buy smarter.",
+      "bannerCta": "Learn How Stockpile Works",
+      "bannerAlt": "Stockpile — construction material procurement"
     },
-    "trio": {
-      "label": "Ways to start",
-      "knowStep": "01",
-      "knowTitle": "I know what I need",
-      "knowBody": "Name it, spec it, and see who lists it — side by side.",
-      "knowLink": "Search the catalogue",
-      "browseStep": "02",
-      "browseTitle": "I want to browse",
-      "browseBody": "Walk the departments and compare materials at leisure.",
-      "browseLink": "Open the catalogue",
-      "suppliersStep": "03",
-      "suppliersTitle": "I want suppliers",
-      "suppliersBody": "Meet the directory first, then ask for quotes.",
-      "suppliersLink": "Meet suppliers"
-    },
-    "departments": {
-      "eyebrow": "Departments",
-      "title": "Shop by department",
-      "lede": "Twelve departments, one live catalogue. Pick a trade and start comparing."
-    },
-    "pulse": {
-      "products": "Products listed",
-      "suppliers": "Suppliers listed",
+    "stats": {
+      "products": "Products",
+      "suppliers": "Suppliers",
       "departments": "Departments",
-      "districts": "Districts served",
-      "note": "Live catalogue figures — read from the platform on every visit, never printed."
+      "categories": "Categories"
     },
-    "strip": {
-      "eyebrow": "Featured materials",
-      "title": "Fresh on the shelves",
-      "lede": "The newest listings with their real specifications. Drag through them, or open any card for the full sheet.",
-      "viewAll": "Open the catalogue"
+    "mostSearched": {
+      "title": "Most Searched Products",
+      "t1": "GI & Steel Box Bar",
+      "t2": "GI & Steel Pipes",
+      "t3": "Chain Link Fences",
+      "t4": "Aluminium Cladding",
+      "t5": "PVC Eco Board",
+      "t6": "Kempas"
     },
-    "suppliers": {
-      "eyebrow": "Supplier directory",
-      "title": "Verified first, always",
-      "lede": "The directory leads with verified suppliers. Open a row for the full dossier.",
-      "viewAll": "View all suppliers",
+    "featured": {
+      "title": "Featured Products",
+      "viewAll": "View All"
+    },
+    "newestSuppliers": {
+      "title": "Newest Suppliers",
+      "viewAll": "View All",
       "verified": "Verified",
-      "unverified": "Not yet verified",
+      "unverified": "Pending verification",
       "products": "products"
     },
-    "field": {
-      "eyebrow": "Field proof",
-      "title": "Where the catalogue reaches",
-      "lede": "No case studies yet — so here is what the directory itself says: districts served, verified share, department depth.",
-      "districtsLabel": "Districts with listed suppliers",
-      "verifiedLabel": "Verified suppliers",
-      "departmentsLabel": "Departments covered"
+    "becomeSupplier": {
+      "title": "Let Stockpile help you increase your construction profits by streamlining your proposals.",
+      "lede": "Receive project requirements that match your products — filtered, sorted and sent straight to you.",
+      "cta": "Stockpile For Suppliers",
+      "pricingCta": "See Pricing"
     },
-    "final": {
-      "title": "Put the next purchase on the record.",
-      "lede": "List what the site needs once, and let suppliers answer against the same lines.",
-      "primary": "Create a buyer account",
-      "secondary": "Browse suppliers first"
+    "newestProducts": {
+      "title": "Newest Products",
+      "viewAll": "View All New Products"
+    }
+  },
+
+  "pages": {
+    "common": {
+      "breadcrumbHome": "Home"
     },
-    "workflow": {
-      "eyebrow": "How procurement runs",
-      "title": "Four steps, one record.",
-      "lede": "Each stage leaves something both sides can point back to.",
-      "step1Title": "List what the site needs",
-      "step1Body": "Add products with quantities and units, or upload a bill of quantities. Nothing leaves your account until you submit it.",
-      "step2Title": "Suppliers answer with quotes",
-      "step2Body": "Matched suppliers quote price, lead time, validity and terms against the same line items.",
-      "step3Title": "Compare like for like",
-      "step3Body": "Quotes line up item by item, so the differences that decide the purchase are visible rather than buried.",
-      "step4Title": "Place the order",
-      "step4Body": "Accept a quote and the order, its deliveries and its payments stay in one place."
+    "quotations": {
+      "title": "Quotations & Estimations",
+      "subtitle": "Quotes in 3 simple steps.",
+      "lede": "Send us your list of items or BOQ. We''ll dispatch it to our network of Sri Lankan suppliers — they quote you directly. Free, always.",
+      "steps": [
+        {
+          "label": "You send",
+          "title": "Send us your RFQ",
+          "body": "Send us a list of items or a BOQ — by email or upload. Include your name, address, phone number, company name and the products & quantities you need, so we can route it correctly."
+        },
+        {
+          "label": "We dispatch",
+          "title": "We route it to suppliers",
+          "body": "Your RFQ is uploaded to our system and dispatched to every relevant supplier in the network."
+        },
+        {
+          "label": "You receive",
+          "title": "Quotes arrive directly",
+          "body": "Suppliers reply to you directly. Compare prices and lead times, then order with confidence."
+        }
+      ],
+      "onlineCta": "Send your RFQ online",
+      "emailLabel": "Email it to",
+      "email": "rfq@stockpile.lk",
+      "orLabel": "OR",
+      "uploadLabel": "Upload your RFQ document",
+      "freeBadge": "FREE",
+      "freeAlways": "Always",
+      "categoriesValue": "190+",
+      "categoriesLabel": "categories",
+      "suppliersValue": "40+",
+      "suppliersLabel": "suppliers",
+      "uploadCta": "Upload your RFQ"
+    },
+    "howItWorks": {
+      "title": "How It Works",
+      "lede": "Stockpile is your complete solution for finding and trading construction material. We connect buyers with suppliers to find the right products, get quotations and place orders easily.",
+      "buyersTitle": "For Buyers",
+      "buyersBody": "Are you an Architect, Consultant, Contractor, Developer or just looking to find construction material? Click below to see how Stockpile can help you.",
+      "buyersCta": "Stockpile for Buyers",
+      "suppliersTitle": "For Suppliers",
+      "suppliersBody": "Are you a supplier of construction materials or services? Click below to see how Stockpile can work for you.",
+      "suppliersCta": "Stockpile for Suppliers"
+    },
+    "supplierBenefits": {
+      "title": "Stockpile For Suppliers",
+      "eyebrow": "STOCKPILE FOR SUPPLIERS",
+      "lede": "Never miss out on any project requirements ever again.",
+      "intro": "When Stockpile receives a requirement, we filter them to match your products, and send the request straight to you so that you don''t have to waste valuable time and resources anymore.",
+      "cards": [
+        {
+          "title": "Submit quotations instantly",
+          "body": "All buyer requirements are filtered to match your specialty, saving you time. Propose the best product along with special volume pricing and submit to the buyers for consideration."
+        },
+        {
+          "title": "Negotiate Efficiently",
+          "body": "Submit any number of revisions based on the negotiations. Manage discounts and special offers easily."
+        },
+        {
+          "title": "Close The Sale",
+          "body": "Once an order is submitted verify the buyer's PO to meet your internal business requirements. Keep the client updated as you process the order."
+        }
+      ],
+      "moreTitle": "What else?",
+      "features": [
+        {
+          "title": "Choose your audience",
+          "body": "Protect your prices. Select whom can see your products and prices. Contractors, Architects, Consultants, or everyone."
+        },
+        {
+          "title": "No Transaction Fees.",
+          "body": "Stockpile does not charge a transaction fee like most platforms. Your profits are all yours."
+        },
+        {
+          "title": "Supplier Insights",
+          "body": "Subscribe to Supplier Insights to receive details about which of your products were viewed the most, market demands, and lots more."
+        },
+        {
+          "title": "Promote Your Products",
+          "body": "Launching a new product? Promote it through our weekly newsletter and reach Architects, Consultants and Contractors directly. Feature it on our front page for better exposure."
+        },
+        {
+          "title": "Advertise (coming soon)",
+          "body": "Your target audience is right here! Advertise your products and reach them directly."
+        }
+      ],
+      "partnersEyebrow": "OUR PARTNERED BUYERS",
+      "ctaTitle": "Ready to make your life easier? Call 0114-222-555 or register below.",
+      "ctaBody": "One of our experts will help you get started.",
+      "registerCta": "Register As A Supplier",
+      "pricingCta": "See Pricing"
+    },
+    "pricing": {
+      "title": "Pricing",
+      "lede": "Are you a supplier? Choose a monthly plan that works for you.",
+      "sublede": "Select one of three subscription plans tailored to get your products to the right buyers, or get one customized to your needs.",
+      "perMonth": "/month",
+      "tiers": [
+        {
+          "name": "Starter",
+          "price": "Rs. 10,000",
+          "features": [
+            "Direct Customer Calls",
+            "Up to 100 Calls",
+            "Product Uploads - 5",
+            "Supplier Login",
+            "M-F 9am-5pm Customer Support"
+          ]
+        },
+        {
+          "name": "Standard",
+          "price": "Rs. 15,000",
+          "features": [
+            "Direct Customer Calls",
+            "Up to 200 Calls",
+            "Socialmedia Ads - Basic",
+            "Google Ads - Standard",
+            "Detailed Report",
+            "Product Uploads - 5",
+            "Supplier Login",
+            "M-F 9am-5pm Customer Support"
+          ]
+        },
+        {
+          "name": "Enterprise",
+          "price": "Rs. 20,000",
+          "features": [
+            "Direct Customer Calls",
+            "Unlimited Calls",
+            "Socialmedia Ads - Advanced",
+            "Google Ads - Advanced",
+            "Detailed Report",
+            "Product Uploads - 10",
+            "Whatspp Notifications",
+            "Supplier Login",
+            "M-F 9am-5pm Customer Support"
+          ]
+        }
+      ],
+      "customName": "Customized",
+      "customBody": "Need more benefits? We can customize a package for your requirements.",
+      "customEmail": "info@stockpile.lk",
+      "customPhone": "0114-222-555",
+      "callCta": "Call us to sign up today 0114-222-555",
+      "learnMore": "Click HERE to learn how Stockpile can help your business.",
+      "registerCta": "Register As A Supplier"
+    },
+    "about": {
+      "title": "About Us",
+      "subtitle": "Discover. Compare. Negotiate. Purchase.",
+      "tagline": "Stockpile: The efficient way to construction material procurement.",
+      "body": [
+        "Stockpile is built as a complete procurement platform that caters to construction companies and industry professionals by providing an interface to get bulk pricing, view product specifications and place orders for construction material and building supplies including kitchen, sanitary, and plumbing accessories, ironmongery, waterproofing, admixtures, roofing, flooring, electrical fixtures, and more.",
+        "Stockpile provides, contractors, developers, architects, and consultants access to the best choices of construction material available in the market along with transparent price tags. This, in turn, will make comparisons and the decision-making process that much simple and the material procurement process — significantly fast.",
+        "Exclusively available for bulk purchases, the construction material on this platform is carefully selected to equip construction professionals from the point of laying the foundation to completing the interiors of a building. We are committed to continuously improving your experience onsite and contributing towards efficient project management, time saving, and of course better profits.",
+        "Stockpile is a venture of Construction Trade Technologies (pvt) Ltd., established in 2021. The company combines our experience in the construction industry with our foundations in automation and information technology. Our collaboration with the Young Constructors' Forum (YCF), a forum established to voice and discuss the concerns of the next generation of engineers and constructors of Sri Lanka, gave us insights into the critical concerns and practical problems faced in the construction industry. Subsequently, we analyzed the entire life cycle of material procurement and developed Stockpile to reduce inefficiencies and solve problems by making incremental improvements in each step in the process of finding stock, liaising with vendors, and purchasing material for construction."
+      ],
+      "closing": "Save time and build efficiently by discovering, comparing, and purchasing construction material on a single platform, curated exclusively for you."
+    },
+    "contact": {
+      "title": "Contact Us",
+      "questionsTitle": "For Any Questions",
+      "questionsEmail": "info@stockpile.lk",
+      "quotesTitle": "Need Quotations from our Suppliers?",
+      "quotesEmail": "rfq@stockpile.lk",
+      "callTitle": "To Call",
+      "callBody": "Click the call button on the product or category pages.",
+      "hqTitle": "Head Quarters (We do not sell any products here)",
+      "hqAddress": "132 Old Kotte Road, Welikada, Rajagiriya",
+      "workTitle": "Work With Us",
+      "workBody": "Check our vacancies:",
+      "workLink": "Stockpile Careers",
+      "getInTouchTitle": "Get In Touch",
+      "emailUs": "Email us at",
+      "callUs": "Call us on"
+    },
+    "terms": {
+      "title": "Terms Of Use",
+      "body": [
+        "These Terms of Use (\"Agreement\") is an electronic record in terms of Electronic Transactions Act, No. 19 of 2006 and rules thereunder as applicable and the any other provisions pertaining to electronic records in various statutes as amended by the Electronics Transactions Act, No. 19 of 2006. All users of Stockpile.lk are bound by these Terms of Use.",
+        "Stockpile.lk (hereinafter referred to as \"Stockpile\", \"Site\", \"us\" and \"we\") is a platform which seeks to connect customers and suppliers. Customers may obtain, and sellers may provide, product information, quotations, and other product specifications. Stockpile facilitates its users to communicate in doing business with one another. The Site is owned and operated by Construction Trade Technologies (Private) Limited (hereinafter referred to as \"CTT\"). These Terms of Use shall be updated from time to time by Stockpile, without any prior notice to you, and you hereby agree to bound by these Terms of Use as amended.",
+        "Users will be required to create an account with Stockpile, in order to access certain services offered by us. In doing so, you may be required to provide corporate and/or personal information to complete the creation of an account, and may also be contacted by us in verifying your identity. Upon creating an account with Stockpile, you will be provided a User ID and Password. You are solely responsible for maintaining the confidentiality and security of your User ID, password, and any other account details and related corporate/private information.",
+        "Customers will be able to peruse the materials and/or other items which are listed by Suppliers, and may choose to communicate with Suppliers in obtaining quotations for any required Products.",
+        "Construction Trade Technologies (Private) Limited grants you permission to view and use this Site for your own personal use, provided that you agree to and accept without modification terms and conditions set forth herein. Your use of this Site constitutes your agreement and acceptance without modification of the terms and conditions set forth herein. You may not copy (except as required for printing quotations and for taking printouts of individual pages where so permitted), distribute, transmit, display, modify, perform, reproduce, publish, license, create derivative works from, transfer or sell any information, material, software, products or services from this Site.",
+        "Stockpile and CTT merely operate as service providers by connecting Users using the Site. Stockpile and CTT make no representation about the suitability of the Products available on this Site for any purpose. All such Products are provided by Suppliers, without warranty of any kind (express or implied) by Stockpile or CTT, including all implied warranties and conditions of merchantability, fitness for a particular purpose, title and non-infringement. Your use of this Site is at your own risk.",
+        "Stockpile merely facilitates the communication and business between the Customer and the Supplier. Any business transaction that shall arise between the Customer and the Supplier, shall remain an agreement between such parties, and shall be subject to such terms and conditions agreed by such parties. Any disputes that take place between the Customer and the Supplier in doing business using Stockpile, including disputes related to business transactions, payment, delivery, returns and/or material defects, shall exclusively remain the disputes of such concerned parties.",
+        "Customers shall at all times provide us with true and accurate information when creating and continuing to use Stockpile. Customers shall act in good faith. Customer shall clearly communicate with the Supplier.",
+        "Suppliers shall at all times provide us with true and accurate information when creating and continuing to use Stockpile. Supplier shall ensure that the Product listings are true and accurate and shall contain product specifications, product description and product data. Supplier shall at all times ensure that it depicts true and accurate information regarding the availability of Products and stock. Suppliers shall act in good faith.",
+        "Your use of the Site shall more fully be governed by Stockpile's Privacy Statement. All identifiers, user activity, commercial information, and content that you submit may be used and shared with authorized third-parties at the sole discretion of Stockpile and CTT.",
+        "By submitting any content to the Site, represents and warrants that you are the sole author and owner of the intellectual property rights thereto, and/or that you have such owner's permission to use the same. All content submitted and/or posted to the Site, shall be deemed to be a perpetual, irrevocable, royalty-free, transferable right and license from you to Stockpile and CTT.",
+        "Customers shall be eligible to review Suppliers, and are encouraged to do so. All reviews submitted on the Site shall only be published upon verification by Stockpile.",
+        "You agree to indemnify and hold Stockpile and CTT (and its officers, directors, agents, subsidiaries, joint ventures, employees and third-party service providers), harmless from all claims, demands, and damages of every kind and nature, known and unknown including legal fees, arising out of a breach of your obligations set forth above, or your violation of any law or the rights of a third party.",
+        "The Site, its software, and trademarks and/or references to Stockpile shall be the Intellectual Property of Stockpile and CTT.",
+        "You agree that this Agreement and your use of this Site are governed by the laws of Sri Lanka. You hereby consent to the exclusive jurisdiction of the courts of Sri Lanka in all disputes arising out of, relating to, or concerning this Site and/or this agreement."
+      ]
+    },
+    "howItWorksForBuyers": {
+      "title": "Stockpile works to find you the right product at the right price, quickly and efficiently in 3 simple steps.",
+      "eyebrow": "STOCKPILE FOR BUYERS",
+      "steps": [
+        {
+          "label": "1. Submit your RFQ",
+          "body": "A single Request For Quotation (RFQ) from you gets sent to every supplier registered in the categories you select. You won't have to worry about missing anyone out."
+        },
+        {
+          "label": "2. Review your quotes",
+          "body": "Use the Quote Comparison feature to quickly compare selected quotations side-by-side to help you evaluate faster and negotiate directly with the suppliers."
+        },
+        {
+          "label": "3. Confirm your order",
+          "body": "When you are ready to confirm your order, simply Add-To-Order and Check-Out. Upload your company Purchase Order (PO) to comply with your corporate procedures. Payment can be made directly to the supplier using your method of choice."
+        }
+      ],
+      "moreTitle": "But There''s more!",
+      "features": [
+        {
+          "title": "Match Specifications",
+          "body": "Use our search and Fiters to browse and identity products that meet your specifications"
+        },
+        {
+          "title": "Growing Supplier Base",
+          "body": "Our growing number of suppliers means that you will get quotations from more suppliers without any extra effort"
+        },
+        {
+          "title": "Be Informed",
+          "body": "Get to know about the latest products. suppliers and technologies featured in our weekly newsletter"
+        }
+      ],
+      "partnersEyebrow": "FEATURED SUPPLIERS",
+      "ctaTitle": "Ready to make your life easier? Get started by registering now.",
+      "ctaBody": "One of our experts will contact you to complete your registration.",
+      "registerCta": "Register Now"
+    },
+    "userGuide": {
+      "title": "Learn How To Use Stockpile",
+      "lede": "Congratulations on selecting Stockpile, the only service which offers a complete solution to discover, quote and receive orders from Architects, Consultants, Contractors and Developers. Use the navigation menu on the left to find the guide",
+      "navLabel": "User guide contents",
+      "prevTopic": "Prev Topic",
+      "nextTopic": "Next Topic",
+      "topicNavLabel": "Topic navigation",
+      "nav": [
+        { "label": "Introduction", "href": "/user-guide" },
+        {
+          "title": "Stockpile for Buyers",
+          "items": [
+            { "label": "Buyer Registration" },
+            { "label": "Updating Buyer Profile" },
+            { "label": "Creating an RFQ", "href": "/user-guide-customer-creating-rfqs" },
+            { "label": "Viewing Quotations", "href": "/user-guide-customer-viewing-quotations" }
+          ]
+        },
+        {
+          "title": "Stockpile for Suppliers",
+          "href": "/user-guide-supplier-registration",
+          "items": [
+            { "label": "Supplier Registration", "href": "/user-guide-supplier-registration" },
+            { "label": "Product Creation", "href": "/user-guide-product-creation" },
+            { "label": "Product Specifications", "href": "/user-guide-product-specifications" },
+            { "label": "Submitting Quotations", "href": "/user-guide-supplier-quotation" }
+          ]
+        },
+        { "label": "Conversion Tables", "href": "/conversion-tables" },
+        { "label": "Glossary", "href": "/user-guide-glossary" }
+      ]
+    },
+    "guideSupplierRegistration": {
+      "title": "Supplier Registration",
+      "lede": "Never miss out on any project requirements ever again. When Stockpile receives a requirement, we filter them to match your products, and send the request straight to you so that you don''t have to waste valuable time and resources anymore.",
+      "sections": [
+        {
+          "body": "Start by navigating to the Supplier Registration page.",
+          "link": { "label": "Supplier Registration page", "href": "/supplier-register" }
+        },
+        {
+          "title": "EMAIL ADDRESS",
+          "body": "Enter your official company email address. This will be used for all notifications about your account, orders, RFQs and newsletters."
+        },
+        {
+          "title": "PASSWORD",
+          "body": "Your password must have a minimum length of 8, and must contain 3 of the following 4:",
+          "bullets": ["Lower Case letter", "Upper Case letter", "Digit", "Special Character"],
+          "footer": "Click on Proceed to continue to the 2nd Page."
+        },
+        {
+          "title": "CONTACT INFORMATION",
+          "body": "Enter your contact details and Company Name."
+        },
+        {
+          "title": "COMPANY URL",
+          "body": "This is your Stockpile Site Url – This will be the direct link on Stockpile for your company. Use your company name without legal terms like (pvt), Ltd., LLC, etc., replacing spaces with dash (-).",
+          "footer": "In the following example, the link to the seller's profile page will be http://stockpile.lk/bluewire-electrical-systems"
+        },
+        {
+          "title": "ADDRESS INFORMATION",
+          "body": "Enter your company's operating address details. If you have a secondary operational address, it can be added later through the Supplier Dashboard."
+        },
+        {
+          "body": "Once you have successfully submitted your request, you will receive an email from support@stockpile.lk to Verify Your Account. Completing this step will help us in the first step of verifying your identity. Thereafter, one of our representatives will contact you to gather more information required for the verifciation process."
+        },
+        {
+          "title": "SUPPLIER ONBOARDING QUESTIONNAIRE",
+          "body": "In order to expedite the on-boarding process, please complete the Supplier Onboarding Questionnaire available here.",
+          "link": {
+            "label": "Supplier Onboarding Questionnaire",
+            "href": "https://forms.office.com/r/T8ALh7i1VR"
+          }
+        }
+      ]
+    },
+    "guideSupplierQuotation": {
+      "title": "Supplier - Quoting for an RFQ",
+      "lede": "This video shows the following:",
+      "bullets": [
+        "Email notification when you get an RFQ",
+        "How to find new RFQs which are called Buying Leads",
+        "How to create a quotation for an RFQ",
+        "How to view all quotations you have created"
+      ]
+    },
+    "guideCustomerCreatingRfqs": {
+      "title": "Customer - Creating an RFQ",
+      "lede": "This video shows how the customer can log into Stockpile and create a Request For Quotation (RFQ) so that all the registered suppliers for the required product categories will get the request."
+    },
+    "guideCustomerViewingQuotations": {
+      "title": "Customer - Viewing Quotations",
+      "lede": "This video shows how the customer can log into Stockpile and view quotations that have been received for a Request For Quotation (RFQ) that the customer has created."
+    },
+    "guideProductCreation": {
+      "title": "Product Creation",
+      "sections": [
+        {
+          "body": "In this video we will demonstrate the method to create a new product on Stockpile. First click on the user icon on the top right, and then click on Supplier Login. Enter your registered email address and password. You will then be redirected to your Supplier Dashboard."
+        },
+        {
+          "body": "Click on Products and then click on Add Products.",
+          "link": { "label": "Add Products", "href": "/supplier" }
+        },
+        {
+          "title": "ATTRIBUTE SET",
+          "body": "First you will have to select the attribute set most suitable for your product. When some products have specifications that are important to highlight, then we will create an attribute set for those. If you don't find an attribute set made for your product type, then select the General attribute set."
+        },
+        {
+          "title": "PRODUCT TYPE",
+          "body": "Select the Simple product type and click continue. If you want to learn about creating a configurable product and it's benefits, read our guide on Creating a Configurable Product."
+        },
+        {
+          "title": "PRODUCT CATEGORY",
+          "body": "Select the Product Category that most closely matches your product. For example if you want to upload a product that matches Wooden Flooring, then under Building Materials you can select Timber. Do not select the parent category which is Building Materials, your product will automatically be show in the selected category and all parent categories. You can also see that under Flooring, there is a sub-category called Wooden which can be selected. This will list your product under Timber Building Products, and Wooden Flooring.",
+          "footer": "You can use the search bar to try and find a suitable category."
+        },
+        {
+          "title": "PRODUCT NAME",
+          "body": "Next enter your Product Name. Please use the following convention for naming your products\n\n[brand] + [model/product type] + [key attributes]\n\nExample:",
+          "bullets": [
+            "Gibraltar Teak Wooden Flooring 24mm",
+            "Stanley Philips Screwdriver 6.5Mmx200Mm",
+            "Grundfos Self Priming Jet Pump JP3-42-PTV (Flow 57 LPM)"
+          ]
+        },
+        {
+          "title": "DESCRIPTION",
+          "body": "The production description should include the following mandatory information. Including this will assist your buyers in obtaining all of the necessary details without having to contact you, thereby expediting the procurement process."
+        },
+        {
+          "title": "PRODUCT SUMMARY:",
+          "body": "This should be a detailed description of the product, it's advantages, applications, etc."
+        },
+        {
+          "title": "GENERAL SPECIFICATIONS:",
+          "body": "Include all specifications for the product in a well formatted layout. Refer the MINIMUM REQUIRED SPECIFICATIONS for your product. If your product is not listed, contact support to obtain the list of required specifications. You must list the minimum specifications in the same order it is given in the link above. If you have additional specifications you may include them after listing the minimum required specifciations.",
+          "link": {
+            "label": "MINIMUM REQUIRED SPECIFICATIONS",
+            "href": "/user-guide-product-specifications"
+          }
+        },
+        {
+          "title": "CLIENT RESPONSIBILITIES",
+          "body": "List all responsibilities not included with the product. This can include but not limited to cranes for unloading at the delivery location, product assembly, insurance, etc."
+        },
+        {
+          "title": "COMPLETED PROJECTS:",
+          "body": "A list of all projects this product has successfully been used. You should have the right to list the said projects."
+        },
+        {
+          "title": "TERMS OF SALE:",
+          "body": "All terms of sale should be included."
+        },
+        {
+          "title": "SHORT DESCRIPTION:",
+          "body": "This should be a 1-2 sentence brief about the product. It will be shown on category pages listings."
+        },
+        {
+          "title": "SKU (STOCK KEEPING UNIT):",
+          "body": "If you have internal product SKUs we suggest using those with the addition of two letters in front, indicating the name of your company (this will be provided to you). Otherwise, please follow this format for creating a SKU.\n\nAABBCCDDEE",
+          "bullets": [
+            "[AA-AAA] - 2-3 letters uniquly indicating your company name (This will be provided to you).",
+            "[BB] - Product brand or manufacturer name. If it's generic, use GN",
+            "[CC] - Type of material (Ex: WP - Wood Polymer, GL - Glass, PL - Plastic, SS - Stainless Steel)",
+            "[DD-DDD] - 2 or 3 letters describing the product (Ex: MC - Manhole Cover, FWP for Fluted Wall Panel, etc.)",
+            "[EE-EEEEE] - 2 or more letters describing a model number or important specification (such as size). If none of the above applies, then a two digit index of this item (ex: 01, 02)."
+          ]
+        },
+        { "title": "PRICE:", "body": "This is your list or catalog price." },
+        {
+          "title": "SPECIAL PRICE, SPECIAL PRICE TO, SPECIAL PRICE FROM:",
+          "body": "Leave blank."
+        },
+        {
+          "title": "STOCK:",
+          "body": "Your actual stock value. If a customer places an order through Stockpile, this value will be deducted by the volume of the order. Therefore availability will be affected by customer orders. It is important that the stock quantity is kept updated, especially if a customer has accepted your quotation and is making arragements to place the order through Stockpile."
+        },
+        {
+          "title": "STOCK AVAILABILITY:",
+          "body": "Select In stock if the item is available. Items Out of Stock will not be displayed on the catalog, and will not be available for providing quotes."
+        },
+        {
+          "title": "VISIBILITY:",
+          "bullets": [
+            "Not Visible Individually — The product will not appear anywhere on Stockpile",
+            "Catalog — The product page can be seen individually and on category pages",
+            "Search — The product will show in search results",
+            "Catalog, Search — The product page can be seen individually, on category pages and search results"
+          ],
+          "footer": "In most cases you would want to select Catalog, Search."
+        },
+        {
+          "title": "TAX CLASS:",
+          "body": "Select between VAT if your company is VAT registered and liable to pay VAT, and Non-VAT otherwise."
+        },
+        {
+          "title": "WEIGHT (KGs):",
+          "body": "This is for a future feature. If you are unsure of the weight, please estimate it as accurately as possible."
+        },
+        {
+          "title": "URL KEY:",
+          "body": "This will be the direct link to the item under https://stockpile.lk. It is generally good practice to use the name of the product with hyphen/dash '-' in place of spaces.\n\nConsider the following example",
+          "bullets": [
+            "Product Name: Gibraltar Teak Wooden Flooring 24mm",
+            "Supplier Name: Stockpile Supplier",
+            "URL Key: stockpile-supplier-gibraltar-teak-wooden-flooring-24mm",
+            "Link on Stockpile: https://stockpile.lk/stockpile-supplier-gibraltar-teak-wooden-flooring-24mm.html"
+          ]
+        },
+        {
+          "title": "SEARCH ENGINE OPTIMIZATION (SEO) ITEMS",
+          "body": "META TITLE: Make this the same as your Product Name.\n\nMETA KEYWORKS: Include specific keywords that would help a search engine like Google categorize this product. WARNING: Using unrelated keywords will result in unrelated inquiries and may reduce the accuracy of search results. If you are unsure leave this blank.\n\nMETA DESCRIPTION: Use the same text from the Short Description."
+        },
+        {
+          "title": "PRODUCT IMAGES:",
+          "body": "Upload images in JPG, JPEG, and PNG format. If you have any product material in PDF format, it is recommended to use a PDF to Image converter like https://pdftoimage.com/ and upload the documents in image format. You must ensure that you have the authority to use all uploaded images."
+        },
+        {
+          "title": "ADD VIDEO:",
+          "body": "If you have a video hosted on YouTube or Vimeo, you can link it to the product.",
+          "bullets": [
+            "Url: Paste the link to the video and press the tab key or click outside the field. The following fields should automatically fill using the details from the video",
+            "Title: You can include or amend the video title",
+            "Description: You can include or amend the video description.",
+            "Preview Image: You can change the thumbnail of the video",
+            "Role: Select MIB Hover only."
+          ],
+          "footer": "Click Save to continue editing the product."
+        },
+        {
+          "title": "MANUFACTURER:",
+          "body": "Select the manufacturer of the product. If the manufacturer is not included in the list, please contact support@stockpile.lk and request the name to be added. If you wish to withold the manufacturer you may select Generic"
+        },
+        {
+          "title": "COLOUR:",
+          "body": "Select the most suitable colour. If the specific colour is not included in the list, please contact support@stockpile.lk and request it to be added."
+        },
+        {
+          "title": "PRIMARY MATERIAL:",
+          "body": "Select the primary material of the product. If the specific material is not included in the list, please contact support@stockpile.lk and request it to be added."
+        },
+        {
+          "title": "LEAD TIME IN DAYS:",
+          "body": "If the product is manufactured to order or provided by your supplier/manufacturer after order placement, mention the average lead time to deliver the product to the buyer."
+        },
+        { "title": "WARRANTY MONTHS:", "body": "The default warranty period for the product." },
+        {
+          "title": "MIN QTY REQUIRED PER ORDER:",
+          "body": "If you want to accept only bulk orders and have a minimum order quantity (MOQ) enter that number here. You will be able to quote for smaller numbers, but you won't be able to accept orders below this quantity."
+        },
+        {
+          "title": "IS FEATURED PRODUCT:",
+          "body": "Select Y if you want this product to be available to be featured by Stockpile. Otherwise select N."
+        },
+        {
+          "title": "RELATED PRODUCTS:",
+          "body": "Select which of your products are related to this product. These will show at the bottom of the product page."
+        },
+        {
+          "title": "UP-SELL PRODUCTS:",
+          "body": "An up-sell item is offered to the customer as a pricier or higher-quality alternative to the product the customer is looking at. Select which of your products are higher alternatives to this product. These will show at the bottom of the product page."
+        },
+        {
+          "body": "Once you have completed the form, click on Save. This will submit the product for approval by Stockpile. You will receive a notification by email once the product has been reviewed and approved."
+        },
+        {
+          "body": "If you have an almost identical product that you would like to add next, you can click Save & Duplicate. This will submit the first product for approval and fill the form for you to create another product. Carefully review and complete all of the fields before submitting the 2nd product."
+        }
+      ]
+    },
+    "guideProductSpecifications": {
+      "title": "Product Specifications",
+      "lede": "By including the important specifications of your product in the description, your customers will be able to easily find and verify the suitability of the product for their project. Therefore, Stockpile requires the following specifications to be included in your product listings.",
+      "tocTitle": "Table of Content",
+      "attributeHeader": "Attribute",
+      "inputTypeHeader": "Input Type",
+      "examplesHeader": "Examples"
+    },
+    "guideGlossary": {
+      "title": "Glossary",
+      "sections": [
+        {
+          "title": "CUTTING/GRINDING WHEELS",
+          "definitions": [
+            {
+              "term": "Abrasive Wheel",
+              "body": "A rotating accessory designed to grind, cut, or remove stock from various materials such as metal or concrete. (reference)"
+            },
+            {
+              "term": "Type 27 Wheel",
+              "body": "A saucer/center depressed shaped wheel intended for grinding on the face of the wheel is used with angle grinders fitted with the appropriate guard."
+            },
+            {
+              "term": "Type 41 Wheel",
+              "body": "Formerly Type 1A cutting wheel. A disc shaped wheel intended for cutting by the periphery of the wheel used with abrasive cut off machines or angle grinders fitted with the appropriate guard."
+            },
+            {
+              "term": "A24",
+              "body": "Abrasive material with a grit of 24, meaning there are 24 grains per inch of the grinding wheel's surface."
+            },
+            {
+              "term": "PBF",
+              "body": "PBF stands for Precision Bonding Format. PBF grinding wheels are commonly used in applications where tight tolerances and fine surface finishes are required, such as in the aerospace, automotive, and medical industries. They are also used in applications where grinding of hard materials is necessary, such as in the production of cutting tools and precision components."
+            }
+          ]
+        },
+        {
+          "title": "FIBERGLASS",
+          "definitions": [
+            {
+              "term": "Bulk Molding Compound (BMC)",
+              "body": "BMC stands for Bulk Molding Compound, which is a composite material made from a mixture of resin, glass fibers, and other additives. BMC Gully Covers are strong and durable, resistant to corrosion, and often used for heavy-duty applications."
+            },
+            {
+              "term": "Sheet Molding Compound (SMC)",
+              "body": "SMC stands for Sheet Molding Compound, another composite material composed of resin, glass fibers, and fillers. SMC Gully Covers are known for their excellent strength-to-weight ratio, resistance to chemicals and weathering, and suitability for various industries."
+            }
+          ]
+        },
+        {
+          "title": "SCREWS",
+          "definitions": [
+            {
+              "term": "Drywall Screws",
+              "body": "Drywall screws are self-tapping, so you don't need to pre-drill holes. They have a sharp point that helps them to penetrate wood and metal easily. They have coarse threads that provide a good grip on the material. They are available in a variety of lengths and sizes, including short screws for light applications and long screws for heavy-duty applications. And they are relatively inexpensive."
+            }
+          ]
+        },
+        {
+          "title": "TARPAULIN",
+          "definitions": [
+            {
+              "term": "Tarpaulin",
+              "body": "Polypropylene (PP), Polyethylene (PE), and polythene are all types of thermoplastic polymers that are made from petroleum. They are all widely used in a variety of applications, including construction, packaging, and consumer goods.\n\nTarpaulin is typically made with Polyethylene (PE) because it needs to be strong, durable, and waterproof. Polyethylene (PE) is also resistant to UV degradation, which is important for a tarp that will be exposed to sunlight."
+            }
+          ]
+        }
+      ]
+    },
+    "conversionTables": {
+      "title": "Conversions",
+      "firstSectionTitle": "GAUGE TO THICKNESS"
+    },
+    "careers": {
+      "title": "Join Our Growing Team",
+      "lede": "DO YOU HAVE WHAT IT TAKES?",
+      "body": "Construction Trade Technologies (Pvt) Ltd. is a revolutionary start-up with the intent of modernizing the material procurement practices for the construction sector. We are looking for eligible candidates who have hands-on experience in the Sri Lankan construction industry.\n\nCheck out our vacancies and apply directly by clicking on the link below",
+      "link": {
+        "label": "Click to see Careers At Stockpile",
+        "href": "https://odoo.stockpile.lk/jobs"
+      },
+      "outro": "Join our team and be part of the revolution!"
+    },
+    "returnPolicy": {
+      "title": "Return Policy",
+      "lede": "When an order is placed on Stockpile, it is fulfilled separately by the registered suppliers of the products in the order. Each supplier maintains their own return policy, which you can view by navigating to the supplier''s profile and scrolling to the Policies section.",
+      "sections": [
+        {
+          "title": "Eligibility",
+          "body": "Returns are subject to the individual supplier's policy. Generally, the following conditions apply:",
+          "bullets": [
+            "Items must be returned in their original, unused condition and original packaging.",
+            "Return requests must be raised within the timeframe specified by the supplier.",
+            "Bulk or custom orders (including cut-to-size, mixed, or specially sourced materials) may not be eligible for return — confirm with the supplier before ordering.",
+            "Perishable or hygroscopic materials (such as cement, lime, and similar products) are typically non-returnable once delivered, due to the risk of quality degradation."
+          ]
+        },
+        {
+          "title": "How to Request a Return",
+          "body": "Contact the supplier directly using the contact details on their profile page. When raising a return request, provide your order number, a description of the issue, and supporting photographs where applicable."
+        },
+        {
+          "title": "Refunds",
+          "body": "If a return is approved by the supplier and payment was made online through Stockpile, the refund will be processed within 2 business days of the supplier confirming the return. Refunds will be credited to the original payment method.\n\nStockpile does not process refunds for orders paid directly to suppliers outside of the platform."
+        },
+        {
+          "title": "Damaged or Incorrect Goods",
+          "body": "If you receive goods that are damaged in transit or materially different from what was ordered, contact the supplier immediately upon delivery. Document the condition of the goods with photographs before accepting or rejecting the delivery."
+        },
+        {
+          "title": "Disputes",
+          "body": "If a return or refund dispute cannot be resolved directly with the supplier, contact Stockpile support at support@stockpile.lk and we will assist in facilitating a resolution."
+        }
+      ],
+      "footer": "To view a supplier''s return policy, visit the list of suppliers and click on the relevant supplier, then on Policies.",
+      "footerLink": { "label": "list of suppliers", "href": "/suppliers" }
+    },
+    "dataDeletion": {
+      "title": "Data Deletion Instructions",
+      "body": "Users who wish to have their data deleted from our website can email us at support@stockpile.lk"
+    },
+    "privacyPolicy": {
+      "title": "Privacy and Cookie Policy",
+      "lede": "This privacy policy sets out how this website (hereafter \"the Store\") uses and protects any information that you give the Store while using this website. The Store is committed to ensuring that your privacy is protected. Should we ask you to provide certain information by which you can be identified when using this website, then you can be assured that it will only be used in accordance with this privacy statement. The Store may change this policy from time to time by updating this page. You should check this page from time to time to ensure that you are happy with any changes.",
+      "sections": [
+        {
+          "title": "What we collect",
+          "body": "We may collect the following information:",
+          "bullets": [
+            "name",
+            "contact information including email address",
+            "demographic information such as postcode, preferences and interests",
+            "other information relevant to customer surveys and/or offers"
+          ],
+          "footer": "For the exhaustive list of cookies we collect see the List of cookies we collect section."
+        },
+        {
+          "title": "What we do with the information we gather",
+          "body": "We require this information to understand your needs and provide you with a better service, and in particular for the following reasons:",
+          "bullets": [
+            "Internal record keeping.",
+            "We may use the information to improve our products and services.",
+            "We may periodically send promotional emails about new products, special offers or other information which we think you may find interesting using the email address which you have provided.",
+            "From time to time, we may also use your information to contact you for market research purposes. We may contact you by email, phone, fax or mail. We may use the information to customise the website according to your interests."
+          ]
+        },
+        {
+          "title": "Security",
+          "body": "We are committed to ensuring that your information is secure. In order to prevent unauthorised access or disclosure, we have put in place suitable physical, electronic and managerial procedures to safeguard and secure the information we collect online."
+        },
+        {
+          "title": "How we use cookies",
+          "body": "A cookie is a small file which asks permission to be placed on your computer's hard drive. Once you agree, the file is added and the cookie helps analyse web traffic or lets you know when you visit a particular site. Cookies allow web applications to respond to you as an individual. The web application can tailor its operations to your needs, likes and dislikes by gathering and remembering information about your preferences.\n\nWe use traffic log cookies to identify which pages are being used. This helps us analyse data about web page traffic and improve our website in order to tailor it to customer needs. We only use this information for statistical analysis purposes and then the data is removed from the system.\n\nOverall, cookies help us provide you with a better website, by enabling us to monitor which pages you find useful and which you do not. A cookie in no way gives us access to your computer or any information about you, other than the data you choose to share with us. You can choose to accept or decline cookies. Most web browsers automatically accept cookies, but you can usually modify your browser setting to decline cookies if you prefer. This may prevent you from taking full advantage of the website."
+        },
+        {
+          "title": "Links to other websites",
+          "body": "Our website may contain links to other websites of interest. However, once you have used these links to leave our site, you should note that we do not have any control over that other website. Therefore, we cannot be responsible for the protection and privacy of any information which you provide whilst visiting such sites and such sites are not governed by this privacy statement. You should exercise caution and look at the privacy statement applicable to the website in question."
+        },
+        {
+          "title": "Controlling your personal information",
+          "body": "You may choose to restrict the collection or use of your personal information in the following ways:",
+          "bullets": [
+            "whenever you are asked to fill in a form on the website, look for the box that you can click to indicate that you do not want the information to be used by anybody for direct marketing purposes",
+            "if you have previously agreed to us using your personal information for direct marketing purposes, you may change your mind at any time by letting us know using our Contact Us information"
+          ],
+          "footer": "We will not sell, distribute or lease your personal information to third parties unless we have your permission or are required by law to do so. We may use your personal information to send you promotional information about third parties which we think you may find interesting if you tell us that you wish this to happen.\n\nYou may request details of personal information which we hold about you under the Data Protection Act 1998. A small fee will be payable. If you would like a copy of the information held on you please email us this request using our Contact Us information.\n\nIf you believe that any information we are holding on you is incorrect or incomplete, please write to or email us as soon as possible, at the above address. We will promptly correct any information found to be incorrect."
+        }
+      ],
+      "cookiesTitle": "List of cookies we collect",
+      "cookiesLede": "The table below lists the cookies we collect and what information they store.",
+      "cookieNameHeader": "Cookie Name",
+      "cookieDescriptionHeader": "Cookie Description",
+      "cookies": [
+        {
+          "term": "FORM_KEY",
+          "body": "Stores randomly generated key used to prevent forged requests."
+        },
+        { "term": "PHPSESSID", "body": "Your session ID on the server." },
+        { "term": "GUEST-VIEW", "body": "Allows guests to view and edit their orders." },
+        {
+          "term": "PERSISTENT_SHOPPING_CART",
+          "body": "A link to information about your cart and viewing history, if you have asked for this."
+        },
+        { "term": "STF", "body": "Information on products you have emailed to friends." },
+        { "term": "STORE", "body": "The store view or language you have selected." },
+        {
+          "term": "USER_ALLOWED_SAVE_COOKIE",
+          "body": "Indicates whether a customer allowed to use cookies."
+        },
+        {
+          "term": "MAGE-CACHE-SESSID",
+          "body": "Facilitates caching of content on the browser to make pages load faster."
+        },
+        {
+          "term": "MAGE-CACHE-STORAGE",
+          "body": "Facilitates caching of content on the browser to make pages load faster."
+        },
+        {
+          "term": "MAGE-CACHE-STORAGE-SECTION-INVALIDATION",
+          "body": "Facilitates caching of content on the browser to make pages load faster."
+        },
+        {
+          "term": "MAGE-CACHE-TIMEOUT",
+          "body": "Facilitates caching of content on the browser to make pages load faster."
+        },
+        {
+          "term": "SECTION-DATA-IDS",
+          "body": "Facilitates caching of content on the browser to make pages load faster."
+        },
+        {
+          "term": "PRIVATE_CONTENT_VERSION",
+          "body": "Facilitates caching of content on the browser to make pages load faster."
+        },
+        {
+          "term": "X-MAGENTO-VARY",
+          "body": "Facilitates caching of content on the server to make pages load faster."
+        },
+        {
+          "term": "MAGE-TRANSLATION-FILE-VERSION",
+          "body": "Facilitates translation of content to other languages."
+        },
+        {
+          "term": "MAGE-TRANSLATION-STORAGE",
+          "body": "Facilitates translation of content to other languages."
+        }
+      ]
+    },
+    "newestProducts": {
+      "title": "Newest Products",
+      "lede": "See the latest products added by our suppliers on Stockpile."
+    },
+    "help": {
+      "title": "User Guide & Help",
+      "lede": "Everything you need to get the most out of Stockpile.lk. If you cannot find an answer here, contact us and we will help you personally.",
+      "groups": [
+        {
+          "title": "Searching the catalogue",
+          "items": [
+            "Use the search box in the header to look for products, categories or suppliers by name, material or SKU.",
+            "Browse by department from the \"Shop By Department\" menu, or start from the home page \"Most Searched Products\" tiles.",
+            "Use the filters on the products page to narrow by category, supplier, price and stock availability."
+          ]
+        },
+        {
+          "title": "Getting quotations",
+          "items": [
+            "Send your list of items or a BOQ through the Get Quotes page — we dispatch it to relevant suppliers, free of charge.",
+            "Sign in to create a buyer account, then submit requests for quote and track supplier responses in your workspace.",
+            "Suppliers reply to you directly, so you can compare prices, lead times and terms before you order."
+          ]
+        },
+        {
+          "title": "Your account",
+          "items": [
+            "Create a free account to request quotations, place orders and manage your product list.",
+            "Use the \"Me\" button on mobile (or the account menu in the header on desktop) to reach your workspace.",
+            "Keep your email address and phone number up to date so suppliers and our team can reach you."
+          ]
+        },
+        {
+          "title": "For suppliers",
+          "items": [
+            "Register as a supplier and choose a plan — see the Pricing page for Starter, Standard, Enterprise and Customized options.",
+            "Upload your products once and they appear in the catalogue along with your profile.",
+            "Supplier accounts are reviewed before approval — we verify identities to keep the marketplace trustworthy."
+          ]
+        },
+        {
+          "title": "Still stuck?",
+          "items": [
+            "Email us at info@stockpile.lk or call 0114-222-555 (Monday–Saturday 9am–5pm).",
+            "For quotations about your projects, email rfq@stockpile.lk directly with your item list or BOQ."
+          ]
+        }
+      ]
+    },
+    "sitemap": {
+      "title": "Sitemap",
+      "lede": "Every public page on Stockpile.lk, in one place.",
+      "mainTitle": "Main",
+      "shopTitle": "Shop",
+      "companyTitle": "Company",
+      "supportTitle": "Support"
     }
   },
 
@@ -251,17 +1041,74 @@
     "alreadyVerifiedTitle": "Already confirmed",
     "alreadyVerifiedBody": "This email address was already confirmed. Sign in to continue.",
     "resendSent": "We sent a new confirmation link to {email}.",
+    "supplierRegisterTitle": "Register as a supplier",
+    "supplierRegisterSubtitle": "Create your company profile, pick the departments you supply, and start quoting on buyer requests.",
+    "supplierLoginTitle": "Supplier sign in",
+    "supplierLoginSubtitle": "Sign in to manage your company profile, products and quotes.",
+    "supplierDepartmentsLegend": "Departments you supply",
+    "supplierDepartmentsHint": "Choose every department your catalogue covers. Buyers use this to match their requests to you.",
+    "supplierHaveAccount": "Already registered as a supplier?",
+    "supplierSetup": {
+      "stepsLabel": "Supplier setup steps",
+      "stepOf": "Step {current} of {total}",
+      "steps": {
+        "profile": "Company details",
+        "serviceAreas": "Service areas",
+        "categories": "Categories"
+      },
+      "noSupplier": {
+        "title": "No supplier profile on this account",
+        "body": "This account does not have a supplier company yet. Create one to set up its profile, service areas and categories.",
+        "cta": "Register as a supplier"
+      },
+      "profile": {
+        "title": "Company details",
+        "description": "The contact person and the business identity buyers see on your public profile. Each step saves on its own, so you can stop and come back.",
+        "companyName": "Registered business name",
+        "registrationNumber": "Business registration number",
+        "registrationHint": "Optional — shown to buyers as proof of registration.",
+        "website": "Website",
+        "websiteHint": "Optional — include http:// or https://.",
+        "contactPerson": "Contact person",
+        "phone": "Phone",
+        "email": "Email",
+        "saving": "Saving…",
+        "continue": "Save and continue"
+      },
+      "serviceAreas": {
+        "title": "Service areas",
+        "description": "The districts your company serves. Buyer requests are matched against this list.",
+        "hint": "Tick every district you can deliver to. Saving replaces the whole list.",
+        "districtsLabel": "Districts you serve",
+        "defaultLabel": "Default district",
+        "defaultNone": "No default district",
+        "defaultHint": "The district shown first on your public profile.",
+        "saving": "Saving…",
+        "continue": "Save and continue"
+      },
+      "categories": {
+        "title": "Categories",
+        "description": "The product categories your catalogue covers. Buyers use these to match their requests to you.",
+        "hint": "Tick every category you supply. Each change is saved straight away.",
+        "legend": "Categories you supply",
+        "empty": "The category list is not available right now. Try again in a moment.",
+        "saving": "Saving…",
+        "finish": "Save and finish"
+      }
+    },
     "validation": {
       "emailRequired": "Enter your email address.",
       "emailInvalid": "Enter a valid email address.",
       "passwordRequired": "Enter your password.",
       "passwordTooShort": "Use at least 10 characters.",
+      "currentPasswordRequired": "Enter your current password.",
       "passwordsDoNotMatch": "The two passwords do not match.",
       "nameRequired": "Enter your full name.",
       "companyRequired": "Enter your registered business name.",
       "phoneRequired": "Enter a phone number.",
       "phoneInvalid": "Enter a phone number in international format, for example +94 77 123 4567.",
-      "duplicateEmail": "An account with this email already exists. Sign in instead."
+      "duplicateEmail": "An account with this email already exists. Sign in instead.",
+      "categoriesRequired": "Select at least one department you supply."
     },
     "strength": {
       "label": "Password strength",
@@ -269,11 +1116,112 @@
       "fair": "Fair",
       "good": "Good",
       "strong": "Strong"
+    },
+    "profile": {
+      "roleLabel": "Your role",
+      "rolePlaceholder": "Select your role",
+      "role": {
+        "procurementManager": "Procurement Manager",
+        "projectManager": "Project Manager",
+        "ownerDirector": "Owner / Director",
+        "other": "Other"
+      },
+      "locationsLabel": "Procurement locations",
+      "locationsPlaceholder": "Type a city/district and press Enter",
+      "locationsHint": "Add every location you procure for. Press Enter after each.",
+      "interestsLabel": "Project interests",
+      "interestsPlaceholder": "Type a project type and press Enter",
+      "interestsHint": "Add the project types you are interested in. Press Enter after each.",
+      "removeItem": "Remove",
+      "saving": "Saving...",
+      "continue": "Continue"
+    },
+    "preferences": {
+      "localeLabel": "Preferred language",
+      "locale": {
+        "en": "English",
+        "si": "Sinhala"
+      },
+      "quoteNotificationsLabel": "Notify me about new quotations on my RFQs",
+      "saving": "Saving...",
+      "continue": "Continue"
+    },
+    "notificationPreferences": {
+      "description": "Choose how you want to be notified when suppliers submit quotes on your requests.",
+      "emailLabel": "Email",
+      "smsLabel": "SMS",
+      "whatsappLabel": "WhatsApp",
+      "whatsappNote": "WhatsApp notifications require the platform operator to configure the WhatsApp Business API. If unavailable, this channel will not be active.",
+      "completing": "Completing...",
+      "completeSetup": "Complete setup"
+    },
+    "organization": {
+      "alreadySetUp": "You already belong to {name}. There is nothing to create here.",
+      "companyNameLabel": "Registered business name",
+      "registrationNumberLabel": "Business registration number",
+      "taxIdLabel": "Tax identification number (TIN)",
+      "websiteLabel": "Website",
+      "websiteHint": "Optional. Include the full address, for example https://example.lk.",
+      "addressLegend": "Business address",
+      "addressToggle": "Add a business address now",
+      "line1Label": "Address line 1",
+      "line2Label": "Address line 2",
+      "cityLabel": "City / town",
+      "postalCodeLabel": "Postal code",
+      "districtLabel": "District",
+      "districtPlaceholder": "Select a district",
+      "line1Required": "Enter the first line of the address.",
+      "cityRequired": "Enter the city or town.",
+      "districtRequired": "Select a district.",
+      "membersLegend": "Team members",
+      "membersHint": "Optional. Invite colleagues who already have a Stockpile account; they are confirmed once they accept.",
+      "memberEmailLabel": "Colleague's email",
+      "memberRoleLabel": "Role",
+      "role": {
+        "buyer": "Buyer",
+        "buyerAdmin": "Buyer administrator"
+      },
+      "addMember": "Add a team member",
+      "removeMember": "Remove",
+      "saving": "Saving...",
+      "continue": "Continue"
+    },
+    "wizard": {
+      "stepsLabel": "Account setup steps",
+      "stepOf": "Step {current} of {total}",
+      "steps": {
+        "profile": "Profile",
+        "organization": "Organisation",
+        "preferences": "Preferences",
+        "notificationPreferences": "Notifications"
+      },
+      "profile": {
+        "title": "Professional profile",
+        "description": "Tell us about your role so suppliers can match the right opportunities to you."
+      },
+      "organization": {
+        "title": "Your organisation",
+        "description": "Register the company you buy for and invite the colleagues who should see its requests."
+      },
+      "preferences": {
+        "title": "Preferences",
+        "description": "Choose the language you prefer and whether to hear about new quotations."
+      },
+      "notificationPreferences": {
+        "title": "Notifications",
+        "description": "Decide which channels we may use to reach you."
+      }
     }
   },
 
   "workspace": {
     "title": "Workspace",
+    "setupTitle": "Account setup",
+    "setupBody": "Your profile, organisation, preferences and notification channels — four short steps, each saved on its own.",
+    "setupCta": "Open setup",
+    "supplierSetupTitle": "Finish your supplier profile",
+    "supplierSetupBody": "Company details, the districts you serve and the categories you cover — three short steps, each saved on its own.",
+    "supplierSetupCta": "Open supplier setup",
     "emptyTitle": "No activity yet",
     "emptyBody": "Requests for quote, orders and projects will appear here as they come in.",
     "supplierTitle": "Supplier desk",
@@ -281,7 +1229,43 @@
     "supplierEmptyBody": "Requests for quote addressed to your company will appear here.",
     "adminTitle": "Administration",
     "adminEmptyTitle": "No administration tasks yet",
-    "adminEmptyBody": "Platform administration functions will appear here."
+    "adminEmptyBody": "Platform administration functions will appear here.",
+    "accessDeniedTitle": "You do not have access to this area",
+    "accessDeniedBody": "Your account does not carry the permissions for this page. The rest of the site stays open to you.",
+    "accountTitle": "Account",
+    "verified": "Email confirmed",
+    "unverified": "Email not confirmed yet",
+    "unverifiedHint": "Confirm your email address to receive quotations.",
+    "rolesTitle": "Role",
+    "roleLabels": {
+      "buyer": "Buyer",
+      "buyerAdmin": "Buyer administrator",
+      "supplierOwner": "Supplier owner",
+      "supplierUser": "Supplier user",
+      "platformAdministrator": "Platform administrator"
+    },
+    "securityTitle": "Security",
+    "changePasswordTitle": "Change password",
+    "changePasswordHint": "Changing your password signs every other device out while keeping this one signed in.",
+    "passwordChangedTitle": "Password changed",
+    "passwordChangedBody": "Your password has been updated. Every other session was signed out.",
+    "sessionsHint": "Sessions are listed newest first; the one marked \u201cThis device\u201d is the browser you are using now.",
+    "currentSession": "This device",
+    "sessionIssued": "Signed in {date}",
+    "sessionLastSeen": "Last seen {date}",
+    "revokeSession": "Sign out this device",
+    "sessionRevoked": "That session was signed out.",
+    "signedOutEverywhere": "Every session is now signed out.",
+    "sessionsEmpty": "No other devices are signed in.",
+    "sessionUnknownDevice": "Unknown device"
+  },
+
+  "content": {
+    "news": "News",
+    "tags": "Tags",
+    "readMore": "Read more",
+    "emptyTitle": "Nothing published yet",
+    "emptyBody": "Articles will appear here once they are published."
   },
 
   "catalogue": {
@@ -322,7 +1306,8 @@
       "priceHistory": "Price history",
       "onDate": "on {date}",
       "related": "Related products",
-      "viewAllInCategory": "View all in {category}"
+      "viewAllInCategory": "View all in {category}",
+      "requestQuoteHint": "Send this product to our team through the quotations page and we will route it to suitable suppliers."
     },
     "stock": {
       "InStock": "In stock",
@@ -392,6 +1377,53 @@
       "next": "Next",
       "page": "Page {page} of {total}",
       "pageAria": "Page {page}"
+    }
+  },
+
+  "rfq": {
+    "title": "Request For Quote",
+    "lede": "Send one list to every supplier who covers the departments you need — they quote you directly. Free, always.",
+    "signInTitle": "Sign in to request quotes",
+    "signInBody": "Requests for quote belong to your buyer account, so we know who is buying and where the quotes should go.",
+    "notBuyerTitle": "This is a buyer action",
+    "notBuyerBody": "Requesting quotes is something buyer accounts do. You are signed in with a supplier account, so this request could not be sent from here — sign in with a buyer account, or create one.",
+    "notBuyerCta": "Create a buyer account",
+    "titleLabel": "Request title",
+    "companyLegend": "Your company",
+    "companyHint": "First time here? Tell us who you are buying for — this request creates your buyer account's company.",
+    "deliveryLocationLabel": "Delivery location",
+    "specialInstructionsLabel": "Special instructions",
+    "specificationLabel": "Specification",
+    "specificationHint": "Grade, finish, brand or any other requirement.",
+    "expiryDaysLabel": "Quotes close after (days)",
+    "expiryDaysHint": "Leave as is to accept quotes for two weeks.",
+    "substitutionsLabel": "Suppliers may suggest a close alternative when an exact match is unavailable.",
+    "itemsLegend": "What do you need?",
+    "itemLegend": "Item {number}",
+    "addItem": "Add another item",
+    "unitAny": "— Any unit —",
+    "categoryAny": "— Any department —",
+    "submitCta": "Send request to suppliers",
+    "submitting": "Sending your request…",
+    "successTitle": "Request sent",
+    "successBody": "Your reference is {reference}. We dispatched it to the suppliers that match your departments.",
+    "successMatches": "{count, plural, =0 {No supplier matched yet — we will keep looking.} one {1 supplier matched.} other {# suppliers matched.}}",
+    "sendAnother": "Send another request",
+    "recentTitle": "Your requests",
+    "recentMatches": "{count, plural, =0 {no matches} one {1 match} other {# matches}}",
+    "statusDraft": "Draft",
+    "statusSubmitted": "Submitted",
+    "statusMatching": "Matching",
+    "statusDispatched": "Dispatched",
+    "statusCancelled": "Cancelled",
+    "statusClosed": "Closed",
+    "statusAwarded": "Awarded",
+    "statusExpired": "Expired",
+    "validation": {
+      "titleRequired": "Give your request a short title.",
+      "companyRequired": "Tell us which company you are buying for.",
+      "itemDescriptionRequired": "Describe the item you need.",
+      "quantityInvalid": "Enter a quantity greater than zero."
     }
   },
 

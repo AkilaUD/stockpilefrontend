@@ -1,6 +1,9 @@
+import { Suspense } from "react";
 import { setRequestLocale } from "next-intl/server";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteHeader } from "@/components/layout/site-header";
+import { LazyMobileDock } from "@/components/layout/nav/lazy-nav";
+import { getCategoryTree } from "@/lib/api/catalogue-server";
 
 /**
  * Editorial shell — the `/(public)` tree (implementation-plan 1.47/1.52).
@@ -15,6 +18,11 @@ import { SiteHeader } from "@/components/layout/site-header";
  *
  * `flex-1` is what lets the footer sit at the bottom of a short page — the
  * root `<body>` is a `min-h-dvh flex flex-col` column (design-system §5.1).
+ *
+ * The mobile dock (reference mobile theme, < md) is mounted here, once, so it
+ * does not re-mount per page. It needs the category tree for its Menu drawer,
+ * which is fetched server-side like the header fetch (catalogue is live
+ * platform state, so both reads are no-store by design).
  */
 export default async function PublicLayout({
   children,
@@ -29,10 +37,30 @@ export default async function PublicLayout({
   return (
     <>
       <SiteHeader />
-      <main id="main-content" className="flex-1">
+      <main id="main-content" className="flex-1 pb-14 md:pb-0">
         {children}
       </main>
       <SiteFooter />
+      {/* The dock's category tree is fetched inside the Suspense boundary so a
+          slow/unavailable catalogue read never delays the page shell itself
+          (the mobile menu is a client island and can wait for its own data). */}
+      <Suspense fallback={null}>
+        <MobileDockTree />
+      </Suspense>
     </>
   );
+}
+
+/** Fetches the category tree for the mobile dock without gating the layout. */
+async function MobileDockTree() {
+  let tree: Awaited<ReturnType<typeof getCategoryTree>> | null;
+  try {
+    tree = await getCategoryTree();
+  } catch (error) {
+    // A failed dock read must not reach the layout's error boundary — the dock
+    // is an enhancement; the shell (header/main/footer) renders without it.
+    console.error("[public-layout] dock category read failed; omitting dock:", error);
+    tree = null;
+  }
+  return tree ? <LazyMobileDock tree={tree} /> : null;
 }

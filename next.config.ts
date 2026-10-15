@@ -59,6 +59,28 @@ const nextConfig: NextConfig = {
     remotePatterns: [],
   },
 
+  /*
+   * Reference-path canon. The paths the live site publishes are the canonical
+   * URLs here too, and the paths we used before become permanent redirects into
+   * them, so an earlier bookmark or a link from the old notes still lands.
+   *
+   * `redirects()` runs before the proxy (file-conventions/proxy.md, "Execution
+   * order"), so the unprefixed English variant is matched on the raw path here.
+   * The `/si` variant is listed explicitly because next-intl's `as-needed`
+   * prefix is not a Next built-in i18n prefix and would otherwise only be
+   * resolved inside the proxy, after this step.
+   */
+  async redirects() {
+    const renamed: Array<[string, string]> = [
+      ["/quotations", "/quotations-and-estimations"],
+      ["/supplier-benefits", "/how-it-works-for-suppliers"],
+    ];
+    return renamed.flatMap(([from, to]) => [
+      { source: from, destination: to, permanent: true },
+      { source: `/si${from}`, destination: `/si${to}`, permanent: true },
+    ]);
+  },
+
   async headers() {
     return [{ source: "/(.*)", headers: securityHeaders }];
   },

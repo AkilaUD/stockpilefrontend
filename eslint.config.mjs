@@ -7,11 +7,14 @@ const eslintConfig = defineConfig([
   ...nextTs,
   {
     // security-test-matrix I8/X11: HTML injection may only ever be rendered
-    // through the sanitized renderer (none exists in Phase 1 — the guard
-    // ships ahead of it, like the design-qa source rules). `dangerouslySetInnerHTML`
-    // is a hard lint failure in CI, so a raw-HTML render cannot land quietly;
-    // the sanctioned path replaces this rule's scope when the sanitized
-    // renderer arrives.
+    // through the sanitized renderer. `dangerouslySetInnerHTML` is a hard lint
+    // failure everywhere else, so a raw-HTML render cannot land quietly — and
+    // that is exactly the scope this override hands to the sanctioned path,
+    // `src/components/ui/sanitized-html.tsx`. That component is safe because
+    // `src/lib/html/sanitize-article-html.ts` renders a body only when every tag
+    // is allow-listed, none carries an attribute, and no `<` survives outside
+    // those tags (otherwise it escapes the whole body to text); its classifier
+    // is proven by `tests/e2e/sanitized-html.spec.ts`.
     rules: {
       "no-restricted-syntax": [
         "error",
@@ -21,6 +24,12 @@ const eslintConfig = defineConfig([
             "dangerouslySetInnerHTML is forbidden (security-test-matrix I8/X11); render through the sanitized renderer instead.",
         },
       ],
+    },
+  },
+  {
+    files: ["src/components/ui/sanitized-html.tsx"],
+    rules: {
+      "no-restricted-syntax": "off",
     },
   },
   // Override default ignores of eslint-config-next.

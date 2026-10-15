@@ -1,0 +1,2026 @@
+{
+  "source": "https://stockpile.lk/en/user-guide-product-specifications",
+  "captured": "2026-10-14",
+  "sections": [
+    {
+      "category": "Acoustic Panel",
+      "rows": [
+        [
+          "Attribute",
+          "Input Type",
+          "Examples"
+        ],
+        [
+          "Application",
+          "Manual Entry",
+          "Dry wall partitioning"
+        ],
+        [
+          "Dimensions",
+          "Manual Entry",
+          "Length,Width,Thickness"
+        ],
+        [
+          "Brand",
+          "Select from list",
+          ""
+        ],
+        [
+          "Colour",
+          "Select from list",
+          "Black,Brown"
+        ],
+        [
+          "Fire resistance",
+          "Manual Entry",
+          "2 hours"
+        ],
+        [
+          "Country of Origin",
+          "Select from list",
+          "UK, Italy, Japan"
+        ],
+        [
+          "Country of Manufacture",
+          "Select from list",
+          "Sri Lanka, Turkey, China"
+        ],
+        [
+          "Quality standards",
+          "Manual Entry",
+          "SLS, ISO"
+        ],
+        [
+          "Warranty",
+          "Select from list",
+          "N/A, 3 Months, 5 Years"
+        ]
+      ]
+    },
+    {
+      "category": "Bitumen Emulsion CSS1/CRS1/CRS2",
+      "rows": [
+        [
+          "Attribute",
+          "Input Type",
+          "Examples"
+        ],
+        [
+          "Application",
+          "Manual Entry",
+          "Road Construction"
+        ],
+        [
+          "Packaging Size",
+          "Manual Entry",
+          "200 Ltr"
+        ],
+        [
+          "Packaging Type",
+          "Manual Entry",
+          "Drum"
+        ],
+        [
+          "State/Form",
+          "Manual Entry",
+          "Liquid"
+        ],
+        [
+          "Colour",
+          "Select from list",
+          "Black"
+        ],
+        [
+          "Storage Stability",
+          "Manual Entry",
+          "Best Before Use In 12 Months. Store Below 40°C"
+        ],
+        [
+          "Country of Origin",
+          "Select from list",
+          "UK, Italy, Japan"
+        ],
+        [
+          "Country of Manufacture",
+          "Select from list",
+          "Sri Lanka, Turkey, China"
+        ],
+        [
+          "Quality standards",
+          "Manual Entry",
+          "SLS, ISO"
+        ],
+        [
+          "Warranty",
+          "Select from list",
+          "N/A, 3 Months, 5 Years"
+        ]
+      ]
+    },
+    {
+      "category": "Bitumen Crack Fill Road Paint",
+      "rows": [
+        [
+          "Attribute",
+          "Input Type",
+          "Examples"
+        ],
+        [
+          "Application",
+          "Manual Entry",
+          "Road Construction"
+        ],
+        [
+          "Packaging Size",
+          "Manual Entry",
+          "10 Ltr, 20 Ltr"
+        ],
+        [
+          "Packaging Type",
+          "Manual Entry",
+          "Drum"
+        ],
+        [
+          "State/Form",
+          "Manual Entry",
+          "Liquid"
+        ],
+        [
+          "Colour",
+          "Select from list",
+          "Black"
+        ],
+        [
+          "Storage Stability",
+          "Manual Entry",
+          "Best Before Use In 12 Months. Store Below 40°C"
+        ],
+        [
+          "Country of Origin",
+          "Select from list",
+          "UK, Italy, Japan"
+        ],
+        [
+          "Country of Manufacture",
+          "Select from list",
+          "Sri Lanka, Turkey, China"
+        ],
+        [
+          "Warranty",
+          "Select from list",
+          "N/A, 3 Months, 5 Years"
+        ],
+        [
+          "Quality standards",
+          "Manual Entry",
+          "SLS, ISO"
+        ],
+        [
+          "Solid by Volume",
+          "Manual Entry",
+          ">60%"
+        ],
+        [
+          "Specific Gravity",
+          "Manual Entry",
+          "XX.XX to XX at 25°C"
+        ],
+        [
+          "Drying Time",
+          "Manual Entry",
+          "2 to 4 hours depending on temperature and humidity"
+        ],
+        [
+          "Film Thickness",
+          "Manual Entry",
+          "1.0 to 1.5 mm per two coat"
+        ],
+        [
+          "Heat Resistance",
+          "Manual Entry",
+          "Stable below 100° C"
+        ],
+        [
+          "Chemical Resistance",
+          "Manual Entry",
+          "Resistant to water, all alkalis and acids"
+        ],
+        [
+          "Estimated Coverage",
+          "Manual Entry",
+          "Depending on the surface,XX.XX to XX.XX m2"
+        ]
+      ]
+    },
+    {
+      "category": "Bonding Agent",
+      "rows": [
+        [
+          "Attribute",
+          "Input Type",
+          "Examples"
+        ],
+        [
+          "Brand",
+          "Select from list",
+          ""
+        ],
+        [
+          "Country of Origin",
+          "Select from list",
+          "UK, Italy, Japan"
+        ],
+        [
+          "Country of Manufacture",
+          "Select from list",
+          "Sri Lanka, Turkey, China"
+        ],
+        [
+          "Warranty",
+          "Select from list",
+          "N/A, 3 Months, 5 Years"
+        ],
+        [
+          "Primary material",
+          "Select from list",
+          ""
+        ],
+        [
+          "Quality Certifications",
+          "Manual Entry",
+          "ISO, SLS"
+        ],
+        [
+          "Supply form",
+          "Manual Entry",
+          "Liquid"
+        ],
+        [
+          "Colour",
+          "Manual Entry",
+          "white"
+        ],
+        [
+          "Specific gravity",
+          "Manual Entry",
+          "1.01 ± 0.01"
+        ],
+        [
+          "Storage temperature",
+          "Manual Entry",
+          "XX Cº"
+        ],
+        [
+          "Application temperature",
+          "Manual Entry",
+          "Not below 5 Cº"
+        ],
+        [
+          "Toxicity",
+          "Manual Entry",
+          "Non-toxic"
+        ],
+        [
+          "Shelf Life",
+          "Manual Entry",
+          "3 Months, 5 Years, 1 Year"
+        ],
+        [
+          "EEstimated Coverage",
+          "Manual Entry",
+          "Typical coverage Bonding agent & primer XX - XXm² per literBonding slurry XX - XXm² per liter"
+        ]
+      ]
+    },
+    {
+      "category": "Cable Manager",
+      "rows": [
+        [
+          "Attribute",
+          "Input Type",
+          "Examples"
+        ],
+        [
+          "Number of units",
+          "Manual Entry",
+          "1U - 48U"
+        ],
+        [
+          "Height",
+          "Manual Entry",
+          "44.45mm"
+        ],
+        [
+          "Length",
+          "Manual Entry",
+          "450mm"
+        ],
+        [
+          "Depth",
+          "Manual Entry",
+          "60mm"
+        ],
+        [
+          "Product or component type",
+          "Manual Entry",
+          "19\" enclosure"
+        ],
+        [
+          "Colors",
+          "Manual Entry",
+          "Matte Black ( RAL 9005"
+        ],
+        [
+          "Installation mode",
+          "Manual Entry",
+          "Rack mounted 4x cage nut, (not included)"
+        ],
+        [
+          "Surface finish",
+          "Manual Entry",
+          "Epoxy-polyester powder coat"
+        ],
+        [
+          "Standards",
+          "Manual Entry",
+          "EIA-310DIEC 60297-3-100"
+        ],
+        [
+          "Country of Origin",
+          "Select from list",
+          "UK, Italy, Japan"
+        ],
+        [
+          "Country of Manufacture",
+          "Select from list",
+          "Sri Lanka, Turkey, China"
+        ],
+        [
+          "Warranty",
+          "Select from list",
+          "N/A, 3 Months, 5 Years"
+        ],
+        [
+          "Primary material",
+          "Select from list",
+          "Zinc Coated Steel"
+        ]
+      ]
+    },
+    {
+      "category": "Construction Grout",
+      "rows": [
+        [
+          "Attribute",
+          "Input Type",
+          "Examples"
+        ],
+        [
+          "Brand",
+          "Select from list",
+          ""
+        ],
+        [
+          "Supply form",
+          "Manual Entry",
+          "Powder"
+        ],
+        [
+          "Primary Material",
+          "Manual Entry",
+          "Cement"
+        ],
+        [
+          "Pot life",
+          "Manual Entry",
+          "40 Min"
+        ],
+        [
+          "Colour",
+          "Manual Entry",
+          "Cement Grey"
+        ],
+        [
+          "Pack Size",
+          "Manual Entry",
+          "1kg , 5kg, 25kg"
+        ],
+        [
+          "Country of Origin",
+          "Select from list",
+          "UK, Italy, Japan"
+        ],
+        [
+          "Country of Manufacture",
+          "Select from list",
+          "Sri Lanka, Turkey, China"
+        ],
+        [
+          "Warranty",
+          "Select from list",
+          "N/A, 3 Months, 5 Years"
+        ],
+        [
+          "Self life",
+          "Manual Entry",
+          "12 Month"
+        ],
+        [
+          "Compressive strength (ASTM C-109)",
+          "Manual Entry",
+          "Flowable Trowellable 1day >30 MPa >40 MPa 3days >40 MPa >50 MPa 7days >50 MPa >60 MPa 28days >60 MPa >70 MPa"
+        ],
+        [
+          "Flow (ASTM C939-02)",
+          "Manual Entry",
+          "xx sec"
+        ],
+        [
+          "Volume Expansion (ASTM C827)",
+          "Manual Entry",
+          "No shrinkage"
+        ],
+        [
+          "Bleeding (ASTM C827)",
+          "Manual Entry",
+          "Absent"
+        ],
+        [
+          "Coefficient of Thermal Expansion (ASTM C531-00)",
+          "Manual Entry",
+          "XX.XX x X-Y ℃-1"
+        ],
+        [
+          "Estimated Coverage",
+          "Manual Entry",
+          "Water Addition for 25kg bag;Flowable consistency XX literTrowellable consistency XXX literTypical yield of 25kg bag;Flowable consistency xx.xx literTrowellable consistency xx.xx liter"
+        ]
+      ]
+    },
+    {
+      "category": "Cover Block",
+      "rows": [
+        [
+          "Attribute",
+          "Input Type",
+          "Examples"
+        ],
+        [
+          "Applications",
+          "Manual Entry",
+          "Slab, beam, wall, footing & etc.."
+        ],
+        [
+          "Materials",
+          "Manual Entry",
+          "High strength concrete (25MPA)"
+        ],
+        [
+          "Cover Size",
+          "Manual Entry",
+          "20mm, 25mm, 40mm & 50mm"
+        ],
+        [
+          "Weight",
+          "Manual Entry",
+          "100g"
+        ],
+        [
+          "Production Capacity",
+          "Manual Entry",
+          "10,000 pieces per day"
+        ],
+        [
+          "Advantages",
+          "Manual Entry",
+          "Fire resistanceLow Water absorptionsBearing high load"
+        ],
+        [
+          "Load Bearing Capacity",
+          "Manual Entry",
+          ""
+        ],
+        [
+          "Compressive Strength",
+          "Manual Entry",
+          ""
+        ],
+        [
+          "Brand",
+          "Select from list",
+          ""
+        ],
+        [
+          "Primary Material",
+          "Select from list",
+          "Cement"
+        ],
+        [
+          "Country of Origin",
+          "Select from list",
+          "UK, Italy, Japan"
+        ],
+        [
+          "Country of Manufacture",
+          "Select from list",
+          "Sri Lanka, Turkey, China"
+        ],
+        [
+          "Colour",
+          "Select from list",
+          "Natural Cement Gray"
+        ],
+        [
+          "Warranty",
+          "Select from list",
+          "N/A, 3 Months, 5 Years"
+        ]
+      ]
+    },
+    {
+      "category": "Cutback Bitumen MC30/MC70",
+      "rows": [
+        [
+          "Attribute",
+          "Input Type",
+          "Examples"
+        ],
+        [
+          "Application",
+          "Manual Entry",
+          "Road Construction"
+        ],
+        [
+          "Packaging Size",
+          "Manual Entry",
+          "200 Ltr"
+        ],
+        [
+          "Packaging Type",
+          "Manual Entry",
+          "Drum"
+        ],
+        [
+          "State/Form",
+          "Manual Entry",
+          "Liquid"
+        ],
+        [
+          "Colour",
+          "Select from list",
+          "Black"
+        ],
+        [
+          "Storage Stability",
+          "Manual Entry",
+          "Best Before Use In 12 Months. Store Below 40°C"
+        ],
+        [
+          "Country of Origin",
+          "Select from list",
+          "UK, Italy, Japan"
+        ],
+        [
+          "Country of Manufacture",
+          "Select from list",
+          "Sri Lanka, Turkey, China"
+        ],
+        [
+          "Quality standards",
+          "Manual Entry",
+          "SLS, ISO"
+        ],
+        [
+          "Warranty",
+          "Select from list",
+          "N/A, 3 Months, 5 Years"
+        ]
+      ]
+    },
+    {
+      "category": "Data Center Server / Network Rack",
+      "rows": [
+        [
+          "Attribute",
+          "Input Type",
+          "Examples"
+        ],
+        [
+          "Brand",
+          "Select from list",
+          ""
+        ],
+        [
+          "Country of Origin",
+          "Select from list",
+          "UK, Italy, Japan"
+        ],
+        [
+          "Country of Manufacture",
+          "Select from list",
+          "Sri Lanka, Turkey, China"
+        ],
+        [
+          "Colour",
+          "Select from list",
+          "Silver, Black, Bronze"
+        ],
+        [
+          "Warranty",
+          "Select from list",
+          "N/A, 3 Months, 5 Years"
+        ],
+        [
+          "Primary material",
+          "Select from list",
+          "Stainless Steel, Zn Al Steel"
+        ],
+        [
+          "No. of Rack units",
+          "Select from list",
+          "2U, 10U, 42U"
+        ],
+        [
+          "Surface Finish",
+          "Manual Entry",
+          "Powder Coated"
+        ],
+        [
+          "Door Opening details",
+          "Manual Entry",
+          "Left or Right"
+        ],
+        [
+          "Side Panels",
+          "Manual Entry",
+          "N/A, Optional locks for side panels"
+        ],
+        [
+          "Cable Entry Options",
+          "Manual Entry",
+          "Closeable top/bottom cable entry openings"
+        ],
+        [
+          "Quality Certifications",
+          "Manual Entry",
+          "ISO, SLS"
+        ],
+        [
+          "Manufacturing Standards",
+          "Manual Entry",
+          "EIA-310D"
+        ],
+        [
+          "Height (mm)",
+          "Manual Entry",
+          "1800mm"
+        ],
+        [
+          "Width (mm)",
+          "Manual Entry",
+          "600mm"
+        ],
+        [
+          "Depth (mm)",
+          "Manual Entry",
+          "450mm"
+        ],
+        [
+          "Material Thickness (mm)",
+          "Manual Entry",
+          "2mm"
+        ],
+        [
+          "Weight (kg)",
+          "Manual Entry",
+          "25, 42, 50"
+        ]
+      ]
+    },
+    {
+      "category": "Distribution Boards",
+      "rows": [
+        [
+          "Attribute",
+          "Input Type",
+          "Examples"
+        ],
+        [
+          "Type",
+          "Manual Entry",
+          "Wall Mounting Surface Type"
+        ],
+        [
+          "Material",
+          "Manual Entry",
+          "1.00mm/ 1.5mm Electro Galvanized Sheet"
+        ],
+        [
+          "Protection",
+          "Manual Entry",
+          "Up to IP 55"
+        ],
+        [
+          "Finish",
+          "Manual Entry",
+          "RAL 7032, Powder Coated to 80µm ~ 100µm"
+        ],
+        [
+          "Lock",
+          "Manual Entry",
+          "Standard Lock"
+        ],
+        [
+          "Gland Plate",
+          "Manual Entry",
+          "Top / Bottom Gland Plated"
+        ],
+        [
+          "Accessories",
+          "Manual Entry",
+          "Neutral and Earth Links"
+        ],
+        [
+          "Colour",
+          "Manual Entry",
+          "RAL 7032, Powder Coated to 80µm ~ 100µm"
+        ],
+        [
+          "Country of Origin",
+          "Select from list",
+          "UK, Italy, Japan"
+        ],
+        [
+          "Dimension",
+          "Manual Entry",
+          "Customized"
+        ],
+        [
+          "Brand",
+          "Manual Entry",
+          ""
+        ],
+        [
+          "Country of Manufacture",
+          "Select from list",
+          "Sri Lanka, Turkey, China"
+        ],
+        [
+          "Warranty",
+          "Select from list",
+          "N/A, 3 Months, 5 Years"
+        ]
+      ]
+    },
+    {
+      "category": "Door Locks",
+      "rows": [
+        [
+          "Attribute",
+          "Input Type",
+          "Examples"
+        ],
+        [
+          "Brand",
+          "Select from list",
+          ""
+        ],
+        [
+          "Country of Origin",
+          "Select from list",
+          "UK, Italy, Japan"
+        ],
+        [
+          "Country of Manufacture",
+          "Select from list",
+          "Sri Lanka, Turkey, China"
+        ],
+        [
+          "Colour",
+          "Select from list",
+          "Silver, Black, Bronze"
+        ],
+        [
+          "Warranty",
+          "Select from list",
+          "N/A, 3 Months, 5 Years"
+        ],
+        [
+          "Primary material",
+          "Select from list",
+          "Stainless Steel 304, Brass"
+        ],
+        [
+          "Quality Certifications",
+          "Manual Entry",
+          "ISO, SLS"
+        ],
+        [
+          "Manufacturing Standards",
+          "Manual Entry",
+          "EN12209"
+        ],
+        [
+          "Applications",
+          "Manual Entry",
+          "Main door, Kitchen, bathroom, bed room"
+        ],
+        [
+          "Technical Details",
+          "Manual Entry",
+          "Centre Distance , Backset,"
+        ],
+        [
+          "Number Of Keys",
+          "Manual Entry",
+          "2, 3, 4"
+        ],
+        [
+          "Door Thickness",
+          "Manual Entry",
+          "30mm, 40mm, 45mm, 50mm"
+        ],
+        [
+          "Weight (kg)",
+          "Manual Entry",
+          "1.2, 0.9, 2.5"
+        ]
+      ]
+    },
+    {
+      "category": "Fire Door Set",
+      "rows": [
+        [
+          "Attribute",
+          "Input Type",
+          "Examples"
+        ],
+        [
+          "Brand",
+          "Select from list",
+          ""
+        ],
+        [
+          "Standards",
+          "Manual Entry",
+          "BS 476, ITI, SL"
+        ],
+        [
+          "Diameter",
+          "Manual Entry",
+          "150mm,600mm,60mm"
+        ],
+        [
+          "Warranty",
+          "Manual Entry",
+          "5years,10 years"
+        ],
+        [
+          "Application locations",
+          "Manual Entry",
+          "Main door,Kitchen,bathroom,bed rooms"
+        ],
+        [
+          "fire insulation",
+          "Manual Entry",
+          "60 to 120 Mins"
+        ],
+        [
+          "Fire Integrity",
+          "Manual Entry",
+          "60 to 120 Mins"
+        ],
+        [
+          "Smoke and Fume seals",
+          "Manual Entry",
+          "20 x 2 (mm) Single line"
+        ],
+        [
+          "Material Type",
+          "Manual Entry",
+          "SS,wood,Fiber"
+        ],
+        [
+          "View panel details",
+          "Manual Entry",
+          "Dimensions with priamry materials"
+        ],
+        [
+          "Colour",
+          "Select from list",
+          "Brown,Dark Brown, Metal,Wood"
+        ],
+        [
+          "Weight",
+          "Manul Entry",
+          "80Kg"
+        ],
+        [
+          "Country of Origin",
+          "Select from list",
+          "UK, Italy, Japan"
+        ],
+        [
+          "Country of Manufacture",
+          "Select from list",
+          "Sri Lanka, Turkey, China"
+        ]
+      ]
+    },
+    {
+      "category": "Gum Boots",
+      "rows": [
+        [
+          "Attribute",
+          "Input Type",
+          "Examples"
+        ],
+        [
+          "Size",
+          "Manual Entry",
+          "38-44 (6-10)"
+        ],
+        [
+          "Height",
+          "Manual Entry",
+          "38 cm"
+        ],
+        [
+          "Average weight",
+          "Manual Entry",
+          "02 Kg"
+        ],
+        [
+          "Standard",
+          "Manual Entry",
+          "En ISO 20346:2014"
+        ],
+        [
+          "Toe cap",
+          "Manual Entry",
+          "Steel or non steel Toe cap"
+        ],
+        [
+          "Colour",
+          "Select from list",
+          "Yellow"
+        ],
+        [
+          "Primary Material",
+          "Select from list",
+          "PVC"
+        ],
+        [
+          "Country of Origin",
+          "Select from list",
+          "UK, Italy, Japan"
+        ],
+        [
+          "Country of Manufacture",
+          "Select from list",
+          "Sri Lanka, Turkey, China"
+        ],
+        [
+          "Warranty",
+          "Select from list",
+          "N/A, 3 Months, 5 Years"
+        ]
+      ]
+    },
+    {
+      "category": "Hand Gloves",
+      "rows": [
+        [
+          "Attribute",
+          "Input Type",
+          "Examples"
+        ],
+        [
+          "Finish",
+          "Manual Entry",
+          "Rubber Palm coated"
+        ],
+        [
+          "Packaging",
+          "Manual Entry",
+          "12 Pairs per poly bag"
+        ],
+        [
+          "Guage",
+          "Manual Entry",
+          "13"
+        ],
+        [
+          "Size",
+          "Manual Entry",
+          "Free Size"
+        ],
+        [
+          "Brand",
+          "Select from list",
+          ""
+        ],
+        [
+          "Primary Material",
+          "Select from list",
+          "Cotton"
+        ],
+        [
+          "Country of Origin",
+          "Select from list",
+          "UK, Italy, Japan"
+        ],
+        [
+          "Country of Manufacture",
+          "Select from list",
+          "Sri Lanka, Turkey, China"
+        ],
+        [
+          "Colour",
+          "Select from list",
+          "Black"
+        ],
+        [
+          "Warranty",
+          "Select from list",
+          "N/A, 3 Months, 5 Years"
+        ]
+      ]
+    },
+    {
+      "category": "Hot Bitumen 60/70, 80/100",
+      "rows": [
+        [
+          "Attribute",
+          "Input Type",
+          "Examples"
+        ],
+        [
+          "Application",
+          "Manual Entry",
+          "Road Construction"
+        ],
+        [
+          "Packaging Size",
+          "Manual Entry",
+          "200 Ltr"
+        ],
+        [
+          "Packaging Type",
+          "Manual Entry",
+          "Drum"
+        ],
+        [
+          "State/Form",
+          "Manual Entry",
+          "Liquid"
+        ],
+        [
+          "Color",
+          "Select from list",
+          "Black"
+        ],
+        [
+          "Storage Stability",
+          "Manual Entry",
+          "Best Before Use In 12 Months. Store Below 40°C"
+        ],
+        [
+          "Country of Origin",
+          "Select from list",
+          "UK, Italy, Japan"
+        ],
+        [
+          "Country of Manufacture",
+          "Select from list",
+          "Sri Lanka, Turkey, China"
+        ],
+        [
+          "Quality standards",
+          "Manual Entry",
+          "SLS, ISO"
+        ],
+        [
+          "Warranty",
+          "Select from list",
+          "N/A, 3 Months, 5 Years"
+        ]
+      ]
+    },
+    {
+      "category": "Main Switch Boards / Power Distribution Boards",
+      "rows": [
+        [
+          "Attribute",
+          "Input Type",
+          "Examples"
+        ],
+        [
+          "Operating Voltage",
+          "Manual Entry",
+          "400VAC"
+        ],
+        [
+          "Frequency",
+          "Manual Entry",
+          "50Hz"
+        ],
+        [
+          "Degree of Protection",
+          "Manual Entry",
+          "IP54"
+        ],
+        [
+          "Phase",
+          "Manual Entry",
+          "3Phase"
+        ],
+        [
+          "Busbar For Ratings",
+          "Manual Entry",
+          "Upto 9000A"
+        ],
+        [
+          "Colour",
+          "Manual Entry",
+          "RAL 7032, Powder Coated to 80µm ~ 100µm"
+        ],
+        [
+          "Application",
+          "Manual Entry",
+          "Industrial, Commercial"
+        ],
+        [
+          "Dimension",
+          "Manual Entry",
+          "Customized"
+        ],
+        [
+          "Brand",
+          "Manual Entry",
+          "Schneider, Siemens, ABB or Any"
+        ],
+        [
+          "Country of Origin",
+          "Select from list",
+          "UK, Italy, Japan"
+        ],
+        [
+          "Country of Manufacture",
+          "Select from list",
+          "Sri Lanka, Turkey, China"
+        ],
+        [
+          "Quality standards",
+          "Manual Entry",
+          "SLS, ISO"
+        ],
+        [
+          "Warranty",
+          "Select from list",
+          "N/A, 3 Months, 5 Years"
+        ]
+      ]
+    },
+    {
+      "category": "MCB Distribution Box",
+      "rows": [
+        [
+          "Attribute",
+          "Input Type",
+          "Examples"
+        ],
+        [
+          "Operating Voltage",
+          "Manual Entry",
+          "230VAC, 400VAC"
+        ],
+        [
+          "Frequency",
+          "Manual Entry",
+          "50Hz"
+        ],
+        [
+          "Degree of Protection",
+          "Manual Entry",
+          "IP54"
+        ],
+        [
+          "Phase",
+          "Manual Entry",
+          "1Phase, 3Phase"
+        ],
+        [
+          "Colour",
+          "Manual Entry",
+          "RAL 7032, Powder Coated to 80µm ~ 100µm"
+        ],
+        [
+          "Country of Origin",
+          "Select from list",
+          "UK, Italy, Japan"
+        ],
+        [
+          "Application",
+          "Manual Entry",
+          "Industrial, Motor/Pump"
+        ],
+        [
+          "Dimension",
+          "Manual Entry",
+          "Customized"
+        ],
+        [
+          "Starting Methods",
+          "Manual Entry",
+          "DOL, Star Delta, Soft Starter, VFD"
+        ],
+        [
+          "Brand",
+          "Manual Entry",
+          "Schneider, Siemens, ABB or Any"
+        ],
+        [
+          "Country of Manufacture",
+          "Select from list",
+          "Sri Lanka, Turkey, China"
+        ],
+        [
+          "Quality standards",
+          "Manual Entry",
+          "SLS, ISO"
+        ],
+        [
+          "Warranty",
+          "Select from list",
+          "N/A, 3 Months, 5 Years"
+        ]
+      ]
+    },
+    {
+      "category": "Motor Control Panels",
+      "rows": [
+        [
+          "Attribute",
+          "Input Type",
+          "Examples"
+        ],
+        [
+          "Type",
+          "Manual Entry",
+          "Wall Mounting Surface Type"
+        ],
+        [
+          "Material",
+          "Manual Entry",
+          "1.00mm/ 1.5mm Electro Galvanized Sheet"
+        ],
+        [
+          "Protection",
+          "Manual Entry",
+          "Up to IP 55"
+        ],
+        [
+          "Finish",
+          "Manual Entry",
+          "RAL 7032, Powder Coated to 80µm ~ 100µm"
+        ],
+        [
+          "Lock",
+          "Manual Entry",
+          "Magnetic or Standard Lock"
+        ],
+        [
+          "Gland Plate",
+          "Manual Entry",
+          "Top / Bottom Gland Plated"
+        ],
+        [
+          "Accessories",
+          "Manual Entry",
+          "Neutral and Earth Links"
+        ],
+        [
+          "Country of Origin",
+          "Select from list",
+          "UK, Italy, Japan"
+        ],
+        [
+          "Country of Manufacture",
+          "Select from list",
+          "Sri Lanka, Turkey, China"
+        ],
+        [
+          "Quality standards",
+          "Manual Entry",
+          "SLS, ISO"
+        ],
+        [
+          "Warranty",
+          "Select from list",
+          "N/A, 3 Months, 5 Years"
+        ]
+      ]
+    },
+    {
+      "category": "Paint",
+      "rows": [
+        [
+          "Attribute",
+          "Input Type",
+          "Examples"
+        ],
+        [
+          "Finishes",
+          "Manual Entry",
+          "30% Gloss"
+        ],
+        [
+          "Coverage",
+          "Manual Entry",
+          "170-180 ft2"
+        ],
+        [
+          "Drying Time",
+          "Manual Entry",
+          "4 -5 Hours"
+        ],
+        [
+          "Coats",
+          "Manual Entry",
+          "2 Coats"
+        ],
+        [
+          "Uses",
+          "Manual Entry",
+          "Formulated for both interior & exterior wooden furniture, wooden structures, doors & windows , plywood, hardboard, chip boards ,wooden exterior fence etc."
+        ],
+        [
+          "Drying Time",
+          "Manual Entry",
+          "Surface drying 45 minutes at 30°C ± 2°C and RH 65 % ± 5%Recoating 4 hours at 30°C ± 2°C and RH 65 % ± 5%Hard Dry 16 hours at 30°C ± 2°C and RH 65 % ± 5%"
+        ],
+        [
+          "Storage",
+          "Manual Entry",
+          "Store in a tightly sealed container in a cool dry place."
+        ],
+        [
+          "Shelf Life",
+          "Manual Entry",
+          "Up to 2 years in a tightly sealed container."
+        ],
+        [
+          "Brand",
+          "Select from list",
+          "Nippon, Dulux"
+        ],
+        [
+          "Primary Material",
+          "Select from list",
+          ""
+        ],
+        [
+          "Country of Origin",
+          "Select from list",
+          "UK, Italy, Japan"
+        ],
+        [
+          "Country of Manufacture",
+          "Select from list",
+          "Sri Lanka, Turkey, China"
+        ],
+        [
+          "Colour",
+          "Select from list",
+          "Natural Cement Gray"
+        ],
+        [
+          "Warranty",
+          "Select from list",
+          "N/A, 3 Months, 5 Years"
+        ]
+      ]
+    },
+    {
+      "category": "Panels & Partitions",
+      "rows": [
+        [
+          "Attribute",
+          "Input Type",
+          "Examples"
+        ],
+        [
+          "Applications",
+          "Select from list",
+          "Dry wall, Tempered glass,gypsum boards,Aluminium partitions,Metal Lath"
+        ],
+        [
+          "Dimensions",
+          "Manual Entry",
+          "Length,Width,Thickness"
+        ],
+        [
+          "Brand",
+          "Select from list",
+          ""
+        ],
+        [
+          "Fire resistance",
+          "Manual Entry",
+          "2 hours"
+        ],
+        [
+          "Testing details",
+          "Manual Entry",
+          "Heat/Fire/Cold resistance"
+        ],
+        [
+          "Warrenty",
+          "Manual Entry",
+          "2 Years,5 Years,10 Years"
+        ],
+        [
+          "Used locations",
+          "Manual Entry",
+          "Wall /Wash room/Balcony"
+        ],
+        [
+          "Colour",
+          "Select from list",
+          "White,off white,Silver,Grey,CherryBeige,Black, Brown, wood"
+        ],
+        [
+          "Country of Origin",
+          "Select from list",
+          "UK, Italy, Japan"
+        ],
+        [
+          "Country of Manufacture",
+          "Select from list",
+          "Sri Lanka, Turkey, China"
+        ],
+        [
+          "Quality standards",
+          "Manual Entry",
+          "SLS, ISO"
+        ]
+      ]
+    },
+    {
+      "category": "Precast",
+      "rows": [
+        [
+          "Attribute",
+          "Input Type",
+          "Examples"
+        ],
+        [
+          "Dimensions",
+          "Manual Entry",
+          "Length/Width/Thickness/Depth/Diameter"
+        ],
+        [
+          "Warranty",
+          "Select from list",
+          "N/A, 3 Months, 5 Years"
+        ],
+        [
+          "Weight",
+          "Manual Entry",
+          "XX Kg"
+        ],
+        [
+          "Primary Material",
+          "Manual Entry",
+          "Concrete"
+        ],
+        [
+          "Concrete Strength",
+          "Manual Entry",
+          "XX kn/mm2"
+        ],
+        [
+          "Concrete Grade",
+          "Manual Entry",
+          "35/40/50"
+        ],
+        [
+          "Colour",
+          "Manual Entry",
+          "Natural Cement Gray"
+        ],
+        [
+          "Country of Origin",
+          "Select from list",
+          "UK, Italy, Japan, Sri Lanka"
+        ],
+        [
+          "Country of Manufacture",
+          "Select from list",
+          "Sri Lanka, Turkey, China"
+        ],
+        [
+          "Standards",
+          "Manual Entry",
+          "BS / ASTM / SLS"
+        ]
+      ]
+    },
+    {
+      "category": "PVC/Zinc Coated Gabion",
+      "rows": [
+        [
+          "Attribute",
+          "Input Type",
+          "Examples"
+        ],
+        [
+          "Gabions Hexagonal Mesh Size",
+          "Manual Entry",
+          "80mm x 100mm"
+        ],
+        [
+          "PVC Coating Colour",
+          "Select from list",
+          "Dark Grey"
+        ],
+        [
+          "Mesh Wire",
+          "Manual Entry",
+          "Core wire 2.7mm"
+        ],
+        [
+          "Selvedge Wire",
+          "Manual Entry",
+          "Core wire 3.4mm"
+        ],
+        [
+          "Lacing Wire",
+          "Manual Entry",
+          "Core wire 2.2mm"
+        ],
+        [
+          "PVC Coating",
+          "Manual Entry",
+          "1mm"
+        ],
+        [
+          "Zinc Coating",
+          "Manual Entry",
+          "BS 443-198"
+        ],
+        [
+          "Primary material",
+          "Manual Entry",
+          ""
+        ],
+        [
+          "Country of Origin",
+          "Select from list",
+          "UK, Italy, Japan"
+        ],
+        [
+          "Country of Manufacture",
+          "Select from list",
+          "Sri Lanka, Turkey, China"
+        ],
+        [
+          "Quality standards",
+          "Manual Entry",
+          "BS - 3262:1989 SLS - 1384:201"
+        ],
+        [
+          "Warranty",
+          "Select from list",
+          "N/A, 3 Months, 5 Years"
+        ]
+      ]
+    },
+    {
+      "category": "Road Marking",
+      "rows": [
+        [
+          "Attribute",
+          "Input Type",
+          "Examples"
+        ],
+        [
+          "Brand name",
+          "Select from list",
+          ""
+        ],
+        [
+          "Colour",
+          "Select from list",
+          "Yellow,White,Green,Blue,Black"
+        ],
+        [
+          "Category",
+          "Select from list",
+          "Thermoplastics"
+        ],
+        [
+          "Testing details",
+          "Manual Entry",
+          "Maximum Applicationt temperature/ Maximum safe heating temperature"
+        ],
+        [
+          "Quality standards",
+          "Manual Entry",
+          "BS - 3262:1989 SLS - 1384:201"
+        ],
+        [
+          "Technical details",
+          "Manual Entry",
+          "Composition / Glass Beads Content / Luminance Factor / Heat stability on luminance factor"
+        ],
+        [
+          "Surface details",
+          "Manual Entry",
+          "Road / Concrete / Runway"
+        ],
+        [
+          "MSDS",
+          "Manual Entry",
+          "Do not mix Thinner"
+        ],
+        [
+          "Pack Size",
+          "Manual Entry",
+          "10kg, 20kg, 25kg"
+        ],
+        [
+          "Binder Content",
+          "Manual Entry",
+          "XX%"
+        ],
+        [
+          "Solid glass bead content",
+          "Manual Entry",
+          "XX%"
+        ],
+        [
+          "Aggregate,pigment,extender & solid glass content",
+          "Manual Entry",
+          "XX%"
+        ],
+        [
+          "Country of Origin",
+          "Select from list",
+          "UK, Italy, Japan"
+        ],
+        [
+          "Country of Manufacture",
+          "Select from list",
+          "Sri Lanka, Turkey, China"
+        ],
+        [
+          "Quality standards",
+          "Manual Entry",
+          "SLS, ISO"
+        ],
+        [
+          "Warranty",
+          "Select from list",
+          "N/A, 3 Months, 5 Years"
+        ]
+      ]
+    },
+    {
+      "category": "Safety Goggles",
+      "rows": [
+        [
+          "Attribute",
+          "Input Type",
+          "Examples"
+        ],
+        [
+          "Usage",
+          "Manual Entry",
+          "Industry, Agriculture, Laboratory, Medical Protection"
+        ],
+        [
+          "Goggles Hardness",
+          "Manual Entry",
+          "Soft and Comfortable"
+        ],
+        [
+          "Brand",
+          "Select from list",
+          ""
+        ],
+        [
+          "Primary Material",
+          "Select from list",
+          "Polyurethane"
+        ],
+        [
+          "Country of Origin",
+          "Select from list",
+          "UK, Italy, Japan"
+        ],
+        [
+          "Country of Manufacture",
+          "Select from list",
+          "Sri Lanka, Turkey, China"
+        ],
+        [
+          "Colour",
+          "Select from list",
+          "Black"
+        ],
+        [
+          "Warranty",
+          "Select from list",
+          "N/A, 3 Months, 5 Years"
+        ]
+      ]
+    },
+    {
+      "category": "Safety Shoes",
+      "rows": [
+        [
+          "Attribute",
+          "Input Type",
+          "Examples"
+        ],
+        [
+          "Size",
+          "Manual Entry",
+          "6-10 (36-44)"
+        ],
+        [
+          "Toe Cap Impact Protection",
+          "Manual Entry",
+          "200 Joule"
+        ],
+        [
+          "Quality standards",
+          "Manual Entry",
+          "SLS, ISO"
+        ],
+        [
+          "Brand",
+          "Select from list",
+          ""
+        ],
+        [
+          "Primary Material",
+          "Select from list",
+          "Leather"
+        ],
+        [
+          "Country of Origin",
+          "Select from list",
+          "UK, Italy, Japan"
+        ],
+        [
+          "Country of Manufacture",
+          "Select from list",
+          "Sri Lanka, Turkey, China"
+        ],
+        [
+          "Colour",
+          "Select from list",
+          "Black"
+        ],
+        [
+          "Warranty",
+          "Select from list",
+          "N/A, 3 Months, 5 Years"
+        ]
+      ]
+    },
+    {
+      "category": "Skim Coat Putty",
+      "rows": [
+        [
+          "Attribute",
+          "Input Type",
+          "Examples"
+        ],
+        [
+          "Application",
+          "Manual Entry",
+          "On Rough/smooth plasters"
+        ],
+        [
+          "Coverage",
+          "Manual Entry",
+          "Coverage upto 200-300 sq. ft."
+        ],
+        [
+          "Technical Information",
+          "Manual Entry",
+          "• WATER RETENTION 95%• AVERAGE SHRINKAGE 0.1%"
+        ],
+        [
+          "Setting Time",
+          "Manual Entry",
+          "• Initial set - 240 – 360 minutes • Final set - < 500 minutes"
+        ],
+        [
+          "1st Coat Drying",
+          "Manual Entry",
+          "3 – 4 Hours"
+        ],
+        [
+          "Hard Drying",
+          "Manual Entry",
+          "24 hours"
+        ],
+        [
+          "Packing",
+          "Manual Entry",
+          "20 Kg"
+        ],
+        [
+          "Storage",
+          "Manual Entry",
+          "Store in a tightly sealed container in a cool dry place."
+        ],
+        [
+          "Brand",
+          "Select from list",
+          ""
+        ],
+        [
+          "Primary Material",
+          "Select from list",
+          ""
+        ],
+        [
+          "Country of Origin",
+          "Select from list",
+          "UK, Italy, Japan"
+        ],
+        [
+          "Country of Manufacture",
+          "Select from list",
+          "Sri Lanka, Turkey, China"
+        ],
+        [
+          "Colour",
+          "Select from list",
+          "White"
+        ],
+        [
+          "Warranty",
+          "Select from list",
+          "N/A, 3 Months, 5 Years"
+        ]
+      ]
+    },
+    {
+      "category": "Water Proofing",
+      "rows": [
+        [
+          "Attribute",
+          "Input Type",
+          "Examples"
+        ],
+        [
+          "Supply form",
+          "Manual Entry",
+          "Liquid (Part A)Powder (Part B)"
+        ],
+        [
+          "Colour",
+          "Select from list",
+          "Milky White (Part A)Cement Grey (Part B)"
+        ],
+        [
+          "Pot life",
+          "Manual Entry",
+          "30 - 40 minute"
+        ],
+        [
+          "Water permeability (BS EN 14891)",
+          "Manual Entry",
+          "Impermeable"
+        ],
+        [
+          "Adhesion Strength (BS EN 1542)",
+          "Manual Entry",
+          "0.xx N/mm2"
+        ],
+        [
+          "Modulus of Elasticity (ASTM C 469-2)",
+          "Manual Entry",
+          "XXX MPa"
+        ],
+        [
+          "Compressive Strength (BS EN 196-1)",
+          "Manual Entry",
+          "3days X.X N/mm228days X.X N/mm2"
+        ],
+        [
+          "Flexural Strength (BS EN 196-1)",
+          "Manual Entry",
+          "3days X.X N/mm228days X.X N/mm2"
+        ],
+        [
+          "Tensile Strength (ASTM D412-15)",
+          "Manual Entry",
+          "X.3N/mm2"
+        ],
+        [
+          "Mixing proportion",
+          "Manual Entry",
+          "Part A : Part B = X.X : X.X"
+        ],
+        [
+          "Minimum recommended coverage",
+          "Manual Entry",
+          "2.0 to 3.0 kg for two coats per m2 at 1.0 to 1.5 thickness"
+        ],
+        [
+          "Shelf Life",
+          "Manual Entry",
+          "1 Year"
+        ],
+        [
+          "Pack size",
+          "Manual Entry",
+          "36.0kg set (10.0kg Part A and26.0kg Part B)7.2kg set (2.0kg Part A and 5.2kg Part B)"
+        ],
+        [
+          "Country of Origin",
+          "Select from list",
+          "UK, Italy, Japan"
+        ],
+        [
+          "Country of Manufacture",
+          "Select from list",
+          "Sri Lanka, Turkey, China"
+        ],
+        [
+          "Quality standards",
+          "Manual Entry",
+          "SLS, ISO"
+        ],
+        [
+          "Warranty",
+          "Select from list",
+          "N/A, 3 Months, 5 Years"
+        ]
+      ]
+    },
+    {
+      "category": "All Other Products",
+      "rows": [
+        [
+          "Attribute",
+          "Input Type",
+          "Examples"
+        ],
+        [
+          "Brand",
+          "Select from list",
+          ""
+        ],
+        [
+          "Country of Origin",
+          "Select from list",
+          "UK, Italy, Japan"
+        ],
+        [
+          "Country of Manufacture",
+          "Select from list",
+          "Sri Lanka, Turkey, China"
+        ],
+        [
+          "Colour",
+          "Select from list",
+          "Silver, Black, Bronze"
+        ],
+        [
+          "Warranty",
+          "Select from list",
+          "N/A, 3 Months, 5 Years"
+        ],
+        [
+          "Primary material",
+          "Select from list",
+          "Stainless Steel 304, Brass"
+        ],
+        [
+          "Quality Certifications",
+          "Manual Entry",
+          "ISO, SLS"
+        ],
+        [
+          "Depth (mm)",
+          "Manual Entry",
+          "450mm"
+        ],
+        [
+          "Weight (kg)",
+          "Manual Entry",
+          "1.2, 0.9, 2.5"
+        ]
+      ]
+    }
+  ]
+}

@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Bricolage_Grotesque, IBM_Plex_Mono, Instrument_Sans } from "next/font/google";
+import { Open_Sans } from "next/font/google";
 import { notFound } from "next/navigation";
 import { connection } from "next/server";
 import { NextIntlClientProvider } from "next-intl";
@@ -11,30 +11,36 @@ import { SessionProvider } from "@/components/providers/session-provider";
 import "../globals.css";
 
 /*
- * Three families, no more — docs/design-system.md §3.
+ * One family — Open Sans, the typeface of the original Stockpile.lk
+ * (Magento/MageBig Martfury layout05).
  *
  * next/font downloads the files at build time and self-hosts them under
  * /_next/static/media. The browser never contacts fonts.googleapis.com, which
  * is what lets the CSP declare `font-src 'self'` (security-threat-model §9).
- * The CSS variable names here are the ones referenced by the `--font-*` theme
- * entries in app/globals.css.
+ * Three Open Sans instances give the three CSS roles their own weights — the
+ * display voice runs heavier (700/800), the UI voice runs regular (400/500/600)
+ * and the former mono/data role collapses into Open Sans too, so the generic
+ * "mono accent" look of the previous build is gone. The CSS variable names here
+ * are the ones referenced by the `--font-*` theme entries in app/globals.css.
  */
-const bricolage = Bricolage_Grotesque({
-  variable: "--font-bricolage",
+const openSansDisplay = Open_Sans({
+  variable: "--font-open-sans-display",
   subsets: ["latin"],
+  weight: ["600", "700", "800"],
   display: "swap",
 });
 
-const instrument = Instrument_Sans({
-  variable: "--font-instrument",
-  subsets: ["latin"],
-  display: "swap",
-});
-
-const plexMono = IBM_Plex_Mono({
-  variable: "--font-plex-mono",
+const openSansBody = Open_Sans({
+  variable: "--font-open-sans-body",
   subsets: ["latin"],
   weight: ["400", "500", "600"],
+  display: "swap",
+});
+
+const openSansData = Open_Sans({
+  variable: "--font-open-sans-data",
+  subsets: ["latin"],
+  weight: ["500", "600"],
   display: "swap",
 });
 
@@ -107,7 +113,7 @@ export async function generateMetadata({
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  themeColor: "#202020",
+  themeColor: "#f6e71d",
 };
 
 export default async function LocaleLayout({
@@ -152,9 +158,15 @@ export default async function LocaleLayout({
   return (
     <html
       lang={locale}
-      className={`${bricolage.variable} ${instrument.variable} ${plexMono.variable}`}
+      className={`${openSansDisplay.variable} ${openSansBody.variable} ${openSansData.variable}`}
     >
-      <body className="min-h-dvh flex flex-col bg-surface-page text-ink antialiased">
+      {/* suppressHydrationWarning: browser extensions (e.g. Grammarly) inject
+          attributes onto <body> post-render, which otherwise tripped the
+          React hydration-mismatch guard on every load. */}
+      <body
+        className="min-h-dvh flex flex-col bg-surface-page text-ink antialiased"
+        suppressHydrationWarning
+      >
         {/*
           First focusable element in the document. Keyboard users must be able
           to reach main content without tabbing through the entire header —

@@ -12,7 +12,7 @@
  * fields. See lib/validation/auth.ts.
  */
 
-import { useId, useState, type ChangeEvent, type FormEvent } from "react";
+import { useEffect, useId, useRef, useState, type ChangeEvent, type FormEvent } from "react";
 import { useTranslations } from "next-intl";
 import { Link, useRouter } from "@/i18n/navigation";
 import { useSession } from "@/components/providers/session-provider";
@@ -25,6 +25,7 @@ import {
   type FieldFailures,
   validateRegister,
 } from "@/lib/validation/auth";
+import { clearDraftHandle, readDraftHandle, writeDraftHandle } from "@/lib/registration/draft-storage";
 
 interface RegisterValues {
   email: string;
@@ -51,6 +52,79 @@ export function RegisterForm() {
   const [banner, setBanner] = useState<string | null>(null);
   const [submitting, setSubmitting] = useState(false);
 
+  /*
+   * Resumable registration (business-flows §2, api.md §2.1). The buyer flow
+   * collects only an email and a password; the email is autosaved to a server
+   * draft so an abandoned signup comes back with the username already filled —
+   * the password is never sent anywhere but the register call itself.
+   */
+  const draftTokenRef = useRef<string | null>(null);
+  const resumeStartedRef = useRef(false);
+  const resumeSettledRef = useRef(false);
+  const completedRef = useRef(false);
+
+  useEffect(() => {
+    if (resumeStartedRef.current) return; // once per mount, StrictMode-safe
+    resumeStartedRef.current = true;
+
+    const handle = readDraftHandle("buyer");
+    if (!handle) {
+      resumeSettledRef.current = true; // nothing to bring back — autosave may start
+      return;
+    }
+
+    let cancelled = false;
+    void (async () => {
+      try {
+        const state = await authApi.resumeRegistrationDraft(handle.draftToken, await csrfToken());
+        if (cancelled) return;
+        draftTokenRef.current = state.draftToken;
+        // A username already typed wins over the restored one.
+        setValues((previous) => ({
+          ...previous,
+          email: previous.email !== "" ? previous.email : state.prefill.email ?? previous.email,
+        }));
+      } catch {
+        // Unknown, expired or already retired: forget the handle, start clean.
+        if (!cancelled) clearDraftHandle("buyer");
+      } finally {
+        if (!cancelled) resumeSettledRef.current = true;
+      }
+    })();
+
+    return () => {
+      cancelled = true;
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- one resume per mount; csrfToken is a stable input to that single run.
+  }, []);
+
+  // Autosave 1.5 s after the last keystroke, best-effort: a failed save must
+  // never disrupt the form the visitor is filling.
+  useEffect(() => {
+    if (!resumeSettledRef.current || submitting || completedRef.current) return;
+
+    const email = values.email.trim();
+    if (email === "" && draftTokenRef.current === null) return; // nothing to remember yet
+
+    const timer = setTimeout(() => {
+      void (async () => {
+        try {
+          const state = await authApi.saveRegistrationDraft(
+            { kind: "buyer", draftToken: draftTokenRef.current ?? undefined, email: email || undefined },
+            await csrfToken(),
+          );
+          if (completedRef.current) return;
+          draftTokenRef.current = state.draftToken;
+          writeDraftHandle("buyer", { draftToken: state.draftToken, expiresAt: state.expiresAtUtc });
+        } catch {
+          /* best-effort autosave */
+        }
+      })();
+    }, 1500);
+
+    return () => clearTimeout(timer);
+  }, [submitting, csrfToken, values.email]);
+
   const setField = (field: keyof RegisterValues) => (event: ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
     setValues((previous) => ({ ...previous, [field]: value }));
@@ -66,9 +140,20 @@ export function RegisterForm() {
     setBanner(null);
     setSubmitting(true);
     try {
-      const response = await authApi.register(values, await csrfToken());
+      const response = await authApi.register(
+        { ...values, draftToken: draftTokenRef.current ?? undefined },
+        await csrfToken(),
+      );
+      // The server retires the draft with the account (business-flows §2); the
+      // browser forgets its handle with it. The post-register landing (1.38):
+      // verification is pending, so the account's email is echoed and the panel
+      // offers to resend the confirmation link (business-flows §2 — sign-in
+      // works immediately, verification gates RFQ submit). The backend response
+      // carries no email; the submitted value IS the account's login identifier.
+      completedRef.current = true;
+      clearDraftHandle("buyer");
       storeMintedToken(response.requestToken);
-      router.replace("/login");
+      router.replace(`/verify-email?email=${encodeURIComponent(values.email)}`);
     } catch (error) {
       if (error instanceof ApiClientError && error.envelope?.code === "VALIDATION_FAILED") {
         const server = fieldErrorsToRecord(error.envelope.fieldErrors, tValidation);

@@ -117,15 +117,16 @@ const NON_PAGE_PREFIXES = ["/api/", "/_next/", "/_vercel/"];
 
 /**
  * Extensioned URLs answered by the App Router rather than by a file in
- * `public/`. Today that is the metadata file convention
- * (`src/app/favicon.ico` → /favicon.ico). Phase 7 adds `robots.ts` →
- * /robots.txt and `sitemap.ts` → /sitemap.xml (spec §39, task 7E), which
- * belong here too because their filename does not match their URL.
+ * `public/`. Today: the metadata file convention (`src/app/favicon.ico` →
+ * /favicon.ico) and the reference's own sitemap path
+ * (`src/app/sitemap/sitemap.xml/route.ts`, a route handler whose folder name
+ * matches its URL). Phase 7's `robots.ts` → /robots.txt belongs here too,
+ * because its filename does not match its URL.
  *
  * A missing entry does not crash anything — it produces a 404, and the wrong
  * one: locale-routed, and (until it resolves) missing from the page.
  */
-const APP_ROUTED_URLS = new Set<string>(["/favicon.ico"]);
+const APP_ROUTED_URLS = new Set<string>(["/favicon.ico", "/sitemap/sitemap.xml"]);
 
 const PUBLIC_DIR = join(process.cwd(), "public");
 
@@ -134,13 +135,18 @@ const PUBLIC_DIR = join(process.cwd(), "public");
  *
  * The session cookie is `HttpOnly` + encrypted (architecture §8.1) — this
  * Node proxy can only check that it exists, which is exactly the job: the
- * private groups must not so much as render a page shell for a visitor with
- * no session. Roles are not decidable here and are the API's job (spec §0.9).
+ * private surfaces must not so much as render a page shell for a visitor with
+ * no session. Roles are not decidable here and remain the API's job (spec §0.9).
  */
 const AUTH_SESSION_COOKIE = ".Stockpile.Auth";
 
-/** Private route groups, URL-prefix form (the group layout for each lives in `src/app/[locale]`). */
-const PRIVATE_PREFIXES = ["/workspace", "/supplier", "/admin"];
+/**
+ * Private URL prefixes. Three are route groups (`(workspace)`, `(supplier)`,
+ * `(admin)`); `/wizard` is the buyer setup wizard, which renders the guarded
+ * `(workspace)` shell but resolves to a top-level URL. The API authorizes
+ * every request regardless — this is the shell-level floor, not the gate.
+ */
+const PRIVATE_PREFIXES = ["/workspace", "/supplier", "/admin", "/wizard"];
 
 /**
  * Split a pathname into its locale and the locale-stripped remainder, the

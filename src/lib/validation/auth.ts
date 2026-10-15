@@ -35,7 +35,12 @@ export type AuthValidationCode =
   | "passwordRequired"
   | "passwordTooShort"
   | "passwordsDoNotMatch"
-  | "duplicateEmail";
+  | "duplicateEmail"
+  | "currentPasswordRequired"
+  | "companyRequired"
+  | "phoneRequired"
+  | "phoneInvalid"
+  | "categoriesRequired";
 
 /* FluentValidation's EmailAddress semantics, kept intentionally close. */
 const emailPattern = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
@@ -59,6 +64,13 @@ export interface ForgotValues {
 export interface ResetValues {
   email: string;
   token: string;
+  newPassword: string;
+  confirmPassword: string;
+}
+
+/** Self-service password change (api.md §2.1) — current + new, plus the client-only confirm field. */
+export interface PasswordChangeValues {
+  currentPassword: string;
   newPassword: string;
   confirmPassword: string;
 }
@@ -101,6 +113,41 @@ export function validateRegister(values: RegisterValues, t: Translate): FieldFai
   return failing;
 }
 
+/**
+ * Supplier self-registration (mirrors RegisterSupplierRequestValidator.cs on the
+ * server). Fields the backend rejects for a non-empty reason — a phone longer
+ * than nvarchar(30), an unknown department slug — are left for the 422 envelope
+ * to land on the field; only presence is asserted here, where the form can
+ * answer without a round trip.
+ */
+export interface SupplierRegisterValues {
+  email: string;
+  password: string;
+  contactFirstName: string;
+  contactLastName: string;
+  phone: string;
+  companyName: string;
+  registrationNumber: string;
+  website: string;
+  categories: string[];
+}
+
+export function validateSupplierRegistration(
+  values: SupplierRegisterValues,
+  t: Translate,
+): FieldFailures {
+  const failing: FieldFailures = {};
+  checkEmail(values.email, t, failing);
+  checkPassword(values.password, t, failing);
+  if (values.contactFirstName.trim().length === 0) failing.contactFirstName = t("nameRequired");
+  if (values.contactLastName.trim().length === 0) failing.contactLastName = t("nameRequired");
+  if (values.phone.trim().length === 0) failing.phone = t("phoneRequired");
+  else if (values.phone.trim().length > 30) failing.phone = t("phoneInvalid");
+  if (values.companyName.trim().length === 0) failing.companyName = t("companyRequired");
+  if (values.categories.length === 0) failing.categories = t("categoriesRequired");
+  return failing;
+}
+
 export function validateReset(values: ResetValues, t: Translate): FieldFailures {
   const failing: FieldFailures = {};
   checkEmail(values.email, t, failing);
@@ -108,6 +155,14 @@ export function validateReset(values: ResetValues, t: Translate): FieldFailures 
   checkPassword(values.newPassword, t, failing);
   /* Confirm is client-only UX (the backend contract has no confirm field); an
    * empty or different confirm is simply "the two passwords do not match". */
+  if (values.confirmPassword !== values.newPassword) failing.confirmPassword = t("passwordsDoNotMatch");
+  return failing;
+}
+
+export function validatePasswordChange(values: PasswordChangeValues, t: Translate): FieldFailures {
+  const failing: FieldFailures = {};
+  if (values.currentPassword.length === 0) failing.currentPassword = t("currentPasswordRequired");
+  checkPassword(values.newPassword, t, failing);
   if (values.confirmPassword !== values.newPassword) failing.confirmPassword = t("passwordsDoNotMatch");
   return failing;
 }

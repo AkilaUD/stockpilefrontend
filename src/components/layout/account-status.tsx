@@ -60,7 +60,7 @@ export function AccountStatus() {
     );
   }
 
-  const fullName = `${user.firstName} ${user.lastName}`;
+  const fullName = `${user.firstName} ${user.lastName}`.trim() || user.email;
 
   return (
     <>

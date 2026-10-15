@@ -23,6 +23,7 @@ import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
 import { Link } from "@/i18n/navigation";
 import { fetchCommandSearch, type CommandSearchResponse } from "@/lib/api/catalogue";
+import { categoryHref } from "@/lib/navigation/navigation";
 import { cx } from "@/lib/cx";
 
 type OverlayState = "idle" | "loading" | "done" | "error";
@@ -39,6 +40,7 @@ const DEBOUNCE_MS = 200;
 
 export function CommandSearch() {
   const t = useTranslations("catalogue.command");
+  const tNav = useTranslations("nav");
   const tErr = useTranslations("errors");
   const tA11y = useTranslations("a11y");
   const [open, setOpen] = useState(false);
@@ -90,7 +92,7 @@ export function CommandSearch() {
     for (const category of result.categories) {
       entries.push({
         key: `c-${category.slug}`,
-        href: `/categories/${category.slug}`,
+        href: categoryHref(category.slug),
         primary: category.name,
       });
     }
@@ -131,12 +133,16 @@ export function CommandSearch() {
         <button
           type="button"
           aria-label={t("trigger")}
-          className="inline-flex h-11 items-center gap-2 rounded-sm bg-surface-elevated px-3 text-ink-muted transition-colors duration-instant ease-standard hover:bg-surface-panel hover:text-ink focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus"
+          className="inline-flex h-11 w-full items-center gap-2 rounded-sm bg-surface-elevated px-4 text-ink-muted transition-colors duration-instant ease-standard hover:bg-surface-panel hover:text-ink focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus"
         >
-          <svg aria-hidden="true" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5" className="size-4">
+          <svg aria-hidden="true" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5" className="size-4 shrink-0">
             <circle cx="7" cy="7" r="4.25" />
             <path d="m10.5 10.5 2.75 2.75" strokeLinecap="round" />
           </svg>
+          <span className="hidden truncate text-sm xl:inline">{tNav("searchPlaceholder")}</span>
+          <span className="ml-auto hidden items-center rounded-sm bg-brand-primary px-3 py-1.5 font-body text-xs font-semibold text-ink-on-signal xl:inline-flex">
+            {tNav("searchSubmit")}
+          </span>
         </button>
       </DialogPrimitive.Trigger>
 
@@ -206,7 +212,7 @@ export function CommandSearch() {
                   if (group.entries.length === 0) return null;
                   return (
                     <section key={group.key}>
-                      <h2 className="type-label text-ink-accent">{t(group.key)}</h2>
+                      <h2 className="block-title">{t(group.key)}</h2>
                       <ul className="mt-2 space-y-1">
                         {group.entries.map((entry) => {
                           const index = entries.indexOf(entry);

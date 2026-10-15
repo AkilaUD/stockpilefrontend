@@ -28,6 +28,17 @@ export interface ErrorCopyFunction {
 /** Fallback when a 429 carries no parseable Retry-After (it always should). */
 const RATE_LIMITED_FALLBACK_SECONDS = 60;
 
+/**
+ * The envelope's own code when the failure carried a readable §1.4 envelope,
+ * `undefined` otherwise. Callers that must branch on a *specific* server
+ * decision (e.g. `RESOURCE_NOT_FOUND` meaning "you have no supplier") read it
+ * here rather than re-deriving the shape; the copy itself still comes from
+ * `resolveErrorCopy`.
+ */
+export function errorEnvelopeCode(error: unknown): string | undefined {
+  return error instanceof ApiClientError ? (error.envelope?.code ?? undefined) : undefined;
+}
+
 export function resolveErrorCopy(t: ErrorCopyFunction, error: unknown): string {
   if (error instanceof ApiTimeoutError) return t("timeout");
 

@@ -1,5 +1,4 @@
-import { ApiClientError } from "./envelope";
-import { API_ORIGIN } from "./origin";
+import { queryString, serverGet } from "./server";
 import type {
   CatalogueSummary,
   CategoryDetailResponse,
@@ -10,48 +9,16 @@ import type {
   SortKey,
   SupplierDirectoryResponse,
   SupplierDetailResponse,
+  UnitOfMeasureRef,
 } from "./catalogue";
 
 /**
  * Server-render data reads for the public catalogue (api.md §2.3–§2.5).
  *
- * Browser-facing code cannot use this module: it reads `API_ORIGIN` and
- * fetches the .NET origin directly, because during SSR there is no running
- * browser to hit the `next.config` rewrite. Server Components import the
- * helpers here; client components import `./catalogue`. Nothing in this file
- * may be imported from a `"use client"` module, or `API_ORIGIN` (and the
- * absolute origin) would leak into the client bundle.
- *
- * `cache: "no-store"` matches the browser transport's policy (client.ts): the
- * catalogue is live platform state — exact totals, fresh audience policy —
- * never snapshot data.
+ * Reads go through the shared SSR transport (`./server`), so the catalogue and
+ * the editorial surface share one timeout/retry policy. Server Components
+ * import the helpers here; client components import `./catalogue`.
  */
-
-async function serverGet<T>(path: string): Promise<T> {
-  const response = await fetch(`${API_ORIGIN}${path}`, {
-    cache: "no-store",
-    headers: { accept: "application/json" },
-  });
-
-  if (!response.ok) {
-    // The envelope is already rendered into friendly copy by the backend for
-    // browsers; SSR cares about status semantics (404 → notFound()), so the
-    // envelope body is not needed here.
-    throw new ApiClientError(response.status, null, null);
-  }
-
-  if (response.status === 204) return undefined as T;
-  return (await response.json()) as T;
-}
-
-function queryString(params: Record<string, string | number | boolean | undefined | null>): string {
-  const entries = Object.entries(params).filter(
-    (entry): entry is [string, string | number | boolean] =>
-      entry[1] !== undefined && entry[1] !== null && entry[1] !== "",
-  );
-  if (entries.length === 0) return "";
-  return `?${entries.map(([key, value]) => `${encodeURIComponent(key)}=${encodeURIComponent(String(value))}`).join("&")}`;
-}
 
 export const CATALOGUE_PAGE_SIZE = 24;
 
@@ -61,6 +28,10 @@ export function getCatalogueSummary(): Promise<CatalogueSummary> {
 
 export function getCategoryTree(): Promise<CategoryNode[]> {
   return serverGet<CategoryNode[]>("/api/v1/catalog/categories");
+}
+
+export function getUnits(): Promise<UnitOfMeasureRef[]> {
+  return serverGet<UnitOfMeasureRef[]>("/api/v1/catalog/units");
 }
 
 export interface ProductListingParams {
@@ -113,6 +84,10 @@ export function getSupplierDetail(slug: string): Promise<SupplierDetailResponse>
 
 export function getSearchResults(params: { q: string; page?: number }): Promise<SearchResponse> {
   return serverGet<SearchResponse>(
-    `/api/v1/catalog/search${queryString({ q: params.q, page: params.page ?? 1 })}`,
+    `/api/v1/catalog/search${queryString({
+      q: params.q,
+      page: params.page ?? 1,
+      pageSize: CATALOGUE_PAGE_SIZE,
+    })}`,
   );
 }

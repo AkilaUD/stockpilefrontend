@@ -2,11 +2,12 @@
    Stockpile.lk — Typography scale
    Source of truth: docs/design-system.md §3.
 
-   Three families, no more:
-     Bricolage Grotesque  — the voice of statements (editorial display)
-     Instrument Sans      — the voice of UI (everything that does work)
-     IBM Plex Mono        — the voice of data (SKUs, quantities, prices,
-                            timestamps, reference codes, table headers)
+   One family, three roles (reference reconstruction — the original site is
+   Open Sans throughout):
+     Open Sans 600/700/800 — the voice of statements (editorial display)
+     Open Sans 400/500/600 — the voice of UI (everything that does work)
+     Open Sans 500/600      — the voice of data (labels, SKUs, prices,
+                              timestamps, reference codes, table headers)
 
    Font variables are assigned in globals.css via @theme from `next/font`
    downloads. Nothing here references a third-party font CDN — next/font

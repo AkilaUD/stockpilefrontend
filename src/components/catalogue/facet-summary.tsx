@@ -54,7 +54,7 @@ export function FacetSummary({ facets, locale, title }: FacetSummaryProps) {
 
   return (
     <section className="rounded-md border border-line bg-surface-panel p-5">
-      <h2 className="type-label text-ink-accent">{title}</h2>
+      <h2 className="block-title">{title}</h2>
       <dl className="mt-4 space-y-3">
         {facets.map((facet) => (
           <div key={facet.key}>
