@@ -547,7 +547,9 @@ export function RfqForm({
 /** The buyer's own recent requests — a real read of GET /me/rfqs, only when signed in. */
 function RecentRequests({ version }: { version: number }) {
   const t = useTranslations("rfq");
+  const tErrors = useTranslations("errors");
   const [requests, setRequests] = useState<RfqResponse[] | null>(null);
+  const [loadError, setLoadError] = useState<string | null>(null);
 
   const statusLabel = (status: string): string => {
     const key = STATUS_KEYS[status];
@@ -559,17 +561,36 @@ function RecentRequests({ version }: { version: number }) {
     rfqApi
       .mine()
       .then((rows) => {
-        if (!cancelled) setRequests(rows);
+        if (!cancelled) {
+          setRequests(rows);
+          setLoadError(null);
+        }
       })
-      .catch(() => {
-        if (!cancelled) setRequests([]);
+      .catch((error: unknown) => {
+        if (!cancelled) {
+          setRequests([]);
+          setLoadError(resolveErrorCopy(tErrors, error) || t("recentLoadError"));
+        }
       });
     return () => {
       cancelled = true;
     };
-  }, [version]);
+  }, [version, t, tErrors]);
 
-  if (requests === null || requests.length === 0) return null;
+  if (requests === null) return null;
+
+  if (loadError) {
+    return (
+      <section className="flex flex-col gap-3 border-t border-line pt-6">
+        <h2 className="font-display text-lg font-bold text-ink">{t("recentTitle")}</h2>
+        <p role="alert" className="type-meta rounded-sm border border-danger/30 bg-danger/5 p-3 text-danger">
+          {loadError}
+        </p>
+      </section>
+    );
+  }
+
+  if (requests.length === 0) return null;
 
   return (
     <section className="flex flex-col gap-3 border-t border-line pt-6">

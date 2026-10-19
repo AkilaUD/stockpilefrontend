@@ -35,7 +35,15 @@ export function RoleGate({
   const { status, user } = useSession();
   const t = useTranslations("workspace");
 
-  if (status === "loading" || status === "signedOut" || !user) return null;
+  if (status === "loading") {
+    return (
+      <p className="type-body text-ink-muted" role="status" aria-live="polite">
+        {t("loading")}
+      </p>
+    );
+  }
+
+  if (status === "signedOut" || !user) return null;
   if (!user.roles.some((role) => allowedRoles.includes(role))) {
     return (
       <EmptyState

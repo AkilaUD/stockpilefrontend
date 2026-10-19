@@ -6,7 +6,6 @@ import { NextIntlClientProvider } from "next-intl";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { isAppLocale, routing } from "@/i18n/routing";
 import { MotionProvider } from "@/components/providers/motion-provider";
-import { QueryProvider } from "@/components/providers/query-provider";
 import { SessionProvider } from "@/components/providers/session-provider";
 import "../globals.css";
 
@@ -94,19 +93,13 @@ export async function generateMetadata({
     description: t("tagline"),
     applicationName: "Stockpile.lk",
     /*
-     * Pre-launch switch, not a policy — and easy to leave on by accident.
-     *
-     * Today the site is a shell: no catalogue, no accounts, nothing worth
-     * caching, so every page is `noindex, nofollow` until it has real content.
-     * Before launch this must be dropped (Next's default is indexable) or set
-     * to `{ index: true, follow: true }`, together with `app/robots.ts` and
-     * `app/sitemap.ts` — that is task 7E in implementation-plan.md, which is
-     * also where `noindex` on private workspace routes gets decided.
-     *
-     * Left as-is it silently blocks the whole site from every index.
-     * 404 responses are excluded by their status code regardless of this.
+     * Launch switch (task 7E): set ALLOW_SEARCH_INDEXING=true on the production
+     * host when public catalogue content is ready. Private routes still get
+     * X-Robots-Tag via src/proxy.ts regardless of this metadata flag.
      */
-    robots: { index: false, follow: false },
+    robots: process.env.ALLOW_SEARCH_INDEXING === "true"
+      ? { index: true, follow: true }
+      : { index: false, follow: false },
   };
 }
 
@@ -176,11 +169,9 @@ export default async function LocaleLayout({
           {t("skipToContent")}
         </a>
         <MotionProvider>
-          <QueryProvider>
-            <SessionProvider>
-              <NextIntlClientProvider>{children}</NextIntlClientProvider>
-            </SessionProvider>
-          </QueryProvider>
+          <SessionProvider>
+            <NextIntlClientProvider>{children}</NextIntlClientProvider>
+          </SessionProvider>
         </MotionProvider>
       </body>
     </html>

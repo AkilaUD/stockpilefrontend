@@ -2,7 +2,7 @@
 
 /*
  * Why this file is a client component: the session is decided by cookies the
- * server set on this browser (`.Stockpile.Session` / `.Stockpile.Refresh`),
+ * server set on this browser (`.Stockpile.Auth` / `.Stockpile.Refresh`),
  * so only a client can read it — `GET /auth/session` answers 200 here and 401
  * for the next browser. The same is true of the antiforgery token, whose
  * newest mint always lives in a response body (§1.10).
@@ -17,6 +17,8 @@
  *      response's token. An ANTIFORGERY_FAILED answers stays visible to the
  *      caller — re-priming is a decision the guard/screen makes, not a retry
  *      the provider hides.
+ *   4. one refresh attempt when `/auth/session` answers 401 (absolute session
+ *      may still have a valid refresh cookie).
  *
  * The retry policy of the transport (isRetryable, 1.49) deliberately does NOT
  * apply to these writes: they are user-initiated, single-shot, and a retried
@@ -25,6 +27,7 @@
 
 import { createContext, useCallback, useContext, useEffect, useRef, useState } from "react";
 import { authApi, type AuthSessionResponse, type LoginRequestBody } from "@/lib/api";
+import { ApiClientError } from "@/lib/api/envelope";
 
 export type SessionStatus = "loading" | "signedOut" | "signedIn";
 
@@ -54,6 +57,10 @@ interface SessionContextValue {
 
 const SessionContext = createContext<SessionContextValue | null>(null);
 
+function isUnauthorized(error: unknown): boolean {
+  return error instanceof ApiClientError && error.status === 401;
+}
+
 export function SessionProvider({ children }: { children: React.ReactNode }) {
   const [status, setStatus] = useState<SessionStatus>("loading");
   const [user, setUser] = useState<AuthSessionResponse | null>(null);
@@ -78,8 +85,25 @@ export function SessionProvider({ children }: { children: React.ReactNode }) {
         if (cancelled) return;
         setUser(session);
         setStatus("signedIn");
-      } catch {
-        /* 401, or transport trouble: either way we are not signed in right now. */
+        return;
+      } catch (sessionError) {
+        if (cancelled) return;
+
+        /* Absolute session cookie may have expired while the refresh cookie is
+         * still valid — try one refresh before treating the browser as signed out. */
+        if (isUnauthorized(sessionError) && tokenRef.current) {
+          try {
+            const response = await authApi.refresh(tokenRef.current);
+            if (cancelled) return;
+            tokenRef.current = response.requestToken;
+            setUser(response.user);
+            setStatus("signedIn");
+            return;
+          } catch {
+            /* Refresh failed — fall through to signedOut. */
+          }
+        }
+
         if (!cancelled) setStatus("signedOut");
       }
     })();

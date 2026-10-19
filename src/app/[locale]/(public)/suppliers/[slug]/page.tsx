@@ -10,6 +10,7 @@ import { Pagination } from "@/components/catalogue/pagination";
 import { StatusPill } from "@/components/ui/status-pill";
 import { ButtonLink } from "@/components/ui/button";
 import { Reveal } from "@/components/motion/reveal";
+import { safeExternalHref } from "@/lib/url/safe-external-href";
 
 export const dynamicParams = true;
 
@@ -63,6 +64,7 @@ export default async function SupplierPage({
 
   const stockLabel = (state: string): string =>
     (STOCK_STATES as readonly string[]).includes(state) ? tCat(`stock.${state}`) : state;
+  const websiteHref = safeExternalHref(detail.website);
 
   // `?view=products` swaps the microsite for this supplier's full catalogue —
   // same page route, still SSR, served from the dedicated endpoint.
@@ -150,17 +152,17 @@ export default async function SupplierPage({
                         </dd>
                       </div>
                     )}
-                    {detail.website && (
+                    {websiteHref && (
                       <div className="flex justify-between gap-4">
                         <dt className="type-body text-ink-muted">{t("website")}</dt>
                         <dd className="type-body text-ink">
                           <a
-                            href={detail.website}
+                            href={websiteHref}
                             target="_blank"
                             rel="noopener noreferrer"
                             className="transition-colors duration-instant ease-standard hover:text-ink-accent"
                           >
-                            {detail.website.replace(/^https?:\/\//, "")}
+                            {websiteHref.replace(/^https?:\/\//, "")}
                           </a>
                         </dd>
                       </div>

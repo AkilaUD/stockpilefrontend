@@ -81,9 +81,21 @@ export const rfqApi = {
   /** Create a Draft RFQ (buyer capability `rfq.create`, rate-limited). */
   create: (body: CreateRfqRequest, csrfToken: string) =>
     apiFetch<RfqResponse>(RFQ_PATH, { method: "POST", body: JSON.stringify(body) }, { csrfToken }),
-  /** Submit a draft; the server runs matching and answers the dispatched RFQ. */
-  submit: (rfqId: string, csrfToken: string) =>
-    apiFetch<RfqResponse>(`${RFQ_PATH}/${rfqId}/submit`, { method: "POST" }, { csrfToken }),
+  /**
+   * Submit a draft; the server runs matching and answers the dispatched RFQ.
+   * Requires a GUID `Idempotency-Key` (api.md §1.7) so retries replay instead of
+   * re-matching. Callers should mint one key per submit attempt
+   * (`crypto.randomUUID()`).
+   */
+  submit: (rfqId: string, csrfToken: string, idempotencyKey: string = crypto.randomUUID()) =>
+    apiFetch<RfqResponse>(
+      `${RFQ_PATH}/${rfqId}/submit`,
+      {
+        method: "POST",
+        headers: { "Idempotency-Key": idempotencyKey },
+      },
+      { csrfToken },
+    ),
   /** One RFQ the caller's organisation owns; a foreign id answers the BOLA 404. */
   get: (rfqId: string) => apiFetch<RfqResponse>(`${RFQ_PATH}/${rfqId}`),
   /** The caller's organisations' RFQs, newest first (api.md §2.6). */

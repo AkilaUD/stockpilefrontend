@@ -23,17 +23,22 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { cx } from "@/lib/cx";
 
+const SUPPLIER_ROLES = new Set(["supplierOwner", "supplierUser"]);
+
 export function AccountMenu({
   fullName,
+  roles,
   signOutBusy,
   onSignOut,
 }: {
   fullName: string;
+  roles: readonly string[];
   signOutBusy: boolean;
   onSignOut: () => void;
 }) {
   const tActions = useTranslations("common.actions");
   const tNav = useTranslations("nav");
+  const showSupplierDesk = roles.some((role) => SUPPLIER_ROLES.has(role));
 
   return (
     <DropdownMenu>
@@ -46,6 +51,11 @@ export function AccountMenu({
         <DropdownMenuItem asChild>
           <Link href="/workspace">{tNav("workspace")}</Link>
         </DropdownMenuItem>
+        {showSupplierDesk && (
+          <DropdownMenuItem asChild>
+            <Link href="/supplier">{tNav("supplierDesk")}</Link>
+          </DropdownMenuItem>
+        )}
         <DropdownMenuItem disabled={signOutBusy} onSelect={onSignOut}>
           {tActions("signOut")}
         </DropdownMenuItem>

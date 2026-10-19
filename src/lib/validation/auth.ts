@@ -162,7 +162,14 @@ export function validateReset(values: ResetValues, t: Translate): FieldFailures 
 export function validatePasswordChange(values: PasswordChangeValues, t: Translate): FieldFailures {
   const failing: FieldFailures = {};
   if (values.currentPassword.length === 0) failing.currentPassword = t("currentPasswordRequired");
-  checkPassword(values.newPassword, t, failing);
+  // Map onto the form's newPassword key (checkPassword writes `password` for login/register).
+  const passwordErrors: { password?: string } = {};
+  checkPassword(values.newPassword, t, passwordErrors);
+  if (passwordErrors.password === t("passwordRequired")) {
+    failing.newPassword = t("passwordRequired");
+  } else if (passwordErrors.password) {
+    failing.newPassword = passwordErrors.password;
+  }
   if (values.confirmPassword !== values.newPassword) failing.confirmPassword = t("passwordsDoNotMatch");
   return failing;
 }
