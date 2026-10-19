@@ -168,12 +168,104 @@
       "description": "Find construction material, compare quotations and order from verified Sri Lankan suppliers on one platform."
     },
     "hero": {
-      "headline": "Build the list. Buy smarter.",
-      "lede": "Search Sri Lankan construction materials, send one RFQ, and compare supplier quotes on a single desk.",
+      "headline": "Send one RFQ. Get quotes from multiple suppliers.",
+      "lede": "Stop calling five suppliers for one price. Build your materials list once — Sri Lankan suppliers quote against it, you compare price and lead time side by side, then order.",
       "bannerCta": "Learn how Stockpile works",
-      "bannerAlt": "Stockpile — construction material procurement",
+      "bannerAlt": "Construction materials warehouse with steel, cement and timber",
       "rfqCta": "Request a quote",
-      "supplierCta": "Join as a supplier"
+      "supplierCta": "Join as a supplier",
+      "browseCta": "Browse materials",
+      "proofLine": "Free for buyers · One request, many quotes · Order only when a quote fits",
+      "flowLabel": "1 RFQ → multiple quotes → 1 order"
+    },
+    "departments": {
+      "title": "Every material on the job, one atlas",
+      "lede": "Browse the live departments contractors actually search — from steel and cement to finishing and services.",
+      "imageAlt": "Construction material samples laid out like an atlas",
+      "subcategories": "{count} subcategories",
+      "browse": "Browse"
+    },
+    "benefits": {
+      "title": "Why buyers build their list on Stockpile",
+      "lede": "The phone-around is replaced by one desk: one request out, competing quotes back, a clear comparison, and an order when you are ready.",
+      "imageAlt": "Contractor reviewing quotations on site",
+      "cta": "Start your RFQ",
+      "items": [
+        {
+          "title": "One RFQ, many quotes",
+          "body": "Send your list or BOQ once. It is routed to suppliers whose products match, so you stop repeating the same call."
+        },
+        {
+          "title": "Compare like-for-like",
+          "body": "Quotes line up in your workspace with price and lead time visible together — not scattered across calls and chats."
+        },
+        {
+          "title": "Order from the winning quote",
+          "body": "Accept the quote that fits your site and date, and it becomes an order both sides can track."
+        },
+        {
+          "title": "Free to request",
+          "body": "Sending an RFQ costs buyers nothing. You only commit when you accept a quote."
+        }
+      ],
+      "example": {
+        "title": "How a comparison looks",
+        "note": "Example only — your quotes show real supplier names and prices",
+        "item": "GI steel box bar × 100 lengths",
+        "supplier": "Supplier",
+        "unitPrice": "Unit price",
+        "leadTime": "Lead time",
+        "total": "Total",
+        "days": "{count} days"
+      }
+    },
+    "supplierValue": {
+      "title": "Contractors are already building lists. Quote the ones that match you.",
+      "lede": "Register, list what you stock, and receive project requirements matched to your products — filtered and sent straight to your desk.",
+      "imageAlt": "Supplier loading steel sections for delivery",
+      "cta": "Register as a supplier",
+      "pricingCta": "See supplier plans",
+      "items": [
+        "Receive RFQs matched to the products you actually list",
+        "Quote only the jobs you want — no obligation to bid on every lead",
+        "Answer from one desk and turn accepted quotes into orders"
+      ]
+    },
+    "faq": {
+      "title": "Questions, answered straight",
+      "helpLabel": "Visit the help centre",
+      "items": [
+        {
+          "q": "What is Stockpile?",
+          "a": "Sri Lanka's construction-material procurement platform. Buyers search a live catalogue, send one request for quotation (RFQ), compare supplier quotes, and order — all on one desk."
+        },
+        {
+          "q": "How does an RFQ work?",
+          "a": "Build your list (or describe your BOQ), add quantities and notes, and submit once. Stockpile routes it to suppliers whose products match; their quotes arrive in your workspace."
+        },
+        {
+          "q": "Does it cost buyers anything?",
+          "a": "No. Sending an RFQ and comparing quotes is free for buyers. You only pay the supplier for an order you accept, on the terms in that quote."
+        },
+        {
+          "q": "How do I compare quotes?",
+          "a": "Open the comparison view for your RFQ to line quotes up side by side — price, lead time and supplier together — then accept the one that fits."
+        },
+        {
+          "q": "Who delivers my order?",
+          "a": "Your chosen supplier fulfils the order on the delivery terms in their accepted quote. Delivery location and timing are agreed in the quote before you accept."
+        },
+        {
+          "q": "How do suppliers join?",
+          "a": "Register as a supplier, list your products, and choose a plan on the pricing page. Plans are billed manually by invoice — there is no card checkout."
+        }
+      ]
+    },
+    "finalCta": {
+      "title": "Your next materials list could be quoted by morning tea.",
+      "lede": "Build the list once, let suppliers compete for it, and order with the comparison in front of you.",
+      "rfqCta": "Request a quote",
+      "browseCta": "Browse materials"
     },
     "workflow": {
       "title": "From RFQ to order",

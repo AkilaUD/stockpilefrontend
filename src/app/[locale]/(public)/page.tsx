@@ -14,16 +14,22 @@ import { StatsBand } from "@/components/home/stats-band";
 import { MostSearched } from "@/components/home/most-searched";
 import { ProductGridSection } from "@/components/home/product-grid-section";
 import { NewestSuppliers } from "@/components/home/newest-suppliers-section";
-import { BecomeSupplierBand } from "@/components/home/become-supplier-band";
 import { NewsBand } from "@/components/home/news-band";
 import { ProcurementWorkflow } from "@/components/home/procurement-workflow";
+import { DepartmentAtlas } from "@/components/home/department-atlas";
+import { BuyerBenefits } from "@/components/home/buyer-benefits";
+import { SupplierValue } from "@/components/home/supplier-value";
+import { HomeFaq } from "@/components/home/home-faq";
+import { FinalCta } from "@/components/home/final-cta";
 import { HomeGsap } from "@/components/home/home-gsap";
 import { Skeleton } from "@/components/ui/skeleton";
 
 /**
  * Material Atlas home — live catalogue reads only.
- * Trust band = catalog/summary (+ department count from tree roots).
- * No invented RFQ/call counters.
+ * Research-backed order: mechanism hero → live proof → departments →
+ * how it works → buyer benefits (+ labelled example) → products →
+ * supplier value → newest suppliers → products → FAQ → news → final CTA.
+ * No invented counts, testimonials, or savings claims.
  */
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
@@ -82,6 +88,17 @@ async function StatsBandSection({ locale }: { locale: string }) {
   ];
 
   return <StatsBand stats={stats} />;
+}
+
+async function DepartmentAtlasSection() {
+  const tree = await safeRead(() => getCategoryTree());
+  if (!tree) return null;
+  const departments = tree.filter((node) => node.isRoot).slice(0, 12);
+  return (
+    <div data-home-reveal>
+      <DepartmentAtlas departments={departments} />
+    </div>
+  );
 }
 
 async function ProductSweepSection({
@@ -148,6 +165,27 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
     body: t(`workflow.steps.${index}.body`),
   }));
 
+  const benefitItems = [0, 1, 2, 3].map((index) => ({
+    title: t(`benefits.items.${index}.title`),
+    body: t(`benefits.items.${index}.body`),
+  }));
+
+  const exampleRows = [
+    { supplier: "A", unitPrice: "Rs 4,850", leadDays: 3, total: "Rs 485,000" },
+    { supplier: "B", unitPrice: "Rs 4,620", leadDays: 5, total: "Rs 462,000" },
+    { supplier: "C", unitPrice: "Rs 4,790", leadDays: 2, total: "Rs 479,000" },
+  ].map((row) => ({
+    supplier: `${t("benefits.example.supplier")} ${row.supplier}`,
+    unitPrice: row.unitPrice,
+    leadTime: t("benefits.example.days", { count: row.leadDays }),
+    total: row.total,
+  }));
+
+  const faqItems = [0, 1, 2, 3, 4, 5].map((index) => ({
+    question: t(`faq.items.${index}.q`),
+    answer: t(`faq.items.${index}.a`),
+  }));
+
   return (
     <>
       <HomeGsap />
@@ -157,7 +195,9 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
         alt={t("hero.bannerAlt")}
         cta={t("hero.bannerCta")}
         rfqCta={t("hero.rfqCta")}
-        supplierCta={t("hero.supplierCta")}
+        supplierCta={t("hero.browseCta")}
+        proofLine={t("hero.proofLine")}
+        flowLabel={t("hero.flowLabel")}
         searchSlot={<HeroSearch />}
       />
 
@@ -165,9 +205,39 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
         <StatsBandSection locale={locale} />
       </Suspense>
 
+      <Suspense fallback={<HomeSectionSkeleton />}>
+        <DepartmentAtlasSection />
+      </Suspense>
+
       <div data-home-reveal>
         <MostSearched />
       </div>
+
+      <ProcurementWorkflow
+        title={t("workflow.title")}
+        lede={t("workflow.lede")}
+        steps={workflowSteps}
+        ctaLabel={t("workflow.cta")}
+        ctaHref="/rfq"
+      />
+
+      <BuyerBenefits
+        title={t("benefits.title")}
+        lede={t("benefits.lede")}
+        items={benefitItems}
+        imageAlt={t("benefits.imageAlt")}
+        ctaLabel={t("benefits.cta")}
+        example={{
+          title: t("benefits.example.title"),
+          note: t("benefits.example.note"),
+          item: t("benefits.example.item"),
+          supplierHeader: t("benefits.example.supplier"),
+          unitPriceHeader: t("benefits.example.unitPrice"),
+          leadTimeHeader: t("benefits.example.leadTime"),
+          totalHeader: t("benefits.example.total"),
+          rows: exampleRows,
+        }}
+      />
 
       <Suspense fallback={<HomeSectionSkeleton />}>
         <div data-home-reveal>
@@ -180,12 +250,13 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
         </div>
       </Suspense>
 
-      <ProcurementWorkflow
-        title={t("workflow.title")}
-        lede={t("workflow.lede")}
-        steps={workflowSteps}
-        ctaLabel={t("workflow.cta")}
-        ctaHref="/rfq"
+      <SupplierValue
+        title={t("supplierValue.title")}
+        lede={t("supplierValue.lede")}
+        items={[0, 1, 2].map((index) => t(`supplierValue.items.${index}`))}
+        imageAlt={t("supplierValue.imageAlt")}
+        cta={t("supplierValue.cta")}
+        pricingCta={t("supplierValue.pricingCta")}
       />
 
       <Suspense fallback={<HomeSectionSkeleton />}>
@@ -193,13 +264,6 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
           <NewestSuppliersSection />
         </div>
       </Suspense>
-
-      <BecomeSupplierBand
-        title={t("becomeSupplier.title")}
-        lede={t("becomeSupplier.lede")}
-        cta={t("becomeSupplier.cta")}
-        pricingCta={t("becomeSupplier.pricingCta")}
-      />
 
       <Suspense fallback={<HomeSectionSkeleton />}>
         <div data-home-reveal>
@@ -212,11 +276,20 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
         </div>
       </Suspense>
 
+      <HomeFaq title={t("faq.title")} items={faqItems} helpLabel={t("faq.helpLabel")} />
+
       <Suspense fallback={<HomeSectionSkeleton />}>
         <div data-home-reveal>
           <HomeNewsBandSection locale={locale} />
         </div>
       </Suspense>
+
+      <FinalCta
+        title={t("finalCta.title")}
+        lede={t("finalCta.lede")}
+        rfqCta={t("finalCta.rfqCta")}
+        browseCta={t("finalCta.browseCta")}
+      />
     </>
   );
 }
