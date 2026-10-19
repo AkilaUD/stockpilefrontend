@@ -44,9 +44,7 @@ export default async function PrivacyPolicyPage({
       <ProseSections sections={t.raw("sections") as ProseSection[]} />
 
       <section className="mt-10 measure-editorial">
-        <h2 className="font-display text-base font-bold uppercase tracking-wide text-ink">
-          {t("cookiesTitle")}
-        </h2>
+        <h2 className="block-title">{t("cookiesTitle")}</h2>
         <p className="mt-2 type-body leading-relaxed text-ink-muted">{t("cookiesLede")}</p>
         <div className="mt-3 overflow-x-auto">
           <table className="w-full min-w-[32rem] border-collapse text-left">

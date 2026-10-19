@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { setRequestLocale, getTranslations } from "next-intl/server";
-import { Link } from "@/i18n/navigation";
 import { InfoPage } from "@/components/pages/info-page";
+import { ButtonLink, buttonClassName } from "@/components/ui/button";
 
 /**
  * /quotations-and-estimations — "Quotations & Estimations" (reference
@@ -38,11 +38,11 @@ export default async function QuotationsAndEstimationsPage({
 
   return (
     <InfoPage breadcrumb={t("title")} title={t("title")}>
-      <div className="max-w-3xl">
+      <div className="measure-editorial">
         <p className="font-display text-xl font-bold tracking-tight text-ink md:text-2xl">
           {t("subtitle")}
         </p>
-        <p className="mt-3 font-body leading-relaxed text-ink-muted">{t("lede")}</p>
+        <p className="mt-3 type-body text-ink-muted">{t("lede")}</p>
       </div>
 
       <ol className="mt-10 grid gap-4 md:grid-cols-3">
@@ -52,24 +52,22 @@ export default async function QuotationsAndEstimationsPage({
               {index + 1}. {step.label}
             </p>
             <h2 className="mt-2 font-display text-lg font-bold text-ink">{step.title}</h2>
-            <p className="mt-2 font-body text-sm leading-relaxed text-ink-muted">{step.body}</p>
+            <p className="mt-2 type-body-sm text-ink-muted">{step.body}</p>
           </li>
         ))}
       </ol>
 
       <div className="mt-10 rounded-md border border-line bg-surface-panel p-6 md:p-8">
         <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-          <Link
+          <ButtonLink
             href="/rfq"
-            className="group inline-flex items-center justify-center gap-2 rounded-md bg-ink px-6 py-3 font-body text-sm font-semibold text-white transition-colors duration-instant ease-standard hover:bg-ink-soft focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus"
+            size="lg"
+            className="border-ink! bg-ink! text-ink-inverse! hover:bg-ink-soft!"
           >
             {t("onlineCta")}
-          </Link>
+          </ButtonLink>
           <span className="type-label text-center text-ink-muted">{t("orLabel")}</span>
-          <a
-            href={rfqMailto}
-            className="inline-flex items-center justify-center gap-2 rounded-md border-2 border-ink px-6 py-3 font-body text-sm font-semibold text-ink transition-colors duration-instant ease-standard hover:bg-ink hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus"
-          >
+          <a href={rfqMailto} className={buttonClassName({ variant: "secondary", size: "lg" })}>
             {t("uploadCta")}
           </a>
         </div>
@@ -77,18 +75,18 @@ export default async function QuotationsAndEstimationsPage({
           <div className="flex items-center gap-2">
             <dt className="sr-only">{t("freeAlways")}</dt>
             <dd className="flex items-baseline gap-2">
-              <span className="inline-flex items-center rounded-sm bg-brand-primary px-2 py-0.5 font-body text-xs font-bold text-ink">
+              <span className="inline-flex items-center rounded-sm bg-brand-primary px-2 py-0.5 type-micro font-bold text-ink-on-signal">
                 {t("freeBadge")}
               </span>
-              <span className="font-body text-sm font-medium text-ink">{t("freeAlways")}</span>
+              <span className="type-body-sm font-medium text-ink">{t("freeAlways")}</span>
             </dd>
           </div>
           <div className="flex items-baseline gap-2">
-            <dt className="font-body text-sm text-ink-muted">{t("categoriesLabel")}</dt>
+            <dt className="type-body-sm text-ink-muted">{t("categoriesLabel")}</dt>
             <dd className="font-display text-lg font-bold text-ink">{t("categoriesValue")}</dd>
           </div>
           <div className="flex items-baseline gap-2">
-            <dt className="font-body text-sm text-ink-muted">{t("suppliersLabel")}</dt>
+            <dt className="type-body-sm text-ink-muted">{t("suppliersLabel")}</dt>
             <dd className="font-display text-lg font-bold text-ink">{t("suppliersValue")}</dd>
           </div>
         </dl>

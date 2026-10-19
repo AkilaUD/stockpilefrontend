@@ -8,8 +8,11 @@ import type { ProductDetailResponse } from "@/lib/api/catalogue";
 import { ApiClientError } from "@/lib/api/envelope";
 import { formatMoney } from "@/lib/money";
 import { ProductCard } from "@/components/catalogue/product-card";
+import { ProductGallery } from "@/components/catalogue/product-gallery";
+import { CatalogueShell } from "@/components/catalogue/catalogue-shell";
 import { StatusPill, type StatusTone } from "@/components/ui/status-pill";
 import { Reveal } from "@/components/motion/reveal";
+import { BadgeCheck, FileText, Truck } from "lucide-react";
 
 export const dynamicParams = true;
 
@@ -34,11 +37,6 @@ const STOCK_TONES: Record<string, StatusTone> = {
 };
 
 const STOCK_STATES = ["InStock", "OutOfStock", "EnquireForAvailability"] as const;
-
-function imageUrl(srcset: string | null | undefined): string | null {
-  if (!srcset || srcset.trim() === "") return null;
-  return srcset.trim().split(/\s+/)[0] ?? null;
-}
 
 function formatDate(value: string, locale: string): string {
   return new Intl.DateTimeFormat(locale, { year: "numeric", month: "short", day: "numeric" }).format(new Date(value));
@@ -68,113 +66,121 @@ export default async function ProductDetailPage({
   const tCat = await getTranslations({ locale, namespace: "catalogue" });
   const tListing = await getTranslations({ locale, namespace: "catalogue.listing" });
   const tActions = await getTranslations({ locale, namespace: "common.actions" });
+  const tPager = await getTranslations({ locale, namespace: "catalogue.pagination" });
 
-  const src = imageUrl(detail.media[0]?.srcset);
   const price = detail.price;
   const pricePublic = price?.state === "Public" && price.amount != null;
   const taxLabel = price?.taxState && price.taxState !== "Unknown" ? price.taxState : null;
+  const priceReason = !pricePublic && detail.visibility?.reason ? detail.visibility.reason : null;
 
   const stockLabel = (state: string): string =>
     (STOCK_STATES as readonly string[]).includes(state) ? tCat(`stock.${state}`) : state;
 
   const related = detail.relatedProducts ?? [];
 
-  return (
-    <div className="shell-public py-8 md:py-12">
-      <nav aria-label="breadcrumb" className="text-sm leading-[19px] text-ink-muted">
-        <Link href="/products" className="text-ink-muted transition-colors duration-instant ease-standard hover:text-ink">
-          {tListing("title")}
-        </Link>
-        <span aria-hidden="true" className="mx-2 text-ink-faint">/</span>
-        <Link href={`/suppliers/${detail.supplier.slug}`} className="text-ink-muted transition-colors duration-instant ease-standard hover:text-ink">
-          {detail.supplier.name}
-        </Link>
-      </nav>
+  const crumbs = [
+    { label: tListing("title"), href: "/products" },
+    { label: detail.supplier.name, href: `/suppliers/${detail.supplier.slug}` },
+    { label: detail.name },
+  ];
 
-      <div className="mt-6 grid gap-8 lg:grid-cols-[1fr_24rem] lg:gap-12">
-        <section>
-          {src ? (
-            <div className="relative aspect-[4/3] overflow-hidden rounded-md border border-line bg-surface-recessed">
-              {/* eslint-disable-next-line @next/next/no-img-element -- deliberate: same-origin media rewrite, no optimizer re-fetch. */}
-              <img
-                src={src}
-                alt={detail.media[0]?.alt ?? detail.name}
-                className="absolute inset-0 h-full w-full object-cover"
-              />
-            </div>
-          ) : (
-            <div className="aspect-[4/3] rounded-md border border-line bg-surface-recessed" aria-hidden="true" />
-          )}
+  return (
+    <CatalogueShell crumbs={crumbs} title={detail.name}>
+      <div className="grid gap-10 lg:grid-cols-12 lg:gap-12">
+        <section className="lg:col-span-7">
+          <ProductGallery
+            media={detail.media}
+            productName={detail.name}
+            previousLabel={tPager("previous")}
+            nextLabel={tPager("next")}
+          />
         </section>
 
-        <aside className="flex flex-col gap-6">
+        <aside className="flex flex-col gap-6 lg:col-span-5">
           <div>
-            <p className="text-base leading-[22px] text-ink-muted">{detail.sku}</p>
-            <h1 className="page-title mt-2">{detail.name}</h1>
+            <p className="type-meta tabular text-ink-muted">{t("sku", { sku: detail.sku })}</p>
           </div>
 
-          <div className="flex items-start justify-between gap-4">
-            {pricePublic ? (
-              <p className="text-2xl leading-6 font-medium text-ink tabular">
-                {formatMoney({ amount: price.amount as number, currency: price.currency, locale })}
-                {taxLabel && (
-                  <span className="type-meta text-ink-muted"> {taxLabel}</span>
+          <div className="rounded-sm border border-line bg-surface-panel p-5 md:p-6">
+            <div className="flex flex-wrap items-start justify-between gap-4">
+              <div className="min-w-0">
+                {pricePublic ? (
+                  <p className="font-display text-3xl font-extrabold tracking-tight text-ink tabular">
+                    {formatMoney({ amount: price.amount as number, currency: price.currency, locale })}
+                    {taxLabel && <span className="type-meta font-body font-normal text-ink-muted"> {taxLabel}</span>}
+                  </p>
+                ) : (
+                  <p className="font-display text-2xl font-bold tracking-tight text-ink-muted">{t("priceOnRequest")}</p>
                 )}
-              </p>
-            ) : (
-              <p className="text-2xl leading-6 font-medium text-ink-muted">{t("priceOnRequest")}</p>
+                {priceReason && (
+                  <p className="mt-2 type-body-sm text-ink-muted">{priceReason}</p>
+                )}
+              </div>
+              <StatusPill tone={STOCK_TONES[detail.stock?.state ?? ""] ?? "neutral"}>
+                {stockLabel(detail.stock?.state ?? "")}
+              </StatusPill>
+            </div>
+
+            {detail.canAddToRfq && (
+              <div className="mt-6 border-t border-line pt-5">
+                <ButtonLink href="/rfq" fullWidth>
+                  {tActions("requestQuote")}
+                </ButtonLink>
+                <p className="mt-2 type-meta text-ink-muted">{t("requestQuoteHint")}</p>
+              </div>
             )}
-            <StatusPill tone={STOCK_TONES[detail.stock?.state ?? ""] ?? "neutral"}>
-              {stockLabel(detail.stock?.state ?? "")}
-            </StatusPill>
           </div>
 
-          <div className="border-t border-line pt-5">
-            <ButtonLink href="/quotations-and-estimations" fullWidth>
-              {tActions("requestQuote")}
-            </ButtonLink>
-            <p className="mt-2 type-meta text-ink-muted">{t("requestQuoteHint")}</p>
-          </div>
-
-          <dl className="space-y-3 border-t border-line pt-5">
+          <dl className="space-y-3 rounded-sm border border-line bg-surface-panel p-5 md:p-6">
             {detail.brand && (
               <div className="flex justify-between gap-4">
-                <dt className="type-body text-ink-muted">{t("brand")}</dt>
-                <dd className="type-body text-ink">{detail.brand.name}</dd>
+                <dt className="type-body-sm text-ink-muted">{t("brand")}</dt>
+                <dd className="type-body-sm text-ink">{detail.brand.name}</dd>
               </div>
             )}
             {detail.origin?.countryOfOrigin && (
               <div className="flex justify-between gap-4">
-                <dt className="type-body text-ink-muted">{t("countryOfOrigin")}</dt>
-                <dd className="type-body text-ink">{detail.origin.countryOfOrigin.name}</dd>
+                <dt className="type-body-sm text-ink-muted">{t("countryOfOrigin")}</dt>
+                <dd className="type-body-sm text-ink">{detail.origin.countryOfOrigin.name}</dd>
               </div>
             )}
             {detail.origin?.countryOfManufacture && (
               <div className="flex justify-between gap-4">
-                <dt className="type-body text-ink-muted">{t("countryOfManufacture")}</dt>
-                <dd className="type-body text-ink">{detail.origin.countryOfManufacture.name}</dd>
+                <dt className="type-body-sm text-ink-muted">{t("countryOfManufacture")}</dt>
+                <dd className="type-body-sm text-ink">{detail.origin.countryOfManufacture.name}</dd>
               </div>
             )}
             {detail.minOrderQuantity != null && (
-              <div className="flex justify-between gap-4">
-                <dt className="type-body text-ink-muted">{t("minOrderLabel")}</dt>
-                <dd className="type-body text-ink tabular">{formatQuantity(detail.minOrderQuantity, locale)}</dd>
+              <div className="flex items-center justify-between gap-4">
+                <dt className="flex items-center gap-2 type-body-sm text-ink-muted">
+                  <FileText className="size-4 shrink-0" aria-hidden />
+                  {t("minOrderLabel")}
+                </dt>
+                <dd className="type-body-sm text-ink tabular">{formatQuantity(detail.minOrderQuantity, locale)}</dd>
               </div>
             )}
             {detail.leadTimeDays != null && (
-              <div className="flex justify-between gap-4">
-                <dt className="type-body text-ink-muted">{t("leadTimeLabel")}</dt>
-                <dd className="type-body text-ink">{t("leadTime", { days: detail.leadTimeDays })}</dd>
+              <div className="flex items-center justify-between gap-4">
+                <dt className="flex items-center gap-2 type-body-sm text-ink-muted">
+                  <Truck className="size-4 shrink-0" aria-hidden />
+                  {t("leadTimeLabel")}
+                </dt>
+                <dd className="type-body-sm text-ink">{t("leadTime", { days: detail.leadTimeDays })}</dd>
               </div>
             )}
           </dl>
 
-          <div className="rounded-md border border-line bg-surface-panel p-5">
-            <p className="type-title-sm text-ink">{detail.supplier.name}</p>
-            <p className="mt-1 type-body-sm text-ink-muted">
-              {detail.supplier.verifiedAt
-                ? tCat("supplier.verifiedAt", { date: formatDate(detail.supplier.verifiedAt, locale) })
-                : t("unverified")}
+          <div className="rounded-sm border border-line bg-surface-panel p-5 md:p-6">
+            <p className="font-display text-lg font-bold tracking-tight text-ink">{detail.supplier.name}</p>
+            <p className="mt-1 flex items-center gap-1.5 type-body-sm text-ink-muted">
+              {detail.supplier.verifiedAt ? (
+                <>
+                  <BadgeCheck className="size-4 shrink-0 text-ink" aria-hidden />
+                  {tCat("supplier.verifiedAt", { date: formatDate(detail.supplier.verifiedAt, locale) })}
+                </>
+              ) : (
+                t("unverified")
+              )}
             </p>
             <Link
               href={`/suppliers/${detail.supplier.slug}`}
@@ -187,25 +193,25 @@ export default async function ProductDetailPage({
       </div>
 
       {(detail.summary || detail.description) && (
-        <section className="mt-12 max-w-prose">
-          <h2 className="text-xl font-medium text-ink">{t("about")}</h2>
-          {detail.summary && <p className="mt-3 type-body text-ink">{detail.summary}</p>}
-          {detail.description && <p className="mt-3 type-body text-ink">{detail.description}</p>}
+        <section className="mt-14 max-w-prose">
+          <h2 className="font-display text-2xl font-bold tracking-tight text-ink">{t("about")}</h2>
+          {detail.summary && <p className="mt-4 type-body leading-relaxed text-ink">{detail.summary}</p>}
+          {detail.description && <p className="mt-4 type-body leading-relaxed text-ink">{detail.description}</p>}
         </section>
       )}
 
       {detail.specifications && detail.specifications.sections.length > 0 && (
-        <section className="mt-12">
-          <h2 className="text-xl font-medium text-ink">{t("specifications")}</h2>
-          <div className="mt-4 grid gap-8 md:grid-cols-2">
+        <section className="mt-14">
+          <h2 className="font-display text-2xl font-bold tracking-tight text-ink">{t("specifications")}</h2>
+          <div className="mt-6 grid gap-8 md:grid-cols-2">
             {detail.specifications.sections.map((section) => (
-              <div key={section.label}>
-                <h3 className="block-title">{section.label}</h3>
-                <dl className="mt-3 divide-y divide-line border-y border-line">
+              <div key={section.label} className="rounded-sm border border-line bg-surface-panel p-5">
+                <h3 className="type-label font-semibold tracking-wide text-ink">{section.label}</h3>
+                <dl className="mt-4 divide-y divide-line">
                   {section.attributes.map((row) => (
                     <div key={row.code} className="flex justify-between gap-6 py-2.5">
                       <dt className="type-body-sm text-ink-muted">{row.label}</dt>
-                      <dd className="type-body-sm text-ink">
+                      <dd className="type-body-sm text-right text-ink tabular">
                         {row.value}
                         {row.unit ? ` ${row.unit}` : ""}
                       </dd>
@@ -219,11 +225,11 @@ export default async function ProductDetailPage({
       )}
 
       {detail.priceHistory && detail.priceHistory.length > 0 && (
-        <section className="mt-12 max-w-2xl">
-          <h2 className="text-xl font-medium text-ink">{t("priceHistory")}</h2>
-          <ul className="mt-4 divide-y divide-line border-y border-line">
+        <section className="mt-14 max-w-2xl">
+          <h2 className="font-display text-2xl font-bold tracking-tight text-ink">{t("priceHistory")}</h2>
+          <ul className="mt-4 divide-y divide-line rounded-sm border border-line bg-surface-panel">
             {detail.priceHistory.map((entry) => (
-              <li key={entry.at} className="flex items-center justify-between gap-6 py-2.5">
+              <li key={entry.at} className="flex items-center justify-between gap-6 px-5 py-3">
                 <span className="type-body-sm text-ink-muted">{t("onDate", { date: formatDate(entry.at, locale) })}</span>
                 <span className="type-body-sm text-ink tabular">
                   {formatMoney({ amount: entry.amount, currency: detail.price?.currency ?? "LKR", locale })}
@@ -235,9 +241,9 @@ export default async function ProductDetailPage({
       )}
 
       {related.length > 0 && (
-        <section className="mt-12">
-          <h2 className="text-xl font-medium text-ink">{t("related")}</h2>
-          <Reveal className="mt-6 grid grid-cols-2 gap-x-4 gap-y-8 md:grid-cols-4">
+        <section className="mt-14">
+          <h2 className="font-display text-2xl font-bold tracking-tight text-ink">{t("related")}</h2>
+          <Reveal className="catalogue-grid mt-6 gap-3 md:gap-4">
             {related.map((item) => (
               <ProductCard
                 key={item.publicId}
@@ -253,6 +259,6 @@ export default async function ProductDetailPage({
           </Reveal>
         </section>
       )}
-    </div>
+    </CatalogueShell>
   );
 }

@@ -18,6 +18,7 @@
  */
 
 import { useEffect, useId, useRef, useState, type ChangeEvent, type FormEvent } from "react";
+import { CheckCircle2, ClipboardList, ListPlus, LogIn, UserPlus } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useSession } from "@/components/providers/session-provider";
 import { Button, ButtonLink } from "@/components/ui/button";
@@ -31,6 +32,8 @@ import {
   type RfqFormValues,
   type RfqItemValues,
 } from "@/lib/validation/rfq";
+import { quoteStatusTone } from "@/lib/procurement/status-tone";
+import { StatusPill } from "@/components/ui/status-pill";
 
 /** One selectable department, server-supplied from the live category tree. */
 export interface DepartmentOption {
@@ -119,14 +122,18 @@ export function RfqForm({
 
   if (status !== "signedIn" || !user) {
     return (
-      <div className="rounded-md border border-line bg-surface-panel p-6">
-        <h2 className="font-display text-lg font-bold text-ink">{t("signInTitle")}</h2>
-        <p className="mt-2 font-body text-sm leading-relaxed text-ink-muted">{t("signInBody")}</p>
-        <div className="mt-5 flex flex-wrap gap-3">
+      <div className="flex flex-col gap-4 border-t border-line pt-6">
+        <h2 className="flex items-center gap-2 font-display text-lg font-bold text-ink">
+          <LogIn className="size-5 shrink-0 text-ink-muted" aria-hidden />
+          {t("signInTitle")}
+        </h2>
+        <p className="font-body text-sm leading-relaxed text-ink-muted">{t("signInBody")}</p>
+        <div className="flex flex-wrap gap-3">
           <ButtonLink href="/login" variant="primary" size="md">
             {tActions("signIn")}
           </ButtonLink>
           <ButtonLink href="/register" variant="secondary" size="md">
+            <UserPlus className="size-4" aria-hidden />
             {tActions("register")}
           </ButtonLink>
         </div>
@@ -226,11 +233,11 @@ export function RfqForm({
   if (submitted) {
     return (
       <div className="flex flex-col gap-6">
-        <div
-          role="status"
-          className="rounded-md border border-line bg-surface-panel p-6"
-        >
-          <h2 className="font-display text-xl font-bold text-ink">{t("successTitle")}</h2>
+        <div role="status" className="rounded-md border border-line bg-surface-recessed/50 p-6">
+          <h2 className="flex items-center gap-2 font-display text-xl font-bold text-ink">
+            <CheckCircle2 className="size-6 shrink-0 text-success" aria-hidden />
+            {t("successTitle")}
+          </h2>
           <p className="mt-2 font-body text-sm leading-relaxed text-ink-muted">
             {t("successBody", { reference: submitted.referenceCode })}
           </p>
@@ -400,7 +407,10 @@ export function RfqForm({
         </label>
 
         <fieldset className="flex flex-col gap-5 border-t border-line pt-5">
-          <legend className="type-label text-ink-muted">{t("itemsLegend")}</legend>
+          <legend className="flex items-center gap-2 type-label text-ink-muted">
+            <ClipboardList className="size-4 shrink-0" aria-hidden />
+            {t("itemsLegend")}
+          </legend>
 
           {values.items.map((item, index) => (
             <div
@@ -527,6 +537,7 @@ export function RfqForm({
 
           <div>
             <Button type="button" variant="ghost" size="sm" onClick={addItem} disabled={submitting}>
+              <ListPlus className="size-4" aria-hidden />
               {t("addItem")}
             </Button>
           </div>
@@ -595,13 +606,17 @@ function RecentRequests({ version }: { version: number }) {
   return (
     <section className="flex flex-col gap-3 border-t border-line pt-6">
       <h2 className="font-display text-lg font-bold text-ink">{t("recentTitle")}</h2>
-      <ul className="flex flex-col divide-y divide-line">
+      <ul className="divide-y divide-line border-y border-line">
         {requests.map((request) => (
-          <li key={request.id} className="flex flex-wrap items-baseline justify-between gap-2 py-3">
-            <span className="font-body text-sm font-semibold text-ink">{request.title}</span>
-            <span className="type-meta text-ink-muted">
-              {request.referenceCode} · {statusLabel(request.status)} ·{" "}
-              {t("recentMatches", { count: request.matches.length })}
+          <li key={request.id} className="grid grid-cols-[1fr_auto] grid-rows-[auto_auto] gap-x-3 gap-y-1 py-2.5">
+            <StatusPill tone={quoteStatusTone(request.status)} className="col-start-1 row-start-1">
+              {statusLabel(request.status)}
+            </StatusPill>
+            <span className="col-span-2 row-start-2 font-body text-sm font-semibold text-ink">
+              {request.title}
+            </span>
+            <span className="col-start-2 row-start-1 type-meta text-ink-muted sm:text-right">
+              {request.referenceCode} · {t("recentMatches", { count: request.matches.length })}
             </span>
           </li>
         ))}

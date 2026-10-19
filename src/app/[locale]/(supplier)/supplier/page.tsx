@@ -52,6 +52,27 @@ export default async function SupplierDeskPage({
         </section>
       </RoleGate>
 
+      <RoleGate allowedRoles={["supplierOwner", "supplierUser"]}>
+        <section
+          aria-labelledby="supplier-leads"
+          className="mt-8 rounded-md border border-line bg-surface-panel p-5"
+        >
+          <h2 id="supplier-leads" className="type-title-md text-ink">
+            {t("supplierLeadsTitle")}
+          </h2>
+          <p className="mt-2 type-body text-ink-muted">{t("supplierLeadsBody")}</p>
+          <div className="mt-4 flex flex-wrap gap-3">
+            <ButtonLink href="/supplier/leads">{t("supplierLeadsCta")}</ButtonLink>
+            <ButtonLink href="/supplier/quotes" variant="secondary">
+              {t("supplierQuotesCta")}
+            </ButtonLink>
+            <ButtonLink href="/supplier/orders" variant="secondary">
+              {t("supplierOrdersCta")}
+            </ButtonLink>
+          </div>
+        </section>
+      </RoleGate>
+
       <div className="mt-8">
         <RoleGate allowedRoles={["supplierOwner", "supplierUser"]}>
           <div className="rounded-md border border-line bg-surface-panel">

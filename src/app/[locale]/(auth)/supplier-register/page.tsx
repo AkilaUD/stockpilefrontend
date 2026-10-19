@@ -43,7 +43,11 @@ export default async function SupplierRegisterPage({ params }: { params: Promise
   }
 
   return (
-    <AuthShell title={t("supplierRegisterTitle")} subtitle={t("supplierRegisterSubtitle")}>
+    <AuthShell
+      title={t("supplierRegisterTitle")}
+      subtitle={t("supplierRegisterSubtitle")}
+      audience="supplier"
+    >
       <SupplierRegisterForm departments={departments} />
     </AuthShell>
   );

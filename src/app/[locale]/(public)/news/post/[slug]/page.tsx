@@ -80,6 +80,19 @@ export default async function NewsArticlePage({
         {published && <span className="type-body-sm text-ink-muted">{published}</span>}
       </div>
 
+      {article.heroImageUrl && (
+        <div className="mt-6 overflow-hidden bg-surface-recessed">
+          {/* eslint-disable-next-line @next/next/no-img-element -- catalogue media via rewrite */}
+          <img
+            src={article.heroImageUrl}
+            alt=""
+            loading="eager"
+            decoding="async"
+            className="aspect-[16/9] w-full object-cover"
+          />
+        </div>
+      )}
+
       <ArticleBody html={article.body} className="mt-6" />
 
       {article.tags.length > 0 && (

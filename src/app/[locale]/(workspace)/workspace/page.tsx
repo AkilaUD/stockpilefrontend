@@ -56,8 +56,21 @@ export default async function WorkspaceHomePage({
 
       <section
         aria-labelledby="workspace-buying-activity"
-        className="mt-8 rounded-md border border-line bg-surface-panel"
+        className="mt-8 rounded-md border border-line bg-surface-panel p-5"
       >
+        <h2 id="workspace-buying-activity" className="type-title-md text-ink">
+          {t("buyingTitle")}
+        </h2>
+        <p className="mt-2 type-body text-ink-muted">{t("buyingBody")}</p>
+        <div className="mt-4 flex flex-wrap gap-3">
+          <ButtonLink href="/workspace/quotes">{t("quotesCta")}</ButtonLink>
+          <ButtonLink href="/workspace/orders" variant="secondary">
+            {t("ordersCta")}
+          </ButtonLink>
+        </div>
+      </section>
+
+      <section className="mt-8 rounded-md border border-line bg-surface-panel">
         <EmptyState
           title={t("emptyTitle")}
           description={t("emptyBody")}

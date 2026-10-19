@@ -21,10 +21,8 @@ export function NewsShell({ crumbs, title, children }: NewsShellProps) {
     <section className="shell-public py-10 md:py-14">
       <Breadcrumbs items={crumbs} />
 
-      <header className="mt-6 max-w-3xl">
-        <h1 className="mt-1 font-display text-3xl font-extrabold tracking-tight text-ink md:text-4xl">
-          {title}
-        </h1>
+      <header className="measure-editorial mt-6">
+        <h1 className="type-display-md mt-1 font-extrabold text-ink">{title}</h1>
       </header>
 
       <div className="mt-8 md:mt-10">{children}</div>

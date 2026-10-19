@@ -25,7 +25,7 @@ export default async function TermsOfUsePage({ params }: { params: Promise<{ loc
 
   return (
     <InfoPage breadcrumb={t("title")} title={t("title")}>
-      <ol className="max-w-3xl space-y-5">
+      <ol className="measure-editorial space-y-5">
         {paragraphs.map((paragraph, index) => (
           <li key={paragraph.slice(0, 32)} className="flex gap-4">
             <span
@@ -34,7 +34,7 @@ export default async function TermsOfUsePage({ params }: { params: Promise<{ loc
             >
               {index + 1}.
             </span>
-            <p className="font-body leading-relaxed text-ink-muted">{paragraph}</p>
+            <p className="type-body text-ink-muted">{paragraph}</p>
           </li>
         ))}
       </ol>

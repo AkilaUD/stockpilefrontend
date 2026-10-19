@@ -7,39 +7,23 @@ import {
   getProductListing,
   getSupplierDirectory,
 } from "@/lib/api/catalogue-server";
+import { getArticles } from "@/lib/api/content-server";
 import { HeroBanner } from "@/components/home/hero-banner";
+import { HeroSearch } from "@/components/home/hero-search";
 import { StatsBand } from "@/components/home/stats-band";
 import { MostSearched } from "@/components/home/most-searched";
 import { ProductGridSection } from "@/components/home/product-grid-section";
 import { NewestSuppliers } from "@/components/home/newest-suppliers-section";
 import { BecomeSupplierBand } from "@/components/home/become-supplier-band";
+import { NewsBand } from "@/components/home/news-band";
+import { ProcurementWorkflow } from "@/components/home/procurement-workflow";
+import { HomeGsap } from "@/components/home/home-gsap";
+import { Skeleton } from "@/components/ui/skeleton";
 
 /**
- * Home — the public landing, reconstructed against the original
- * Stockpile.lk section order (reference reconstruction Phase 2 §4.4):
- *
- *   1. hero banner      (original "how it works" graphic → /how-it-works)
- *   2. stats band       (dark count band — honest live figures)
- *   3. most searched    (6 original tiles → real category routes)
- *   4. featured products (newest first sweep, page 1)
- *   5. newest suppliers  (directory registration order)
- *   6. become a supplier (signal-yellow band)
- *   7. newest products   (newest sweep, page 2 — real "more recent" list)
- *
- * Server-rendered from live reads only: category tree, newest listings,
- * supplier directory, catalogue summary. No section renders invented
- * numbers or dead CTAs (§0.6): the reference RFQ/call counters have no
- * endpoint here, so the stats band shows Products · Suppliers ·
- * Departments · Districts instead (dependency documented in stats-band).
- *
- * Streaming: the hero and the static bands are data-free and render with the
- * first flush; every data-driven section below them fetches in its own
- * Suspense boundary. A slow read shows that section's skeleton; a read that
- * FAILS (e.g. the public-read rate limiter answering 429 under a burst) omits
- * just that section — the shell, hero and every other section still render,
- * so the page never white-screens on a busy/limited origin. (Before this,
- * the whole home body sat behind one Promise.all of five catalogue reads, and
- * a failed read reached the route error boundary — see reconstruction notes.)
+ * Material Atlas home — live catalogue reads only.
+ * Trust band = catalog/summary (+ department count from tree roots).
+ * No invented RFQ/call counters.
  */
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
@@ -53,13 +37,6 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 
 const STOCK_STATES = ["InStock", "OutOfStock", "EnquireForAvailability"] as const;
 
-/**
- * Reads one home section's data. A failed read (network/5xx after the server
- * retry, or a 4xx such as the public-read rate limiter's 429) resolves to
- * `null` so the owning section is omitted rather than thrown: the shell, hero
- * and sibling sections still stream, and the failure is left in the server log
- * instead of becoming a blank error page.
- */
 async function safeRead<T>(read: () => Promise<T>): Promise<T | null> {
   try {
     return await read();
@@ -73,19 +50,16 @@ function formatCount(locale: string, n: number): string {
   return n.toLocaleString(locale);
 }
 
-/** Decorative load placeholder for a home section (same shell as loading.tsx). */
 function HomeSectionSkeleton() {
   return (
-    <div className="shell-public pb-[30px]" aria-hidden="true">
-      <div className="px-5 py-[5px]">
-        <div className="h-8 w-64 rounded bg-surface-recessed" />
-      </div>
-      <div className="home-product-grid mt-[5px] gap-x-[30px] gap-y-8 px-5">
+    <div className="shell-public py-10" aria-hidden="true">
+      <Skeleton className="h-8 w-64" />
+      <div className="home-product-grid mt-6 gap-x-6 gap-y-8">
         {Array.from({ length: 8 }).map((_, index) => (
           <div key={index} className="space-y-2">
-            <div className="aspect-square bg-surface-recessed" />
-            <div className="h-4 w-3/4 rounded bg-surface-recessed" />
-            <div className="h-4 w-1/2 rounded bg-surface-recessed" />
+            <Skeleton className="aspect-square w-full" />
+            <Skeleton className="h-4 w-3/4" />
+            <Skeleton className="h-4 w-1/2" />
           </div>
         ))}
       </div>
@@ -93,7 +67,6 @@ function HomeSectionSkeleton() {
   );
 }
 
-/** Stats band — own read of catalogue summary + category tree. */
 async function StatsBandSection({ locale }: { locale: string }) {
   const t = await getTranslations({ locale, namespace: "home" });
   const data = await safeRead(() => Promise.all([getCategoryTree(), getCatalogueSummary()]));
@@ -111,7 +84,6 @@ async function StatsBandSection({ locale }: { locale: string }) {
   return <StatsBand stats={stats} />;
 }
 
-/** A titled product sweep (featured = newest page 1, newest = newest page 2). */
 async function ProductSweepSection({
   locale,
   title,
@@ -146,42 +118,80 @@ async function ProductSweepSection({
   );
 }
 
-/** Newest suppliers — own read of the directory, head of the list. */
 async function NewestSuppliersSection() {
   const directory = await safeRead(() => getSupplierDirectory());
   if (!directory) return null;
   return <NewestSuppliers suppliers={directory.items} limit={6} />;
 }
 
+async function HomeNewsBandSection({ locale }: { locale: string }) {
+  const t = await getTranslations({ locale, namespace: "home" });
+  const page = await safeRead(() => getArticles({ page: 1, pageSize: 6, locale }));
+  if (!page || page.items.length === 0) return null;
+  return (
+    <NewsBand
+      title={t("news.title")}
+      viewAllLabel={t("news.viewAll")}
+      articles={page.items}
+      locale={locale}
+    />
+  );
+}
+
 export default async function HomePage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "home" });
 
+  const workflowSteps = [0, 1, 2, 3, 4].map((index) => ({
+    label: t(`workflow.steps.${index}.label`),
+    title: t(`workflow.steps.${index}.title`),
+    body: t(`workflow.steps.${index}.body`),
+  }));
+
   return (
     <>
+      <HomeGsap />
       <HeroBanner
         headline={t("hero.headline")}
+        lede={t("hero.lede")}
         alt={t("hero.bannerAlt")}
         cta={t("hero.bannerCta")}
+        rfqCta={t("hero.rfqCta")}
+        supplierCta={t("hero.supplierCta")}
+        searchSlot={<HeroSearch />}
       />
 
       <Suspense fallback={<HomeSectionSkeleton />}>
         <StatsBandSection locale={locale} />
       </Suspense>
 
-      <MostSearched />
+      <div data-home-reveal>
+        <MostSearched />
+      </div>
 
       <Suspense fallback={<HomeSectionSkeleton />}>
-        <ProductSweepSection
-          locale={locale}
-          title={t("featured.title")}
-          viewAllLabel={t("featured.viewAll")}
-          page={1}
-        />
+        <div data-home-reveal>
+          <ProductSweepSection
+            locale={locale}
+            title={t("featured.title")}
+            viewAllLabel={t("featured.viewAll")}
+            page={1}
+          />
+        </div>
       </Suspense>
 
+      <ProcurementWorkflow
+        title={t("workflow.title")}
+        lede={t("workflow.lede")}
+        steps={workflowSteps}
+        ctaLabel={t("workflow.cta")}
+        ctaHref="/rfq"
+      />
+
       <Suspense fallback={<HomeSectionSkeleton />}>
-        <NewestSuppliersSection />
+        <div data-home-reveal>
+          <NewestSuppliersSection />
+        </div>
       </Suspense>
 
       <BecomeSupplierBand
@@ -192,12 +202,20 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
       />
 
       <Suspense fallback={<HomeSectionSkeleton />}>
-        <ProductSweepSection
-          locale={locale}
-          title={t("newestProducts.title")}
-          viewAllLabel={t("newestProducts.viewAll")}
-          page={2}
-        />
+        <div data-home-reveal>
+          <ProductSweepSection
+            locale={locale}
+            title={t("newestProducts.title")}
+            viewAllLabel={t("newestProducts.viewAll")}
+            page={2}
+          />
+        </div>
+      </Suspense>
+
+      <Suspense fallback={<HomeSectionSkeleton />}>
+        <div data-home-reveal>
+          <HomeNewsBandSection locale={locale} />
+        </div>
       </Suspense>
     </>
   );

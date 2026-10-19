@@ -1,5 +1,9 @@
 # Stockpile.lk Frontend Reconstruction — Phase 2 Notes
 
+> **Update — Material Atlas redesign:** Visual Martfury clone is superseded. Routes, navigation IA,
+> Magento path redirects, and live-API-only data rules still apply. See `DESIGN.md` and the banner
+> on `PARITY.md`.
+
 Reference-based reconstruction of https://stockpile.lk/ (Sri Lankan construction-procurement
 marketplace) using **real backend data, real original assets, and real routes only**. Nothing in
 this document's build is invented: every number, logo, tile and CTA traces to a live API read, an
@@ -25,8 +29,8 @@ original asset in `public/original/`, or a route that exists in this application
    (`/api/v1/catalog/summary` + tree). The reference's RFQ & call counters have no endpoint here.
 3. Most Searched — six original tile graphics → real deep category routes.
 4. Featured Products — newest-first sweep, page 1 (the API has no `featured` flag; slice is honest).
-5. Newest Suppliers — directory registration order via `SupplierStoryStrip` (no logo field in the
-   directory API → text rows instead of the reference logo carousel).
+5. Newest Suppliers — directory registration order via `SupplierStoryStrip` (logo grid when the
+   directory returns seeded `logo` srcsets; text register otherwise).
 6. Become a Supplier band (signal yellow) → `/supplier-benefits` + `/pricing`.
 7. Newest Products — newest sweep, page 2 (real "more recent" list).
 
@@ -858,10 +862,11 @@ stage layouts, and the measurement itself is shared (`tests/e2e/support/overflow
 | RFQ submission | ~~No public RFQ endpoint; `/quotations` and `/contact` use `mailto:`/tel, no form~~ **Resolved 2026-10-14**: the org-owned `POST /rfqs` → `/submit` flow + `/rfq` form (B16); `/quotations-and-estimations`' primary CTA is the real form (mailto kept as an alternative). Honest residual: matching is **category-overlap only, capped at 50** | rfq, quotations-and-estimations |
 | RFQ supplier response | A supplier can be *matched* to an RFQ, but no screen lists a supplier's open invitations or submits a quote — what was built is the buyer-side create/submit/list. The `quote.*` capabilities exist in the permission model but no UI consumes them | supplier workspace |
 | Plan subscription | Pricing tiers are informational; no checkout/wiring (call `0114-222-555` + Learn More are the actions) | pricing |
-| Supplier logos | Directory API has no logo field → text roster instead of the reference logo carousel | home "Newest Suppliers", suppliers pages |
+| Supplier logos | ~~Directory API has no logo field~~ **Resolved**: catalogue seeder links `Logo` MediaAssets; directory/microsite/home render logos when present | home "Newest Suppliers", suppliers pages |
 | Partner-buyers strip | No data source → the "OUR PARTNERED BUYERS" logo strip is omitted | how-it-works-for-suppliers |
-| News | ~~No endpoint/data → News link and home news blocks omitted by decision~~ **Resolved 2026-10-14**: 71 posts migrated to `ContentItems` / `ContentCategories` / `ContentTags` and served at `/news`, `/news/post/{slug}`, `/news/category/{slug}`, `/news/tag/{slug}` (api.md §2.12), with the hub bar's own News link restored in the reference's order. Honest residuals: **no images are ingested** (the 71 posts reference 364; `MediaController` has no news storage path), bodies are stored as sanitized HTML with their anchors unwrapped to text, and the reference's view counter, comment section and previous/next pair are **not reproduced** (no view data, no comments aggregate, no adjacency endpoint exist here) | hub bar, `/news` |
-| News on the home page | The reference's home carries a news band (`.blog-home5.sp-news`); our home renders our own bands instead (§5b deviation 6), and no news block was added to it in this slice | home |
+| News | ~~No endpoint/data~~ **Resolved 2026-10-14** (+ heroes): 71 posts at `/news…`; hero bytes via `ingest-heroes.mjs` → `ContentSeeder` → `HeroImageMediaId`. Residuals: body inline images not ingested; view counter / comments / prev-next omitted | hub bar, `/news` |
+| News on the home page | ~~omitted~~ **Resolved**: `NewsBand` after Newest Products (`getArticles` page 1) | home |
+| Magento `.html` URLs | ~~different scheme only~~ **Resolved**: 308 map in `proxy.ts` from catalogue seed (`magento-html-redirects.json`) | SEO / bookmarks |
 | Dead-slug handling in the news harvester | `tests/news-harvest.mjs` has no *DEAD* classification: a slug the reference itself 404s (it serves its search page) is reported as a capture failure and the operator decides. One such slug is recorded in the news section above and is not seeded; the tooling was left as-is | `tests/news-harvest*.log` |
 | Not-found responses stream `200` | Every public detail route (news, products, suppliers) answers **HTTP 200** with the app's 404 page rendered, and the reference answers **404**: `(public)/loading.tsx` streams the shell before `notFound()` can set the status. The API stays the authority (it answers `RESOURCE_NOT_FOUND`; the clean 36-spec run shows 2 × 404, both the not-found spec's unknown article slug). Fix (not applied — it restructures the shell for every public route): move the detail reads into `generateMetadata` + a route-level guard, or drop the shared `loading.tsx` in favour of per-route skeletons | any unknown detail URL |
 | Catalogue seeder's identical latent race | `CatalogueSeeder` shares the read-then-write gate shape that failed run 18 for the content seeder, but takes no app lock: two concurrent first-boot hosts against one empty database can still collide on `IX_ContentCategories_Slug`. Left alone deliberately (every database that boots today already holds its marker, so the race is not reachable in practice) and recorded here rather than changed in a content slice | first boot against an empty database |

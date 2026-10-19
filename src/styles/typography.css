@@ -2,12 +2,10 @@
    Stockpile.lk — Typography scale
    Source of truth: docs/design-system.md §3.
 
-   One family, three roles (reference reconstruction — the original site is
-   Open Sans throughout):
-     Open Sans 600/700/800 — the voice of statements (editorial display)
-     Open Sans 400/500/600 — the voice of UI (everything that does work)
-     Open Sans 500/600      — the voice of data (labels, SKUs, prices,
-                              timestamps, reference codes, table headers)
+   Material Atlas type roles (DESIGN.md):
+     Source Serif 4 — editorial display (statements, section titles)
+     Source Sans 3  — UI / body (navigation, forms, tables, data)
+     Noto Sans Sinhala — appended in the body stack for /si coverage
 
    Font variables are assigned in globals.css via @theme from `next/font`
    downloads. Nothing here references a third-party font CDN — next/font

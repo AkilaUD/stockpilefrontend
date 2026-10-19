@@ -52,7 +52,7 @@ export function Pagination({ page, pageSize, total, basePath, params, labels }: 
   }
 
   return (
-    <nav aria-label="pagination" className="flex items-center justify-between gap-4 border-t border-line pt-6">
+    <nav aria-label="pagination" className="flex flex-wrap items-center justify-between gap-4 border-t border-line pt-8">
       <div>
         {page > 1 && (
           <Link

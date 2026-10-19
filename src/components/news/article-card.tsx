@@ -4,16 +4,8 @@ import { formatPublishedDate } from "@/lib/date";
 import type { ArticleSummary } from "@/lib/api/content";
 
 /*
- * One news list entry.
- *
- * Follows the reference's own list item (probed 2026-10-14 on /en/news:
- * `.post-item` = artwork, the bucket as a badge over it, then the title link,
- * the date, the post's full text and a "Read more" link) minus the artwork: the
- * reference's media is not ingested yet, and a hotlinked or placeholder image
- * would be worse than none (api.md §3.5 truthful rendering).
- *
- * The list renders the article text in full because the reference does — it is
- * not a teaser list — which is also why the list contract carries the body.
+ * One news list entry — reference `.post-item` with optional ingested hero
+ * (ContentSeeder → MediaAsset). No hotlink / placeholder when heroImageUrl is null.
  */
 interface ArticleCardProps {
   article: ArticleSummary;
@@ -25,9 +17,23 @@ export function ArticleCard({ article, locale, readMoreLabel }: ArticleCardProps
   const published = formatPublishedDate(article.publishedAt, locale);
   const bucket = article.categories[0];
   const href = `/news/post/${encodeURIComponent(article.slug)}`;
+  const hero = article.heroImageUrl;
 
   return (
     <article className="border-t border-line pt-8 first:border-t-0 first:pt-0">
+      {hero && (
+        <Link href={href} className="mb-4 block overflow-hidden bg-surface-recessed" aria-hidden="true">
+          {/* eslint-disable-next-line @next/next/no-img-element -- catalogue media via rewrite */}
+          <img
+            src={hero}
+            alt=""
+            loading="lazy"
+            decoding="async"
+            className="aspect-[16/9] w-full object-cover"
+          />
+        </Link>
+      )}
+
       {bucket && (
         <Link
           href={`/news/category/${encodeURIComponent(bucket.slug)}`}

@@ -3,9 +3,8 @@
  * them — the editorial tree the reference serves at /news.
  *
  * One shape covers news, completed projects and supplier stories: the row's
- * `kind` is what selects the surface. A field the platform does not hold is
- * null rather than invented, so `heroImageUrl` is null until the reference's
- * media is ingested and the surface renders without artwork.
+ * `kind` is what selects the surface. `heroImageUrl` is null when no MediaAsset
+ * was linked (honest empty), otherwise the same-origin catalogue media path.
  */
 
 /** Editorial bucket (the reference's news categories, e.g. "Completed Jobs"). */

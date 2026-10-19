@@ -37,20 +37,19 @@
      Blues and greens are banned by the reference palette, full stop.
      ======================================================================== */
 
-  /* core — reference brand colours */
-  --palette-ink: #020202;
-  --palette-ink-soft: #333533;
-  --palette-signal: #f6e71d;
-  --palette-signal-soft: #fcb800;
-  --palette-neutral: #ffffff;
+  /* core — Material Atlas (signal yellow + graphite; warm paper field) */
+  --palette-ink: #141414;
+  --palette-ink-soft: #2a2a2a;
+  --palette-signal: #f0d60a;
+  --palette-signal-soft: #e6b800;
+  --palette-neutral: #f7f5f0;
 
-  /* derived neutrals (core mixes). Contrasts are cited against the ground
-     they sit on; AA pairs live in design-system.md §2.1/§2.3. */
-  --palette-neutral-elevated: #ffffff;   /* floating panels, inputs, menus */
-  --palette-neutral-recessed: #f5f5f5;   /* recessed wells, zebra bands */
-  --palette-neutral-muted: #6b7280;      /* AA muted ink - 4.6:1 on #ffffff */
-  --palette-neutral-faint: #9ca3af;      /* decorative tier only - never copy */
-  --palette-ink-deep: #f8f8f8;           /* recessed well inside dark grounds */
+  /* derived neutrals */
+  --palette-neutral-elevated: #ffffff;
+  --palette-neutral-recessed: #ebe7df;
+  --palette-neutral-muted: #5c5c5c;      /* AA muted ink on paper */
+  --palette-neutral-faint: #9a9590;      /* decorative tier only - never copy */
+  --palette-ink-deep: #1c1c1c;           /* recessed well inside dark grounds */
 
   /* functional exception: danger (§2.5) - error semantics cannot be expressed
      in the five-colour core for every ground, so this is the single imported
@@ -136,9 +135,9 @@
      Aliased into Tailwind's --radius-* namespace in globals.css.
      ======================================================================== */
   --corner-none: 0;
-  --corner-sm: 3px; /* inputs, chips — the reference layout's 3px radius */
+  --corner-sm: 2px; /* inputs, chips — hard industrial edge */
   --corner-md: 4px; /* buttons, panels */
-  --corner-lg: 6px; /* dialogs only */
+  --corner-lg: 8px; /* dialogs only */
   --corner-round: 999px; /* ONLY avatars, status dots, text-bearing status pills */
 
   /* ===========================================================================
@@ -172,11 +171,11 @@
      It is deliberately NOT `--layout-gutter`: that token also floors the
      overlay widths below (`calc(100vw - 2 * var(--layout-gutter))`), and 15px
      would push dialogs/sheets to the viewport edge. */
-  --layout-max-public: 1200px;
+  --layout-max-public: 1280px;
   --layout-max-workspace: 1680px;
   --layout-rail-nav: 248px;
   --layout-rail-context: 320px;
-  --layout-gutter-public: 0.9375rem;
+  --layout-gutter-public: 1.25rem;
   --layout-gutter: 1.5rem;
 
   /* Content-driven breakpoints (§36). CSS media queries cannot consume custom

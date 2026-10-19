@@ -232,6 +232,15 @@ export function RegisterForm() {
           {tActions("signIn")}
         </Link>
       </p>
+      <p className="type-meta text-ink-muted">
+        {tAuth("audienceSupplierHint")}{" "}
+        <Link
+          href="/supplier-register"
+          className="font-medium text-ink underline underline-offset-2 hover:text-ink-strong"
+        >
+          {tActions("registerAsSupplier")}
+        </Link>
+      </p>
     </form>
   );
 }

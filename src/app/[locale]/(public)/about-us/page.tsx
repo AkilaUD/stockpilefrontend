@@ -24,27 +24,23 @@ export default async function AboutUsPage({ params }: { params: Promise<{ locale
 
   return (
     <InfoPage breadcrumb={t("title")} title={t("title")}>
-      <header className="max-w-3xl">
+      <header className="measure-editorial">
         <p className="font-display text-xl font-bold tracking-tight text-ink md:text-2xl">
           {t("subtitle")}
         </p>
-        <p className="mt-2 font-display text-base font-semibold text-ink-accent">
-          {t("tagline")}
-        </p>
+        <p className="mt-2 font-display text-base font-semibold text-ink-accent">{t("tagline")}</p>
       </header>
 
-      <div className="mt-8 max-w-3xl space-y-5">
+      <div className="measure-editorial mt-8 space-y-5">
         {body.map((paragraph) => (
-          <p key={paragraph.slice(0, 32)} className="font-body leading-relaxed text-ink-muted">
+          <p key={paragraph.slice(0, 32)} className="type-body text-ink-muted">
             {paragraph}
           </p>
         ))}
       </div>
 
-      <aside className="mt-10 max-w-3xl rounded-md border-l-4 border-brand-primary bg-surface-panel p-6">
-        <p className="font-display text-lg font-semibold leading-relaxed text-ink">
-          {t("closing")}
-        </p>
+      <aside className="measure-editorial mt-10 rounded-md border-l-4 border-brand-primary bg-surface-panel p-6">
+        <p className="font-display text-lg font-semibold leading-relaxed text-ink">{t("closing")}</p>
       </aside>
     </InfoPage>
   );

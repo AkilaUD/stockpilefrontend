@@ -50,7 +50,7 @@ import { useTranslations } from "next-intl";
 import { Link, usePathname } from "@/i18n/navigation";
 import type { CategoryNode } from "@/lib/api/catalogue";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
-import { ReferenceIcon } from "@/components/ui/reference-icon";
+import { ChevronRight } from "lucide-react";
 import { DEPARTMENT_ICONS, categoryHref, sortDepartments } from "@/lib/navigation/navigation";
 
 interface DepartmentMenuProps {
@@ -82,7 +82,7 @@ const STICKY_AT_PX = 8;
  * `lazy-nav.tsx`'s DepartmentMenuFallback repeats this string — keep in sync.
  */
 const BLOCK_CLASS =
-  "inline-flex h-[50px] w-full items-center justify-center bg-transparent px-0 font-body text-base font-medium text-ink transition-opacity duration-instant ease-standard hover:opacity-70 focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-focus md:justify-start";
+  "inline-flex h-[50px] w-full items-center justify-center bg-brand-primary px-4 font-body text-base font-semibold text-ink-on-signal transition-colors duration-instant ease-standard hover:bg-brand-primary-hover focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-focus md:justify-start";
 
 const BLOCK_WIDTH_CLASS = "department-block";
 
@@ -169,7 +169,7 @@ function DepartmentPanel({
                   <span className="size-5 shrink-0" aria-hidden="true" />
                 )}
                 <span className="min-w-0 flex-1 truncate">{department.name}</span>
-                {hasChildren && <ReferenceIcon name="mbi-ios-arrow-down" className="size-[13px]" />}
+                {hasChildren && <ChevronRight className="size-3.5 shrink-0 opacity-60" aria-hidden="true" />}
               </Link>
             </li>
           );

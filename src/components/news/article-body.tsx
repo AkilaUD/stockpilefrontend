@@ -21,7 +21,7 @@ import { cx } from "@/lib/cx";
  * body copy instead.
  */
 const BODY_CLASS = cx(
-  "max-w-3xl font-body text-base leading-relaxed text-ink",
+  "measure-editorial type-body text-ink",
   "[&>*+*]:mt-4",
   "[&_h2]:mt-8 [&_h2]:font-display [&_h2]:text-2xl [&_h2]:font-semibold [&_h2]:tracking-tight",
   "[&_h3]:mt-6 [&_h3]:font-display [&_h3]:text-xl [&_h3]:font-semibold [&_h3]:tracking-tight",

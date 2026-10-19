@@ -4,6 +4,7 @@ import { join, resolve, sep } from "node:path";
 import createMiddleware from "next-intl/middleware";
 import { NextResponse, type NextRequest } from "next/server";
 import { routing } from "./i18n/routing";
+import magentoHtmlRedirects from "./lib/seo/magento-html-redirects.json";
 
 /*
  * Next 16 renamed `middleware.ts` → `proxy.ts` and the exported `middleware`
@@ -166,6 +167,21 @@ function localePathname(
   return { locale: routing.defaultLocale, rest: pathname };
 }
 
+const MAGENTO_HTML_MAP = magentoHtmlRedirects as Record<string, string>;
+
+/**
+ * Map a Magento `.html` path (with or without `/en` / `/si`) to the
+ * reconstruction canonical path, locale-prefixed when the visitor used `/si`.
+ */
+function magentoHtmlDestination(pathname: string): string | null {
+  const { locale, rest } = localePathname(pathname);
+  const key = rest.replace(/^\//, "");
+  const dest = MAGENTO_HTML_MAP[key];
+  if (!dest) return null;
+  if (locale === routing.defaultLocale) return dest;
+  return `/${locale}${dest}`;
+}
+
 /** The private group a locale-stripped path belongs to, if any. */
 function privateGroupOf(rest: string): string | undefined {
   return PRIVATE_PREFIXES.find(
@@ -192,6 +208,20 @@ export function proxy(request: NextRequest) {
   }
 
   if (pathname.includes(".")) {
+    /*
+     * Magento `.html` catalogue URLs → canonical `/products|categories/…`
+     * (generated from tools/catalogue-migrate/out/catalogue.json). 308 so
+     * crawlers and bookmarks consolidate on the reconstruction paths.
+     */
+    if (pathname.endsWith(".html")) {
+      const magento = magentoHtmlDestination(pathname);
+      if (magento) {
+        const url = request.nextUrl.clone();
+        url.pathname = magento;
+        return NextResponse.redirect(url, 308);
+      }
+    }
+
     /*
      * The live reason for this branch: proxy runs *before* the filesystem
      * step (proxy.md, "Execution order"), so locale-routing a real file

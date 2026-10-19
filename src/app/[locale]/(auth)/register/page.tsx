@@ -25,7 +25,7 @@ export default async function RegisterPage({ params }: { params: Promise<{ local
   const t = await getTranslations("auth");
 
   return (
-    <AuthShell title={t("registerTitle")} subtitle={t("registerSubtitle")}>
+    <AuthShell title={t("registerTitle")} subtitle={t("registerSubtitle")} audience="buyer">
       <RegisterForm />
     </AuthShell>
   );

@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import { AuthAudienceRail, type AuthAudience } from "@/components/auth/auth-audience-rail";
 
 /**
  * AuthShell — the shared frame for the sign-in / register / reset / verify
@@ -22,20 +23,22 @@ import type { ReactNode } from "react";
 export function AuthShell({
   title,
   subtitle,
+  audience = "buyer",
   children,
 }: {
   title: ReactNode;
   subtitle?: ReactNode;
+  /** Highlights buyer vs supplier entry on the shared auth chrome. */
+  audience?: AuthAudience;
   children: ReactNode;
 }) {
   return (
-    <div
-      className="flex flex-1 items-start justify-center px-6 py-12 md:py-16"
-    >
-      <div className="w-full max-w-md">
-        <h1 className="type-display-lg">{title}</h1>
-        {subtitle && <p className="type-body text-ink-muted mt-3">{subtitle}</p>}
-        <div className="mt-8 rounded-md border border-line bg-surface-panel shadow-elev-sm">
+    <div className="flex flex-1 items-start justify-center bg-surface-recessed/40 px-6 py-10 md:py-14">
+      <div className="w-full max-w-lg">
+        <AuthAudienceRail active={audience} />
+        <h1 className="type-display-lg text-ink">{title}</h1>
+        {subtitle && <p className="type-body mt-3 text-ink-muted">{subtitle}</p>}
+        <div className="mt-6 rounded-md border border-line bg-surface-panel shadow-elev-sm">
           <div className="p-6 md:p-8">{children}</div>
         </div>
       </div>

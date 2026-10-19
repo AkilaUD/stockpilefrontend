@@ -81,9 +81,7 @@ export function ProseSections({
       {sections.map((section, index) => (
         <section key={section.title ?? `section-${index}`} className="measure-editorial">
           {section.title && (
-            <Heading className="font-display text-base font-bold uppercase tracking-wide text-ink">
-              {section.title}
-            </Heading>
+            <Heading className="block-title">{section.title}</Heading>
           )}
 
           {section.body && (

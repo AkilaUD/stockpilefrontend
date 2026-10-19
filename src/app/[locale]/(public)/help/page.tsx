@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { ChevronDown } from "lucide-react";
 import { setRequestLocale, getTranslations } from "next-intl/server";
 import { InfoPage } from "@/components/pages/info-page";
 
@@ -26,25 +27,20 @@ export default async function HelpPage({ params }: { params: Promise<{ locale: s
 
   return (
     <InfoPage breadcrumb={t("title")} title={t("title")} lede={t("lede")}>
-      <div className="max-w-3xl space-y-3">
+      <div className="measure-editorial space-y-3">
         {groups.map((group) => (
           <details key={group.title} className="group rounded-md border border-line bg-surface-panel">
             <summary className="flex cursor-pointer list-none items-center justify-between gap-4 rounded-md px-5 py-4 transition-colors duration-instant ease-standard hover:bg-surface-recessed focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus [&::-webkit-details-marker]:hidden">
               <span className="font-display text-base font-bold text-ink">{group.title}</span>
-              <svg
-                aria-hidden="true"
-                viewBox="0 0 16 16"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1.5"
+              <ChevronDown
+                aria-hidden
                 className="size-4 shrink-0 text-ink-muted transition-transform duration-instant ease-standard group-open:rotate-180"
-              >
-                <path d="m4 6 4 4 4-4" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
+                strokeWidth={1.5}
+              />
             </summary>
             <ul className="space-y-2 px-5 pb-5">
               {group.items.map((item) => (
-                <li key={item} className="flex gap-2 font-body text-sm leading-relaxed text-ink-muted">
+                <li key={item} className="flex gap-2 type-body-sm text-ink-muted">
                   <span aria-hidden="true" className="mt-2 size-1 shrink-0 rounded-full bg-brand-secondary" />
                   <span>{item}</span>
                 </li>

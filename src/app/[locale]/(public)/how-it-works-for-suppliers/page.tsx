@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import { setRequestLocale, getTranslations } from "next-intl/server";
-import { Link } from "@/i18n/navigation";
+import { FeatureListItem } from "@/components/pages/feature-list-item";
 import { InfoPage } from "@/components/pages/info-page";
+import { ButtonLink } from "@/components/ui/button";
 
 /**
  * /how-it-works-for-suppliers — "Stockpile For Suppliers" (reference
@@ -38,7 +39,7 @@ export default async function HowItWorksForSuppliersPage({
 
   return (
     <InfoPage breadcrumb={t("title")} title={t("title")} overline={t("eyebrow")} lede={t("lede")}>
-      <p className="max-w-3xl font-body leading-relaxed text-ink-muted">{t("intro")}</p>
+      <p className="measure-editorial type-body text-ink-muted">{t("intro")}</p>
 
       <ol className="mt-10 grid gap-4 md:grid-cols-3">
         {cards.map((card, index) => (
@@ -47,58 +48,36 @@ export default async function HowItWorksForSuppliersPage({
               {String(index + 1).padStart(2, "0")}
             </p>
             <h2 className="mt-2 font-display text-lg font-bold text-ink">{card.title}</h2>
-            <p className="mt-2 font-body text-sm leading-relaxed text-ink-muted">{card.body}</p>
+            <p className="mt-2 type-body-sm text-ink-muted">{card.body}</p>
           </li>
         ))}
       </ol>
 
       <section className="mt-12">
-        <h2 className="font-display text-2xl font-extrabold tracking-tight text-ink">
-          {t("moreTitle")}
-        </h2>
+        <h2 className="type-display-md font-extrabold text-ink">{t("moreTitle")}</h2>
         <ul className="mt-6 grid gap-x-8 gap-y-5 md:grid-cols-2">
           {features.map((feature) => (
-            <li key={feature.title} className="flex gap-4">
-              <svg
-                aria-hidden="true"
-                viewBox="0 0 16 16"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1.5"
-                className="mt-1 size-4 shrink-0 text-brand-secondary"
-              >
-                <circle cx="8" cy="8" r="6.5" />
-                <path d="m5.5 8 2 2 3-3.5" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
-              <div>
-                <h3 className="font-display text-base font-bold text-ink">{feature.title}</h3>
-                <p className="mt-1 font-body text-sm leading-relaxed text-ink-muted">
-                  {feature.body}
-                </p>
-              </div>
-            </li>
+            <FeatureListItem key={feature.title} title={feature.title} body={feature.body} />
           ))}
         </ul>
       </section>
 
-      <section className="mt-12 rounded-md bg-brand-primary p-6 text-ink md:p-8">
+      <section className="mt-12 border-y border-ink bg-brand-primary p-6 text-ink-on-signal md:p-8">
         <h2 className="font-display text-xl font-extrabold tracking-tight md:text-2xl">
           {t("ctaTitle")}
         </h2>
-        <p className="mt-2 font-body font-medium">{t("ctaBody")}</p>
+        <p className="mt-2 type-body font-medium">{t("ctaBody")}</p>
         <div className="mt-6 flex flex-col gap-3 sm:flex-row">
-          <Link
+          <ButtonLink
             href="/supplier-register"
-            className="inline-flex h-12 items-center justify-center rounded-md bg-ink px-7 font-body text-sm font-semibold text-white transition-colors duration-instant ease-standard hover:bg-ink-soft focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus"
+            size="lg"
+            className="border-ink! bg-ink! text-ink-inverse! hover:bg-ink-soft!"
           >
             {t("registerCta")}
-          </Link>
-          <Link
-            href="/pricing"
-            className="inline-flex h-12 items-center justify-center rounded-md border-2 border-ink px-7 font-body text-sm font-semibold text-ink transition-colors duration-instant ease-standard hover:bg-ink hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus"
-          >
+          </ButtonLink>
+          <ButtonLink href="/pricing" variant="secondary" size="lg" className="border-ink! bg-transparent!">
             {t("pricingCta")}
-          </Link>
+          </ButtonLink>
         </div>
       </section>
     </InfoPage>

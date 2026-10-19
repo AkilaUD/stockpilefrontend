@@ -7,6 +7,7 @@ import { SORT_KEYS } from "@/lib/api/catalogue";
 import { ProductCard } from "@/components/catalogue/product-card";
 import { Pagination } from "@/components/catalogue/pagination";
 import { FacetSummary } from "@/components/catalogue/facet-summary";
+import { CatalogueShell } from "@/components/catalogue/catalogue-shell";
 import { Reveal } from "@/components/motion/reveal";
 import { EmptyState } from "@/components/ui/empty-state";
 import { ButtonLink } from "@/components/ui/button";
@@ -26,7 +27,6 @@ export async function generateMetadata({
 
 const STOCK_STATES = ["InStock", "OutOfStock", "EnquireForAvailability"] as const;
 
-/** First value of a possibly-repeated search param (Next may hand us arrays). */
 function firstParam(value: string | string[] | undefined): string | undefined {
   return Array.isArray(value) ? value[0] : value;
 }
@@ -61,7 +61,6 @@ export default async function ProductsPage({
 
   const data = await getProductListing({ category, q, sort, verifiedOnly, inStockOnly, page });
 
-  // Params every link must preserve, minus the page (Pagination folds it).
   const baseParams: Record<string, string | undefined> = {
     category,
     q,
@@ -84,23 +83,13 @@ export default async function ProductsPage({
 
   const totalPages = Math.max(1, Math.ceil(data.totalItems / data.pageSize));
 
-  return (
-    <div className="shell-public py-8 md:py-12">
-      <header className="max-w-2xl">
-        <h1 className="page-title">{t("title")}</h1>
-        <p className="mt-3 type-body text-ink-muted">{t("lede")}</p>
-        {q && (
-          <p className="mt-2 type-body-sm text-ink-muted">
-            {t("searchEcho", { query: q })}
-          </p>
-        )}
-      </header>
+  const toolbar = (
+    <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
+      <p className="type-body text-ink-muted" aria-live="polite">
+        {t("count", { count: data.totalItems })}
+      </p>
 
-      <div className="mt-8 flex flex-wrap items-center justify-between gap-x-6 gap-y-4">
-        <p className="type-body text-ink-muted" aria-live="polite">
-          {t("count", { count: data.totalItems })}
-        </p>
-
+      <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:gap-4">
         <div className="flex flex-wrap items-center gap-1" aria-label={t("sortLabel")}>
           {SORT_KEYS.map((key) => (
             <Link
@@ -109,51 +98,70 @@ export default async function ProductsPage({
               aria-current={sort === key ? "true" : undefined}
               className={cx(
                 "type-meta rounded-sm px-2.5 py-1.5 transition-colors duration-instant ease-standard focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus",
-                sort === key ? "bg-surface-recessed text-ink" : "text-ink-muted hover:text-ink",
+                sort === key ? "bg-brand-primary/15 font-semibold text-ink" : "text-ink-muted hover:text-ink",
               )}
             >
               {tSort(key)}
             </Link>
           ))}
         </div>
-      </div>
 
-      <div className="mt-4 flex flex-wrap items-center gap-2">
-        <Link
-          href={hrefWith({ verifiedOnly: verifiedOnly ? undefined : "true" })}
-          aria-pressed={verifiedOnly}
-          className={cx(
-            "type-meta rounded-full border px-3 py-1.5 transition-colors duration-instant ease-standard focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus",
-            verifiedOnly
-              ? "border-line-strong bg-surface-recessed text-ink"
-              : "border-line text-ink-muted hover:text-ink",
-          )}
-        >
-          {t("verifiedOnly")}
-        </Link>
-        <Link
-          href={hrefWith({ inStockOnly: inStockOnly ? undefined : "true" })}
-          aria-pressed={inStockOnly}
-          className={cx(
-            "type-meta rounded-full border px-3 py-1.5 transition-colors duration-instant ease-standard focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus",
-            inStockOnly
-              ? "border-line-strong bg-surface-recessed text-ink"
-              : "border-line text-ink-muted hover:text-ink",
-          )}
-        >
-          {t("inStockOnly")}
-        </Link>
+        <div className="flex flex-wrap items-center gap-2">
+          <Link
+            href={hrefWith({ verifiedOnly: verifiedOnly ? undefined : "true" })}
+            aria-pressed={verifiedOnly}
+            className={cx(
+              "type-meta rounded-full border px-3 py-1.5 transition-colors duration-instant ease-standard focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus",
+              verifiedOnly
+                ? "border-ink-strong bg-surface-recessed text-ink"
+                : "border-line text-ink-muted hover:border-line-strong hover:text-ink",
+            )}
+          >
+            {t("verifiedOnly")}
+          </Link>
+          <Link
+            href={hrefWith({ inStockOnly: inStockOnly ? undefined : "true" })}
+            aria-pressed={inStockOnly}
+            className={cx(
+              "type-meta rounded-full border px-3 py-1.5 transition-colors duration-instant ease-standard focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus",
+              inStockOnly
+                ? "border-ink-strong bg-surface-recessed text-ink"
+                : "border-line text-ink-muted hover:border-line-strong hover:text-ink",
+            )}
+          >
+            {t("inStockOnly")}
+          </Link>
+        </div>
       </div>
+    </div>
+  );
 
+  return (
+    <CatalogueShell
+      title={t("title")}
+      lede={
+        <>
+          {t("lede")}
+          {q && (
+            <span className="mt-2 block type-body-sm text-ink-muted">{t("searchEcho", { query: q })}</span>
+          )}
+        </>
+      }
+      toolbar={toolbar}
+    >
       {data.items.length === 0 ? (
         <EmptyState
           title={t("emptyTitle")}
           description={t("emptyBody")}
           headingLevel="h2"
-          action={<ButtonLink href="/products" variant="secondary" size="md">{t("clearFilters")}</ButtonLink>}
+          action={
+            <ButtonLink href="/products" variant="secondary" size="md">
+              {t("clearFilters")}
+            </ButtonLink>
+          }
         />
       ) : (
-        <Reveal className="mt-8 grid grid-cols-2 gap-x-4 gap-y-8 md:grid-cols-3 xl:grid-cols-4">
+        <Reveal className="catalogue-grid gap-3 md:gap-4">
           {data.items.map((item) => (
             <ProductCard
               key={item.publicId}
@@ -170,7 +178,7 @@ export default async function ProductsPage({
       )}
 
       {data.facets && data.facets.length > 0 && (
-        <div className="mt-10">
+        <div className="mt-12">
           <FacetSummary facets={data.facets} locale={locale} title={tFacets("title")} />
         </div>
       )}
@@ -191,6 +199,6 @@ export default async function ProductsPage({
           />
         </div>
       )}
-    </div>
+    </CatalogueShell>
   );
 }

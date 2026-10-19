@@ -1,16 +1,18 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { setRequestLocale, getTranslations } from "next-intl/server";
-import { Link } from "@/i18n/navigation";
 import { getSupplierDetail, getSupplierProducts } from "@/lib/api/catalogue-server";
 import type { SupplierDetailResponse, PagedProductResponse } from "@/lib/api/catalogue";
 import { ApiClientError } from "@/lib/api/envelope";
 import { ProductCard } from "@/components/catalogue/product-card";
 import { Pagination } from "@/components/catalogue/pagination";
+import { CatalogueShell } from "@/components/catalogue/catalogue-shell";
 import { StatusPill } from "@/components/ui/status-pill";
 import { ButtonLink } from "@/components/ui/button";
 import { Reveal } from "@/components/motion/reveal";
 import { safeExternalHref } from "@/lib/url/safe-external-href";
+import { imageUrl } from "@/lib/media-url";
+import { BadgeCheck, Globe, Mail, Phone } from "lucide-react";
 
 export const dynamicParams = true;
 
@@ -65,53 +67,70 @@ export default async function SupplierPage({
   const stockLabel = (state: string): string =>
     (STOCK_STATES as readonly string[]).includes(state) ? tCat(`stock.${state}`) : state;
   const websiteHref = safeExternalHref(detail.website);
+  const logo = imageUrl(detail.logo?.srcset);
 
-  // `?view=products` swaps the microsite for this supplier's full catalogue —
-  // same page route, still SSR, served from the dedicated endpoint.
   const showAll = view === "products";
   let products: PagedProductResponse | null = null;
   if (showAll) {
     products = await getSupplierProducts(slug, page);
   }
 
-  return (
-    <div className="shell-public py-8 md:py-12">
-      <nav aria-label="breadcrumb" className="type-meta">
-        <Link href="/suppliers" className="text-ink-muted transition-colors duration-instant ease-standard hover:text-ink">
-          {t("title")}
-        </Link>
-        <span aria-hidden="true" className="mx-2 text-ink-faint">/</span>
-        <span className="text-ink">{detail.name}</span>
-      </nav>
+  const crumbs = showAll
+    ? [
+        { label: t("title"), href: "/suppliers" },
+        { label: detail.name, href: `/suppliers/${detail.slug}` },
+        { label: t("allProducts") },
+      ]
+    : [{ label: t("title"), href: "/suppliers" }, { label: detail.name }];
 
+  const headerAside = !showAll ? (
+    <div className="flex flex-wrap items-start gap-4">
+      {logo && (
+        <span className="relative size-20 shrink-0 overflow-hidden rounded-sm border border-line bg-surface-recessed sm:size-24">
+          {/* eslint-disable-next-line @next/next/no-img-element -- catalogue media via rewrite */}
+          <img
+            src={logo}
+            alt={detail.logo?.alt ?? detail.name}
+            loading="eager"
+            decoding="async"
+            className="h-full w-full object-contain p-2"
+          />
+        </span>
+      )}
+      <div className="flex flex-wrap items-center gap-3">
+        <StatusPill tone={detail.verified ? "success" : "neutral"}>
+          {detail.verified ? (
+            <span className="inline-flex items-center gap-1">
+              <BadgeCheck className="size-3.5" aria-hidden />
+              {t("verified")}
+            </span>
+          ) : (
+            t("unverified")
+          )}
+        </StatusPill>
+        {(detail.district || detail.location) && (
+          <p className="type-body text-ink-muted">{[detail.district, detail.location].filter(Boolean).join(" · ")}</p>
+        )}
+      </div>
+    </div>
+  ) : undefined;
+
+  return (
+    <CatalogueShell crumbs={crumbs} title={detail.name} aside={headerAside}>
       {!showAll ? (
         <>
-          <header className="mt-6 flex flex-wrap items-start justify-between gap-4">
-            <div>
-              <h1 className="page-title">{detail.name}</h1>
-              {(detail.district || detail.location) && (
-                <p className="mt-2 type-body text-ink-muted">
-                  {[detail.district, detail.location].filter(Boolean).join(" · ")}
-                </p>
-              )}
-            </div>
-            <StatusPill tone={detail.verified ? "success" : "neutral"}>
-              {detail.verified ? t("verified") : t("unverified")}
-            </StatusPill>
-          </header>
-
           {(detail.story || detail.categories.length > 0 || detail.contactPerson || detail.phone || detail.email || detail.website) && (
-            <div className="mt-8 grid gap-8 md:grid-cols-2">
+            <div className="grid gap-8 lg:grid-cols-2">
               {detail.story && (
-                <section>
-                  <h2 className="block-title">{t("story")}</h2>
-                  <p className="mt-3 type-body text-ink">{detail.story}</p>
+                <section className="rounded-sm border border-line bg-surface-panel p-5 md:p-6">
+                  <h2 className="font-display text-lg font-bold tracking-tight text-ink">{t("story")}</h2>
+                  <p className="mt-3 type-body leading-relaxed text-ink">{detail.story}</p>
                 </section>
               )}
 
               {detail.categories.length > 0 && (
-                <section>
-                  <h2 className="block-title">{t("specialties")}</h2>
+                <section className="rounded-sm border border-line bg-surface-panel p-5 md:p-6">
+                  <h2 className="font-display text-lg font-bold tracking-tight text-ink">{t("specialties")}</h2>
                   <ul className="mt-3 flex flex-wrap gap-2">
                     {detail.categories.map((name) => (
                       <li key={name} className="type-meta rounded-full border border-line px-3 py-1.5 text-ink-muted">
@@ -123,9 +142,9 @@ export default async function SupplierPage({
               )}
 
               {(detail.contactPerson || detail.phone || detail.email || detail.website) && (
-                <section>
-                  <h2 className="block-title">{t("contact")}</h2>
-                  <dl className="mt-3 space-y-2">
+                <section className="rounded-sm border border-line bg-surface-panel p-5 md:p-6 lg:col-span-2">
+                  <h2 className="font-display text-lg font-bold tracking-tight text-ink">{t("contact")}</h2>
+                  <dl className="mt-4 space-y-3">
                     {detail.contactPerson && (
                       <div>
                         <dt className="sr-only">{t("contact")}</dt>
@@ -133,8 +152,11 @@ export default async function SupplierPage({
                       </div>
                     )}
                     {detail.phone && (
-                      <div className="flex justify-between gap-4">
-                        <dt className="type-body text-ink-muted">{t("phone")}</dt>
+                      <div className="flex items-center justify-between gap-4">
+                        <dt className="flex items-center gap-2 type-body-sm text-ink-muted">
+                          <Phone className="size-4 shrink-0" aria-hidden />
+                          {t("phone")}
+                        </dt>
                         <dd className="type-body text-ink">
                           <a href={`tel:${detail.phone.replace(/\s+/g, "")}`} className="transition-colors duration-instant ease-standard hover:text-ink-accent">
                             {detail.phone}
@@ -143,8 +165,11 @@ export default async function SupplierPage({
                       </div>
                     )}
                     {detail.email && (
-                      <div className="flex justify-between gap-4">
-                        <dt className="type-body text-ink-muted">{t("email")}</dt>
+                      <div className="flex items-center justify-between gap-4">
+                        <dt className="flex items-center gap-2 type-body-sm text-ink-muted">
+                          <Mail className="size-4 shrink-0" aria-hidden />
+                          {t("email")}
+                        </dt>
                         <dd className="type-body text-ink">
                           <a href={`mailto:${detail.email}`} className="transition-colors duration-instant ease-standard hover:text-ink-accent">
                             {detail.email}
@@ -153,8 +178,11 @@ export default async function SupplierPage({
                       </div>
                     )}
                     {websiteHref && (
-                      <div className="flex justify-between gap-4">
-                        <dt className="type-body text-ink-muted">{t("website")}</dt>
+                      <div className="flex items-center justify-between gap-4">
+                        <dt className="flex items-center gap-2 type-body-sm text-ink-muted">
+                          <Globe className="size-4 shrink-0" aria-hidden />
+                          {t("website")}
+                        </dt>
                         <dd className="type-body text-ink">
                           <a
                             href={websiteHref}
@@ -178,14 +206,14 @@ export default async function SupplierPage({
           )}
 
           {detail.featuredProducts && detail.featuredProducts.length > 0 && (
-            <section className="mt-4">
-              <div className="flex items-center justify-between gap-4">
-                <h2 className="type-title-md text-ink">{t("featured")}</h2>
+            <section className="mt-8">
+              <div className="flex flex-wrap items-center justify-between gap-4">
+                <h2 className="font-display text-xl font-bold tracking-tight text-ink">{t("featured")}</h2>
                 <ButtonLink href={`/suppliers/${detail.slug}?view=products`} variant="secondary" size="sm">
                   {t("allProducts")}
                 </ButtonLink>
               </div>
-              <Reveal className="mt-6 grid grid-cols-2 gap-x-4 gap-y-8 md:grid-cols-4">
+              <Reveal className="catalogue-grid mt-6 gap-3 md:gap-4">
                 {detail.featuredProducts.map((item) => (
                   <ProductCard
                     key={item.publicId}
@@ -204,14 +232,12 @@ export default async function SupplierPage({
         </>
       ) : (
         <>
-          <div className="mt-6 flex flex-wrap items-center justify-between gap-4">
-            <p className="type-body text-ink-muted" aria-live="polite">
-              {t("products", { count: products?.totalItems ?? 0 })}
-            </p>
-          </div>
+          <p className="type-body text-ink-muted" aria-live="polite">
+            {t("products", { count: products?.totalItems ?? 0 })}
+          </p>
 
           {products && products.items.length > 0 ? (
-            <Reveal className="mt-6 grid grid-cols-2 gap-x-4 gap-y-8 md:grid-cols-3 xl:grid-cols-4">
+            <Reveal className="catalogue-grid mt-6 gap-3 md:gap-4">
               {products.items.map((item) => (
                 <ProductCard
                   key={item.publicId}
@@ -247,6 +273,6 @@ export default async function SupplierPage({
           )}
         </>
       )}
-    </div>
+    </CatalogueShell>
   );
 }

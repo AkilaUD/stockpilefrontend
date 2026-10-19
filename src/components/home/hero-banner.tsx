@@ -1,73 +1,82 @@
 import Image from "next/image";
 import { Link } from "@/i18n/navigation";
+import { ButtonLink } from "@/components/ui/button";
 
 /*
- * HeroBanner — the home hero (reference reconstruction Phase 2 §4.4).
- *
- * The original hero is a single editorial graphic ("How it works" flyer)
- * linking to the how-it-works page. We reuse the original asset
- * (public/original/hero-how-it-works.jpg, 871×366 ≈ 2.4:1) and keep that
- * whole-banner link: the full-width graphic plus a small dark CTA chip in the
- * bottom corner, so the affordance does not rely on the image alone (§10).
- *
- * Server Component; copy arrives as props so this file owns no English.
+ * Material Atlas hero — brand-first, search-forward procurement opening.
+ * Real CTAs only; imagery is the existing how-it-works asset (no invented photos).
  */
+
 interface HeroBannerProps {
-  /** Page-level heading (the reference home headline) — one h1 per page. */
   headline: string;
-  /** Screen-reader description of the banner image. */
+  lede: string;
   alt: string;
-  /** Visible CTA label (e.g. "Learn How Stockpile Works"). */
   cta: string;
+  rfqCta: string;
+  supplierCta: string;
+  searchSlot?: React.ReactNode;
 }
 
-export function HeroBanner({ headline, alt, cta }: HeroBannerProps) {
+export function HeroBanner({
+  headline,
+  lede,
+  alt,
+  cta,
+  rfqCta,
+  supplierCta,
+  searchSlot,
+}: HeroBannerProps) {
   return (
-    /*
-     * The banner lives inside the public container (the reference's
-     * `.banner-slider-top` measures the full container width, 1170px at a
-     * 1440px viewport), and from 1200px its left 300px is the reserved column
-     * for the permanently-open "Shop By Department" list — the reference's
-     * `.bn-inner` row pairs an empty `col-md-3` with a 75%-wide `col-xl-9`
-     * hero. The list (in the header's menu row, aligned to the same container
-     * edge) fills that gutter instead of covering the banner.
-     */
-    <section className="bg-surface-recessed">
-      <div className="shell-public">
-        {/*
-          The 300px reservation is a *second* offset inside the container, not a
-          replacement for the container's own gutter: at 1280px the container
-          content starts at (1280-1200)/2 + 15 = 55px, the reserved column is
-          55→355, and the hero must start at 355. A single `shell-public
-          min-[1200px]:pl-[300px]` element would put the hero at 40 + 300 = 340
-          and overlap the department list by the 15px gutter.
-        */}
-        <div className="min-[1200px]:pl-[300px]">
-          {/* The reference hero IS the graphic below; the headline lives in the
-              graphic, so the semantic h1 is visually-hidden but fully spoken
-              (a11y gate: exactly one h1 per page, localized). */}
-          <h1 className="sr-only">{headline}</h1>
-          <Link
-            href="/how-it-works"
-            className="group relative block focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus"
-          >
-            <div className="relative aspect-[871/366] w-full overflow-hidden">
-              <Image
-                src="/original/hero-how-it-works.jpg"
-                alt={alt}
-                fill
-                priority
-                sizes="(min-width: 1200px) calc(min(100vw, 1200px) - 330px), 100vw"
-                className="h-full w-full object-cover transition-transform duration-200 ease-standard group-hover:scale-[1.01]"
-              />
-            </div>
-            <span className="absolute inset-x-4 bottom-4 inline-flex w-fit items-center gap-2 rounded-sm bg-ink px-4 py-2 font-body text-xs font-semibold text-white transition-colors duration-instant ease-standard group-hover:bg-ink-soft md:inset-x-auto md:bottom-6 md:left-6 md:text-sm">
+    <section className="relative overflow-hidden border-b border-line bg-surface-inverse text-ink" data-surface="dark">
+      <div className="pointer-events-none absolute inset-0 opacity-[0.35]">
+        <Image
+          src="/original/hero-how-it-works.jpg"
+          alt=""
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover object-center"
+        />
+        <div className="absolute inset-0 bg-gradient-to-r from-surface-inverse via-surface-inverse/90 to-surface-inverse/40" />
+      </div>
+
+      <div className="shell-public relative grid gap-10 py-14 md:grid-cols-12 md:items-end md:py-20 lg:py-24">
+        <div className="md:col-span-7 lg:col-span-6">
+          <p className="type-label font-semibold tracking-[0.14em] text-ink-accent">Stockpile</p>
+          <h1 className="mt-3 font-display text-4xl leading-[1.05] font-bold tracking-tight text-ink-strong md:text-5xl lg:text-6xl">
+            {headline}
+          </h1>
+          <p className="mt-5 max-w-xl type-body text-ink-muted md:text-lg">{lede}</p>
+
+          {searchSlot && <div className="mt-8 max-w-xl">{searchSlot}</div>}
+
+          <div className="mt-8 flex flex-wrap gap-3">
+            <ButtonLink href="/rfq" size="lg">
+              {rfqCta}
+            </ButtonLink>
+            <ButtonLink href="/supplier-register" variant="secondary" size="lg" className="border-ink-muted! bg-transparent! text-ink! hover:bg-surface-elevated!">
+              {supplierCta}
+            </ButtonLink>
+            <Link
+              href="/how-it-works"
+              className="inline-flex items-center type-body-sm font-medium text-ink-accent underline-offset-4 hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus"
+            >
               {cta}
-              <svg aria-hidden="true" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5" className="size-3.5">
-                <path d="M3 8h9m0 0-3.5-3.5M12 8l-3.5 3.5" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
-            </span>
-          </Link>
+            </Link>
+          </div>
+        </div>
+
+        <div className="relative hidden md:col-span-5 md:block lg:col-span-6">
+          <div className="relative aspect-[4/3] overflow-hidden border border-line/30 bg-surface-elevated">
+            <Image
+              src="/original/hero-how-it-works.jpg"
+              alt={alt}
+              fill
+              priority
+              sizes="(min-width: 768px) 40vw, 100vw"
+              className="object-cover"
+            />
+          </div>
         </div>
       </div>
     </section>

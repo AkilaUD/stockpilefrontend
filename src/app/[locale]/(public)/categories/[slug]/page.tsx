@@ -8,6 +8,7 @@ import { ApiClientError } from "@/lib/api/envelope";
 import { categoryHref } from "@/lib/navigation/navigation";
 import { ProductCard } from "@/components/catalogue/product-card";
 import { Pagination } from "@/components/catalogue/pagination";
+import { CatalogueShell } from "@/components/catalogue/catalogue-shell";
 import { ButtonLink } from "@/components/ui/button";
 import { Reveal } from "@/components/motion/reveal";
 
@@ -64,10 +65,6 @@ export default async function CategoryPage({
   const stockLabel = (state: string): string =>
     (STOCK_STATES as readonly string[]).includes(state) ? tCat(`stock.${state}`) : state;
 
-  // Ancestor chain for the breadcrumb: the detail payload only knows the
-  // parent slug, so the full tree is consulted for names (the masthead loads
-  // the same tree; here it is a small in-request lookup, not a second data
-  // source — same endpoint, same no-store policy).
   const tree = await getCategoryTree();
   const nodeBySlug = new Map<string, CategoryNode>();
   const collect = (nodes: CategoryNode[]): void => {
@@ -86,38 +83,26 @@ export default async function CategoryPage({
     cursor = node.parentSlug;
   }
 
+  const crumbs = [
+    { label: tListing("title"), href: "/products" },
+    ...ancestors.map((ancestor) => ({ label: ancestor.name, href: categoryHref(ancestor.slug) })),
+    { label: category.name },
+  ];
+
   return (
-    <div className="shell-public py-8 md:py-12">
-      <nav aria-label="breadcrumb" className="type-meta">
-        <Link href="/products" className="text-ink-muted transition-colors duration-instant ease-standard hover:text-ink">
-          {tListing("title")}
-        </Link>
-        {ancestors.map((ancestor) => (
-          <span key={ancestor.slug} className="inline-flex items-center">
-            <span aria-hidden="true" className="mx-2 text-ink-faint">/</span>
-            <Link
-              href={categoryHref(ancestor.slug)}
-              className="text-ink-muted transition-colors duration-instant ease-standard hover:text-ink"
-            >
-              {ancestor.name}
-            </Link>
-          </span>
-        ))}
-      </nav>
-
-      <header className="mt-6 max-w-2xl">
-        <h1 className="page-title">{category.name}</h1>
-        <p className="mt-3 type-body text-ink-muted">{t("products", { count: detail.totalProducts })}</p>
-        <div className="mt-4">
-          <ButtonLink href={`/products?category=${encodeURIComponent(slug)}`} variant="secondary" size="sm">
-            {tProduct("viewAllInCategory", { category: category.name })}
-          </ButtonLink>
-        </div>
-      </header>
-
+    <CatalogueShell
+      crumbs={crumbs}
+      title={category.name}
+      lede={t("products", { count: detail.totalProducts })}
+      aside={
+        <ButtonLink href={`/products?category=${encodeURIComponent(slug)}`} variant="secondary" size="sm">
+          {tProduct("viewAllInCategory", { category: category.name })}
+        </ButtonLink>
+      }
+    >
       {childCount > 0 && (
-        <section className="mt-10">
-          <h2 className="block-title">{t("subcategories")}</h2>
+        <section className="mb-10">
+          <h2 className="font-display text-lg font-bold tracking-tight text-ink">{t("subcategories")}</h2>
           <ul className="mt-4 flex flex-wrap gap-2">
             {category.children.map((child) => (
               <li key={child.slug}>
@@ -134,7 +119,7 @@ export default async function CategoryPage({
       )}
 
       {detail.products.length > 0 ? (
-        <Reveal className="mt-10 grid grid-cols-2 gap-x-4 gap-y-8 md:grid-cols-3 xl:grid-cols-4">
+        <Reveal className="catalogue-grid gap-3 md:gap-4">
           {detail.products.map((item) => (
             <ProductCard
               key={item.publicId}
@@ -149,7 +134,7 @@ export default async function CategoryPage({
           ))}
         </Reveal>
       ) : (
-        <p className="mt-10 type-body text-ink-muted">{t("products", { count: 0 })}</p>
+        <p className="type-body text-ink-muted">{t("products", { count: 0 })}</p>
       )}
 
       {totalPages > 1 && (
@@ -167,6 +152,6 @@ export default async function CategoryPage({
           />
         </div>
       )}
-    </div>
+    </CatalogueShell>
   );
 }

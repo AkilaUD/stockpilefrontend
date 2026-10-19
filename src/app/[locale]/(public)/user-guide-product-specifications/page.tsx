@@ -71,7 +71,7 @@ export default async function ProductSpecificationsGuidePage({
       topicNavLabel={tGuide("topicNavLabel")}
     >
       <nav aria-label={t("tocTitle")} className="measure-editorial">
-        <h2 className="font-display text-base font-bold text-ink">{t("tocTitle")}</h2>
+        <h2 className="block-title normal-case">{t("tocTitle")}</h2>
         <ul className="mt-3 grid list-disc gap-1 pl-5 sm:grid-cols-2">
           {spec.sections.map((section) => (
             <li key={section.category} className="type-body-sm text-ink-muted">
@@ -91,7 +91,7 @@ export default async function ProductSpecificationsGuidePage({
           const [head, ...body] = section.rows;
           return (
             <section key={section.category} id={slug(section.category)} className="scroll-mt-24">
-              <h2 className="font-display text-base font-bold text-ink">{section.category}</h2>
+              <h2 className="block-title normal-case">{section.category}</h2>
               <div className="mt-3 overflow-x-auto">
                 <table className="w-full min-w-[36rem] border-collapse text-left">
                   <thead>

@@ -1,5 +1,10 @@
 # Parity audit — reconstruction vs live https://stockpile.lk/
 
+> **Visual Magento/Martfury pixel parity is retired (Material Atlas redesign).**  
+> Business IA, routes, Magento `.html` → 308 redirects, and honest API wiring remain authoritative.
+> Active visual direction: [`DESIGN.md`](./DESIGN.md). Tables below that claim typeface/palette/skin
+> “match” describe the **historical** clone pass (audited 2026-10-14), not the current UI.
+
 Audited **2026-10-14**; gaps **A**, **B** and **C** closed in the same pass (see §8). This document
 compares this application against the live reference site item by item, so "full parity" is a list of
 measured facts rather than an impression. Nothing here is guessed: every reference value was read
@@ -256,18 +261,32 @@ by paging instead (13 index pages, 73 linked posts / 72 live / 71 captured — R
 | `/news/category/{slug}` | `/news/category/[slug]` | **match, and filtered where the reference's own page is not** (deviation 8) |
 | `/news/tag/{slug}` | `/news/tag/[slug]` | **match** — the reference's own tag-chip destinations |
 | `/marketplace/seller/sellerlist/` + seller profiles | `/suppliers`, `/suppliers/[slug]` | equivalent |
-| `/{dept}.html`, `/{dept}/{sub}.html` | `/categories/{slug}` | different scheme |
-| `/{product}.html` | `/products/[slug]` | different scheme |
+| `/{dept}.html`, `/{dept}/{sub}.html` | `/categories/{slug}` | **308 from Magento path** (proxy map) |
+| `/{product}.html` | `/products/[slug]` | **308 from Magento path** (proxy map) |
 | `/home`, `/home-05`, `/home-onecolumn`, `/mbi-font-icon`, `/no-route`, `/no-route-404` | — | **N/A** — Magento theme demos / 404 fixtures |
 
-Old paths are 308 (permanent) redirects to the new ones, preserving the query string, via
-`next.config.ts` `redirects()` — which runs before the next-intl proxy, so it is safe with
-`localePrefix: "as-needed"` in both locales:
+Old editorial paths are 308 (permanent) redirects via `next.config.ts` `redirects()`
+(before the next-intl proxy, safe with `localePrefix: "as-needed"`):
 
 | Old path | New path |
 |---|---|
 | `/quotations`, `/si/quotations` | `/quotations-and-estimations`, `/si/quotations-and-estimations` |
 | `/supplier-benefits`, `/si/supplier-benefits` | `/how-it-works-for-suppliers`, `/si/how-it-works-for-suppliers` |
+
+Magento catalogue `.html` URLs (product + category, `/en/…` and `/si/…`) are 308-redirected
+in `src/proxy.ts` from the generated map `src/lib/seo/magento-html-redirects.json`
+(`scripts/generate-magento-redirects.mjs` ← `tools/catalogue-migrate/out/catalogue.json`).
+`/sitemap/sitemap.xml` also lists `/news`, article posts, category tree, newest products
+(cap), and suppliers when the API answers.
+
+### Marketplace surfaces (Phases 4–6)
+
+| Surface | Status |
+|---|---|
+| Supplier lead inbox `/supplier/leads` + quote submit | **Wired** to shipped leads + `POST /quotes` |
+| Quote lifecycle (revise/withdraw/accept/decline/comparison) | **Wired** FE + API |
+| Orders (buyer `/workspace/orders`, supplier `/supplier/orders`) | **Wired** — accept creates order in one transaction |
+| `/pricing` | **Live plans** from `GET /subscriptions/plans`; checkout = register → supplier subscribe (manual/invoice / file-sink), not a card form |
 
 Routes we have that the reference does not, all justified by real backend surfaces:
 `/help` (our FAQ), `/rfq`, `/search`, `/suppliers` (directory), `/workspace`, `/wizard` (the four-step

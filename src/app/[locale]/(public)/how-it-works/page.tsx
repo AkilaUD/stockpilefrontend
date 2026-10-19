@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { setRequestLocale, getTranslations } from "next-intl/server";
-import { Link } from "@/i18n/navigation";
 import { InfoPage } from "@/components/pages/info-page";
+import { ButtonLink } from "@/components/ui/button";
 
 /**
  * /how-it-works — reference reconstruction §4.4 (copy faithful to the
@@ -27,29 +27,25 @@ export default async function HowItWorksPage({ params }: { params: Promise<{ loc
 
   return (
     <InfoPage breadcrumb={t("title")} title={t("title")} lede={t("lede")}>
-      <div className="mt-4 grid gap-4 md:grid-cols-2">
+      <div className="grid gap-4 md:grid-cols-2">
         <article className="flex flex-col rounded-md border border-line bg-surface-panel p-6 md:p-8">
           <h2 className="font-display text-xl font-bold text-ink">{t("buyersTitle")}</h2>
-          <p className="mt-3 flex-1 font-body leading-relaxed text-ink-muted">{t("buyersBody")}</p>
-          <Link
-            href="/how-it-works-for-buyers"
-            className="mt-6 inline-flex h-12 w-fit items-center justify-center rounded-md bg-brand-primary px-7 font-body text-sm font-semibold text-ink transition-colors duration-instant ease-standard hover:bg-brand-primary-hover focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus"
-          >
+          <p className="mt-3 flex-1 type-body text-ink-muted">{t("buyersBody")}</p>
+          <ButtonLink href="/how-it-works-for-buyers" size="lg" className="mt-6 w-fit">
             {t("buyersCta")}
-          </Link>
+          </ButtonLink>
         </article>
 
         <article className="flex flex-col rounded-md border border-line bg-surface-panel p-6 md:p-8">
           <h2 className="font-display text-xl font-bold text-ink">{t("suppliersTitle")}</h2>
-          <p className="mt-3 flex-1 font-body leading-relaxed text-ink-muted">
-            {t("suppliersBody")}
-          </p>
-          <Link
+          <p className="mt-3 flex-1 type-body text-ink-muted">{t("suppliersBody")}</p>
+          <ButtonLink
             href="/how-it-works-for-suppliers"
-            className="mt-6 inline-flex h-12 w-fit items-center justify-center rounded-md bg-ink px-7 font-body text-sm font-semibold text-white transition-colors duration-instant ease-standard hover:bg-ink-soft focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus"
+            size="lg"
+            className="mt-6 w-fit border-ink! bg-ink! text-ink-inverse! hover:bg-ink-soft!"
           >
             {t("suppliersCta")}
-          </Link>
+          </ButtonLink>
         </article>
       </div>
     </InfoPage>

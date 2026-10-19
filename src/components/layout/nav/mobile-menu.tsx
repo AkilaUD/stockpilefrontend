@@ -26,6 +26,7 @@
  */
 
 import * as DialogPrimitive from "@radix-ui/react-dialog";
+import { Menu, X } from "lucide-react";
 import { useState } from "react";
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
@@ -60,9 +61,7 @@ function MobileMenuPanel({ tree, onNavigate }: MobileMenuProps & { onNavigate?: 
           aria-label={tA11y("closeDialog")}
           className="inline-flex size-9 items-center justify-center rounded-sm text-ink-muted transition-colors duration-instant ease-standard hover:bg-surface-recessed hover:text-ink focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus"
         >
-          <svg aria-hidden="true" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5" className="size-4">
-            <path d="m4 4 8 8M12 4l-8 8" strokeLinecap="round" />
-          </svg>
+          <X className="size-4" aria-hidden="true" />
         </DialogPrimitive.Close>
       </div>
 
@@ -226,9 +225,7 @@ export function MobileMenu({ tree }: MobileMenuProps) {
           aria-label={tA11y("openMenu")}
           className="inline-flex size-11 items-center justify-center rounded-sm text-ink transition-colors duration-instant ease-standard hover:bg-surface-recessed focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus"
         >
-          <svg aria-hidden="true" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5" className="size-5">
-            <path d="M2 4.5h12M2 8h12M2 11.5h12" strokeLinecap="round" />
-          </svg>
+          <Menu className="size-5" aria-hidden="true" />
         </button>
       }
     />

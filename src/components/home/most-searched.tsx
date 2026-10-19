@@ -4,33 +4,23 @@ import { Link } from "@/i18n/navigation";
 import { MOST_SEARCHED } from "@/lib/navigation/navigation";
 
 /*
- * MostSearched — the "Most Searched Products" tile grid (reference
- * reconstruction Phase 2 §4.4). Six original tiles (graphic + label), each
- * mapping to a REAL backend category route via navigation.ts's MOST_SEARCHED
- * config — every tile was verified to resolve to a live category page.
- * The labels are the original's; the original asset PNGs are served from
- * public/original/most-searched/ (provenance: README.md there).
+ * Most searched tiles — real category routes from navigation.ts.
  */
 export async function MostSearched() {
   const t = await getTranslations("home.mostSearched");
   const tA11y = await getTranslations("a11y");
 
   return (
-    <section className="shell-public pb-[30px]">
-      {/* Reference `.top-title` rhythm: heading block `padding:5px 20px`,
-          24px/500 heading, sections 30px apart. This heading is NOT a link in
-          the reference (only Newest Suppliers / Newest Products / News are). */}
-      <div className="px-5 py-[5px]">
-        <h2 className="font-body text-2xl leading-8 font-medium text-ink">{t("title")}</h2>
-      </div>
-      <ul className="mt-[5px] grid grid-cols-2 gap-4 px-5 sm:grid-cols-3 lg:grid-cols-6">
+    <section className="shell-public border-b border-line py-12 md:py-16">
+      <h2 className="font-display text-2xl font-bold tracking-tight text-ink md:text-3xl">{t("title")}</h2>
+      <ul className="mt-8 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-6 lg:gap-6">
         {MOST_SEARCHED.map((tile) => (
           <li key={tile.href}>
             <Link
               href={tile.href}
               className="group block focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus"
             >
-              <span className="relative block aspect-square overflow-hidden bg-surface-recessed">
+              <span className="relative block aspect-square overflow-hidden border border-line bg-surface-elevated">
                 <Image
                   src={tile.image}
                   alt=""
@@ -40,7 +30,7 @@ export async function MostSearched() {
                   aria-hidden="true"
                 />
               </span>
-              <span className="mt-3 block text-center font-body text-sm font-normal text-ink transition-colors duration-instant ease-standard group-hover:text-ink-accent">
+              <span className="mt-3 block text-center type-body-sm font-medium text-ink transition-colors duration-instant ease-standard group-hover:underline">
                 {t(tile.labelKey)}
               </span>
             </Link>

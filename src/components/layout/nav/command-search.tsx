@@ -19,6 +19,7 @@
  */
 
 import * as DialogPrimitive from "@radix-ui/react-dialog";
+import { Search, X } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
 import { Link } from "@/i18n/navigation";
@@ -135,10 +136,7 @@ export function CommandSearch() {
           aria-label={t("trigger")}
           className="inline-flex h-11 w-full items-center gap-2 rounded-sm bg-surface-elevated px-4 text-ink-muted transition-colors duration-instant ease-standard hover:bg-surface-panel hover:text-ink focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus"
         >
-          <svg aria-hidden="true" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5" className="size-4 shrink-0">
-            <circle cx="7" cy="7" r="4.25" />
-            <path d="m10.5 10.5 2.75 2.75" strokeLinecap="round" />
-          </svg>
+          <Search className="size-4 shrink-0" aria-hidden="true" />
           <span className="hidden truncate text-sm xl:inline">{tNav("searchPlaceholder")}</span>
           <span className="ml-auto hidden items-center rounded-sm bg-brand-primary px-3 py-1.5 font-body text-xs font-semibold text-ink-on-signal xl:inline-flex">
             {tNav("searchSubmit")}
@@ -151,10 +149,7 @@ export function CommandSearch() {
         <DialogPrimitive.Content className="command-content rounded-md border border-line bg-surface-elevated shadow-elev-lg outline-none">
           <div role="search">
             <div className="flex items-center gap-3 px-6 py-3.5">
-              <svg aria-hidden="true" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5" className="size-4 shrink-0 text-ink-muted">
-                <circle cx="7" cy="7" r="4.25" />
-                <path d="m10.5 10.5 2.75 2.75" strokeLinecap="round" />
-              </svg>
+              <Search className="size-4 shrink-0 text-ink-muted" aria-hidden="true" />
               <input
                 type="search"
                 value={query}
@@ -188,9 +183,7 @@ export function CommandSearch() {
                 aria-label={tA11y("closeDialog")}
                 className="inline-flex size-9 shrink-0 items-center justify-center rounded-sm text-ink-muted transition-colors duration-instant ease-standard hover:bg-surface-panel hover:text-ink focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus"
               >
-                <svg aria-hidden="true" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5" className="size-4">
-                  <path d="m4 4 8 8M12 4l-8 8" strokeLinecap="round" />
-                </svg>
+                <X className="size-4" aria-hidden="true" />
               </DialogPrimitive.Close>
             </div>
           </div>

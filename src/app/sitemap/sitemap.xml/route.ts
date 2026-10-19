@@ -1,22 +1,15 @@
 import type { NextRequest } from "next/server";
 import { routing } from "@/i18n/routing";
+import { API_ORIGIN } from "@/lib/api/origin";
+import { categoryHref } from "@/lib/navigation/navigation";
 
 export const runtime = "nodejs";
 
 /*
- * /sitemap/sitemap.xml — the reference's own sitemap path. The live footer's
- * "Sitemap" link points at `/sitemap/sitemap.xml`, so this route exists at that
- * exact URL rather than at the metadata-file default (`/sitemap.xml`); it is
- * listed in `src/proxy.ts`'s APP_ROUTED_URLS because a dotted path is otherwise
- * treated as a `public/` asset.
- *
- * Locale-independent: it enumerates the public editorial routes in both locales
- * and emits `<xhtml:link rel="alternate">` pairs so a crawler can pair the
- * English and Sinhala variants.
- *
- * The dynamic catalogue (categories, products, suppliers) is deliberately not
- * enumerated: it is large, API-driven, and changes per deploy. This file states
- * only what it can state truthfully — the static editorial set.
+ * /sitemap/sitemap.xml — reference path. Enumerates static editorial routes,
+ * /news (+ posts when the content API answers), and a bounded catalogue sample
+ * (category tree + newest products) so the map stays truthful without dumping
+ * the entire SKU list into every crawl.
  */
 
 const PUBLIC_PATHS = [
@@ -49,9 +42,12 @@ const PUBLIC_PATHS = [
   "/terms-of-use",
   "/privacy-policy-cookie-restriction-mode",
   "/sitemap",
+  "/news",
 ];
 
-/** Absolute URL for one path in one locale (`as-needed` prefix). */
+const CATALOGUE_PRODUCT_CAP = 200;
+const NEWS_PAGE_SIZE = 100;
+
 function href(origin: string, locale: string, path: string): string {
   const prefix = locale === routing.defaultLocale ? "" : `/${locale}`;
   const suffix = path === "/" ? "" : path;
@@ -66,20 +62,91 @@ function escapeXml(value: string): string {
     .replaceAll('"', "&quot;");
 }
 
-export function GET(request: NextRequest): Response {
-  const origin = request.nextUrl.origin;
+async function fetchJson<T>(path: string): Promise<T | null> {
+  try {
+    const response = await fetch(`${API_ORIGIN}${path}`, {
+      headers: { accept: "application/json" },
+      next: { revalidate: 3600 },
+    });
+    if (!response.ok) return null;
+    return (await response.json()) as T;
+  } catch {
+    return null;
+  }
+}
 
-  const entries = PUBLIC_PATHS.map((path) => {
-    const alternates = routing.locales
-      .map(
-        (locale) =>
-          `    <xhtml:link rel="alternate" hreflang="${locale}" href="${escapeXml(
-            href(origin, locale, path),
-          )}"/>`,
-      )
-      .join("\n");
-    return `  <url>\n    <loc>${escapeXml(href(origin, routing.defaultLocale, path))}</loc>\n${alternates}\n  </url>`;
-  }).join("\n");
+interface CategoryNode {
+  slug: string;
+  children?: CategoryNode[];
+}
+
+function flattenCategories(nodes: CategoryNode[], into: string[] = []): string[] {
+  for (const node of nodes) {
+    if (node.slug) into.push(node.slug);
+    if (node.children?.length) flattenCategories(node.children, into);
+  }
+  return into;
+}
+
+async function dynamicPaths(): Promise<string[]> {
+  const paths: string[] = [];
+
+  const articles = await fetchJson<{ items?: { slug: string }[] }>(
+    `/api/v1/content/articles?page=1&pageSize=${NEWS_PAGE_SIZE}`,
+  );
+  for (const item of articles?.items ?? []) {
+    if (item.slug) paths.push(`/news/post/${encodeURIComponent(item.slug)}`);
+  }
+
+  const tree = await fetchJson<CategoryNode[]>("/api/v1/catalog/categories");
+  if (tree) {
+    for (const slug of flattenCategories(tree)) {
+      paths.push(categoryHref(slug));
+    }
+  }
+
+  const products = await fetchJson<{ items?: { slug: string }[] }>(
+    `/api/v1/catalog/products?sort=newest&page=1&pageSize=${CATALOGUE_PRODUCT_CAP}`,
+  );
+  for (const item of products?.items ?? []) {
+    if (item.slug) paths.push(`/products/${encodeURIComponent(item.slug)}`);
+  }
+
+  const suppliers = await fetchJson<{ items?: { slug: string }[] }>(
+    "/api/v1/suppliers",
+  );
+  for (const item of suppliers?.items ?? []) {
+    if (item.slug) paths.push(`/suppliers/${encodeURIComponent(item.slug)}`);
+  }
+
+  return paths;
+}
+
+function urlEntry(origin: string, path: string): string {
+  const alternates = routing.locales
+    .map(
+      (locale) =>
+        `    <xhtml:link rel="alternate" hreflang="${locale}" href="${escapeXml(
+          href(origin, locale, path),
+        )}"/>`,
+    )
+    .join("\n");
+  return `  <url>\n    <loc>${escapeXml(href(origin, routing.defaultLocale, path))}</loc>\n${alternates}\n  </url>`;
+}
+
+export async function GET(request: NextRequest): Promise<Response> {
+  const origin = request.nextUrl.origin;
+  const extra = await dynamicPaths();
+  const allPaths = [...PUBLIC_PATHS, ...extra];
+  const seen = new Set<string>();
+  const entries = allPaths
+    .filter((path) => {
+      if (seen.has(path)) return false;
+      seen.add(path);
+      return true;
+    })
+    .map((path) => urlEntry(origin, path))
+    .join("\n");
 
   const xml =
     `<?xml version="1.0" encoding="UTF-8"?>\n` +

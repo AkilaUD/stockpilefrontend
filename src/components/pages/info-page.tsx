@@ -26,12 +26,10 @@ export function InfoPage({ breadcrumb, title, overline, lede, children }: InfoPa
     <section className="shell-public py-10 md:py-14">
       <Breadcrumbs items={[{ label: breadcrumb }]} />
 
-      <header className="mt-6 max-w-3xl">
+      <header className="measure-editorial mt-6">
         {overline && <p className="type-label font-semibold text-ink-accent">{overline}</p>}
-        <h1 className="mt-1 font-display text-3xl font-extrabold tracking-tight text-ink md:text-4xl">
-          {title}
-        </h1>
-        {lede && <p className="mt-4 font-body text-lg leading-relaxed text-ink-muted">{lede}</p>}
+        <h1 className="type-display-md mt-1 font-extrabold text-ink">{title}</h1>
+        {lede && <p className="type-body mt-4 text-ink-muted md:text-lg">{lede}</p>}
       </header>
 
       <div className="mt-8 md:mt-10">{children}</div>

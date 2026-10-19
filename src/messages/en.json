@@ -169,8 +169,43 @@
     },
     "hero": {
       "headline": "Build the list. Buy smarter.",
-      "bannerCta": "Learn How Stockpile Works",
-      "bannerAlt": "Stockpile — construction material procurement"
+      "lede": "Search Sri Lankan construction materials, send one RFQ, and compare supplier quotes on a single desk.",
+      "bannerCta": "Learn how Stockpile works",
+      "bannerAlt": "Stockpile — construction material procurement",
+      "rfqCta": "Request a quote",
+      "supplierCta": "Join as a supplier"
+    },
+    "workflow": {
+      "title": "From RFQ to order",
+      "lede": "The same path your workspace and supplier desk already run — no invented steps.",
+      "cta": "Start an RFQ",
+      "steps": [
+        {
+          "label": "Search",
+          "title": "Find materials",
+          "body": "Browse departments or search the live catalogue of products and suppliers."
+        },
+        {
+          "label": "RFQ",
+          "title": "Send one request",
+          "body": "Submit quantities and notes once. Stockpile routes the request to matching suppliers."
+        },
+        {
+          "label": "Quotes",
+          "title": "Collect replies",
+          "body": "Suppliers respond in your workspace with prices and lead times."
+        },
+        {
+          "label": "Compare",
+          "title": "Line up offers",
+          "body": "Compare quotes side by side, then accept the offer that fits the job."
+        },
+        {
+          "label": "Order",
+          "title": "Confirm the buy",
+          "body": "Accepted quotes become orders you and the supplier can track."
+        }
+      ]
     },
     "stats": {
       "products": "Products",
@@ -188,8 +223,8 @@
       "t6": "Kempas"
     },
     "featured": {
-      "title": "Featured Products",
-      "viewAll": "View All"
+      "title": "Newest products",
+      "viewAll": "View all"
     },
     "newestSuppliers": {
       "title": "Newest Suppliers",
@@ -207,6 +242,10 @@
     "newestProducts": {
       "title": "Newest Products",
       "viewAll": "View All New Products"
+    },
+    "news": {
+      "title": "News & Projects",
+      "viewAll": "View All News"
     }
   },
 
@@ -359,7 +398,11 @@
       "customPhone": "0114-222-555",
       "callCta": "Call us to sign up today 0114-222-555",
       "learnMore": "Click HERE to learn how Stockpile can help your business.",
-      "registerCta": "Register As A Supplier"
+      "registerCta": "Register As A Supplier",
+      "liveHint": "Plans below are loaded from the live subscription catalogue. Payment is by invoice or operator confirmation — there is no card form on this page.",
+      "manualBilling": "Billing is manual / invoice. After you register as a supplier, subscribe from the supplier desk.",
+      "subscribeCta": "Register to subscribe",
+      "contactPrice": "Contact us"
     },
     "about": {
       "title": "About Us",
@@ -1012,6 +1055,11 @@
   },
 
   "auth": {
+    "audienceLegend": "Sign in as",
+    "audienceBuyer": "Buyer",
+    "audienceBuyerHint": "Request quotes, compare offers, and place orders.",
+    "audienceSupplier": "Supplier",
+    "audienceSupplierHint": "Respond to leads, submit quotes, and fulfil orders.",
     "loginTitle": "Sign in to your account",
     "loginSubtitle": "Continue to your procurement workspace.",
     "registerTitle": "Create a buyer account",
@@ -1226,8 +1274,17 @@
     "emptyTitle": "No activity yet",
     "emptyBody": "Requests for quote, orders and projects will appear here as they come in.",
     "supplierTitle": "Supplier desk",
+    "supplierLeadsTitle": "Buying leads",
+    "supplierLeadsBody": "Open your inbox to view matched RFQs, decline ones you cannot cover, or submit a quotation.",
+    "supplierLeadsCta": "Open lead inbox",
+    "supplierQuotesCta": "Quotations",
+    "supplierOrdersCta": "Orders",
+    "buyingTitle": "Buying activity",
+    "buyingBody": "Quotations you have received and orders created when you accept a quote.",
+    "quotesCta": "Quotations",
+    "ordersCta": "Orders",
     "supplierEmptyTitle": "No buying leads yet",
-    "supplierEmptyBody": "Requests for quote addressed to your company will appear here.",
+    "supplierEmptyBody": "Requests for quote addressed to your company will appear here. Open the inbox to refresh.",
     "adminTitle": "Administration",
     "adminEmptyTitle": "No administration tasks yet",
     "adminEmptyBody": "Platform administration functions will appear here.",
@@ -1259,7 +1316,96 @@
     "sessionRevoked": "That session was signed out.",
     "signedOutEverywhere": "Every session is now signed out.",
     "sessionsEmpty": "No other devices are signed in.",
-    "sessionUnknownDevice": "Unknown device"
+    "sessionUnknownDevice": "Unknown device",
+    "quotes": {
+      "title": "Quotations",
+      "lede": "Quotes suppliers have submitted against your RFQs. Accept creates an order.",
+      "emptyTitle": "No quotations yet",
+      "emptyBody": "When suppliers quote your RFQs, they appear here.",
+      "loading": "Loading quotations…",
+      "accept": "Accept",
+      "decline": "Decline",
+      "declineTitle": "Decline this quotation",
+      "declineReason": "Reason",
+      "declineConfirm": "Confirm decline",
+      "cancel": "Cancel",
+      "compare": "Compare quotes",
+      "comparisonTitle": "Compare quotations",
+      "comparisonEmptyTitle": "Not enough quotes to compare",
+      "comparisonEmptyBody": "Comparison needs at least two live quotations for this RFQ.",
+      "comparisonLowest": "Lowest total",
+      "leadTime": "{days, plural, one {# day lead time} other {# days lead time}}"
+    },
+    "orders": {
+      "title": "Orders",
+      "lede": "Orders created when you accept a quotation.",
+      "detailTitle": "Order",
+      "emptyTitle": "No orders yet",
+      "emptyBody": "Accept a quotation to create an order.",
+      "loading": "Loading order…",
+      "linesTitle": "Order lines",
+      "acknowledge": "Acknowledge order"
+    }
+  },
+
+  "supplier": {
+    "leads": {
+      "title": "Buying leads",
+      "lede": "Matched requests for quote. Open a lead to quote or decline.",
+      "detailTitle": "Lead detail",
+      "statusTabs": "Lead status",
+      "tabs": {
+        "new": "New",
+        "due_soon": "Due soon",
+        "quoted": "Quoted",
+        "negotiating": "Negotiating",
+        "won": "Won",
+        "lost": "Lost",
+        "follow_up": "Follow up"
+      },
+      "emptyTitle": "No leads in this view",
+      "emptyBody": "When buyers submit RFQs that match your categories, they appear here.",
+      "loading": "Loading leads…",
+      "loadMore": "Load more",
+      "lineCount": "{count, plural, one {# line} other {# lines}}",
+      "linesTitle": "Requested lines",
+      "respondBy": "Respond by {date}",
+      "quoteCta": "Submit quotation",
+      "declineCta": "Decline lead",
+      "declineTitle": "Decline this lead",
+      "declineReason": "Reason",
+      "declineConfirm": "Confirm decline",
+      "declineCancel": "Cancel"
+    },
+    "quotes": {
+      "title": "Submit quotation",
+      "linesTitle": "Line pricing",
+      "unitPrice": "Unit price",
+      "qty": "Qty {quantity} {unit}",
+      "currency": "Currency",
+      "validityDays": "Validity (days)",
+      "leadTimeDays": "Lead time (days)",
+      "deliveryCost": "Delivery cost",
+      "supplierNote": "Note to buyer",
+      "submit": "Submit quotation",
+      "submitting": "Submitting…",
+      "invalidPrice": "Enter a valid unit price for every line.",
+      "submitted": "Quotation {number} submitted."
+    },
+    "quotesList": {
+      "title": "My quotations",
+      "lede": "Quotes you have submitted. Withdraw closes an open quote.",
+      "emptyTitle": "No quotations yet",
+      "emptyBody": "Submit a quotation from a buying lead to see it here.",
+      "withdraw": "Withdraw"
+    },
+    "orders": {
+      "title": "Orders",
+      "lede": "Orders placed with your company after a buyer accepts your quote.",
+      "detailTitle": "Order",
+      "emptyTitle": "No orders yet",
+      "emptyBody": "When a buyer accepts your quotation, the order appears here."
+    }
   },
 
   "content": {

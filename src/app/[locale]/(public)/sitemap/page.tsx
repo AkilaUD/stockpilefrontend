@@ -119,7 +119,7 @@ export default async function SitemapPage({ params }: { params: Promise<{ locale
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="font-body text-sm text-ink-muted transition-colors duration-instant ease-standard hover:text-ink focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus"
+                    className="type-body-sm text-ink-muted transition-colors duration-instant ease-standard hover:text-ink focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus"
                   >
                     {link.label}
                   </Link>

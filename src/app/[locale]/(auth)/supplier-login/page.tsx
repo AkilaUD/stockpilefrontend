@@ -27,7 +27,7 @@ export default async function SupplierLoginPage({ params }: { params: Promise<{ 
   const t = await getTranslations("auth");
 
   return (
-    <AuthShell title={t("supplierLoginTitle")} subtitle={t("supplierLoginSubtitle")}>
+    <AuthShell title={t("supplierLoginTitle")} subtitle={t("supplierLoginSubtitle")} audience="supplier">
       <LoginForm registerHref="/supplier-register" />
     </AuthShell>
   );

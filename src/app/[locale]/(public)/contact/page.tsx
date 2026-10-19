@@ -36,7 +36,7 @@ export default async function ContactPage({ params }: { params: Promise<{ locale
       body: (
         <a
           href={`mailto:${t("questionsEmail")}`}
-          className="font-body text-base font-semibold text-ink-accent transition-colors duration-instant ease-standard hover:text-ink focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus"
+          className="type-body font-semibold text-ink-accent transition-colors duration-instant ease-standard hover:text-ink focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus"
         >
           {t("questionsEmail")}
         </a>
@@ -47,7 +47,7 @@ export default async function ContactPage({ params }: { params: Promise<{ locale
       body: (
         <a
           href={`mailto:${t("quotesEmail")}?subject=RFQ%20Request`}
-          className="font-body text-base font-semibold text-ink-accent transition-colors duration-instant ease-standard hover:text-ink focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus"
+          className="type-body font-semibold text-ink-accent transition-colors duration-instant ease-standard hover:text-ink focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus"
         >
           {t("quotesEmail")}
         </a>
@@ -55,20 +55,16 @@ export default async function ContactPage({ params }: { params: Promise<{ locale
     },
     {
       title: t("callTitle"),
-      body: (
-        <p className="font-body text-sm leading-relaxed text-ink-muted">
-          {t("callBody")}
-        </p>
-      ),
+      body: <p className="type-body-sm text-ink-muted">{t("callBody")}</p>,
     },
     {
       title: t("hqTitle"),
-      body: <p className="font-body text-base font-medium text-ink">{t("hqAddress")}</p>,
+      body: <p className="type-body font-medium text-ink">{t("hqAddress")}</p>,
     },
     {
       title: t("workTitle"),
       body: (
-        <p className="font-body text-sm leading-relaxed text-ink-muted">
+        <p className="type-body-sm text-ink-muted">
           {t("workBody")}{" "}
           <Link
             href="/careers"
@@ -92,25 +88,25 @@ export default async function ContactPage({ params }: { params: Promise<{ locale
         ))}
       </div>
 
-      <section className="mt-10 rounded-md bg-brand-primary p-6 text-ink md:p-8">
+      <section className="mt-10 border-y border-ink bg-brand-primary p-6 text-ink-on-signal md:p-8">
         <h2 className="font-display text-xl font-extrabold tracking-tight md:text-2xl">
           {t("getInTouchTitle")}
         </h2>
-        <ul className="mt-4 space-y-3 font-body font-semibold">
+        <ul className="mt-4 space-y-3 type-body font-semibold">
           <li className="flex flex-wrap items-center gap-2">
-            <span className="text-ink/70">{t("emailUs")}</span>
+            <span className="text-ink-on-signal/70">{t("emailUs")}</span>
             <a
               href={`mailto:${t("questionsEmail")}`}
-              className="underline decoration-ink/50 underline-offset-2 transition-colors duration-instant ease-standard hover:decoration-ink focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus"
+              className="underline decoration-ink-on-signal/50 underline-offset-2 transition-colors duration-instant ease-standard hover:decoration-ink-on-signal focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus"
             >
               {t("questionsEmail")}
             </a>
           </li>
           <li className="flex flex-wrap items-center gap-2">
-            <span className="text-ink/70">{t("callUs")}</span>
+            <span className="text-ink-on-signal/70">{t("callUs")}</span>
             <a
               href="tel:+94114222555"
-              className="underline decoration-ink/50 underline-offset-2 transition-colors duration-instant ease-standard hover:decoration-ink focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus"
+              className="underline decoration-ink-on-signal/50 underline-offset-2 transition-colors duration-instant ease-standard hover:decoration-ink-on-signal focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus"
             >
               0114-222-555
             </a>

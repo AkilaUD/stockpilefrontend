@@ -75,15 +75,11 @@
   --color-info: var(--info);
   --color-focus: var(--focus-ring);
 
-  /* Type families → font-display / font-body / font-mono utilities.
-     Values are supplied by next/font in app/layout.tsx as
-     --font-open-sans-display/body/data — all three resolve to Open Sans, the
-     reference typeface; the fallbacks here are the last resort if a font
-     request fails. The mono role is collapsed into Open Sans for the
-     reference reconstruction (no more generic mono accent). */
-  --font-display: var(--font-open-sans-display), system-ui, sans-serif;
-  --font-body: var(--font-open-sans-body), system-ui, -apple-system, "Segoe UI", sans-serif;
-  --font-mono: var(--font-open-sans-data), ui-sans-serif, system-ui, sans-serif;
+  /* Type families — Material Atlas: Source Serif 4 display + Source Sans 3 UI,
+     with Noto Sans Sinhala in the body stack for /si. */
+  --font-display: var(--font-source-serif), "Source Serif 4", "Noto Serif", Georgia, serif;
+  --font-body: var(--font-source-sans), var(--font-noto-sinhala), "Source Sans 3", "Noto Sans Sinhala", system-ui, sans-serif;
+  --font-mono: var(--font-source-sans), ui-sans-serif, system-ui, sans-serif;
   /* Tailwind's default `font-sans` would otherwise silently resolve to the
      framework's own stack, so anything written as `font-sans` would be a
      different family than the token. Aliasing it to `--font-body` makes the
@@ -287,6 +283,23 @@
   }
   @media (min-width: 1200px) {
     grid-template-columns: repeat(6, minmax(0, 1fr));
+  }
+}
+
+/* Catalogue listing grids — denser B2B cards (Material Atlas Phase 4). Five
+   across on wide viewports; tighter gutters than the home marketing sweep. */
+@utility catalogue-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+
+  @media (min-width: 768px) {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  @media (min-width: 1024px) {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+  @media (min-width: 1280px) {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
   }
 }
 

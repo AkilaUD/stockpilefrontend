@@ -1,16 +1,17 @@
 import type { Metadata } from "next";
 import { setRequestLocale, getTranslations } from "next-intl/server";
+import { Check, FileText, Phone } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 import { InfoPage } from "@/components/pages/info-page";
+import { ButtonLink } from "@/components/ui/button";
+import { getSubscriptionPlans } from "@/lib/api/subscriptions-server";
+import { formatMoney } from "@/lib/money";
+import type { Plan } from "@/lib/api/subscriptions";
 
 /**
- * /pricing — reference reconstruction §4.4; copy faithful to the original
- * (including its typos "Socialmedia Ads", "Whatspp Notifications" —
- * preserved verbatim). Tier plan selection and payment are not wired in this
- * build (no pricing/checkout endpoints), so each tier card is informational
- * and the actions are the original's own published call route (0114-222-555),
- * the Learn More → how-it-works, and Register → /register (documented
- * dependency: plan subscription).
+ * /pricing — live plans from GET /subscriptions/plans when the API answers;
+ * otherwise the static reference copy. Checkout is manual/invoice or file-sink
+ * (supplier desk subscribe), not a fake card form.
  */
 export async function generateMetadata({
   params,
@@ -22,99 +23,145 @@ export async function generateMetadata({
   return { title: t("title"), description: t("lede") };
 }
 
+function entitlementLabel(plan: Plan, key: string): string | null {
+  const row = plan.entitlements.find((e) => e.key === key);
+  if (!row) return null;
+  if (row.unlimited) return `${key}: unlimited`;
+  if (row.limit != null) return `${key}: ${row.limit}`;
+  if (row.value) return `${key}: ${row.value}`;
+  return key;
+}
+
 export default async function PricingPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   setRequestLocale(locale);
   const t = await getTranslations({ locale, namespace: "pages.pricing" });
-  const tiers = t.raw("tiers") as Array<{ name: string; price: string; features: string[] }>;
+  const staticTiers = t.raw("tiers") as Array<{ name: string; price: string; features: string[] }>;
+
+  let plans: Plan[] = [];
+  try {
+    plans = (await getSubscriptionPlans()).filter((p) => p.isActive);
+  } catch {
+    plans = [];
+  }
+
+  const useLive = plans.length > 0;
 
   return (
-    <InfoPage breadcrumb={t("title")} title={t("title")}>
-      <div className="max-w-3xl">
-        <p className="font-display text-xl font-bold tracking-tight text-ink md:text-2xl">
-          {t("lede")}
-        </p>
-        <p className="mt-3 font-body leading-relaxed text-ink-muted">{t("sublede")}</p>
+    <InfoPage breadcrumb={t("title")} title={t("title")} lede={t("lede")}>
+      <div className="measure-editorial space-y-3">
+        <p className="type-body text-ink-muted">{t("sublede")}</p>
+        {useLive && (
+          <p className="inline-flex items-start gap-2 rounded-sm border border-line bg-surface-recessed/50 px-3 py-2 type-body-sm text-ink-muted">
+            <FileText className="mt-0.5 size-4 shrink-0 text-ink-muted" aria-hidden />
+            {t("liveHint")}
+          </p>
+        )}
       </div>
 
       <div className="mt-10 grid gap-4 md:grid-cols-3">
-        {tiers.map((tier) => (
-          <article
-            key={tier.name}
-            className="flex flex-col rounded-md border border-line bg-surface-panel p-6"
-          >
-            <h2 className="font-display text-lg font-bold text-ink">{tier.name}</h2>
-            <p className="mt-3 flex items-baseline gap-1">
-              <span className="font-display text-3xl font-extrabold tracking-tight text-ink">
-                {tier.price}
-              </span>
-              <span className="font-body text-sm text-ink-muted">{t("perMonth")}</span>
-            </p>
-            <ul className="mt-5 flex-1 space-y-2 border-t border-line pt-5">
-              {tier.features.map((feature) => (
-                <li
-                  key={feature}
-                  className="flex items-start gap-2 font-body text-sm text-ink-muted"
-                >
-                  <svg
-                    aria-hidden="true"
-                    viewBox="0 0 16 16"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="1.5"
-                    className="mt-0.5 size-3.5 shrink-0 text-brand-secondary"
+        {useLive
+          ? plans
+              .filter((p) => !p.isSalesAssisted)
+              .sort((a, b) => a.sortOrder - b.sortOrder)
+              .map((plan) => {
+                const features = plan.entitlements
+                  .map((e) => entitlementLabel(plan, e.key))
+                  .filter((v): v is string => Boolean(v));
+                const price =
+                  plan.priceAmount != null
+                    ? formatMoney({
+                        amount: plan.priceAmount,
+                        currency: plan.currency,
+                        locale,
+                        fractionDigits: 0,
+                      })
+                    : t("contactPrice");
+                return (
+                  <article
+                    key={plan.id}
+                    className="flex flex-col rounded-md border border-line bg-surface-panel p-6"
                   >
-                    <path d="m3 8 3 3 5-5" strokeLinecap="round" strokeLinejoin="round" />
-                  </svg>
-                  {feature}
-                </li>
-              ))}
-            </ul>
-          </article>
-        ))}
+                    <h2 className="font-display text-lg font-bold text-ink">{plan.name}</h2>
+                    <p className="mt-3 flex items-baseline gap-1">
+                      <span className="font-display text-3xl font-extrabold tracking-tight text-ink">
+                        {price}
+                      </span>
+                      {plan.priceAmount != null && (
+                        <span className="type-body-sm text-ink-muted">{t("perMonth")}</span>
+                      )}
+                    </p>
+                    <ul className="mt-5 flex-1 space-y-2 border-t border-line pt-5">
+                      {features.map((feature) => (
+                        <li
+                          key={feature}
+                          className="flex items-start gap-2 type-body-sm text-ink-muted"
+                        >
+                          <Check
+                            className="mt-0.5 size-4 shrink-0 text-brand-secondary"
+                            aria-hidden
+                          />
+                          {feature}
+                        </li>
+                      ))}
+                    </ul>
+                    <p className="mt-5 type-body-sm text-ink-muted">{t("manualBilling")}</p>
+                    <ButtonLink href="/supplier-register" size="md" className="mt-4 w-full">
+                      {t("subscribeCta")}
+                    </ButtonLink>
+                  </article>
+                );
+              })
+          : staticTiers.map((tier) => (
+              <article
+                key={tier.name}
+                className="flex flex-col rounded-md border border-line bg-surface-panel p-6"
+              >
+                <h2 className="font-display text-lg font-bold text-ink">{tier.name}</h2>
+                <p className="mt-3 flex items-baseline gap-1">
+                  <span className="font-display text-3xl font-extrabold tracking-tight text-ink">
+                    {tier.price}
+                  </span>
+                  <span className="type-body-sm text-ink-muted">{t("perMonth")}</span>
+                </p>
+                <ul className="mt-5 flex-1 space-y-2 border-t border-line pt-5">
+                  {tier.features.map((feature) => (
+                    <li
+                      key={feature}
+                      className="flex items-start gap-2 type-body-sm text-ink-muted"
+                    >
+                      <Check
+                        className="mt-0.5 size-4 shrink-0 text-brand-secondary"
+                        aria-hidden
+                      />
+                      {feature}
+                    </li>
+                  ))}
+                </ul>
+              </article>
+            ))}
       </div>
 
       <section className="mt-6 rounded-md border border-dashed border-line-strong bg-surface-panel p-6">
         <h2 className="font-display text-lg font-bold text-ink">{t("customName")}</h2>
-        <p className="mt-2 max-w-2xl font-body text-sm leading-relaxed text-ink-muted">
-          {t("customBody")}
-        </p>
-        <p className="mt-3 font-body text-sm font-semibold text-ink">
+        <p className="mt-2 max-w-2xl type-body-sm text-ink-muted">{t("customBody")}</p>
+        <p className="mt-4 type-body-sm text-ink">
           <a
-            href={`mailto:${t("customEmail")}?subject=Customized%20Plan`}
-            className="text-ink-accent transition-colors duration-instant ease-standard hover:text-ink focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus"
+            href="tel:0114222555"
+            className="inline-flex items-center gap-2 font-semibold text-ink-accent hover:text-ink"
           >
-            {t("customEmail")}
-          </a>
-          {" · "}
-          <a
-            href="tel:+94114222555"
-            className="text-ink-accent transition-colors duration-instant ease-standard hover:text-ink focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus"
-          >
-            {t("customPhone")}
+            <Phone className="size-4 shrink-0" aria-hidden />
+            0114-222-555
           </a>
         </p>
+        <p className="mt-3 type-body-sm text-ink-muted">{t("manualBilling")}</p>
       </section>
 
-      <section className="mt-12 rounded-md bg-brand-primary p-6 text-ink md:p-8">
-        <h2 className="font-display text-xl font-extrabold tracking-tight md:text-2xl">
-          {t("callCta")}
-        </h2>
-        <p className="mt-3 font-body font-medium">
-          <Link
-            href="/how-it-works"
-            className="underline decoration-ink/50 underline-offset-2 transition-colors duration-instant ease-standard hover:decoration-ink focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus"
-          >
-            {t("learnMore")}
-          </Link>
-        </p>
-        <Link
-          href="/supplier-register"
-          className="mt-5 inline-flex h-12 items-center justify-center rounded-md bg-ink px-7 font-body text-sm font-semibold text-white transition-colors duration-instant ease-standard hover:bg-ink-soft focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus"
-        >
-          {t("registerCta")}
+      <p className="mt-8 type-body-sm text-ink-muted">
+        <Link href="/how-it-works-for-suppliers" className="text-ink-accent hover:text-ink">
+          {t("learnMore")}
         </Link>
-      </section>
+      </p>
     </InfoPage>
   );
 }

@@ -3,20 +3,8 @@ import { Link } from "@/i18n/navigation";
 import { SupplierStoryStrip } from "./supplier-story-strip";
 import type { SupplierDirectoryItem } from "@/lib/api/catalogue";
 
-/*
- * NewestSuppliers — the home supplier roster (reference reconstruction
- * Phase 2 §4.4; the original shows a logo carousel — this build has no
- * supplier logos to show, so the honest equivalent is the directory's own
- * order and labels via SupplierStoryStrip).
- *
- * The directory API returns suppliers in registration order (no join-date
- * field to sort by client-side), so "newest" is the API's list head —
- * documented dependency: supplier.logo surfacing would restore the reference
- * carousel look.
- */
 interface NewestSuppliersProps {
   suppliers: SupplierDirectoryItem[];
-  /** How many rows to render from the head of the list. */
   limit: number;
 }
 
@@ -26,9 +14,9 @@ export async function NewestSuppliers({ suppliers, limit }: NewestSuppliersProps
   if (suppliers.length === 0) return null;
 
   return (
-    <section className="shell-public pb-[30px]">
-      <div className="px-5 py-[5px]">
-        <h2 className="font-body text-2xl leading-8 font-medium text-ink">
+    <section className="shell-public border-b border-line py-12 md:py-16">
+      <div className="flex flex-wrap items-end justify-between gap-x-4 gap-y-2">
+        <h2 className="font-display text-2xl font-bold tracking-tight text-ink md:text-3xl">
           <Link
             href="/suppliers"
             className="transition-opacity duration-instant ease-standard hover:opacity-70 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus"
@@ -36,8 +24,14 @@ export async function NewestSuppliers({ suppliers, limit }: NewestSuppliersProps
             {t("title")}
           </Link>
         </h2>
+        <Link
+          href="/suppliers"
+          className="type-body-sm font-semibold text-ink underline-offset-4 hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus"
+        >
+          {t("viewAll")}
+        </Link>
       </div>
-      <div className="mt-[5px] px-5">
+      <div className="mt-8">
         <SupplierStoryStrip
           suppliers={suppliers.slice(0, limit).map((s) => ({
             slug: s.slug,
@@ -48,6 +42,8 @@ export async function NewestSuppliers({ suppliers, limit }: NewestSuppliersProps
             verifiedLabel: t("verified"),
             unverifiedLabel: t("unverified"),
             productsLabel: t("products"),
+            logoSrcset: s.logo?.srcset,
+            logoAlt: s.logo?.alt ?? s.name,
           }))}
         />
       </div>

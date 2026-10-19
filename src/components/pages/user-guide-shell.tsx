@@ -165,9 +165,7 @@ export function UserGuideShell({
 
         <div className="min-w-0">
           <header className="measure-editorial">
-            <h1 className="font-display text-2xl font-extrabold tracking-tight text-ink md:text-3xl">
-              {title}
-            </h1>
+            <h1 className="type-display-md font-extrabold text-ink">{title}</h1>
             {lede && <p className="mt-4 type-body leading-relaxed text-ink-muted">{lede}</p>}
           </header>
 

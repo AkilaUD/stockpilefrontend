@@ -7,20 +7,12 @@ import { categoryHref } from "@/lib/navigation/navigation";
 import { ProductCard } from "@/components/catalogue/product-card";
 import { Pagination } from "@/components/catalogue/pagination";
 import { FacetSummary } from "@/components/catalogue/facet-summary";
+import { CatalogueShell } from "@/components/catalogue/catalogue-shell";
+import { CatalogueSearchForm } from "@/components/catalogue/catalogue-search-form";
 import { EmptyState } from "@/components/ui/empty-state";
 import { ButtonLink } from "@/components/ui/button";
 import { Reveal } from "@/components/motion/reveal";
 
-/**
- * Catalogue search — SSR twin of the command-search overlay (api.md §2.3
- * `/catalog/search`). Every hit ships from the server with a real status;
- * the zero-result state renders the backend's own `zeroResultBridge.message`
- * verbatim (its copy, its truth) alongside the suggested category.
- *
- * `suggestions` are the backend's alternation strings, each a live link into
- * this same route. Facets are the read-only profile (the read API accepts no
- * attribute filters — FacetSummary never pretends otherwise).
- */
 export const dynamicParams = true;
 
 export async function generateMetadata({
@@ -63,47 +55,42 @@ export default async function SearchPage({
   const stockLabel = (state: string): string =>
     (STOCK_STATES as readonly string[]).includes(state) ? tCat(`stock.${state}`) : state;
 
-  const inputClasses =
-    "h-11 w-full rounded-md border border-line bg-surface-panel px-3 font-body text-base text-ink outline-none placeholder:text-ink-muted focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus";
-  const submitClasses =
-    "h-11 shrink-0 rounded-md bg-brand-primary px-4 font-body text-sm font-semibold text-ink-on-signal transition-colors duration-instant ease-standard hover:bg-brand-primary-hover focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus";
-
-  // GET form — the page is the server, no client state involved.
+  const searchAction = getPathname({ href: "/search", locale });
   const searchForm = (
-    <form action={getPathname({ href: "/search", locale })} method="get" role="search" className="flex w-full max-w-md items-center gap-2">
-      <input type="search" name="q" defaultValue={q} placeholder={t("prompt")} aria-label={t("prompt")} className={inputClasses} />
-      <button type="submit" className={submitClasses}>
-        {tActions("search")}
-      </button>
-    </form>
+    <CatalogueSearchForm
+      action={searchAction}
+      defaultValue={q}
+      placeholder={t("prompt")}
+      submitLabel={tActions("search")}
+    />
   );
 
   if (q === "") {
     return (
-      <div className="shell-public py-8 md:py-12">
+      <CatalogueShell title={t("prompt")} lede={undefined}>
         <EmptyState title={t("prompt")} headingLevel="h2" action={searchForm} />
-      </div>
+      </CatalogueShell>
     );
   }
 
   const data = await getSearchResults({ q, page });
   const totalPages = Math.max(1, Math.ceil(data.total / CATALOGUE_PAGE_SIZE));
-  // The backend serves empty items past the last page; the pager must not say
-  // "page 98 of 97".
   const shownPage = Math.min(page, totalPages);
 
   return (
-    <div className="shell-public py-8 md:py-12">
-      <header className="max-w-3xl">
-        <h1 className="page-title">{t("resultsFor", { query: data.query })}</h1>
-        <p className="mt-3 type-body text-ink-muted" aria-live="polite">
-          {t("count", { count: data.total })}
-        </p>
-        <div className="mt-6">{searchForm}</div>
-      </header>
-
+    <CatalogueShell
+      title={t("resultsFor", { query: data.query })}
+      aside={
+        <>
+          <p className="type-body text-ink-muted" aria-live="polite">
+            {t("count", { count: data.total })}
+          </p>
+          {searchForm}
+        </>
+      }
+    >
       {data.items.length > 0 ? (
-        <Reveal className="mt-10 grid grid-cols-2 gap-x-4 gap-y-8 md:grid-cols-3 xl:grid-cols-4">
+        <Reveal className="catalogue-grid gap-3 md:gap-4">
           {data.items.map((item) => (
             <ProductCard
               key={item.publicId}
@@ -118,10 +105,10 @@ export default async function SearchPage({
           ))}
         </Reveal>
       ) : (
-        <div className="mt-10">
+        <div>
           <EmptyState title={t("emptyTitle", { query: q })} description={t("emptyBody")} headingLevel="h2" />
           {data.zeroResultBridge?.message && (
-            <div className="mx-auto mt-6 max-w-md rounded-md border border-line bg-surface-panel p-5 text-center">
+            <div className="mx-auto mt-6 max-w-md rounded-sm border border-line bg-surface-panel p-5 text-center">
               <p className="type-body-sm text-ink-muted">{data.zeroResultBridge.message}</p>
               {data.zeroResultBridge.categorySuggestion && (
                 <div className="mt-4">
@@ -140,8 +127,8 @@ export default async function SearchPage({
       )}
 
       {data.suggestions.length > 0 && (
-        <section className="mt-10">
-          <h2 className="block-title">{t("suggestions")}</h2>
+        <section className="mt-12">
+          <h2 className="font-display text-lg font-bold tracking-tight text-ink">{t("suggestions")}</h2>
           <ul className="mt-3 flex flex-wrap gap-2">
             {data.suggestions.map((suggestion) => (
               <li key={suggestion}>
@@ -158,7 +145,7 @@ export default async function SearchPage({
       )}
 
       {data.facets && data.facets.length > 0 && (
-        <div className="mt-10">
+        <div className="mt-12">
           <FacetSummary facets={data.facets} locale={locale} title={tFacets("title")} />
         </div>
       )}
@@ -179,6 +166,6 @@ export default async function SearchPage({
           />
         </div>
       )}
-    </div>
+    </CatalogueShell>
   );
 }

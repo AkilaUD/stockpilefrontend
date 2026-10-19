@@ -58,10 +58,10 @@ export default async function RfqPage({ params }: { params: Promise<{ locale: st
 
   return (
     <InfoPage breadcrumb={t("title")} title={t("title")}>
-      <div className="max-w-3xl">
-        <p className="font-body leading-relaxed text-ink-muted">{t("lede")}</p>
+      <div className="measure-editorial">
+        <p className="type-body text-ink-muted">{t("lede")}</p>
       </div>
-      <div className="mt-8 max-w-3xl">
+      <div className="measure-editorial mt-8">
         <RfqForm departments={departments} units={units} />
       </div>
     </InfoPage>

@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Open_Sans } from "next/font/google";
+import { Noto_Sans_Sinhala, Source_Sans_3, Source_Serif_4 } from "next/font/google";
 import { notFound } from "next/navigation";
 import { connection } from "next/server";
 import { NextIntlClientProvider } from "next-intl";
@@ -10,36 +10,31 @@ import { SessionProvider } from "@/components/providers/session-provider";
 import "../globals.css";
 
 /*
- * One family — Open Sans, the typeface of the original Stockpile.lk
- * (Magento/MageBig Martfury layout05).
+ * Material Atlas type system (frontend/DESIGN.md):
+ *   Source Serif 4 — editorial display
+ *   Source Sans 3 — UI / body
+ *   Noto Sans Sinhala — /si glyph coverage in the body stack
  *
- * next/font downloads the files at build time and self-hosts them under
- * /_next/static/media. The browser never contacts fonts.googleapis.com, which
- * is what lets the CSP declare `font-src 'self'` (security-threat-model §9).
- * Three Open Sans instances give the three CSS roles their own weights — the
- * display voice runs heavier (700/800), the UI voice runs regular (400/500/600)
- * and the former mono/data role collapses into Open Sans too, so the generic
- * "mono accent" look of the previous build is gone. The CSS variable names here
- * are the ones referenced by the `--font-*` theme entries in app/globals.css.
+ * next/font self-hosts under /_next/static/media (CSP font-src 'self').
  */
-const openSansDisplay = Open_Sans({
-  variable: "--font-open-sans-display",
+const sourceSerif = Source_Serif_4({
+  variable: "--font-source-serif",
   subsets: ["latin"],
-  weight: ["600", "700", "800"],
+  weight: ["600", "700"],
   display: "swap",
 });
 
-const openSansBody = Open_Sans({
-  variable: "--font-open-sans-body",
+const sourceSans = Source_Sans_3({
+  variable: "--font-source-sans",
   subsets: ["latin"],
-  weight: ["400", "500", "600"],
+  weight: ["400", "500", "600", "700"],
   display: "swap",
 });
 
-const openSansData = Open_Sans({
-  variable: "--font-open-sans-data",
-  subsets: ["latin"],
-  weight: ["500", "600"],
+const notoSinhala = Noto_Sans_Sinhala({
+  variable: "--font-noto-sinhala",
+  subsets: ["sinhala"],
+  weight: ["400", "500", "600", "700"],
   display: "swap",
 });
 
@@ -106,7 +101,7 @@ export async function generateMetadata({
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  themeColor: "#f6e71d",
+  themeColor: "#f0d60a",
 };
 
 export default async function LocaleLayout({
@@ -151,7 +146,7 @@ export default async function LocaleLayout({
   return (
     <html
       lang={locale}
-      className={`${openSansDisplay.variable} ${openSansBody.variable} ${openSansData.variable}`}
+      className={`${sourceSerif.variable} ${sourceSans.variable} ${notoSinhala.variable}`}
     >
       {/* suppressHydrationWarning: browser extensions (e.g. Grammarly) inject
           attributes onto <body> post-render, which otherwise tripped the

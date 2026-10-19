@@ -9,6 +9,8 @@
  *                logout, resets, verification) + health probes
  *   organizations.ts — typed organisation endpoint (wizard step 3 create)
  *   rfq.ts     — typed RFQ endpoints (create draft, submit, own reads §2.6)
+ *   leads.ts   — supplier buying-lead inbox (§2.9)
+ *   quotes.ts  — quote submit + lifecycle (§2.7)
  *
  * Everything here is a plain module (no hooks, no "use client"): client
  * components import it; nothing in the server bundle pulls it in.
@@ -20,3 +22,7 @@ export * from "./auth";
 export * from "./organizations";
 export * from "./rfq";
 export * from "./suppliers";
+export * from "./leads";
+export * from "./quotes";
+export * from "./orders";
+export * from "./subscriptions";
