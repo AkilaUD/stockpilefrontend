@@ -6,13 +6,14 @@
 import "./scripts/swc-cache";
 import createNextIntlPlugin from "next-intl/plugin";
 import type { NextConfig } from "next";
-import { API_ORIGIN } from "./src/lib/api/origin";
 
 /*
  * The .NET API is never exposed to the browser as a second origin.
- * The browser calls same-origin `/api/v1/*` on :3000 and this rewrite forwards
- * it to the API origin, which keeps cookies first-party and lets production run
- * with zero CORS (docs/architecture.md §4, security-threat-model §7).
+ * The browser calls same-origin `/api/v1/*` and the route handler in
+ * `src/app/api/v1/[...path]/route.ts` proxies it to the API origin, which
+ * keeps cookies first-party and lets production run with zero CORS
+ * (docs/architecture.md §4, security-threat-model §7). A route handler, not
+ * a rewrite: Vercel's external rewrite refuses the plain-HTTP API origin.
  */
 const withNextIntl = createNextIntlPlugin("./src/i18n/request.ts");
 
@@ -83,15 +84,6 @@ const nextConfig: NextConfig = {
 
   async headers() {
     return [{ source: "/(.*)", headers: securityHeaders }];
-  },
-
-  async rewrites() {
-    return [
-      {
-        source: "/api/v1/:path*",
-        destination: `${API_ORIGIN}/api/v1/:path*`,
-      },
-    ];
   },
 };
 
