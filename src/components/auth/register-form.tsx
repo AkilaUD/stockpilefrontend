@@ -145,15 +145,14 @@ export function RegisterForm() {
         await csrfToken(),
       );
       // The server retires the draft with the account (business-flows §2); the
-      // browser forgets its handle with it. The post-register landing (1.38):
-      // verification is pending, so the account's email is echoed and the panel
-      // offers to resend the confirmation link (business-flows §2 — sign-in
-      // works immediately, verification gates RFQ submit). The backend response
-      // carries no email; the submitted value IS the account's login identifier.
+      // browser forgets its handle with it. Email confirmation is not required
+      // to sign in or use the account today (the backend confirms the address
+      // at creation; outbox email delivery is not running in production), so
+      // the post-register landing is the sign-in page — no inbox detour.
       completedRef.current = true;
       clearDraftHandle("buyer");
       storeMintedToken(response.requestToken);
-      router.replace(`/verify-email?email=${encodeURIComponent(values.email)}`);
+      router.replace("/login");
     } catch (error) {
       if (error instanceof ApiClientError && error.envelope?.code === "VALIDATION_FAILED") {
         const server = fieldErrorsToRecord(error.envelope.fieldErrors, tValidation);

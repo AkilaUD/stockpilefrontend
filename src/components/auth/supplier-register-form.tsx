@@ -243,9 +243,9 @@ export function SupplierRegisterForm({ departments }: { departments: DepartmentO
       completedRef.current = true;
       clearDraftHandle("supplier");
       storeMintedToken(response.requestToken);
-      // Same landing as buyer registration: the confirmation panel echoes the
-      // submitted email and offers to resend (the account's login identifier).
-      router.replace(`/verify-email?email=${encodeURIComponent(values.email)}`);
+      // Same landing as buyer registration: straight to sign-in — email
+      // confirmation is not required to use the account today.
+      router.replace("/login");
     } catch (error) {
       if (error instanceof ApiClientError && error.envelope?.code === "VALIDATION_FAILED") {
         const server = fieldErrorsToRecord(error.envelope.fieldErrors, tValidation);
