@@ -301,9 +301,11 @@
       "folio": "Record No. 003",
       "exampleFolio": "Returns sheet",
       "exampleStamp": "Example",
-      "plateNo": "Plate 01",
+      "plateNo": "Plate 02",
       "plateAlt": "A buyer reviewing material quotations at a desk",
-      "plateCaption": "Comparing returns against one list — illustrative plate."
+      "plateCaption": "Comparing returns against one list — illustrative plate.",
+      "processPlateNo": "Plate 01",
+      "processPlateCaption": "One list, sent once — returns compared, one accepted into an order. Illustrative plate."
     },
     "stats": {
       "products": "Products",
@@ -419,7 +421,7 @@
       "tabBody": "Open a supplier account to receive matched RFQs, return quotations, and trade under a verified profile.",
       "tabCta": "Open a supplier account",
       "pricingCta": "See supplier plans",
-      "plateNo": "Plate 02",
+      "plateNo": "Plate 03",
       "plateAlt": "Construction materials stored in a supplier yard",
       "plateCaption": "Material awaiting dispatch — illustrative plate. Supplier details always come from live profiles."
     },

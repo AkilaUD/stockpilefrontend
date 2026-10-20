@@ -191,6 +191,39 @@ export async function WorkflowStates({
 }) {
   const t = await getTranslations({ locale, namespace: "home" });
   return (
+    <div>
+      {/* Process plate — the artefact's journey, drawn. The image carries no
+          figures; the localised state stamps below it are the explanation. */}
+      <figure className="mb-8 border border-line-strong bg-surface-elevated" data-ledger-line>
+        <div className="relative aspect-[16/9] overflow-hidden">
+          <Image
+            src="/home/home-process-journey.jpg"
+            alt={t("workflow.processPlateCaption")}
+            fill
+            sizes="(min-width: 1280px) 1200px, 100vw"
+            className="object-cover object-center"
+          />
+        </div>
+        <figcaption className="border-t border-line px-4 py-3 sm:px-5">
+          <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
+            <span className="type-folio text-ink">{t("workflow.processPlateNo")}</span>
+            <span className="type-meta">{t("workflow.processPlateCaption")}</span>
+          </div>
+          <ol className="mt-3 flex flex-wrap items-center gap-2">
+            {steps.map((step, index) => (
+              <li key={step.state} className="flex items-center gap-2">
+                <Stamp tone={index === 0 ? "neutral" : index === steps.length - 1 ? "success" : "warning"}>
+                  {`${String(index + 1).padStart(2, "0")} ${step.state}`}
+                </Stamp>
+                {index < steps.length - 1 ? (
+                  <ArrowRight className="size-3.5 text-ink-muted" aria-hidden />
+                ) : null}
+              </li>
+            ))}
+          </ol>
+        </figcaption>
+      </figure>
+
     <div className="grid gap-8 lg:grid-cols-[minmax(0,7fr)_minmax(0,5fr)]">
       <ol className="border border-line-strong bg-surface-elevated">
         {steps.map((step, index) => (
@@ -251,6 +284,7 @@ export async function WorkflowStates({
           />
         </div>
       </div>
+    </div>
     </div>
   );
 }
