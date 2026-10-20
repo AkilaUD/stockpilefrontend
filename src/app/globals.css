@@ -601,6 +601,17 @@
     animation-delay: 220ms;
   }
 
+  /* Material Ledger — the live sheet's active entry. A signal wash plus a
+     hard left rule; cycled by GSAP on the homepage, resting state is plain. */
+  [data-sheet-row] {
+    transition: background-color var(--dur-base) var(--motion-ease-standard);
+  }
+
+  [data-sheet-row].ledger-active {
+    background-color: color-mix(in srgb, var(--brand-primary) 16%, transparent);
+    box-shadow: inset 3px 0 0 var(--brand-primary);
+  }
+
   @keyframes hero-rise {
     from {
       opacity: 0;

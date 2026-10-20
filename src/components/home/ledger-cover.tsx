@@ -55,26 +55,33 @@ export async function LedgerCover({
     : [];
 
   return (
-    <section className="border-b border-line bg-surface-page">
+    <section className="border-b border-line bg-surface-page" data-hero>
       <div className="shell-public pt-8 pb-10 sm:pt-10">
         <div className="min-[1200px]:pl-[calc(300px+2rem)]">
           <div className="grid gap-8 lg:grid-cols-[minmax(0,5fr)_minmax(0,6fr)] lg:gap-10">
             {/* Cover page */}
-            <div data-ledger-line>
-              <p className="type-folio flex flex-wrap items-center gap-x-3 text-ink-muted">
+            <div className="relative overflow-hidden" data-ledger-line>
+              <span
+                aria-hidden
+                data-ghost
+                className="type-ledger-data pointer-events-none absolute -top-8 right-0 text-[9rem] leading-none font-semibold text-ink/[0.05] select-none"
+              >
+                001
+              </span>
+              <p data-hero-reveal className="type-folio flex flex-wrap items-center gap-x-3 text-ink-muted">
                 <span>{t("ledger.folio")}</span>
                 <span aria-hidden className="h-px flex-1 bg-line-strong" />
                 <span>{t("ledger.folioOpen")}</span>
               </p>
-              <h1 className="type-display-lg mt-5 font-display text-ink">{t("ledger.headline")}</h1>
-              <p className="type-body mt-4 max-w-[52ch] text-ink-muted">{t("ledger.lede")}</p>
+              <h1 data-hero-reveal className="type-display-lg mt-5 font-display text-ink">{t("ledger.headline")}</h1>
+              <p data-hero-reveal className="type-body mt-4 max-w-[52ch] text-ink-muted">{t("ledger.lede")}</p>
 
-              <div className="mt-6">
+              <div data-hero-reveal className="mt-6">
                 <HeroSearch />
                 <p className="type-meta mt-2">{t("ledger.searchHint")}</p>
               </div>
 
-              <div className="mt-6 flex flex-wrap items-center gap-3">
+              <div data-hero-reveal className="mt-6 flex flex-wrap items-center gap-3">
                 <a href="#materials-list" className={buttonClassName({ variant: "primary", size: "lg" })}>
                   {t("ledger.startList")}
                   <ArrowDown className="size-4" aria-hidden />
@@ -89,10 +96,13 @@ export async function LedgerCover({
               </div>
 
               {folioStats.length > 0 ? (
-                <dl className="mt-8 grid grid-cols-2 gap-px border border-line bg-line sm:grid-cols-4">
+                <dl data-hero-reveal className="mt-8 grid grid-cols-2 gap-px border border-line bg-line sm:grid-cols-4">
                   {folioStats.map((stat) => (
                     <div key={stat.label} className="bg-surface-elevated px-3 py-2.5">
-                      <dd className="type-ledger-data font-semibold text-ink">
+                      <dd
+                        className="type-ledger-data font-semibold text-ink"
+                        data-count-up={stat.value}
+                      >
                         {stat.value.toLocaleString(locale)}
                       </dd>
                       <dt className="type-meta mt-0.5">{stat.label}</dt>
@@ -114,7 +124,7 @@ export async function LedgerCover({
                 <p className="type-body-sm px-5 py-6 text-ink-muted">{t("ledger.sheetEmpty")}</p>
               ) : (
                 sheetItems.map((item, index) => (
-                  <div key={item.publicId} data-ledger-line>
+                  <div key={item.publicId} data-ledger-line data-sheet-row>
                     <LedgerRow
                       entryNo={String(index + 1).padStart(3, "0")}
                       stamp={
@@ -155,23 +165,29 @@ export async function LedgerCover({
       {/* Current register ribbon — real SKUs and prices, straight from the sheet. */}
       {sheetItems.length > 0 ? (
         <div className="border-t border-line bg-surface-elevated">
-          <div className="shell-public flex items-stretch gap-0 overflow-x-auto">
-            <span className="type-folio flex shrink-0 items-center border-r border-line py-2.5 pr-4 text-ink-muted">
+          <div className="shell-public flex items-stretch gap-0">
+            <span className="type-folio z-10 flex shrink-0 items-center border-r border-line bg-surface-elevated py-2.5 pr-4 text-ink-muted">
               {t("ledger.ribbonLabel")}
             </span>
-            <ul className="flex shrink-0 items-center">
-              {sheetItems.map((item) => (
-                <li key={item.publicId} className="type-entry-no shrink-0 border-r border-line px-4 py-2.5 text-ink">
-                  {item.sku}
-                  <span className="text-ink-muted">
-                    {" — "}
-                    {item.price?.state === "Public" && typeof item.price.amount === "number"
-                      ? formatMoney({ amount: item.price.amount, currency: item.price.currency, locale })
-                      : tProduct("priceOnRequest")}
-                  </span>
-                </li>
-              ))}
-            </ul>
+            <div className="relative flex-1 overflow-hidden">
+              <div data-ribbon-track className="flex w-max">
+                {[false, true].map((duplicate) => (
+                  <ul key={String(duplicate)} aria-hidden={duplicate || undefined} className="flex shrink-0 items-center">
+                    {sheetItems.map((item) => (
+                      <li key={item.publicId} className="type-entry-no shrink-0 border-r border-line px-4 py-2.5 whitespace-nowrap text-ink">
+                        {item.sku}
+                        <span className="text-ink-muted">
+                          {" — "}
+                          {item.price?.state === "Public" && typeof item.price.amount === "number"
+                            ? formatMoney({ amount: item.price.amount, currency: item.price.currency, locale })
+                            : tProduct("priceOnRequest")}
+                        </span>
+                      </li>
+                    ))}
+                  </ul>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
       ) : null}
