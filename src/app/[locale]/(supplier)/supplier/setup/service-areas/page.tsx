@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
+import { PermissionGate } from "@/components/workspace/permission-gate";
+import { ROUTE_PERMISSIONS } from "@/lib/auth/routes";
 import { SupplierServiceAreasForm } from "@/components/supplier/supplier-service-areas-form";
 import { SupplierSetupShell } from "@/components/supplier/supplier-setup-shell";
 
@@ -30,8 +32,8 @@ export default async function SupplierSetupServiceAreasPage({
           <h1 className="type-title-lg text-ink">{t("title")}</h1>
           <p className="mt-2 type-body text-ink-muted">{t("description")}</p>
         </header>
-        <SupplierSetupShell current="service-areas" />
-        <SupplierServiceAreasForm />
+        <PermissionGate allowedPermissions={ROUTE_PERMISSIONS.supplierSetup}><SupplierSetupShell current="service-areas" />
+        <SupplierServiceAreasForm /></PermissionGate>
       </div>
     </div>
   );

@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { ButtonLink } from "@/components/ui/button";
 import { EmptyState } from "@/components/ui/empty-state";
-import { RoleGate } from "@/components/workspace/role-gate";
+import { PermissionGate } from "@/components/workspace/permission-gate";
+import { ROUTE_PERMISSIONS } from "@/lib/auth/routes";
 
 /**
  * Supplier-desk home — implementation-plan 1.52, design-system §8.6.
@@ -37,7 +38,7 @@ export default async function SupplierDeskPage({
     <div className="shell-workspace py-10">
       <h1 className="type-title-lg text-ink">{t("supplierTitle")}</h1>
 
-      <RoleGate allowedRoles={["supplierOwner", "supplierUser"]}>
+      <PermissionGate allowedPermissions={ROUTE_PERMISSIONS.supplierSetup}>
         <section
           aria-labelledby="supplier-setup"
           className="mt-8 rounded-md border border-line bg-surface-panel p-5"
@@ -50,9 +51,9 @@ export default async function SupplierDeskPage({
             <ButtonLink href="/supplier/setup/profile">{t("supplierSetupCta")}</ButtonLink>
           </div>
         </section>
-      </RoleGate>
+      </PermissionGate>
 
-      <RoleGate allowedRoles={["supplierOwner", "supplierUser"]}>
+      <PermissionGate allowedPermissions={ROUTE_PERMISSIONS.supplierHome}>
         <section
           aria-labelledby="supplier-leads"
           className="mt-8 rounded-md border border-line bg-surface-panel p-5"
@@ -71,10 +72,10 @@ export default async function SupplierDeskPage({
             </ButtonLink>
           </div>
         </section>
-      </RoleGate>
+      </PermissionGate>
 
       <div className="mt-8">
-        <RoleGate allowedRoles={["supplierOwner", "supplierUser"]}>
+        <PermissionGate allowedPermissions={ROUTE_PERMISSIONS.supplierHome}>
           <div className="rounded-md border border-line bg-surface-panel">
             <EmptyState
               title={t("supplierEmptyTitle")}
@@ -82,7 +83,7 @@ export default async function SupplierDeskPage({
               headingLevel="h2"
             />
           </div>
-        </RoleGate>
+        </PermissionGate>
       </div>
     </div>
   );

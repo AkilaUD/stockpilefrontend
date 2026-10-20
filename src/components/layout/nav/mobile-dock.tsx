@@ -28,6 +28,7 @@ import { Link } from "@/i18n/navigation";
 import { useSession } from "@/components/providers/session-provider";
 import { ReferenceIcon } from "@/components/ui/reference-icon";
 import type { CategoryNode } from "@/lib/api/catalogue";
+import { derivePersonas } from "@/lib/auth/personas";
 import { MobileMenuDialog } from "./mobile-menu";
 
 interface MobileDockProps {
@@ -63,7 +64,15 @@ export function MobileDock({ tree }: MobileDockProps) {
   const tA11y = useTranslations("a11y");
   const { status, user } = useSession();
 
-  const meHref = status === "signedIn" && user ? "/workspace" : "/login";
+  const personas = derivePersonas(user?.permissions ?? []);
+  const deskHref = personas.canAccessBuyerDesk
+    ? "/workspace"
+    : personas.canAccessSupplierDesk
+      ? "/supplier"
+      : personas.canAccessAdminShell
+        ? "/admin"
+        : "/workspace";
+  const meHref = status === "signedIn" && user ? deskHref : "/login";
 
   return (
     <nav
@@ -91,7 +100,7 @@ export function MobileDock({ tree }: MobileDockProps) {
         <DockIcon name="home" />
         <span>{tNav("home")}</span>
       </Link>
-      <Link href="/workspace" className={ITEM_CLASS}>
+      <Link href={status === "signedIn" && user ? deskHref : "/workspace"} className={ITEM_CLASS}>
         <DockIcon name="order" />
         <span>{tNav("myOrder")}</span>
       </Link>

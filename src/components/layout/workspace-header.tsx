@@ -2,6 +2,7 @@ import Image from "next/image";
 import { Link } from "@/i18n/navigation";
 import { AccountStatus } from "./account-status";
 import { LocaleToggle } from "./locale-toggle";
+import { WorkspaceNav } from "./workspace-nav";
 
 /**
  * Operational masthead for the private route groups — `/(workspace)`,
@@ -37,6 +38,7 @@ export async function WorkspaceHeader() {
           />
         </Link>
 
+        <WorkspaceNav />
         <div className="ml-auto flex items-center gap-2">
           <LocaleToggle />
           <AccountStatus />

@@ -14,7 +14,8 @@
     "format:check": "prettier --check .",
     "bundle-budget": "node scripts/bundle-budget.mjs",
     "design-qa": "node ../tools/design-qa/design-qa.mjs",
-    "design-qa:selftest": "node ../tools/design-qa/design-qa.mjs --selftest"
+    "design-qa:selftest": "node ../tools/design-qa/design-qa.mjs --selftest",
+    "check:permissions": "node scripts/check-permissions-parity.mjs"
   },
   "dependencies": {
     "@radix-ui/react-accordion": "^1.2.21",

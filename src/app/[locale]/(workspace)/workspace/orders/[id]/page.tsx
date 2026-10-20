@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
-import { RoleGate } from "@/components/workspace/role-gate";
+import { PermissionGate } from "@/components/workspace/permission-gate";
+import { ROUTE_PERMISSIONS } from "@/lib/auth/routes";
 import { OrderDetailView } from "@/components/workspace/order-detail";
 
 export async function generateMetadata({
@@ -23,9 +24,9 @@ export default async function WorkspaceOrderDetailPage({
 
   return (
     <div className="shell-workspace py-10">
-      <RoleGate allowedRoles={["buyer", "buyerAdmin"]}>
+      <PermissionGate allowedPermissions={ROUTE_PERMISSIONS.workspaceOrders}>
         <OrderDetailView orderId={id} backHref="/workspace/orders" />
-      </RoleGate>
+      </PermissionGate>
     </div>
   );
 }

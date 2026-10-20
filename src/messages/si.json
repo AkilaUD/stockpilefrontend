@@ -1551,7 +1551,25 @@
       "buyerAdmin": "ගැනුම්කරු පරිපාලක",
       "supplierOwner": "සැපයුම්කරු හිමිකරු",
       "supplierUser": "සැපයුම්කරු පරිශීලක",
-      "platformAdministrator": "වේදිකා පරිපාලක"
+      "platformAdministrator": "වේදිකා පරිපාලක",
+      "procurementOperator": "ප්‍රසම්පාදන ක්‍රියාකරු",
+      "verificationOperator": "තහවුරු කිරීමේ ක්‍රියාකරු",
+      "contentEditor": "අන්තර්ගත සංස්කාරක",
+      "financeOperator": "මූල්‍ය ක්‍රියාකරු",
+      "securityAuditor": "ආරක්ෂක විගණක"
+    },
+    "orgMembershipsTitle": "සංවිධාන භූමිකා",
+    "missingPermissionHint": "ඔබේ ගිණුමට මෙම ක්‍රියාව ඇතුළත් නොවේ. එය ලබා දෙන ලෙස පරිපාලකයෙකුගෙන් ඉල්ලන්න.",
+    "adminModulesTitle": "පරිපාලන මොඩියුල",
+    "adminModulesBody": "සෑම මොඩියුලයක්ම විවෘත වන්නේ ඊට ගැලපෙන අවසරය සමඟ පමණි. තවම ගොඩනගා නැති මොඩියුල සැලසුම් කළ ලෙස සලකුණු කර ඇත.",
+    "adminModulePlanned": "සැලසුම් කර ඇත",
+    "adminModules": {
+      "security": { "title": "ආරක්ෂාව සහ විගණනය", "body": "ආරක්ෂක සිදුවීම්, විගණන සටහන සහ ගිණුම් අගුළු ඇරීම.", "permissions": "audit.read · security.read · admin.users.unlock" },
+      "suppliers": { "title": "සැපයුම්කරු තහවුරු කිරීම", "body": "තහවුරු කිරීමේ පෝලිම සහ අභ්‍යන්තර සැපයුම්කරු වාර්තා.", "permissions": "supplier.verify · supplier.read.internal" },
+      "catalogue": { "title": "නාමාවලි මධ්‍යස්ථභාවය", "body": "ඕනෑම නිෂ්පාදනයක් අනුමත කිරීම, ප්‍රතික්ෂේප කිරීම හෝ ප්‍රකාශනය අත්හිටුවීම.", "permissions": "product.moderate" },
+      "rfqOps": { "title": "RFQ මෙහෙයුම්", "body": "ඕනෑම RFQ එකක් කියවීම, ගැලපීම ක්‍රියාත්මක කිරීම සහ මධ්‍යස්ථභාවය.", "permissions": "rfq.read.any · rfq.match · rfq.match.moderate" },
+      "billing": { "title": "දායකත්ව බිල්පත්", "body": "දායකත්ව බිල්පත් කිරීම, ඉන්වොයිසි සහ ගැලපීම්.", "permissions": "subscription.bill" },
+      "content": { "title": "අන්තර්ගතය සහ සමාලෝචන", "body": "සංස්කාරකීය අන්තර්ගතය සහ සමාලෝචන ප්‍රකාශ කිරීම හා මධ්‍යස්ථභාවය.", "permissions": "content.publish · content.moderate · review.moderate" }
     },
     "securityTitle": "ආරක්ෂාව",
     "changePasswordTitle": "මුරපදය වෙනස් කරන්න",

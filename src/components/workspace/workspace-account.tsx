@@ -53,13 +53,25 @@ export function WorkspaceAccount() {
         <div className="flex justify-between gap-6">
           <dt className="shrink-0 type-body-sm text-ink-muted">{t("rolesTitle")}</dt>
           <dd className="flex flex-wrap justify-end gap-1.5">
-            {roles.map((role) => (
+            {roles.length > 0 ? roles.map((role) => (
               <span key={role} className="type-meta rounded-sm bg-surface-recessed px-2 py-0.5 text-ink-muted">
                 {role}
               </span>
-            ))}
+            )) : <span className="type-body-sm text-ink-muted">—</span>}
           </dd>
         </div>
+        {user.orgMemberships.length > 0 && (
+          <div className="flex justify-between gap-6">
+            <dt className="shrink-0 type-body-sm text-ink-muted">{t("orgMembershipsTitle")}</dt>
+            <dd className="flex flex-wrap justify-end gap-1.5">
+              {user.orgMemberships.map((m) => (
+                <span key={m.organizationId} className="type-meta rounded-sm bg-surface-recessed px-2 py-0.5 text-ink-muted">
+                  {m.name}: {roleLabels[m.role] ?? m.role}
+                </span>
+              ))}
+            </dd>
+          </div>
+        )}
       </dl>
 
       {!user.emailConfirmed && (

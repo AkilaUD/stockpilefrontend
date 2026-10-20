@@ -10,6 +10,8 @@ import { StatusPill } from "@/components/ui/status-pill";
 import { quotesApi, resolveErrorCopy, type QuoteSummary } from "@/lib/api";
 import { formatMoney } from "@/lib/money";
 import { quoteStatusTone } from "@/lib/procurement/status-tone";
+import { Can } from "@/components/workspace/permission-gate";
+import { Permissions } from "@/lib/auth/permissions";
 
 export function SupplierQuotesList() {
   const t = useTranslations("supplier.quotesList");
@@ -79,6 +81,7 @@ export function SupplierQuotesList() {
             status={<StatusPill tone={quoteStatusTone(quote.status)}>{quote.status}</StatusPill>}
             actions={
               canWithdraw(quote.status) ? (
+                <Can permission={Permissions.QuoteWithdraw}>
                 <Button
                   type="button"
                   size="sm"
@@ -88,6 +91,7 @@ export function SupplierQuotesList() {
                 >
                   {t("withdraw")}
                 </Button>
+                </Can>
               ) : null
             }
           >

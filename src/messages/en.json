@@ -1551,7 +1551,25 @@
       "buyerAdmin": "Buyer administrator",
       "supplierOwner": "Supplier owner",
       "supplierUser": "Supplier user",
-      "platformAdministrator": "Platform administrator"
+      "platformAdministrator": "Platform administrator",
+      "procurementOperator": "Procurement operator",
+      "verificationOperator": "Verification operator",
+      "contentEditor": "Content editor",
+      "financeOperator": "Finance operator",
+      "securityAuditor": "Security auditor"
+    },
+    "orgMembershipsTitle": "Organisation roles",
+    "missingPermissionHint": "Your account does not include this action. Ask an administrator to grant it.",
+    "adminModulesTitle": "Administration modules",
+    "adminModulesBody": "Each module opens only with its matching permission. Modules without a built surface are marked planned — no invented tooling.",
+    "adminModulePlanned": "Planned",
+    "adminModules": {
+      "security": { "title": "Security & audit", "body": "Security events, audit log and account lockout release.", "permissions": "audit.read · security.read · admin.users.unlock" },
+      "suppliers": { "title": "Supplier verification", "body": "Verification queue and internal supplier records.", "permissions": "supplier.verify · supplier.read.internal" },
+      "catalogue": { "title": "Catalogue moderation", "body": "Approve, reject or unpublish any product.", "permissions": "product.moderate" },
+      "rfqOps": { "title": "RFQ operations", "body": "Read any RFQ, run matching and moderate matches.", "permissions": "rfq.read.any · rfq.match · rfq.match.moderate" },
+      "billing": { "title": "Subscription billing", "body": "Bill, invoice and adjust subscriptions.", "permissions": "subscription.bill" },
+      "content": { "title": "Content & reviews", "body": "Publish and moderate editorial content and reviews.", "permissions": "content.publish · content.moderate · review.moderate" }
     },
     "securityTitle": "Security",
     "changePasswordTitle": "Change password",

@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import { StatusPill } from "@/components/ui/status-pill";
 import { ordersApi, resolveErrorCopy, type OrderDetail } from "@/lib/api";
 import { formatMoney } from "@/lib/money";
+import { Permissions, hasPermission } from "@/lib/auth/permissions";
 
 export function OrderDetailView({
   orderId,
@@ -20,7 +21,7 @@ export function OrderDetailView({
 }) {
   const t = useTranslations("workspace.orders");
   const tErrors = useTranslations("errors");
-  const { csrfToken } = useSession();
+  const { csrfToken, user } = useSession();
   const [order, setOrder] = useState<OrderDetail | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
@@ -95,7 +96,7 @@ export function OrderDetailView({
         </p>
       )}
 
-      {canAcknowledge && order.status === "Confirmed" && (
+      {canAcknowledge && hasPermission(user, Permissions.OrderFulfill) && order.status === "Confirmed" && (
         <Button type="button" disabled={busy} onClick={() => void onAcknowledge()}>
           {t("acknowledge")}
         </Button>

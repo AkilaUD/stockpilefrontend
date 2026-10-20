@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { DeskPageHeader } from "@/components/ui/desk-register";
-import { RoleGate } from "@/components/workspace/role-gate";
+import { PermissionGate } from "@/components/workspace/permission-gate";
+import { ROUTE_PERMISSIONS } from "@/lib/auth/routes";
 import { BuyerQuotesList } from "@/components/workspace/buyer-quotes-list";
 
 export async function generateMetadata({
@@ -27,9 +28,9 @@ export default async function WorkspaceQuotesPage({
     <div className="shell-workspace py-8">
       <DeskPageHeader title={t("title")} lede={t("lede")} />
       <div>
-        <RoleGate allowedRoles={["buyer", "buyerAdmin"]}>
+        <PermissionGate allowedPermissions={ROUTE_PERMISSIONS.workspaceQuotes}>
           <BuyerQuotesList />
-        </RoleGate>
+        </PermissionGate>
       </div>
     </div>
   );

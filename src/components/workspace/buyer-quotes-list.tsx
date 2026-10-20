@@ -13,6 +13,8 @@ import { FormField, fieldControlClassName } from "@/components/ui/form-field";
 import { quotesApi, resolveErrorCopy, type QuoteSummary } from "@/lib/api";
 import { formatMoney } from "@/lib/money";
 import { quoteStatusTone } from "@/lib/procurement/status-tone";
+import { Can } from "@/components/workspace/permission-gate";
+import { Permissions } from "@/lib/auth/permissions";
 
 export function BuyerQuotesList() {
   const t = useTranslations("workspace.quotes");
@@ -102,22 +104,16 @@ export function BuyerQuotesList() {
             actions={
               actionable(quote.status) ? (
                 <>
-                  <Button
-                    type="button"
-                    size="sm"
-                    disabled={busyId === quote.publicId}
-                    onClick={() => void onAccept(quote.publicId)}
-                  >
-                    {t("accept")}
-                  </Button>
-                  <Button
-                    type="button"
-                    size="sm"
-                    variant="secondary"
-                    onClick={() => setDeclineId(quote.publicId)}
-                  >
-                    {t("decline")}
-                  </Button>
+                  <Can permission={Permissions.QuoteAccept}>
+                    <Button type="button" size="sm" disabled={busyId === quote.publicId} onClick={() => void onAccept(quote.publicId)}>
+                      {t("accept")}
+                    </Button>
+                  </Can>
+                  <Can permission={Permissions.QuoteDecline}>
+                    <Button type="button" size="sm" variant="secondary" onClick={() => setDeclineId(quote.publicId)}>
+                      {t("decline")}
+                    </Button>
+                  </Can>
                 </>
               ) : null
             }

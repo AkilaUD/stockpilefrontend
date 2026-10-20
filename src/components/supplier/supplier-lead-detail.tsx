@@ -7,6 +7,8 @@ import { useSession } from "@/components/providers/session-provider";
 import { Button, ButtonLink } from "@/components/ui/button";
 import { FormField, fieldControlClassName } from "@/components/ui/form-field";
 import { resolveErrorCopy, supplierLeadsApi, type SupplierLeadDetail } from "@/lib/api";
+import { Can } from "@/components/workspace/permission-gate";
+import { Permissions } from "@/lib/auth/permissions";
 
 export function SupplierLeadDetailView({ leadId }: { leadId: string }) {
   const t = useTranslations("supplier.leads");
@@ -121,10 +123,14 @@ export function SupplierLeadDetailView({ leadId }: { leadId: string }) {
       )}
 
       <div className="flex flex-wrap gap-3">
-        <ButtonLink href={`/supplier/leads/${lead.leadId}/quote`}>{t("quoteCta")}</ButtonLink>
-        <Button type="button" variant="secondary" onClick={() => setDeclineOpen(true)}>
-          {t("declineCta")}
-        </Button>
+        <Can permission={Permissions.QuoteSubmit}>
+          <ButtonLink href={`/supplier/leads/${lead.leadId}/quote`}>{t("quoteCta")}</ButtonLink>
+        </Can>
+        <Can permission={Permissions.RfqMatchDecline}>
+          <Button type="button" variant="secondary" onClick={() => setDeclineOpen(true)}>
+            {t("declineCta")}
+          </Button>
+        </Can>
       </div>
 
       {declineOpen && (

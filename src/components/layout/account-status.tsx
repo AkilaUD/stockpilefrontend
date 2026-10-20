@@ -67,6 +67,7 @@ export function AccountStatus() {
       <AccountMenu
         fullName={fullName}
         roles={user.roles}
+        permissions={user.permissions}
         signOutBusy={signOutBusy}
         onSignOut={() => {
           setSignOutBusy(true);

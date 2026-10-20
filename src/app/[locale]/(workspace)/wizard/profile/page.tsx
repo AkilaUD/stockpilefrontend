@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { WizardShell } from "@/components/auth/wizard-shell";
+import { PermissionGate } from "@/components/workspace/permission-gate";
+import { ROUTE_PERMISSIONS } from "@/lib/auth/routes";
 import { ProfileForm } from "@/components/auth/profile-form";
 
 /** Buyer wizard step 2 — the professional profile (business-flows §2, api.md §2.2). */
@@ -31,7 +33,7 @@ export default async function ProfilePage({
           <p className="type-body text-ink-muted mt-2">{t("description")}</p>
         </header>
         <WizardShell current="profile" />
-        <ProfileForm />
+        <PermissionGate allowedPermissions={ROUTE_PERMISSIONS.wizard}><ProfileForm /></PermissionGate>
       </div>
     </div>
   );

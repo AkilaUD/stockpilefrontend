@@ -1,6 +1,10 @@
 "use client";
 
 /*
+ * @deprecated Use `PermissionGate` (permission-gate.tsx) — permissions are the
+ * capability authority; identity roles miss org-scoped grants. Kept only for
+ * backwards compatibility; no route uses it after the RBAC migration.
+ *
  * RoleGate — client-side admission check for the role-scoped private groups
  * (`/(supplier)`, `/(admin)`).
  *

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
-import { RoleGate } from "@/components/workspace/role-gate";
+import { PermissionGate } from "@/components/workspace/permission-gate";
+import { ROUTE_PERMISSIONS } from "@/lib/auth/routes";
 import { SupplierQuoteForm } from "@/components/supplier/supplier-quote-form";
 
 export async function generateMetadata({
@@ -23,9 +24,9 @@ export default async function SupplierLeadQuotePage({
 
   return (
     <div className="shell-workspace py-10">
-      <RoleGate allowedRoles={["supplierOwner", "supplierUser"]}>
+      <PermissionGate allowedPermissions={ROUTE_PERMISSIONS.supplierLeadQuote}>
         <SupplierQuoteForm leadId={id} />
-      </RoleGate>
+      </PermissionGate>
     </div>
   );
 }

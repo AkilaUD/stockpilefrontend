@@ -4,6 +4,8 @@ import { ButtonLink } from "@/components/ui/button";
 import { EmptyState } from "@/components/ui/empty-state";
 import { WorkspaceAccount } from "@/components/workspace/workspace-account";
 import { WorkspaceSecurity } from "@/components/workspace/workspace-security";
+import { Can } from "@/components/workspace/permission-gate";
+import { Permissions } from "@/lib/auth/permissions";
 
 /**
  * Buyer workspace home — implementation-plan 1.52, design-system §8.5.
@@ -44,6 +46,7 @@ export default async function WorkspaceHomePage({
     <div className="shell-workspace py-10">
       <h1 className="type-title-lg text-ink">{t("title")}</h1>
 
+      <Can permissions={[Permissions.RfqCreate, Permissions.OrganizationMemberManage]}>
       <section aria-labelledby="workspace-setup" className="mt-8 rounded-md border border-line bg-surface-panel p-5">
         <h2 id="workspace-setup" className="type-title-md text-ink">
           {t("setupTitle")}
@@ -53,7 +56,9 @@ export default async function WorkspaceHomePage({
           <ButtonLink href="/wizard/profile">{t("setupCta")}</ButtonLink>
         </div>
       </section>
+      </Can>
 
+      <Can permissions={[Permissions.RfqReadOwn, Permissions.QuoteReadBuyer, Permissions.OrderReadOwn]}>
       <section
         aria-labelledby="workspace-buying-activity"
         className="mt-8 rounded-md border border-line bg-surface-panel p-5"
@@ -69,7 +74,9 @@ export default async function WorkspaceHomePage({
           </ButtonLink>
         </div>
       </section>
+      </Can>
 
+      <Can permissions={[Permissions.RfqReadOwn, Permissions.QuoteReadBuyer, Permissions.OrderReadOwn]}>
       <section className="mt-8 rounded-md border border-line bg-surface-panel">
         <EmptyState
           title={t("emptyTitle")}
@@ -77,6 +84,17 @@ export default async function WorkspaceHomePage({
           headingLevel="h2"
         />
       </section>
+      </Can>
+
+      <Can permissions={[Permissions.QuoteReadSupplier, Permissions.SupplierUpdateOwn, Permissions.OrderFulfill]}>
+        <section aria-labelledby="workspace-supplier-desk" className="mt-8 rounded-md border border-line bg-surface-panel p-5">
+          <h2 id="workspace-supplier-desk" className="type-title-md text-ink">{t("supplierTitle")}</h2>
+          <p className="mt-2 type-body text-ink-muted">{t("supplierLeadsBody")}</p>
+          <div className="mt-4">
+            <ButtonLink href="/supplier" variant="secondary">{t("supplierLeadsCta")}</ButtonLink>
+          </div>
+        </section>
+      </Can>
 
       <section aria-labelledby="workspace-account" className="mt-12">
         <h2 id="workspace-account" className="type-title-md text-ink">

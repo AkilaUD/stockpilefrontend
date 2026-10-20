@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { WizardShell } from "@/components/auth/wizard-shell";
+import { PermissionGate } from "@/components/workspace/permission-gate";
+import { ROUTE_PERMISSIONS } from "@/lib/auth/routes";
 import { NotificationPreferencesForm } from "@/components/auth/notification-preferences-form";
 
 /** Buyer wizard step 4b — per-channel notification preferences (business-flows §2, api.md §2.2). */
@@ -31,7 +33,7 @@ export default async function NotificationPreferencesPage({
           <p className="type-body text-ink-muted mt-2">{t("description")}</p>
         </header>
         <WizardShell current="notification-preferences" />
-        <NotificationPreferencesForm />
+        <PermissionGate allowedPermissions={ROUTE_PERMISSIONS.wizard}><NotificationPreferencesForm /></PermissionGate>
       </div>
     </div>
   );
