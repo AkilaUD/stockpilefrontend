@@ -190,6 +190,22 @@
   --bp-2xl: 1440px;
   --bp-3xl: 1600px;
 
+  /* ===========================================================================
+     MATERIAL LEDGER — ruled order-book surfaces (homepage + procurement).
+     Rules are structural ink, not decoration; stamps carry state with text.
+     ======================================================================== */
+  --ledger-rule: var(--line);
+  --ledger-rule-strong: var(--line-strong);
+  --ledger-folio: var(--surface-elevated);     /* opened sheet ground */
+  --ledger-margin: var(--palette-signal);      /* signal margin annotation */
+  --ledger-tab: var(--surface-recessed);       /* supplier marginal tab */
+  --ledger-stamp-ink: var(--palette-ink);
+  --ledger-stamp-success: #2e6b34;             /* stock/verified stamp green */
+  --ledger-stamp-warning: #8a6d00;
+  --ledger-stamp-danger: var(--palette-danger);
+  --layout-department-rail: 300px; /* homepage side-nav rail — hero must reserve it */
+  --layout-home-max: 90rem; /* 1440px opened-book measure */
+
   /* z-index — single scale. No ad-hoc values in components. */
   --z-base: 0;
   --z-raised: 10;

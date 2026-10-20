@@ -79,7 +79,7 @@
      with Noto Sans Sinhala in the body stack for /si. */
   --font-display: var(--font-source-serif), "Source Serif 4", "Noto Serif", Georgia, serif;
   --font-body: var(--font-source-sans), var(--font-noto-sinhala), "Source Sans 3", "Noto Sans Sinhala", system-ui, sans-serif;
-  --font-mono: var(--font-source-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-plex-mono), "IBM Plex Mono", var(--font-noto-sinhala), ui-monospace, monospace;
   /* Tailwind's default `font-sans` would otherwise silently resolve to the
      framework's own stack, so anything written as `font-sans` would be a
      different family than the token. Aliasing it to `--font-body` makes the

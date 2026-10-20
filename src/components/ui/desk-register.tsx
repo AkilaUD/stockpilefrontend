@@ -63,6 +63,97 @@ export function DeskRowLink({
   );
 }
 
+/* ---------------------------------------------------------------------------
+   Material Ledger — an opened order-book sheet: folio header, ruled rows and
+   a totals foot. The sheet is a table-like register, never a card grid.
+   ------------------------------------------------------------------------ */
+export function LedgerSheet({
+  folio,
+  title,
+  meta,
+  children,
+  footer,
+  className,
+}: {
+  folio?: string;
+  title?: string;
+  meta?: ReactNode;
+  children: ReactNode;
+  footer?: ReactNode;
+  className?: ClassValue;
+}) {
+  return (
+    <section className={cx("border border-line-strong bg-surface-elevated", className)}>
+      {folio || title ? (
+        <header className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1 border-b-2 border-line-strong px-4 py-3 sm:px-5">
+          <div className="flex flex-wrap items-baseline gap-x-3">
+            {folio ? <span className="type-folio text-ink-muted">{folio}</span> : null}
+            {title ? <h2 className="type-title-sm text-ink">{title}</h2> : null}
+          </div>
+          {meta ? <div className="type-meta">{meta}</div> : null}
+        </header>
+      ) : null}
+      <div>{children}</div>
+      {footer ? <footer className="border-t-2 border-line-strong px-4 py-3 sm:px-5">{footer}</footer> : null}
+    </section>
+  );
+}
+
+/** One ruled ledger line. Entry number, main entry, data cells, stamp/action. */
+export function LedgerRow({
+  entryNo,
+  children,
+  stamp,
+  action,
+  className,
+}: {
+  entryNo?: string;
+  children: ReactNode;
+  stamp?: ReactNode;
+  action?: ReactNode;
+  className?: ClassValue;
+}) {
+  return (
+    <div
+      className={cx(
+        "grid grid-cols-[2.75rem_minmax(0,1fr)] items-start gap-x-3 border-b border-line px-4 py-3 last:border-b-0 sm:px-5",
+        "sm:grid-cols-[3.25rem_minmax(0,1fr)_auto] sm:items-center",
+        className,
+      )}
+    >
+      <span className="type-entry-no pt-0.5 text-ink-muted sm:pt-0">{entryNo}</span>
+      <div className="min-w-0">{children}</div>
+      {stamp || action ? (
+        <div className="col-start-2 mt-2 flex flex-wrap items-center gap-2 sm:col-start-3 sm:mt-0 sm:justify-self-end">
+          {stamp}
+          {action}
+        </div>
+      ) : null}
+    </div>
+  );
+}
+
+/** Totals foot — only ever rendered with honestly computed figures. */
+export function LedgerTotals({
+  label,
+  value,
+  note,
+}: {
+  label: string;
+  value: ReactNode;
+  note?: string;
+}) {
+  return (
+    <div className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1">
+      <span className="type-folio text-ink-muted">{label}</span>
+      <span className="flex flex-wrap items-baseline gap-x-3">
+        {note ? <span className="type-meta">{note}</span> : null}
+        <span className="type-total text-ink">{value}</span>
+      </span>
+    </div>
+  );
+}
+
 /** Compact operational page title (workspace / supplier desk). */
 export function DeskPageHeader({ title, lede }: { title: string; lede?: string }) {
   return (

@@ -32,6 +32,7 @@ import {
   type RfqFormValues,
   type RfqItemValues,
 } from "@/lib/validation/rfq";
+import { loadLines, materialsListStore, toRfqItems } from "@/lib/procurement/materials-list";
 import { quoteStatusTone } from "@/lib/procurement/status-tone";
 import { StatusPill } from "@/components/ui/status-pill";
 
@@ -110,7 +111,27 @@ export function RfqForm({
   const nextItemId = useRef(1);
 
   const [values, setValues] = useState<FormState>(INITIAL);
+  const [carriedLines, setCarriedLines] = useState(0);
   const [fieldErrors, setFieldErrors] = useState<FieldFailures>({});
+
+  /* The homepage materials list carries in once, on mount. The visitor still
+     reviews and edits everything here — hydration is a starting point, never
+     a submission. */
+  useEffect(() => {
+    /* Deferred a tick: localStorage is an external system, and the first
+       client render must match the server's empty form (hydration parity). */
+    const handle = window.setTimeout(() => {
+      const carried = toRfqItems(loadLines());
+      if (carried.length === 0) return;
+      nextItemId.current = carried.length;
+      setCarriedLines(carried.length);
+      setValues((previous) => ({
+        ...previous,
+        items: carried.map((item, index) => ({ ...item, id: index })),
+      }));
+    }, 0);
+    return () => window.clearTimeout(handle);
+  }, []);
   const [banner, setBanner] = useState<string | null>(null);
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState<RfqResponse | null>(null);
@@ -213,6 +234,8 @@ export function RfqForm({
       const token = await csrfToken();
       const draft = await rfqApi.create(buildRequest(values, needsCompany), token);
       const dispatched = await rfqApi.submit(draft.id, token);
+      /* The list has become an RFQ — it must not be sent twice by accident. */
+      materialsListStore.clear();
       setSubmitted(dispatched);
       setRecentVersion((version) => version + 1);
     } catch (error) {
@@ -269,6 +292,12 @@ export function RfqForm({
         {banner && (
           <p role="alert" className="type-meta rounded-sm border border-danger/30 bg-danger/5 p-3 text-danger">
             {banner}
+          </p>
+        )}
+
+        {carriedLines > 0 && (
+          <p role="status" className="type-meta border border-line bg-surface-recessed/60 p-3 text-ink">
+            {t("fromListNote", { count: carriedLines })}
           </p>
         )}
 

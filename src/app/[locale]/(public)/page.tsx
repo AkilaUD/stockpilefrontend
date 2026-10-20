@@ -6,30 +6,34 @@ import {
   getCategoryTree,
   getProductListing,
   getSupplierDirectory,
+  getUnits,
 } from "@/lib/api/catalogue-server";
 import { getArticles } from "@/lib/api/content-server";
-import { HeroBanner } from "@/components/home/hero-banner";
-import { HeroSearch } from "@/components/home/hero-search";
-import { StatsBand } from "@/components/home/stats-band";
-import { MostSearched } from "@/components/home/most-searched";
-import { ProductGridSection } from "@/components/home/product-grid-section";
-import { NewestSuppliers } from "@/components/home/newest-suppliers-section";
-import { NewsBand } from "@/components/home/news-band";
-import { ProcurementWorkflow } from "@/components/home/procurement-workflow";
-import { DepartmentAtlas } from "@/components/home/department-atlas";
-import { BuyerBenefits } from "@/components/home/buyer-benefits";
-import { SupplierValue } from "@/components/home/supplier-value";
+import { sortDepartments } from "@/lib/navigation/navigation";
+import { LedgerCover, type FolioStats } from "@/components/home/ledger-cover";
+import { MaterialsListBuilder, type BuilderOption } from "@/components/home/materials-list-builder";
+import {
+  ClosingEntry,
+  DepartmentIndex,
+  FieldNotes,
+  LedgerSectionHead,
+  ProductRegister,
+  SupplierDesk,
+  WorkflowStates,
+} from "@/components/home/ledger-sections";
 import { HomeFaq } from "@/components/home/home-faq";
-import { FinalCta } from "@/components/home/final-cta";
 import { HomeGsap } from "@/components/home/home-gsap";
 import { Skeleton } from "@/components/ui/skeleton";
 
 /**
- * Material Atlas home — live catalogue reads only.
- * Research-backed order: mechanism hero → live proof → departments →
- * how it works → buyer benefits (+ labelled example) → products →
- * supplier value → newest suppliers → products → FAQ → news → final CTA.
- * No invented counts, testimonials, or savings claims.
+ * Material Ledger home — the opened order book.
+ *
+ * Cover (folio + live sheet) → the visitor's own materials list → numbered
+ * materials index → current register → document-state workflow with a
+ * labelled example returns sheet → supplier desk → field-notes annex → FAQ →
+ * open closing entry. All counts, entries and suppliers are live catalogue
+ * reads; the only figures that are not live are inside the stamped EXAMPLE
+ * returns sheet. No invented metrics or testimonials.
  */
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
@@ -41,8 +45,6 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   };
 }
 
-const STOCK_STATES = ["InStock", "OutOfStock", "EnquireForAvailability"] as const;
-
 async function safeRead<T>(read: () => Promise<T>): Promise<T | null> {
   try {
     return await read();
@@ -52,122 +54,83 @@ async function safeRead<T>(read: () => Promise<T>): Promise<T | null> {
   }
 }
 
-function formatCount(locale: string, n: number): string {
-  return n.toLocaleString(locale);
-}
-
-function HomeSectionSkeleton() {
+function LedgerSkeleton() {
   return (
     <div className="shell-public py-10" aria-hidden="true">
-      <Skeleton className="h-8 w-64" />
-      <div className="home-product-grid mt-6 gap-x-6 gap-y-8">
-        {Array.from({ length: 8 }).map((_, index) => (
-          <div key={index} className="space-y-2">
-            <Skeleton className="aspect-square w-full" />
-            <Skeleton className="h-4 w-3/4" />
-            <Skeleton className="h-4 w-1/2" />
-          </div>
+      <Skeleton className="h-6 w-56" />
+      <div className="mt-4 space-y-3">
+        {Array.from({ length: 5 }).map((_, index) => (
+          <Skeleton key={index} className="h-12 w-full" />
         ))}
       </div>
     </div>
   );
 }
 
-async function StatsBandSection({ locale }: { locale: string }) {
-  const t = await getTranslations({ locale, namespace: "home" });
-  const data = await safeRead(() => Promise.all([getCategoryTree(), getCatalogueSummary()]));
-  if (!data) return null;
-  const [tree, summary] = data;
-  const departments = tree.filter((node) => node.isRoot);
-
-  const stats = [
-    { label: t("stats.products"), value: formatCount(locale, summary.products) },
-    { label: t("stats.suppliers"), value: formatCount(locale, summary.suppliers) },
-    { label: t("stats.departments"), value: formatCount(locale, departments.length) },
-    { label: t("stats.categories"), value: formatCount(locale, summary.categories) },
-  ];
-
-  return <StatsBand stats={stats} />;
+async function CoverSection({ locale }: { locale: string }) {
+  const data = await safeRead(() =>
+    Promise.all([getCatalogueSummary(), getCategoryTree(), getProductListing({ sort: "newest", page: 1, pageSize: 6 })]),
+  );
+  let stats: FolioStats | null = null;
+  let sheetItems: Awaited<ReturnType<typeof getProductListing>>["items"] = [];
+  if (data) {
+    const [summary, tree, listing] = data;
+    stats = {
+      products: summary.products,
+      suppliers: summary.suppliers,
+      departments: tree.filter((node) => node.isRoot).length,
+      categories: summary.categories,
+    };
+    sheetItems = listing.items;
+  }
+  return <LedgerCover locale={locale} stats={stats} sheetItems={sheetItems} />;
 }
 
-async function DepartmentAtlasSection() {
+async function BuilderSection() {
+  const data = await safeRead(() => Promise.all([getCategoryTree(), getUnits()]));
+  let departments: BuilderOption[] = [];
+  let units: BuilderOption[] = [];
+  if (data) {
+    const [tree, unitRows] = data;
+    departments = sortDepartments(tree).map((node) => ({ value: node.slug, label: node.name }));
+    units = unitRows.map((unit) => ({ value: unit.code, label: unit.name }));
+  }
+  return <MaterialsListBuilder departments={departments} units={units} />;
+}
+
+async function IndexSection({ locale }: { locale: string }) {
   const tree = await safeRead(() => getCategoryTree());
   if (!tree) return null;
-  const departments = tree.filter((node) => node.isRoot).slice(0, 12);
-  return (
-    <div data-home-reveal>
-      <DepartmentAtlas departments={departments} />
-    </div>
-  );
+  const departments = sortDepartments(tree).slice(0, 12);
+  return <DepartmentIndex locale={locale} departments={departments} />;
 }
 
-async function ProductSweepSection({
-  locale,
-  title,
-  viewAllLabel,
-  page,
-}: {
-  locale: string;
-  title: string;
-  viewAllLabel: string;
-  page: 1 | 2;
-}) {
-  const tCat = await getTranslations({ locale, namespace: "catalogue" });
-  const tProduct = await getTranslations({ locale, namespace: "catalogue.product" });
-
-  const priceOnRequest = tProduct("priceOnRequest");
-  const stockLabel = (state: string): string =>
-    (STOCK_STATES as readonly string[]).includes(state) ? tCat(`stock.${state}`) : state;
-
-  const listing = await safeRead(() => getProductListing({ sort: "newest", page, pageSize: 8 }));
-  if (!listing) return null;
-
-  return (
-    <ProductGridSection
-      title={title}
-      items={listing.items}
-      locale={locale}
-      priceOnRequest={priceOnRequest}
-      stockLabel={stockLabel}
-      viewAllHref="/products?sort=newest"
-      viewAllLabel={viewAllLabel}
-    />
-  );
+async function RegisterSection({ locale }: { locale: string }) {
+  const listing = await safeRead(() => getProductListing({ sort: "newest", page: 1, pageSize: 10 }));
+  if (!listing || listing.items.length === 0) return null;
+  return <ProductRegister locale={locale} items={listing.items} />;
 }
 
-async function NewestSuppliersSection() {
+async function SupplierDeskSection({ locale }: { locale: string }) {
   const directory = await safeRead(() => getSupplierDirectory());
-  if (!directory) return null;
-  return <NewestSuppliers suppliers={directory.items} limit={6} />;
+  if (!directory || directory.items.length === 0) return null;
+  return <SupplierDesk locale={locale} suppliers={directory.items.slice(0, 6)} />;
 }
 
-async function HomeNewsBandSection({ locale }: { locale: string }) {
-  const t = await getTranslations({ locale, namespace: "home" });
-  const page = await safeRead(() => getArticles({ page: 1, pageSize: 6, locale }));
+async function AnnexSection({ locale }: { locale: string }) {
+  const page = await safeRead(() => getArticles({ page: 1, pageSize: 5, locale }));
   if (!page || page.items.length === 0) return null;
-  return (
-    <NewsBand
-      title={t("news.title")}
-      viewAllLabel={t("news.viewAll")}
-      articles={page.items}
-      locale={locale}
-    />
-  );
+  return <FieldNotes locale={locale} articles={page.items} />;
 }
 
 export default async function HomePage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "home" });
 
-  const workflowSteps = [0, 1, 2, 3, 4].map((index) => ({
-    label: t(`workflow.steps.${index}.label`),
+  const steps = [0, 1, 2, 3, 4].map((index) => ({
+    state: t(`workflow.states.${index}`),
     title: t(`workflow.steps.${index}.title`),
     body: t(`workflow.steps.${index}.body`),
-  }));
-
-  const benefitItems = [0, 1, 2, 3].map((index) => ({
-    title: t(`benefits.items.${index}.title`),
-    body: t(`benefits.items.${index}.body`),
   }));
 
   const exampleRows = [
@@ -189,107 +152,64 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
   return (
     <>
       <HomeGsap />
-      <HeroBanner
-        headline={t("hero.headline")}
-        lede={t("hero.lede")}
-        alt={t("hero.bannerAlt")}
-        cta={t("hero.bannerCta")}
-        rfqCta={t("hero.rfqCta")}
-        supplierCta={t("hero.browseCta")}
-        proofLine={t("hero.proofLine")}
-        flowLabel={t("hero.flowLabel")}
-        searchSlot={<HeroSearch />}
-      />
 
-      <Suspense fallback={<HomeSectionSkeleton />}>
-        <StatsBandSection locale={locale} />
+      <Suspense fallback={<LedgerSkeleton />}>
+        <CoverSection locale={locale} />
       </Suspense>
 
-      <Suspense fallback={<HomeSectionSkeleton />}>
-        <DepartmentAtlasSection />
-      </Suspense>
+      <section className="shell-public py-10 sm:py-12">
+        <Suspense fallback={<LedgerSkeleton />}>
+          <BuilderSection />
+        </Suspense>
+      </section>
 
-      <div data-home-reveal>
-        <MostSearched />
-      </div>
+      <section className="shell-public py-10 sm:py-12">
+        <Suspense fallback={<LedgerSkeleton />}>
+          <IndexSection locale={locale} />
+        </Suspense>
+      </section>
 
-      <ProcurementWorkflow
-        title={t("workflow.title")}
-        lede={t("workflow.lede")}
-        steps={workflowSteps}
-        ctaLabel={t("workflow.cta")}
-        ctaHref="/rfq"
-      />
+      <section className="shell-public py-10 sm:py-12">
+        <Suspense fallback={<LedgerSkeleton />}>
+          <RegisterSection locale={locale} />
+        </Suspense>
+      </section>
 
-      <BuyerBenefits
-        title={t("benefits.title")}
-        lede={t("benefits.lede")}
-        items={benefitItems}
-        imageAlt={t("benefits.imageAlt")}
-        ctaLabel={t("benefits.cta")}
-        example={{
-          title: t("benefits.example.title"),
-          note: t("benefits.example.note"),
-          item: t("benefits.example.item"),
-          supplierHeader: t("benefits.example.supplier"),
-          unitPriceHeader: t("benefits.example.unitPrice"),
-          leadTimeHeader: t("benefits.example.leadTime"),
-          totalHeader: t("benefits.example.total"),
-          rows: exampleRows,
-        }}
-      />
+      <section className="shell-public py-10 sm:py-12">
+        <LedgerSectionHead folio={t("workflow.folio")} title={t("workflow.title")} lede={t("workflow.lede")} />
+        <WorkflowStates
+          locale={locale}
+          steps={steps}
+          example={{
+            title: t("benefits.example.title"),
+            note: t("benefits.example.note"),
+            item: t("benefits.example.item"),
+            supplierHeader: t("benefits.example.supplier"),
+            unitPriceHeader: t("benefits.example.unitPrice"),
+            leadTimeHeader: t("benefits.example.leadTime"),
+            totalHeader: t("benefits.example.total"),
+            rows: exampleRows,
+          }}
+        />
+      </section>
 
-      <Suspense fallback={<HomeSectionSkeleton />}>
-        <div data-home-reveal>
-          <ProductSweepSection
-            locale={locale}
-            title={t("featured.title")}
-            viewAllLabel={t("featured.viewAll")}
-            page={1}
-          />
-        </div>
-      </Suspense>
+      <section className="shell-public py-10 sm:py-12">
+        <Suspense fallback={<LedgerSkeleton />}>
+          <SupplierDeskSection locale={locale} />
+        </Suspense>
+      </section>
 
-      <SupplierValue
-        title={t("supplierValue.title")}
-        lede={t("supplierValue.lede")}
-        items={[0, 1, 2].map((index) => t(`supplierValue.items.${index}`))}
-        imageAlt={t("supplierValue.imageAlt")}
-        cta={t("supplierValue.cta")}
-        pricingCta={t("supplierValue.pricingCta")}
-      />
-
-      <Suspense fallback={<HomeSectionSkeleton />}>
-        <div data-home-reveal>
-          <NewestSuppliersSection />
-        </div>
-      </Suspense>
-
-      <Suspense fallback={<HomeSectionSkeleton />}>
-        <div data-home-reveal>
-          <ProductSweepSection
-            locale={locale}
-            title={t("newestProducts.title")}
-            viewAllLabel={t("newestProducts.viewAll")}
-            page={2}
-          />
-        </div>
-      </Suspense>
+      <section className="shell-public py-10 sm:py-12">
+        <Suspense fallback={<LedgerSkeleton />}>
+          <AnnexSection locale={locale} />
+        </Suspense>
+      </section>
 
       <HomeFaq title={t("faq.title")} items={faqItems} helpLabel={t("faq.helpLabel")} />
 
-      <Suspense fallback={<HomeSectionSkeleton />}>
-        <div data-home-reveal>
-          <HomeNewsBandSection locale={locale} />
-        </div>
-      </Suspense>
-
-      <FinalCta
-        title={t("finalCta.title")}
-        lede={t("finalCta.lede")}
-        rfqCta={t("finalCta.rfqCta")}
-        browseCta={t("finalCta.browseCta")}
-      />
+      <section className="shell-public pb-14">
+        <ClosingEntry locale={locale} />
+      </section>
     </>
   );
 }

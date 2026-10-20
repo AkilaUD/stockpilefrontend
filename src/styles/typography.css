@@ -251,6 +251,49 @@
   }
 
   /* -----------------------------------------------------------------------------
+     Material Ledger roles — folio/entry numbers, ledger data, stamps, totals.
+     Uppercase transforms only ever apply to Latin via the label/stamp roles;
+     Sinhala copy must use body/meta roles (no uppercase on script text).
+     -------------------------------------------------------------------------- */
+  .type-folio {
+    font-family: var(--font-mono);
+    font-size: var(--type-label);
+    letter-spacing: var(--tr-label);
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+
+  .type-entry-no {
+    font-family: var(--font-mono);
+    font-variant-numeric: tabular-nums;
+    font-size: var(--type-meta);
+    font-weight: 500;
+    white-space: nowrap;
+  }
+
+  .type-ledger-data {
+    font-family: var(--font-mono);
+    font-variant-numeric: tabular-nums;
+    font-size: var(--type-body-sm);
+  }
+
+  .type-stamp {
+    font-family: var(--font-mono);
+    font-size: var(--type-label);
+    letter-spacing: var(--tr-label);
+    text-transform: uppercase;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+
+  .type-total {
+    font-family: var(--font-mono);
+    font-variant-numeric: tabular-nums;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+
+  /* -----------------------------------------------------------------------------
      Editorial measure — applied to long-form reading blocks only.
      -------------------------------------------------------------------------- */
   .measure-editorial {

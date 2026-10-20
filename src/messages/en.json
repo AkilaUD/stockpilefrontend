@@ -16,7 +16,6 @@
     "sortDescending": "Sorted descending",
     "notifications": "Notifications"
   },
-
   "common": {
     "actions": {
       "save": "Save",
@@ -50,7 +49,6 @@
       "registerAsSupplier": "Register as a supplier",
       "working": "Working…"
     },
-
     "labels": {
       "email": "Email",
       "password": "Password",
@@ -78,7 +76,6 @@
       "description": "Description",
       "notes": "Notes"
     },
-
     "states": {
       "loading": "Loading…",
       "saving": "Saving…",
@@ -89,7 +86,6 @@
       "offline": "You appear to be offline."
     }
   },
-
   "nav": {
     "home": "Home",
     "products": "Products",
@@ -112,7 +108,6 @@
     "switchToSinhala": "Switch to Sinhala",
     "localeEnShort": "EN",
     "localeSiShort": "සිංහල",
-
     "utilityTagline": "Construction Material Procurement Platform",
     "shopByDepartment": "Shop By Department",
     "allDepartments": "All Departments",
@@ -142,7 +137,6 @@
     "searchSubmit": "Search",
     "viewAllDepartments": "View All"
   },
-
   "footer": {
     "tagline": "Business-to-business procurement for construction materials in Sri Lanka.",
     "contactGroup": "Contact Us",
@@ -161,7 +155,6 @@
     "instagram": "Instagram",
     "youtube": "YouTube"
   },
-
   "home": {
     "meta": {
       "title": "Construction Material Procurement Platform",
@@ -268,7 +261,7 @@
       "browseCta": "Browse materials"
     },
     "workflow": {
-      "title": "From RFQ to order",
+      "title": "From entered line to open order",
       "lede": "The same path your workspace and supplier desk already run — no invented steps.",
       "cta": "Start an RFQ",
       "steps": [
@@ -297,7 +290,20 @@
           "title": "Confirm the buy",
           "body": "Accepted quotes become orders you and the supplier can track."
         }
-      ]
+      ],
+      "states": [
+        "Entered",
+        "Sent",
+        "Returns received",
+        "Accepted",
+        "Order opened"
+      ],
+      "folio": "Record No. 003",
+      "exampleFolio": "Returns sheet",
+      "exampleStamp": "Example",
+      "plateNo": "Plate 01",
+      "plateAlt": "A buyer reviewing material quotations at a desk",
+      "plateCaption": "Comparing returns against one list — illustrative plate."
     },
     "stats": {
       "products": "Products",
@@ -338,9 +344,99 @@
     "news": {
       "title": "News & Projects",
       "viewAll": "View All News"
+    },
+    "ledger": {
+      "folio": "Folio No. 001 — Materials Ledger",
+      "folioOpen": "Open — buyer copy",
+      "headline": "Send one RFQ. Get quotes from multiple suppliers.",
+      "lede": "Stockpile is Sri Lanka's construction-materials order book. Build your materials list once, send it as a single request for quotation, and compare the returns side by side before anything becomes an order.",
+      "searchHint": "Search the live catalogue — or take entries straight from the sheet beside this page.",
+      "startList": "Start your materials list",
+      "browse": "Browse all materials",
+      "folioNote": "Counts are read live from the catalogue. Stock is always a state, never a quantity.",
+      "sheetFolio": "Sheet A",
+      "sheetTitle": "Current entries — newest first",
+      "sheetMeta": "{count} entries on this sheet",
+      "sheetEmpty": "The catalogue sheet is unavailable right now. Your own list below still works.",
+      "sheetNote": "Adding an entry places it on your materials list below — nothing is sent anywhere yet.",
+      "ribbonLabel": "Current register",
+      "add": "Add",
+      "addNamed": "Add {name} to your materials list",
+      "inList": "On your list",
+      "builder": {
+        "folio": "Sheet B",
+        "title": "Your materials list",
+        "meta": "{count} lines",
+        "searchLabel": "Find a material",
+        "searchPlaceholder": "Search cement, steel, fittings...",
+        "searching": "Searching the catalogue...",
+        "noResults": "No catalogue entries match. Add a blank line and describe it — suppliers can still quote it.",
+        "empty": "Your list is empty. Search above, add entries from the sheets on this page, or open a blank line and describe the material yourself.",
+        "addBlank": "Add a blank line",
+        "colEntry": "No.",
+        "colMaterial": "Material",
+        "colQty": "Qty",
+        "colUnit": "Unit",
+        "colCategory": "Department",
+        "colActions": "Actions",
+        "specification": "Specification",
+        "descriptionPlaceholder": "Material description",
+        "specificationPlaceholder": "Grade, size, standard... (optional)",
+        "duplicate": "Duplicate line",
+        "subtotal": "Indicative subtotal",
+        "subtotalNote": "Only lines with a public catalogue price and a quantity are totalled. The figure is indicative — the supplier returns on your RFQ are the prices that bind.",
+        "porExcluded": "{count} price-on-request line(s) excluded",
+        "awaitingQty": "{count} priced line(s) need a quantity",
+        "sendCta": "Review & send as one RFQ",
+        "clear": "Clear list",
+        "savedNote": "Saved on this device",
+        "honestyNote": "Nothing is sent from this page. You review the list on the RFQ page, sign in, and send it yourself — suppliers then receive one matched request."
+      }
+    },
+    "index": {
+      "folio": "Index No. 002",
+      "title": "Materials index",
+      "meta": "{count} departments",
+      "subcategories": "{count} subcategories"
+    },
+    "register": {
+      "folio": "Sheet C",
+      "title": "Current register — newest entries",
+      "viewAll": "View all materials",
+      "moq": "MOQ {count}",
+      "lead": "{count}-day lead"
+    },
+    "supplierDesk": {
+      "folio": "Desk No. 004",
+      "title": "Supplier desk",
+      "meta": "{count} suppliers listed",
+      "verified": "Verified",
+      "profile": "Profile",
+      "locationPending": "Location on profile",
+      "products": "{count} products",
+      "tabFolio": "Supplier entry",
+      "tabTitle": "Sell through the order book",
+      "tabBody": "Open a supplier account to receive matched RFQs, return quotations, and trade under a verified profile.",
+      "tabCta": "Open a supplier account",
+      "pricingCta": "See supplier plans",
+      "plateNo": "Plate 02",
+      "plateAlt": "Construction materials stored in a supplier yard",
+      "plateCaption": "Material awaiting dispatch — illustrative plate. Supplier details always come from live profiles."
+    },
+    "annex": {
+      "folio": "Annex No. 005",
+      "title": "Field notes & project records",
+      "viewAll": "All field notes"
+    },
+    "closing": {
+      "folio": "Open entry",
+      "state": "Awaiting your list",
+      "title": "Your first entry is still blank.",
+      "lede": "Add the materials, send one RFQ, and let the suppliers write the next lines.",
+      "startCta": "Start your materials list",
+      "suppliersCta": "Browse suppliers"
     }
   },
-
   "pages": {
     "common": {
       "breadcrumbHome": "Home"
@@ -590,28 +686,59 @@
       "nextTopic": "Next Topic",
       "topicNavLabel": "Topic navigation",
       "nav": [
-        { "label": "Introduction", "href": "/user-guide" },
+        {
+          "label": "Introduction",
+          "href": "/user-guide"
+        },
         {
           "title": "Stockpile for Buyers",
           "items": [
-            { "label": "Buyer Registration" },
-            { "label": "Updating Buyer Profile" },
-            { "label": "Creating an RFQ", "href": "/user-guide-customer-creating-rfqs" },
-            { "label": "Viewing Quotations", "href": "/user-guide-customer-viewing-quotations" }
+            {
+              "label": "Buyer Registration"
+            },
+            {
+              "label": "Updating Buyer Profile"
+            },
+            {
+              "label": "Creating an RFQ",
+              "href": "/user-guide-customer-creating-rfqs"
+            },
+            {
+              "label": "Viewing Quotations",
+              "href": "/user-guide-customer-viewing-quotations"
+            }
           ]
         },
         {
           "title": "Stockpile for Suppliers",
           "href": "/user-guide-supplier-registration",
           "items": [
-            { "label": "Supplier Registration", "href": "/user-guide-supplier-registration" },
-            { "label": "Product Creation", "href": "/user-guide-product-creation" },
-            { "label": "Product Specifications", "href": "/user-guide-product-specifications" },
-            { "label": "Submitting Quotations", "href": "/user-guide-supplier-quotation" }
+            {
+              "label": "Supplier Registration",
+              "href": "/user-guide-supplier-registration"
+            },
+            {
+              "label": "Product Creation",
+              "href": "/user-guide-product-creation"
+            },
+            {
+              "label": "Product Specifications",
+              "href": "/user-guide-product-specifications"
+            },
+            {
+              "label": "Submitting Quotations",
+              "href": "/user-guide-supplier-quotation"
+            }
           ]
         },
-        { "label": "Conversion Tables", "href": "/conversion-tables" },
-        { "label": "Glossary", "href": "/user-guide-glossary" }
+        {
+          "label": "Conversion Tables",
+          "href": "/conversion-tables"
+        },
+        {
+          "label": "Glossary",
+          "href": "/user-guide-glossary"
+        }
       ]
     },
     "guideSupplierRegistration": {
@@ -620,7 +747,10 @@
       "sections": [
         {
           "body": "Start by navigating to the Supplier Registration page.",
-          "link": { "label": "Supplier Registration page", "href": "/supplier-register" }
+          "link": {
+            "label": "Supplier Registration page",
+            "href": "/supplier-register"
+          }
         },
         {
           "title": "EMAIL ADDRESS",
@@ -629,7 +759,12 @@
         {
           "title": "PASSWORD",
           "body": "Your password must have a minimum length of 8, and must contain 3 of the following 4:",
-          "bullets": ["Lower Case letter", "Upper Case letter", "Digit", "Special Character"],
+          "bullets": [
+            "Lower Case letter",
+            "Upper Case letter",
+            "Digit",
+            "Special Character"
+          ],
           "footer": "Click on Proceed to continue to the 2nd Page."
         },
         {
@@ -684,7 +819,10 @@
         },
         {
           "body": "Click on Products and then click on Add Products.",
-          "link": { "label": "Add Products", "href": "/supplier" }
+          "link": {
+            "label": "Add Products",
+            "href": "/supplier"
+          }
         },
         {
           "title": "ATTRIBUTE SET",
@@ -751,7 +889,10 @@
             "[EE-EEEEE] - 2 or more letters describing a model number or important specification (such as size). If none of the above applies, then a two digit index of this item (ex: 01, 02)."
           ]
         },
-        { "title": "PRICE:", "body": "This is your list or catalog price." },
+        {
+          "title": "PRICE:",
+          "body": "This is your list or catalog price."
+        },
         {
           "title": "SPECIAL PRICE, SPECIAL PRICE TO, SPECIAL PRICE FROM:",
           "body": "Leave blank."
@@ -828,7 +969,10 @@
           "title": "LEAD TIME IN DAYS:",
           "body": "If the product is manufactured to order or provided by your supplier/manufacturer after order placement, mention the average lead time to deliver the product to the buyer."
         },
-        { "title": "WARRANTY MONTHS:", "body": "The default warranty period for the product." },
+        {
+          "title": "WARRANTY MONTHS:",
+          "body": "The default warranty period for the product."
+        },
         {
           "title": "MIN QTY REQUIRED PER ORDER:",
           "body": "If you want to accept only bulk orders and have a minimum order quantity (MOQ) enter that number here. You will be able to quote for smaller numbers, but you won't be able to accept orders below this quantity."
@@ -968,7 +1112,10 @@
         }
       ],
       "footer": "To view a supplier''s return policy, visit the list of suppliers and click on the relevant supplier, then on Policies.",
-      "footerLink": { "label": "list of suppliers", "href": "/suppliers" }
+      "footerLink": {
+        "label": "list of suppliers",
+        "href": "/suppliers"
+      }
     },
     "dataDeletion": {
       "title": "Data Deletion Instructions",
@@ -1030,14 +1177,26 @@
           "term": "FORM_KEY",
           "body": "Stores randomly generated key used to prevent forged requests."
         },
-        { "term": "PHPSESSID", "body": "Your session ID on the server." },
-        { "term": "GUEST-VIEW", "body": "Allows guests to view and edit their orders." },
+        {
+          "term": "PHPSESSID",
+          "body": "Your session ID on the server."
+        },
+        {
+          "term": "GUEST-VIEW",
+          "body": "Allows guests to view and edit their orders."
+        },
         {
           "term": "PERSISTENT_SHOPPING_CART",
           "body": "A link to information about your cart and viewing history, if you have asked for this."
         },
-        { "term": "STF", "body": "Information on products you have emailed to friends." },
-        { "term": "STORE", "body": "The store view or language you have selected." },
+        {
+          "term": "STF",
+          "body": "Information on products you have emailed to friends."
+        },
+        {
+          "term": "STORE",
+          "body": "The store view or language you have selected."
+        },
         {
           "term": "USER_ALLOWED_SAVE_COOKIE",
           "body": "Indicates whether a customer allowed to use cookies."
@@ -1138,14 +1297,12 @@
       "supportTitle": "Support"
     }
   },
-
   "notFound": {
     "eyebrow": "404 · Not found",
     "title": "This page could not be found.",
     "body": "The address may have been typed incorrectly, or the page may have moved. Nothing you were working on has been lost.",
     "backHome": "Go to the home page"
   },
-
   "auth": {
     "audienceLegend": "Sign in as",
     "audienceBuyer": "Buyer",
@@ -1354,7 +1511,6 @@
       }
     }
   },
-
   "workspace": {
     "title": "Workspace",
     "setupTitle": "Account setup",
@@ -1400,7 +1556,7 @@
     "changePasswordHint": "Changing your password signs every other device out while keeping this one signed in.",
     "passwordChangedTitle": "Password changed",
     "passwordChangedBody": "Your password has been updated. Every other session was signed out.",
-    "sessionsHint": "Sessions are listed newest first; the one marked \u201cThis device\u201d is the browser you are using now.",
+    "sessionsHint": "Sessions are listed newest first; the one marked “This device” is the browser you are using now.",
     "currentSession": "This device",
     "sessionIssued": "Signed in {date}",
     "sessionLastSeen": "Last seen {date}",
@@ -1439,7 +1595,6 @@
       "acknowledge": "Acknowledge order"
     }
   },
-
   "supplier": {
     "leads": {
       "title": "Buying leads",
@@ -1499,7 +1654,6 @@
       "emptyBody": "When a buyer accepts your quotation, the order appears here."
     }
   },
-
   "content": {
     "news": "News",
     "tags": "Tags",
@@ -1507,7 +1661,6 @@
     "emptyTitle": "Nothing published yet",
     "emptyBody": "Articles will appear here once they are published."
   },
-
   "catalogue": {
     "listing": {
       "title": "Products",
@@ -1619,7 +1772,6 @@
       "pageAria": "Page {page}"
     }
   },
-
   "rfq": {
     "title": "Request For Quote",
     "lede": "Send one list to every supplier who covers the departments you need — they quote you directly. Free, always.",
@@ -1665,16 +1817,15 @@
       "companyRequired": "Tell us which company you are buying for.",
       "itemDescriptionRequired": "Describe the item you need.",
       "quantityInvalid": "Enter a quantity greater than zero."
-    }
+    },
+    "fromListNote": "Your materials list was carried in ({count} lines). Review quantities and details before sending — nothing has been submitted yet."
   },
-
   "errors": {
     "unexpected": "We could not complete this. Quote reference {reference} when you contact support.",
     "unexpectedNoReference": "We could not complete this action just now. Try again in a moment — if it keeps happening, note the time and let us know.",
     "network": "We could not reach Stockpile.lk. Check your connection and try again.",
     "timeout": "The request took too long. Try again — the action may still be running.",
     "validation": "Check the highlighted fields and try again.",
-
     "INVALID_CREDENTIALS": "That email and password combination is not correct. Check them and try again.",
     "ACCOUNT_LOCKED": "Too many failed attempts. This account is temporarily locked — try again in a few minutes.",
     "EMAIL_NOT_VERIFIED": "Confirm your email address before continuing. We can send the link again.",
@@ -1683,12 +1834,10 @@
     "REFRESH_REUSED": "That sign-in was already used elsewhere, so we ended both sessions for safety. Sign in again.",
     "INVALID_VERIFICATION_TOKEN": "That confirmation link is no longer valid.",
     "INVALID_RESET_TOKEN": "That reset link is no longer valid. Request a new one.",
-
     "INSUFFICIENT_CAPABILITY": "Your account does not include this action. Ask an administrator to grant it.",
     "NOT_ORGANIZATION_MEMBER": "You are not a member of this organization.",
     "RESOURCE_NOT_FOUND": "We could not find that. It may have been removed, or you may not have access to it.",
     "CROSS_TENANT_DENIED": "That record belongs to another organization.",
-
     "RATE_LIMITED": "You have made a lot of requests. Wait {seconds} seconds and try again.",
     "VALIDATION_FAILED": "Some details are not valid yet. Fix the highlighted fields.",
     "CONCURRENCY_CONFLICT": "Someone else changed this while you were editing. Reload to get the latest version.",

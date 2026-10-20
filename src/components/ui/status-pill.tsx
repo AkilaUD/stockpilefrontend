@@ -43,6 +43,41 @@ const TONES: Record<StatusTone, ClassValue> = {
   danger: ["border-danger/40 bg-danger/10", "before:bg-danger"],
 };
 
+const STAMP_TONES: Record<StatusTone, string> = {
+  neutral: "border-ink/50 text-ink",
+  info: "border-ink/60 text-ink",
+  success: "border-[#2e6b34]/60 text-[#2e6b34]",
+  warning: "border-[#8a6d00]/60 text-[#8a6d00]",
+  danger: "border-danger/60 text-danger",
+};
+
+/**
+ * Ledger stamp — a rotated, bordered state mark ("IN STOCK", "ACCEPTED").
+ * Text always carries the state; rotation is slight (-2deg) and removed
+ * under prefers-reduced-motion by the global motion reset.
+ */
+export function Stamp({
+  children,
+  tone = "neutral",
+  className,
+}: {
+  children: ReactNode;
+  tone?: StatusTone;
+  className?: ClassValue;
+}) {
+  return (
+    <span
+      className={cx(
+        "type-stamp inline-block -rotate-2 rounded-[2px] border-[1.5px] px-1.5 py-0.5 bg-surface-elevated/60",
+        STAMP_TONES[tone],
+        className,
+      )}
+    >
+      {children}
+    </span>
+  );
+}
+
 export function StatusPill({ children, tone = "neutral", className }: StatusPillProps) {
   return (
     <span

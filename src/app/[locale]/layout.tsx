@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Noto_Sans_Sinhala, Source_Sans_3, Source_Serif_4 } from "next/font/google";
+import { IBM_Plex_Mono, Noto_Sans_Sinhala, Source_Sans_3, Source_Serif_4 } from "next/font/google";
 import { notFound } from "next/navigation";
 import { connection } from "next/server";
 import { NextIntlClientProvider } from "next-intl";
@@ -35,6 +35,15 @@ const notoSinhala = Noto_Sans_Sinhala({
   variable: "--font-noto-sinhala",
   subsets: ["sinhala"],
   weight: ["400", "500", "600", "700"],
+  display: "swap",
+});
+
+/* Material Ledger data voice — real tabular mono for SKUs, entry numbers,
+   quantities, prices and folio references (DESIGN.md). */
+const plexMono = IBM_Plex_Mono({
+  variable: "--font-plex-mono",
+  subsets: ["latin"],
+  weight: ["400", "500", "600"],
   display: "swap",
 });
 
@@ -146,7 +155,7 @@ export default async function LocaleLayout({
   return (
     <html
       lang={locale}
-      className={`${sourceSerif.variable} ${sourceSans.variable} ${notoSinhala.variable}`}
+      className={`${sourceSerif.variable} ${sourceSans.variable} ${notoSinhala.variable} ${plexMono.variable}`}
     >
       {/* suppressHydrationWarning: browser extensions (e.g. Grammarly) inject
           attributes onto <body> post-render, which otherwise tripped the
