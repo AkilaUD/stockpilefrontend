@@ -123,9 +123,10 @@
     overflow-x: clip;
   }
 
-  /* Sticky masthead must never cover anchored headings. */
+  /* Sticky masthead must never cover anchored headings.
+     Public header ≈ utility + masthead + hub (~150–166px on md+). */
   [id] {
-    scroll-margin-top: 9.5rem;
+    scroll-margin-top: 11rem;
   }
 
   img,

@@ -84,7 +84,12 @@ export function ProductCard({ item, locale, priceOnRequest, minOrderLabel, stock
           ) : (
             <p className="type-body-sm font-medium text-ink-muted">{priceOnRequest}</p>
           )}
-          <StatusPill tone={STOCK_TONES[item.stockState] ?? "neutral"}>{stockLabel(item.stockState)}</StatusPill>
+          <StatusPill
+            tone={STOCK_TONES[item.stockState] ?? "neutral"}
+            className="min-w-0 max-w-full whitespace-normal text-left"
+          >
+            {stockLabel(item.stockState)}
+          </StatusPill>
         </div>
 
         {minOrderLabel && <p className="type-meta text-ink-muted">{minOrderLabel}</p>}

@@ -153,11 +153,11 @@ export default async function SupplierPage({
                     )}
                     {detail.phone && (
                       <div className="flex items-center justify-between gap-4">
-                        <dt className="flex items-center gap-2 type-body-sm text-ink-muted">
+                        <dt className="flex shrink-0 items-center gap-2 type-body-sm text-ink-muted">
                           <Phone className="size-4 shrink-0" aria-hidden />
                           {t("phone")}
                         </dt>
-                        <dd className="type-body text-ink">
+                        <dd className="min-w-0 break-all type-body text-right text-ink">
                           <a href={`tel:${detail.phone.replace(/\s+/g, "")}`} className="transition-colors duration-instant ease-standard hover:text-ink-accent">
                             {detail.phone}
                           </a>
@@ -166,11 +166,11 @@ export default async function SupplierPage({
                     )}
                     {detail.email && (
                       <div className="flex items-center justify-between gap-4">
-                        <dt className="flex items-center gap-2 type-body-sm text-ink-muted">
+                        <dt className="flex shrink-0 items-center gap-2 type-body-sm text-ink-muted">
                           <Mail className="size-4 shrink-0" aria-hidden />
                           {t("email")}
                         </dt>
-                        <dd className="type-body text-ink">
+                        <dd className="min-w-0 truncate type-body text-right text-ink" title={detail.email}>
                           <a href={`mailto:${detail.email}`} className="transition-colors duration-instant ease-standard hover:text-ink-accent">
                             {detail.email}
                           </a>
@@ -179,11 +179,11 @@ export default async function SupplierPage({
                     )}
                     {websiteHref && (
                       <div className="flex items-center justify-between gap-4">
-                        <dt className="flex items-center gap-2 type-body-sm text-ink-muted">
+                        <dt className="flex shrink-0 items-center gap-2 type-body-sm text-ink-muted">
                           <Globe className="size-4 shrink-0" aria-hidden />
                           {t("website")}
                         </dt>
-                        <dd className="type-body text-ink">
+                        <dd className="min-w-0 truncate type-body text-right text-ink" title={websiteHref}>
                           <a
                             href={websiteHref}
                             target="_blank"

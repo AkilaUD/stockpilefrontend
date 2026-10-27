@@ -39,7 +39,7 @@ export async function WorkspaceHeader() {
         </Link>
 
         <WorkspaceNav />
-        <div className="ml-auto flex items-center gap-2">
+        <div className="ml-auto flex shrink-0 items-center gap-2">
           <LocaleToggle />
           <AccountStatus />
         </div>

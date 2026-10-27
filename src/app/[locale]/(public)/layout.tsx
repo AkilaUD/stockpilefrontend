@@ -37,10 +37,14 @@ export default async function PublicLayout({
   return (
     <>
       <SiteHeader />
-      <main id="main-content" className="flex-1 pb-14 md:pb-0">
+      <main id="main-content" className="flex-1">
         {children}
       </main>
-      <SiteFooter />
+      {/* Dock clearance on the footer (not just main) so copyright/links sit
+          above the fixed mobile bar rather than under it. */}
+      <div className="pb-[calc(3.5rem+env(safe-area-inset-bottom))] md:pb-0">
+        <SiteFooter />
+      </div>
       {/* The dock's category tree is fetched inside the Suspense boundary so a
           slow/unavailable catalogue read never delays the page shell itself
           (the mobile menu is a client island and can wait for its own data). */}

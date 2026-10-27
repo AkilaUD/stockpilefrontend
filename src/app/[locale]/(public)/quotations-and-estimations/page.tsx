@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { setRequestLocale, getTranslations } from "next-intl/server";
 import { InfoPage } from "@/components/pages/info-page";
 import { ButtonLink, buttonClassName } from "@/components/ui/button";
+import { cx } from "@/lib/cx";
 
 /**
  * /quotations-and-estimations — "Quotations & Estimations" (reference
@@ -58,16 +59,16 @@ export default async function QuotationsAndEstimationsPage({
       </ol>
 
       <div className="mt-10 rounded-lg border border-line bg-surface-panel p-6 shadow-elev-sm md:p-8">
-        <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+        <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
           <ButtonLink
             href="/rfq"
             size="lg"
-            className="border-ink! bg-ink! text-ink-inverse! hover:bg-ink-soft!"
+            className="label-wrap border-ink! bg-ink! text-ink-inverse! hover:bg-ink-soft!"
           >
             {t("onlineCta")}
           </ButtonLink>
           <span className="type-label text-center text-ink-muted">{t("orLabel")}</span>
-          <a href={rfqMailto} className={buttonClassName({ variant: "secondary", size: "lg" })}>
+          <a href={rfqMailto} className={cx(buttonClassName({ variant: "secondary", size: "lg" }), "label-wrap")}>
             {t("uploadCta")}
           </a>
         </div>

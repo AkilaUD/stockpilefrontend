@@ -54,7 +54,8 @@ const BLOCK_CLASS =
 
 const BLOCK_WIDTH_CLASS = "department-block";
 
-/** The disclosure panel body. */
+/** The disclosure panel body. Below md: single column with inline children.
+ *  md+: side flyout (~540px dual column). */
 function DepartmentPanel({
   departments,
   active,
@@ -74,25 +75,15 @@ function DepartmentPanel({
 
   return (
     <div
-      className="flex max-h-[min(44rem,80vh)]"
+      className="flex max-h-[min(44rem,80vh)] w-[min(100vw-2rem,20rem)] md:w-auto"
       onMouseEnter={onPointerEnter}
       onMouseLeave={onPointerLeave}
     >
-      {/* Vertical department column. 270px is the reference's own `max-width`;
-          from 1200px the panel is the reference's measured 300px column.
-
-          `self-start` + its own `max-h` keep this column at ITS OWN height
-          instead of stretching to the flyout beside it. The panel's `max-h`
-          still clamps the pair, and the column still scrolls when its own
-          list is longer than the viewport allows.
-
-          Skin — reference `.vertical-menu .navigation` (measured 2026-10-14):
-          white, `padding:15px 0 14px`, `border-bottom:1px #d3d3d3`, and rows of
-          16px/400 black text, `padding:9px 15px` (38px row), hover
-          `#f6e71d`. */}
+      {/* Vertical department column. Full width of the constrained panel below
+          md; 270→300px from md / 1200px. */}
       <ul
         role="list"
-        className="w-[270px] min-[1200px]:w-[300px] shrink-0 self-start max-h-[min(44rem,80vh)] overflow-y-auto border-b border-[#d3d3d3] bg-surface-panel pt-[15px] pb-[14px] text-ink"
+        className="w-full shrink-0 self-start max-h-[min(44rem,80vh)] overflow-y-auto border-b border-[#d3d3d3] bg-surface-panel pt-[15px] pb-[14px] text-ink md:w-[270px] min-[1200px]:w-[300px]"
         onMouseLeave={(event) => {
           // The flyout is a sibling column of this list, not a descendant of
           // it, so crossing from a row into the flyout fires this handler. A
@@ -132,16 +123,29 @@ function DepartmentPanel({
                 <span className="min-w-0 flex-1 truncate">{department.name}</span>
                 {hasChildren && <ChevronRight className="size-3.5 shrink-0 opacity-60" aria-hidden="true" />}
               </Link>
+              {/* Mobile: inline children under the active row (no side flyout). */}
+              {isActive && hasChildren ? (
+                <ul className="border-b border-line bg-surface-recessed pb-1 md:hidden">
+                  {department.children.map((child) => (
+                    <li key={child.slug}>
+                      <Link
+                        href={categoryHref(child.slug)}
+                        className="block py-2 pr-[15px] pl-10 text-sm leading-5 font-normal text-ink capitalize transition-colors duration-instant ease-standard hover:bg-brand-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus"
+                      >
+                        {child.name}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              ) : null}
             </li>
           );
         })}
       </ul>
 
-      {/* Flyout. Reference `.level1` rows (measured 2026-10-14): a 270px column
-          of 16px/400 `capitalize` links, `padding:10px 15px`, one hairline
-          between rows. */}
+      {/* Desktop flyout. Reference `.level1` rows (measured 2026-10-14). */}
       {active && active.children.length > 0 && (
-        <div className="w-[16.875rem] shrink-0 overflow-y-auto border-l border-[#d3d3d3] bg-surface-panel py-[15px]">
+        <div className="hidden w-[16.875rem] shrink-0 overflow-y-auto border-l border-[#d3d3d3] bg-surface-panel py-[15px] md:block">
           <div className="border-b border-line px-[15px] pb-[10px]">
             <h2 className="text-base leading-5 font-medium text-ink">{active.name}</h2>
             <Link

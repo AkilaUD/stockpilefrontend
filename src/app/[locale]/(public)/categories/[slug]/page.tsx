@@ -95,7 +95,13 @@ export default async function CategoryPage({
       title={category.name}
       lede={t("products", { count: detail.totalProducts })}
       aside={
-        <ButtonLink href={`/products?category=${encodeURIComponent(slug)}`} variant="secondary" size="sm">
+        <ButtonLink
+          href={`/products?category=${encodeURIComponent(slug)}`}
+          variant="secondary"
+          size="sm"
+          className="label-wrap max-w-full text-left"
+          title={tProduct("viewAllInCategory", { category: category.name })}
+        >
           {tProduct("viewAllInCategory", { category: category.name })}
         </ButtonLink>
       }

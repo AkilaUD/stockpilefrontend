@@ -155,38 +155,38 @@ export default async function ProductDetailPage({
           <dl className="space-y-3 rounded-lg border border-line bg-surface-panel p-5 md:p-6">
             {detail.brand && (
               <div className="flex justify-between gap-4">
-                <dt className="type-body-sm text-ink-muted">{t("brand")}</dt>
-                <dd className="type-body-sm text-ink">{detail.brand.name}</dd>
+                <dt className="shrink-0 type-body-sm text-ink-muted">{t("brand")}</dt>
+                <dd className="min-w-0 break-words type-body-sm text-right text-ink">{detail.brand.name}</dd>
               </div>
             )}
             {detail.origin?.countryOfOrigin && (
               <div className="flex justify-between gap-4">
-                <dt className="type-body-sm text-ink-muted">{t("countryOfOrigin")}</dt>
-                <dd className="type-body-sm text-ink">{detail.origin.countryOfOrigin.name}</dd>
+                <dt className="shrink-0 type-body-sm text-ink-muted">{t("countryOfOrigin")}</dt>
+                <dd className="min-w-0 break-words type-body-sm text-right text-ink">{detail.origin.countryOfOrigin.name}</dd>
               </div>
             )}
             {detail.origin?.countryOfManufacture && (
               <div className="flex justify-between gap-4">
-                <dt className="type-body-sm text-ink-muted">{t("countryOfManufacture")}</dt>
-                <dd className="type-body-sm text-ink">{detail.origin.countryOfManufacture.name}</dd>
+                <dt className="shrink-0 type-body-sm text-ink-muted">{t("countryOfManufacture")}</dt>
+                <dd className="min-w-0 break-words type-body-sm text-right text-ink">{detail.origin.countryOfManufacture.name}</dd>
               </div>
             )}
             {detail.minOrderQuantity != null && (
               <div className="flex items-center justify-between gap-4">
-                <dt className="flex items-center gap-2 type-body-sm text-ink-muted">
+                <dt className="flex shrink-0 items-center gap-2 type-body-sm text-ink-muted">
                   <FileText className="size-4 shrink-0" aria-hidden />
                   {t("minOrderLabel")}
                 </dt>
-                <dd className="type-body-sm text-ink tabular">{formatQuantity(detail.minOrderQuantity, locale)}</dd>
+                <dd className="min-w-0 type-body-sm text-right text-ink tabular">{formatQuantity(detail.minOrderQuantity, locale)}</dd>
               </div>
             )}
             {detail.leadTimeDays != null && (
               <div className="flex items-center justify-between gap-4">
-                <dt className="flex items-center gap-2 type-body-sm text-ink-muted">
+                <dt className="flex shrink-0 items-center gap-2 type-body-sm text-ink-muted">
                   <Truck className="size-4 shrink-0" aria-hidden />
                   {t("leadTimeLabel")}
                 </dt>
-                <dd className="type-body-sm text-ink">{t("leadTime", { days: detail.leadTimeDays })}</dd>
+                <dd className="min-w-0 break-words type-body-sm text-right text-ink">{t("leadTime", { days: detail.leadTimeDays })}</dd>
               </div>
             )}
           </dl>
@@ -230,9 +230,9 @@ export default async function ProductDetailPage({
                 <h3 className="type-label font-semibold tracking-wide text-ink">{section.label}</h3>
                 <dl className="mt-4 divide-y divide-line">
                   {section.attributes.map((row) => (
-                    <div key={row.code} className="flex justify-between gap-6 py-2.5">
-                      <dt className="type-body-sm text-ink-muted">{row.label}</dt>
-                      <dd className="type-body-sm text-right text-ink tabular">
+                    <div key={row.code} className="flex justify-between gap-4 py-2.5 sm:gap-6">
+                      <dt className="min-w-0 shrink type-body-sm text-ink-muted">{row.label}</dt>
+                      <dd className="min-w-0 break-words type-body-sm text-right text-ink tabular">
                         {row.value}
                         {row.unit ? ` ${row.unit}` : ""}
                       </dd>

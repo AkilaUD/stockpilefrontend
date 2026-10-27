@@ -20,7 +20,7 @@ export function WorkspaceNav() {
   if (links.length === 0) return null;
 
   return (
-    <nav aria-label={t("workspace")} className="flex items-center gap-1 overflow-x-auto">
+    <nav aria-label={t("workspace")} className="flex min-w-0 flex-1 items-center gap-1 overflow-x-auto">
       {links.map((l) => {
         const active = pathname === l.href || pathname.startsWith(`${l.href}/`);
         return (

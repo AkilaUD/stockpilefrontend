@@ -26,11 +26,11 @@ export async function SiteHeader() {
     <header className="sticky top-0 z-header border-b border-line bg-surface-page shadow-elev-sm">
       {/* Utility — graphite strip, signal accents via links */}
       <div data-surface="dark" className="bg-surface-inverse text-ink">
-        <div className="shell-public flex h-9 items-center justify-between gap-4">
+        <div className="shell-public flex min-h-9 items-center justify-between gap-2 py-1.5 sm:gap-4">
           <p className="hidden type-meta tracking-wide text-ink-muted md:block">
             {nav("utilityTagline")}
           </p>
-          <div className="flex items-center gap-x-4 md:ml-auto">
+          <div className="flex flex-wrap items-center justify-end gap-x-2 gap-y-1 sm:gap-x-3 md:ml-auto">
             {UTILITY_LINKS.map((link) => (
               <Link
                 key={link.href}
@@ -83,27 +83,36 @@ export async function SiteHeader() {
         </div>
       </div>
 
-      {/* Hub + departments — shared 50px row so SBD + RFQ ends match hub links */}
+      {/* Hub + departments — shared 50px row; RFQ only from md (with hub) so SBD can be full-width alone below */}
       <div className="border-t border-line bg-surface-page">
         <div className="shell-public flex min-h-[50px] items-stretch">
           <LazyDepartmentMenu tree={tree} />
           <nav
             aria-label={a11y("mainNavigation")}
-            className="hidden flex-1 items-stretch gap-1 md:flex"
+            className="hidden min-w-0 flex-1 items-stretch gap-1 md:flex"
           >
-            {HUB_LINKS.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className="flex items-center px-3 type-body-sm font-semibold text-ink transition-colors duration-instant ease-standard hover:bg-surface-recessed hover:text-ink focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-focus"
-              >
-                {nav(link.labelKey)}
-              </Link>
-            ))}
+            {HUB_LINKS.map((link) => {
+              // Longer hub labels (How It Works / News) wait for lg to avoid
+              // squeezing the 270px department column + RFQ at tablet widths.
+              const deferToLg = link.labelKey === "howItWorks" || link.labelKey === "news";
+              return (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className={
+                    deferToLg
+                      ? "hidden items-center px-3 type-body-sm font-semibold text-ink transition-colors duration-instant ease-standard hover:bg-surface-recessed hover:text-ink focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-focus lg:flex"
+                      : "flex items-center px-3 type-body-sm font-semibold text-ink transition-colors duration-instant ease-standard hover:bg-surface-recessed hover:text-ink focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-focus"
+                  }
+                >
+                  {nav(link.labelKey)}
+                </Link>
+              );
+            })}
           </nav>
           <Link
             href="/rfq"
-            className="hidden h-[50px] items-center bg-brand-primary px-4 type-body-sm font-semibold text-ink-on-signal transition-colors duration-instant ease-standard hover:bg-brand-primary-hover focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-focus sm:flex"
+            className="hidden h-[50px] shrink-0 items-center bg-brand-primary px-4 type-body-sm font-semibold text-ink-on-signal transition-colors duration-instant ease-standard hover:bg-brand-primary-hover focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-focus md:flex"
           >
             {nav("requestForQuote")}
           </Link>

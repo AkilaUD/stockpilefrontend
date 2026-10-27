@@ -479,7 +479,7 @@ export function RfqForm({
                 )}
               </FormField>
 
-              <div className="grid gap-4 sm:grid-cols-3">
+              <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
                 <FormField
                   id={`${baseId}-item-${item.id}-quantity`}
                   label={tLabels("quantity")}

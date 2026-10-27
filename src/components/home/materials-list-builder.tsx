@@ -82,7 +82,7 @@ export function MaterialsListBuilder({
     .join(" · ");
 
   return (
-    <section id="materials-list" className="scroll-mt-24">
+    <section id="materials-list">
       <PanelSheet
         title={t("builder.title")}
         meta={t("builder.meta", { count: lines.length })}
@@ -99,8 +99,11 @@ export function MaterialsListBuilder({
             />
             <p className="type-meta">{t("builder.subtotalNote")}</p>
             <div className="flex flex-wrap items-center gap-3">
-              <Link href="/rfq" className={buttonClassName({ variant: "primary", size: "lg" })}>
-                <Send className="size-4" aria-hidden />
+              <Link
+                href="/rfq"
+                className={cx(buttonClassName({ variant: "primary", size: "lg" }), "label-wrap")}
+              >
+                <Send className="size-4 shrink-0" aria-hidden />
                 {t("builder.sendCta")}
               </Link>
               {lines.length > 0 ? (
@@ -280,7 +283,7 @@ function MaterialsLineRow({
           {lineTotal ? ` · ${lineTotal}` : ""}
         </p>
       </div>
-      <div className="col-start-2 mt-2 flex gap-2 lg:col-start-auto lg:mt-0 lg:contents">
+      <div className="col-start-2 mt-2 grid grid-cols-2 gap-2 lg:col-start-auto lg:mt-0 lg:contents">
         <input
           aria-label={t("builder.colQty")}
           type="number"
@@ -289,13 +292,13 @@ function MaterialsLineRow({
           step="any"
           value={line.quantity}
           onChange={(event) => update({ quantity: event.target.value })}
-          className={cx(inputClass, "w-24 lg:w-full")}
+          className={cx(inputClass, "min-w-0 w-full")}
         />
         <select
           aria-label={t("builder.colUnit")}
           value={line.unitOfMeasureCode}
           onChange={(event) => update({ unitOfMeasureCode: event.target.value })}
-          className={cx(inputClass, "w-32 lg:w-full")}
+          className={cx(inputClass, "min-w-0 w-full")}
         >
           <option value="">—</option>
           {units.map((unit) => (
@@ -308,7 +311,7 @@ function MaterialsLineRow({
           aria-label={t("builder.colCategory")}
           value={line.categorySlug}
           onChange={(event) => update({ categorySlug: event.target.value })}
-          className={cx(inputClass, "w-36 lg:w-full")}
+          className={cx(inputClass, "col-span-2 min-w-0 w-full lg:col-span-1")}
         >
           <option value="">—</option>
           {departments.map((department) => (

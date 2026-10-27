@@ -27,7 +27,7 @@ export async function NewestProducts({ locale, items }: { locale: string; items:
           </Link>
         }
       />
-      <ul className="mt-7 grid gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
+      <ul className="home-product-grid mt-7 gap-3">
         {items.slice(0, 10).map((item) => (
           <li key={item.publicId}>
             <ProductCard
