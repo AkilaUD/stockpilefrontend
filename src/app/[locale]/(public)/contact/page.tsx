@@ -46,7 +46,7 @@ export default async function ContactPage({ params }: { params: Promise<{ locale
       title: t("quotesTitle"),
       body: (
         <a
-          href={`mailto:${t("quotesEmail")}?subject=RFQ%20Request`}
+          href={`mailto:${t("quotesEmail")}?subject=${encodeURIComponent("RFQ Request")}`}
           className="type-body font-semibold text-ink-accent transition-colors duration-instant ease-standard hover:text-ink focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus"
         >
           {t("quotesEmail")}
@@ -81,7 +81,7 @@ export default async function ContactPage({ params }: { params: Promise<{ locale
     <InfoPage breadcrumb={t("title")} title={t("title")}>
       <div className="grid gap-4 md:grid-cols-2">
         {blocks.map((block) => (
-          <div key={block.title} className="rounded-md border border-line bg-surface-panel p-6">
+          <div key={block.title} className="rounded-lg border border-line bg-surface-panel p-6 shadow-elev-sm">
             <h2 className="font-display text-lg font-bold text-ink">{block.title}</h2>
             <div className="mt-2">{block.body}</div>
           </div>

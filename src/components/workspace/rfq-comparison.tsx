@@ -84,8 +84,8 @@ export function RfqComparisonView({ rfqId }: { rfqId: string }) {
                 key={quote.quoteId}
                 className={
                   isLowest
-                    ? "rounded-md border-2 border-brand-secondary bg-surface-panel p-4"
-                    : "rounded-md border border-line bg-surface-panel p-4"
+                    ? "rounded-lg border-2 border-brand-secondary bg-surface-panel p-4 shadow-elev-sm"
+                    : "rounded-lg border border-line bg-surface-panel p-4"
                 }
               >
                 <div className="flex flex-wrap items-start justify-between gap-2">

@@ -3,10 +3,10 @@ import {
   computeSubtotal,
   parseLines,
   toRfqItems,
-  type LedgerLine,
+  type MaterialsLine,
 } from "./materials-list";
 
-function line(partial: Partial<LedgerLine>): LedgerLine {
+function line(partial: Partial<MaterialsLine>): MaterialsLine {
   return {
     key: "k1",
     description: "Cement 50kg",

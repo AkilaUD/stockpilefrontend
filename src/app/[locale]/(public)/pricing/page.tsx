@@ -52,7 +52,7 @@ export default async function PricingPage({ params }: { params: Promise<{ locale
       <div className="measure-editorial space-y-3">
         <p className="type-body text-ink-muted">{t("sublede")}</p>
         {useLive && (
-          <p className="inline-flex items-start gap-2 rounded-sm border border-line bg-surface-recessed/50 px-3 py-2 type-body-sm text-ink-muted">
+          <p className="inline-flex items-start gap-2 rounded-md border border-line bg-surface-recessed/50 px-3 py-2 type-body-sm text-ink-muted">
             <FileText className="mt-0.5 size-4 shrink-0 text-ink-muted" aria-hidden />
             {t("liveHint")}
           </p>

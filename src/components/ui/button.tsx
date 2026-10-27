@@ -31,7 +31,7 @@ export interface ButtonStyleProps {
 const BASE: ClassValue = [
   "relative inline-flex items-center justify-center gap-2",
   "font-body font-medium whitespace-nowrap",
-  "rounded-sm select-none",
+  "rounded-md select-none",
   "transition-colors duration-instant ease-standard",
   /* §10's ring, verbatim: 2px `--color-focus` at 2px offset. The explicit
    * `outline-focus` is load-bearing — an unset outline colour inherits
@@ -56,7 +56,7 @@ const VARIANTS: Record<ButtonVariant, ClassValue> = {
    * signal block read as a printed button rather than a highlight.
    */
   primary: [
-    "border border-ink bg-brand-primary text-ink-on-signal",
+    "bg-brand-primary text-ink-on-signal shadow-elev-sm",
     "hover:bg-brand-primary-hover",
   ],
 

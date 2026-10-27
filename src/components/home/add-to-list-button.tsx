@@ -9,9 +9,8 @@ import { materialsListStore } from "@/lib/procurement/materials-list";
 import { cx } from "@/lib/cx";
 
 /**
- * The one action that turns a catalogue entry into a materials-list line.
- * Shared by the cover sheet and the current register so "add" means the same
- * thing everywhere on the page.
+ * Turns a catalogue product into a materials-list line.
+ * Tap feedback via CSS transform (layout-safe, no Motion runtime).
  */
 export function AddToListButton({ product, compact = false }: { product: ProductListItem; compact?: boolean }) {
   const t = useTranslations("home.ledger");
@@ -27,7 +26,7 @@ export function AddToListButton({ product, compact = false }: { product: Product
       <Link
         href="#materials-list"
         className={cx(
-          "type-stamp inline-flex items-center gap-1 border border-line-strong px-2 py-1 text-ink",
+          "type-meta inline-flex items-center gap-1 rounded-md border border-line-strong px-2 py-1 font-semibold text-ink",
           "transition-colors hover:bg-surface-recessed focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus",
         )}
       >
@@ -43,9 +42,10 @@ export function AddToListButton({ product, compact = false }: { product: Product
       onClick={() => materialsListStore.addProduct(product)}
       aria-label={t("addNamed", { name: product.name })}
       className={cx(
-        "inline-flex items-center gap-1.5 border border-ink bg-surface-elevated px-2.5 py-1.5",
-        "type-label text-ink transition-colors hover:bg-brand-primary",
+        "inline-flex items-center gap-1.5 rounded-md bg-brand-primary px-2.5 py-1.5 shadow-elev-sm",
+        "type-meta font-semibold text-ink-on-signal transition hover:brightness-95 active:scale-95",
         "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus",
+        "motion-reduce:active:scale-100",
         compact && "px-2 py-1",
       )}
     >

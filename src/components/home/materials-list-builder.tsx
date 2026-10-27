@@ -9,9 +9,9 @@ import { formatMoney } from "@/lib/money";
 import {
   computeSubtotal,
   materialsListStore,
-  type LedgerLine,
+  type MaterialsLine,
 } from "@/lib/procurement/materials-list";
-import { LedgerSheet, LedgerTotals } from "@/components/ui/desk-register";
+import { PanelSheet, PanelTotals } from "@/components/ui/desk-register";
 import { buttonClassName } from "@/components/ui/button";
 import { cx } from "@/lib/cx";
 
@@ -21,11 +21,11 @@ export interface BuilderOption {
 }
 
 const inputClass =
-  "w-full border border-line-strong bg-surface-elevated px-2 py-1.5 type-body-sm text-ink outline-none focus:border-ink";
+  "w-full rounded-md border border-line-strong bg-surface-elevated px-2.5 py-2 type-body-sm text-ink outline-none transition focus:border-ink focus:ring-2 focus:ring-focus/30";
 
 /**
- * The visitor's working page of the ledger. Lines come from the cover sheet,
- * the register, live search, or a blank line; the list persists on this
+ * The visitor's materials list. Lines come from the catalogue,
+ * live search, or a blank line; the list persists on this
  * device and carries into the RFQ form. Nothing here claims an RFQ exists —
  * that only becomes true after the authenticated submit on /rfq.
  */
@@ -83,13 +83,12 @@ export function MaterialsListBuilder({
 
   return (
     <section id="materials-list" className="scroll-mt-24">
-      <LedgerSheet
-        folio={t("builder.folio")}
+      <PanelSheet
         title={t("builder.title")}
         meta={t("builder.meta", { count: lines.length })}
         footer={
           <div className="flex flex-col gap-3">
-            <LedgerTotals
+            <PanelTotals
               label={t("builder.subtotal")}
               note={subtotalNote || undefined}
               value={
@@ -120,7 +119,7 @@ export function MaterialsListBuilder({
       >
         {/* Live search → add */}
         <div className="border-b border-line px-4 py-3 sm:px-5">
-          <label htmlFor="ledger-search" className="type-folio text-ink-muted">
+          <label htmlFor="ledger-search" className="type-label text-ink-muted">
             {t("builder.searchLabel")}
           </label>
           <div className="relative mt-2">
@@ -138,7 +137,7 @@ export function MaterialsListBuilder({
               }}
               placeholder={t("builder.searchPlaceholder")}
               autoComplete="off"
-              className="h-11 w-full border border-line-strong bg-surface-elevated pr-3 pl-10 type-body text-ink outline-none placeholder:text-ink-muted focus:border-ink"
+              className="h-11 w-full rounded-md border border-line-strong bg-surface-elevated pr-3 pl-10 type-body text-ink outline-none placeholder:text-ink-muted transition focus:border-ink focus:ring-2 focus:ring-focus/30"
             />
           </div>
           {searching ? <p className="type-meta mt-2">{t("builder.searching")}</p> : null}
@@ -146,14 +145,14 @@ export function MaterialsListBuilder({
             results.length === 0 ? (
               <p className="type-meta mt-2">{t("builder.noResults")}</p>
             ) : (
-              <ul className="mt-2 divide-y divide-line border border-line">
+              <ul className="mt-2 divide-y divide-line overflow-hidden rounded-md border border-line">
                 {results.map((product) => (
                   <li key={product.publicId} className="flex flex-wrap items-center gap-x-3 gap-y-1 px-3 py-2">
                     <span className="type-body-sm min-w-0 flex-1 font-semibold text-ink">{product.name}</span>
-                    <span className="type-entry-no text-ink-muted">
+                    <span className="type-data text-ink-muted">
                       {product.sku} · {product.supplier.name}
                     </span>
-                    <span className="type-ledger-data text-ink">
+                    <span className="type-data text-ink">
                       {product.price?.state === "Public" && typeof product.price.amount === "number"
                         ? formatMoney({ amount: product.price.amount, currency: product.price.currency, locale })
                         : tProduct("priceOnRequest")}
@@ -166,7 +165,7 @@ export function MaterialsListBuilder({
                         setResults(null);
                       }}
                       aria-label={t("addNamed", { name: product.name })}
-                      className="inline-flex items-center gap-1 border border-ink px-2 py-1 type-label text-ink transition-colors hover:bg-brand-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus"
+                      className="inline-flex items-center gap-1 rounded-md bg-brand-primary px-2.5 py-1.5 type-meta font-semibold text-ink-on-signal transition hover:brightness-95 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus"
                     >
                       <Plus className="size-3.5" aria-hidden />
                       {t("add")}
@@ -193,7 +192,7 @@ export function MaterialsListBuilder({
           </div>
         ) : (
           <>
-            <div className="type-folio hidden grid-cols-[3.25rem_minmax(0,1fr)_7rem_9rem_9rem_auto] gap-x-3 border-b border-line px-5 py-2 text-ink-muted lg:grid">
+            <div className="type-label hidden grid-cols-[3.25rem_minmax(0,1fr)_7rem_9rem_9rem_auto] gap-x-3 border-b border-line px-5 py-2 text-ink-muted lg:grid">
               <span>{t("builder.colEntry")}</span>
               <span>{t("builder.colMaterial")}</span>
               <span>{t("builder.colQty")}</span>
@@ -203,7 +202,7 @@ export function MaterialsListBuilder({
             </div>
             <ul>
               {lines.map((line, index) => (
-                <LedgerLineRow
+                <MaterialsLineRow
                   key={line.key}
                   line={line}
                   index={index}
@@ -225,20 +224,20 @@ export function MaterialsListBuilder({
             </div>
           </>
         )}
-      </LedgerSheet>
+      </PanelSheet>
       <p className="type-meta mt-3">{t("builder.honestyNote")}</p>
     </section>
   );
 }
 
-function LedgerLineRow({
+function MaterialsLineRow({
   line,
   index,
   departments,
   units,
   locale,
 }: {
-  line: LedgerLine;
+  line: MaterialsLine;
   index: number;
   departments: BuilderOption[];
   units: BuilderOption[];
@@ -246,7 +245,7 @@ function LedgerLineRow({
 }) {
   const t = useTranslations("home.ledger");
   const tActions = useTranslations("common.actions");
-  const update = (patch: Partial<LedgerLine>) => materialsListStore.update(line.key, patch);
+  const update = (patch: Partial<MaterialsLine>) => materialsListStore.update(line.key, patch);
   const lineTotal =
     line.priceState === "Public" &&
     typeof line.priceAmount === "number" &&
@@ -259,7 +258,7 @@ function LedgerLineRow({
       data-ledger-line
       className="grid grid-cols-[2.75rem_minmax(0,1fr)] gap-x-3 border-b border-line px-4 py-3 last:border-b-0 sm:px-5 lg:grid-cols-[3.25rem_minmax(0,1fr)_7rem_9rem_9rem_auto] lg:items-start"
     >
-      <span className="type-entry-no pt-2 text-ink-muted">{String(index + 1).padStart(3, "0")}</span>
+      <span className="type-data pt-2 text-ink-muted">{String(index + 1).padStart(3, "0")}</span>
       <div className="flex min-w-0 flex-col gap-1.5">
         <input
           aria-label={t("builder.colMaterial")}
@@ -275,7 +274,7 @@ function LedgerLineRow({
           placeholder={t("builder.specificationPlaceholder")}
           className={inputClass}
         />
-        <p className="type-ledger-data break-words text-ink-muted">
+        <p className="type-data break-words text-ink-muted">
           {line.sku ? `${line.sku} · ` : ""}
           {line.supplierName ?? ""}
           {lineTotal ? ` · ${lineTotal}` : ""}
@@ -325,7 +324,7 @@ function LedgerLineRow({
           onClick={() => materialsListStore.duplicate(line.key)}
           aria-label={t("builder.duplicate")}
           title={t("builder.duplicate")}
-          className="border border-line-strong p-1.5 text-ink transition-colors hover:bg-surface-recessed focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus"
+          className="rounded-md border border-line-strong p-1.5 text-ink transition-colors hover:bg-surface-recessed focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus"
         >
           <Copy className="size-4" aria-hidden />
         </button>
@@ -334,7 +333,7 @@ function LedgerLineRow({
           onClick={() => materialsListStore.remove(line.key)}
           aria-label={`${tActions("remove")} — ${line.description || index + 1}`}
           title={tActions("remove")}
-          className="border border-line-strong p-1.5 text-ink transition-colors hover:border-danger hover:text-danger focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus"
+          className="rounded-md border border-line-strong p-1.5 text-ink transition-colors hover:border-danger hover:text-danger focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus"
         >
           <X className="size-4" aria-hidden />
         </button>

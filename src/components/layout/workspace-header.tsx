@@ -25,8 +25,8 @@ import { WorkspaceNav } from "./workspace-nav";
  */
 export async function WorkspaceHeader() {
   return (
-    <header className="sticky top-0 z-header border-b border-line bg-surface-panel">
-      <div className="shell-workspace flex h-12 items-center gap-3">
+    <header className="sticky top-0 z-header border-b-2 border-b-brand-primary bg-surface-panel shadow-elev-sm">
+      <div className="shell-workspace flex h-14 items-center gap-3">
         <Link href="/workspace" className="flex shrink-0 items-center">
           <Image
             src="/brand/stockpile-logo-ink.png"

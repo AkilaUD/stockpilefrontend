@@ -42,11 +42,11 @@
   --palette-ink-soft: #2a2a2a;
   --palette-signal: #f0d60a;
   --palette-signal-soft: #e6b800;
-  --palette-neutral: #f7f5f0;
+  --palette-neutral: #f4f4f1;
 
   /* derived neutrals */
   --palette-neutral-elevated: #ffffff;
-  --palette-neutral-recessed: #ebe7df;
+  --palette-neutral-recessed: #e9e9e6;
   --palette-neutral-muted: #5c5c5c;      /* AA muted ink on paper */
   --palette-neutral-faint: #9a9590;      /* decorative tier only - never copy */
   --palette-ink-deep: #1c1c1c;           /* recessed well inside dark grounds */
@@ -64,7 +64,7 @@
   /* surfaces — §4.1. The neutral field is the page; elevation is white; the
      dark register is the two structural inks. */
   --surface-page: var(--palette-neutral);
-  --surface-panel: var(--palette-neutral);
+  --surface-panel: var(--palette-neutral-elevated);
   --surface-elevated: var(--palette-neutral-elevated);
   --surface-recessed: var(--palette-neutral-recessed);
   --surface-inverse: var(--palette-ink);
@@ -93,8 +93,8 @@
   --ink-oxide: var(--palette-ink);
 
   /* lines — brief §89: thin #e5e7eb lines on #ffffff. */
-  --line: rgb(229 231 235 / 0.8);          /* quiet hairline */
-  --line-strong: rgb(209 213 219 / 0.9);   /* input borders, structural rules */
+  --line: rgb(20 20 20 / 0.1);             /* quiet hairline */
+  --line-strong: rgb(20 20 20 / 0.22);     /* input borders, structural rules */
   --line-interactive: var(--palette-ink);
 
   /* brand — §14. The wordmark's own yellow (#F4D20F) and the UI signal
@@ -135,9 +135,9 @@
      Aliased into Tailwind's --radius-* namespace in globals.css.
      ======================================================================== */
   --corner-none: 0;
-  --corner-sm: 2px; /* inputs, chips — hard industrial edge */
-  --corner-md: 4px; /* buttons, panels */
-  --corner-lg: 8px; /* dialogs only */
+  --corner-sm: 4px; /* inputs, chips */
+  --corner-md: 8px; /* buttons, panels, cards */
+  --corner-lg: 12px; /* dialogs, hero panels */
   --corner-round: 999px; /* ONLY avatars, status dots, text-bearing status pills */
 
   /* ===========================================================================
@@ -190,21 +190,7 @@
   --bp-2xl: 1440px;
   --bp-3xl: 1600px;
 
-  /* ===========================================================================
-     MATERIAL LEDGER — ruled order-book surfaces (homepage + procurement).
-     Rules are structural ink, not decoration; stamps carry state with text.
-     ======================================================================== */
-  --ledger-rule: var(--line);
-  --ledger-rule-strong: var(--line-strong);
-  --ledger-folio: var(--surface-elevated);     /* opened sheet ground */
-  --ledger-margin: var(--palette-signal);      /* signal margin annotation */
-  --ledger-tab: var(--surface-recessed);       /* supplier marginal tab */
-  --ledger-stamp-ink: var(--palette-ink);
-  --ledger-stamp-success: #2e6b34;             /* stock/verified stamp green */
-  --ledger-stamp-warning: #8a6d00;
-  --ledger-stamp-danger: var(--palette-danger);
-  --layout-department-rail: 300px; /* homepage side-nav rail — hero must reserve it */
-  --layout-home-max: 90rem; /* 1440px opened-book measure */
+  --layout-home-max: 90rem; /* 1440px home measure */
 
   /* z-index — single scale. No ad-hoc values in components. */
   --z-base: 0;

@@ -4,6 +4,7 @@ import type { ProductListItem } from "@/lib/api/catalogue";
 import { imageUrl } from "@/lib/media-url";
 import { categoryHref } from "@/lib/navigation/navigation";
 import { StatusPill, type StatusTone } from "@/components/ui/status-pill";
+import { ImageWithFallback } from "@/components/ui/image-with-fallback";
 import { cx, type ClassValue } from "@/lib/cx";
 import type { ReactNode } from "react";
 
@@ -35,25 +36,12 @@ export function ProductCard({ item, locale, priceOnRequest, minOrderLabel, stock
   return (
     <article
       className={cx(
-        "group flex h-full flex-col overflow-hidden rounded-sm border border-line bg-surface-panel transition-colors duration-instant ease-standard hover:border-line-strong",
+        "group flex h-full flex-col overflow-hidden rounded-lg border border-line bg-surface-panel transition duration-instant ease-standard hover:border-line-strong hover:shadow-elev-md",
         className,
       )}
     >
       <Link href={`/products/${item.slug}`} className="block focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus" aria-label={item.name}>
-        {src ? (
-          <div className="relative aspect-square overflow-hidden border-b border-line bg-surface-recessed">
-            {/* eslint-disable-next-line @next/next/no-img-element -- same-origin rewrite */}
-            <img
-              src={src}
-              alt={item.image?.alt ?? item.name}
-              loading="lazy"
-              decoding="async"
-              className="absolute inset-0 h-full w-full object-cover transition-transform duration-instant ease-standard group-hover:scale-[1.02]"
-            />
-          </div>
-        ) : (
-          <div className="aspect-square border-b border-line bg-surface-recessed" aria-hidden="true" />
-        )}
+        <ImageWithFallback src={src} alt={item.image?.alt ?? item.name} className="aspect-square border-b border-line" imgClassName="transition-transform duration-base ease-standard group-hover:scale-[1.03]" />
       </Link>
 
       <div className="flex flex-1 flex-col gap-2 p-3 md:p-3.5">

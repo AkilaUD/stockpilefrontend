@@ -62,12 +62,12 @@ export async function SiteFooter() {
   const year = new Date().getUTCFullYear();
 
   return (
-    <footer className="mt-auto border-t border-line bg-surface-elevated text-ink">
+    <footer data-surface="dark" className="mt-auto border-t-4 border-t-brand-primary bg-surface-inverse text-ink">
       <div className="shell-public pt-14 pb-10">
         <div className="grid gap-10 md:grid-cols-12 md:gap-8">
           <div className="md:col-span-4">
             <Image
-              src="/brand/stockpile-logo-ink.png"
+              src="/brand/stockpile-logo-yellow.png"
               alt="Stockpile.lk"
               width={300}
               height={73}

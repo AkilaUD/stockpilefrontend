@@ -256,7 +256,7 @@ export function RfqForm({
   if (submitted) {
     return (
       <div className="flex flex-col gap-6">
-        <div role="status" className="rounded-md border border-line bg-surface-recessed/50 p-6">
+        <div role="status" className="rounded-lg border border-line bg-surface-recessed/50 p-6">
           <h2 className="flex items-center gap-2 font-display text-xl font-bold text-ink">
             <CheckCircle2 className="size-6 shrink-0 text-success" aria-hidden />
             {t("successTitle")}
@@ -290,7 +290,7 @@ export function RfqForm({
     <div className="flex flex-col gap-8">
       <form noValidate aria-busy={submitting} onSubmit={onSubmit} className="flex flex-col gap-6">
         {banner && (
-          <p role="alert" className="type-meta rounded-sm border border-danger/30 bg-danger/5 p-3 text-danger">
+          <p role="alert" className="type-meta rounded-md border border-danger/30 bg-danger/5 p-3 text-danger">
             {banner}
           </p>
         )}
@@ -623,7 +623,7 @@ function RecentRequests({ version }: { version: number }) {
     return (
       <section className="flex flex-col gap-3 border-t border-line pt-6">
         <h2 className="font-display text-lg font-bold text-ink">{t("recentTitle")}</h2>
-        <p role="alert" className="type-meta rounded-sm border border-danger/30 bg-danger/5 p-3 text-danger">
+        <p role="alert" className="type-meta rounded-md border border-danger/30 bg-danger/5 p-3 text-danger">
           {loadError}
         </p>
       </section>

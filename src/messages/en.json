@@ -161,26 +161,34 @@
       "description": "Find construction material, compare quotations and order from verified Sri Lankan suppliers on one platform."
     },
     "hero": {
-      "headline": "Send one RFQ. Get quotes from multiple suppliers.",
-      "lede": "Stop calling five suppliers for one price. Build your materials list once — Sri Lankan suppliers quote against it, you compare price and lead time side by side, then order.",
+      "headline": "One RFQ. Many quotes. One order.",
+      "lede": "Build your materials list once. Sri Lankan suppliers compete on price and lead time.",
       "bannerCta": "Learn how Stockpile works",
       "bannerAlt": "Construction materials warehouse with steel, cement and timber",
       "rfqCta": "Request a quote",
       "supplierCta": "Join as a supplier",
       "browseCta": "Browse materials",
-      "proofLine": "Free for buyers · One request, many quotes · Order only when a quote fits",
-      "flowLabel": "1 RFQ → multiple quotes → 1 order"
+      "proofLine": "Free for buyers · Order only when a quote fits",
+      "flowLabel": "Construction procurement"
+    },
+    "ribbon": {
+      "title": "How it works",
+      "steps": {
+        "0": { "label": "List", "title": "Build your materials list" },
+        "1": { "label": "RFQ", "title": "Send one request" },
+        "2": { "label": "Order", "title": "Compare and buy" }
+      }
     },
     "departments": {
-      "title": "Every material on the job, one atlas",
-      "lede": "Browse the live departments contractors actually search — from steel and cement to finishing and services.",
+      "title": "Shop by department",
+      "lede": "Live catalogue — steel to finishing.",
       "imageAlt": "Construction material samples laid out like an atlas",
       "subcategories": "{count} subcategories",
       "browse": "Browse"
     },
     "benefits": {
-      "title": "Why buyers build their list on Stockpile",
-      "lede": "The phone-around is replaced by one desk: one request out, competing quotes back, a clear comparison, and an order when you are ready.",
+      "title": "From list to order",
+      "lede": "One request out. Competing quotes back. Compare, then order.",
       "imageAlt": "Contractor reviewing quotations on site",
       "cta": "Start your RFQ",
       "items": [
@@ -255,40 +263,40 @@
       ]
     },
     "finalCta": {
-      "title": "Your next materials list could be quoted by morning tea.",
-      "lede": "Build the list once, let suppliers compete for it, and order with the comparison in front of you.",
+      "title": "Ready to get quotes?",
+      "lede": "Build the list once. Let suppliers compete.",
       "rfqCta": "Request a quote",
       "browseCta": "Browse materials"
     },
     "workflow": {
-      "title": "From entered line to open order",
-      "lede": "The same path your workspace and supplier desk already run — no invented steps.",
+      "title": "The procurement path",
+      "lede": "The same flow your workspace already runs.",
       "cta": "Start an RFQ",
       "steps": [
         {
           "label": "Search",
           "title": "Find materials",
-          "body": "Browse departments or search the live catalogue of products and suppliers."
+          "body": "Browse or search the live catalogue."
         },
         {
           "label": "RFQ",
           "title": "Send one request",
-          "body": "Submit quantities and notes once. Stockpile routes the request to matching suppliers."
+          "body": "Quantities and notes, submitted once."
         },
         {
           "label": "Quotes",
           "title": "Collect replies",
-          "body": "Suppliers respond in your workspace with prices and lead times."
+          "body": "Prices and lead times in your workspace."
         },
         {
           "label": "Compare",
           "title": "Line up offers",
-          "body": "Compare quotes side by side, then accept the offer that fits the job."
+          "body": "Side by side — then accept."
         },
         {
           "label": "Order",
           "title": "Confirm the buy",
-          "body": "Accepted quotes become orders you and the supplier can track."
+          "body": "Accepted quotes become trackable orders."
         }
       ],
       "states": [
@@ -351,8 +359,8 @@
       "folio": "Folio No. 001 — Materials Ledger",
       "folioOpen": "Open — buyer copy",
       "headline": "Send one RFQ. Get quotes from multiple suppliers.",
-      "lede": "Stockpile is Sri Lanka's construction-materials order book. Build your materials list once, send it as a single request for quotation, and compare the returns side by side before anything becomes an order.",
-      "searchHint": "Search the live catalogue — or take entries straight from the sheet beside this page.",
+      "lede": "Build your materials list once, send it as a single request for quotation, and compare the returns side by side before anything becomes an order.",
+      "searchHint": "Search the live catalogue — or add items straight from the newest materials on this page.",
       "startList": "Start your materials list",
       "browse": "Browse all materials",
       "folioNote": "Counts are read live from the catalogue. Stock is always a state, never a quantity.",
@@ -403,7 +411,7 @@
     },
     "register": {
       "folio": "Sheet C",
-      "title": "Current register — newest entries",
+      "title": "Newest materials",
       "viewAll": "View all materials",
       "moq": "MOQ {count}",
       "lead": "{count}-day lead"
@@ -417,7 +425,7 @@
       "locationPending": "Location on profile",
       "products": "{count} products",
       "tabFolio": "Supplier entry",
-      "tabTitle": "Sell through the order book",
+      "tabTitle": "Sell through Stockpile",
       "tabBody": "Open a supplier account to receive matched RFQs, return quotations, and trade under a verified profile.",
       "tabCta": "Open a supplier account",
       "pricingCta": "See supplier plans",
@@ -1564,7 +1572,7 @@
     "adminModulesBody": "Each module opens only with its matching permission. Modules without a built surface are marked planned — no invented tooling.",
     "adminModulePlanned": "Planned",
     "adminModules": {
-      "security": { "title": "Security & audit", "body": "Security events, audit log and account lockout release.", "permissions": "audit.read · security.read · admin.users.unlock" },
+      "security": { "title": "Security & audit", "body": "Security events, audit log and account lockout release.", "permissions": "audit.read · security.read · user release" },
       "suppliers": { "title": "Supplier verification", "body": "Verification queue and internal supplier records.", "permissions": "supplier.verify · supplier.read.internal" },
       "catalogue": { "title": "Catalogue moderation", "body": "Approve, reject or unpublish any product.", "permissions": "product.moderate" },
       "rfqOps": { "title": "RFQ operations", "body": "Read any RFQ, run matching and moderate matches.", "permissions": "rfq.read.any · rfq.match · rfq.match.moderate" },

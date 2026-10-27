@@ -83,10 +83,19 @@ export default async function ProductsPage({
 
   const totalPages = Math.max(1, Math.ceil(data.totalItems / data.pageSize));
 
+  const filtersActive = Boolean(category || q || verifiedOnly || inStockOnly);
   const toolbar = (
     <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
       <p className="type-body text-ink-muted" aria-live="polite">
         {t("count", { count: data.totalItems })}
+        {filtersActive && (
+          <>
+            {" · "}
+            <Link href="/products" className="font-medium text-ink underline underline-offset-4 hover:text-ink-accent">
+              {t("clearFilters")}
+            </Link>
+          </>
+        )}
       </p>
 
       <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:gap-4">

@@ -52,11 +52,10 @@ const STAMP_TONES: Record<StatusTone, string> = {
 };
 
 /**
- * Ledger stamp — a rotated, bordered state mark ("IN STOCK", "ACCEPTED").
- * Text always carries the state; rotation is slight (-2deg) and removed
- * under prefers-reduced-motion by the global motion reset.
+ * StateBadge — bordered state mark ("IN STOCK", "ACCEPTED").
+ * Text always carries the state; tone is a redundant carrier only.
  */
-export function Stamp({
+export function StateBadge({
   children,
   tone = "neutral",
   className,
@@ -68,7 +67,7 @@ export function Stamp({
   return (
     <span
       className={cx(
-        "type-stamp inline-block -rotate-2 rounded-[2px] border-[1.5px] px-1.5 py-0.5 bg-surface-elevated/60",
+        "type-label inline-block rounded-sm border px-1.5 py-0.5 bg-surface-elevated",
         STAMP_TONES[tone],
         className,
       )}
@@ -97,3 +96,5 @@ export function StatusPill({ children, tone = "neutral", className }: StatusPill
     </span>
   );
 }
+
+

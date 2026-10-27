@@ -19,6 +19,7 @@
  * (design-system §11). See lib/validation/auth.ts.
  */
 
+import { PasswordInput } from "@/components/auth/password-input";
 import { useId, useState, type ChangeEvent, type FormEvent } from "react";
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
@@ -139,9 +140,8 @@ export function ResetPasswordForm({ email, token }: { email: string; token: stri
           error={fieldErrors.newPassword}
         >
           {(control) => (
-            <input
+            <PasswordInput
               {...control}
-              type="password"
               autoComplete="new-password"
               value={values.newPassword}
               onChange={setField("newPassword")}
@@ -161,9 +161,8 @@ export function ResetPasswordForm({ email, token }: { email: string; token: stri
           error={fieldErrors.confirmPassword}
         >
           {(control) => (
-            <input
+            <PasswordInput
               {...control}
-              type="password"
               autoComplete="new-password"
               value={values.confirmPassword}
               onChange={setField("confirmPassword")}

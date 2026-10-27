@@ -59,6 +59,12 @@ export async function WizardShell({ current }: { current: WizardStepKey }) {
           );
         })}
       </ol>
+      <div className="mt-4 h-1 overflow-hidden rounded-full bg-surface-recessed" aria-hidden="true">
+        <div
+          className="h-full rounded-full bg-brand-primary transition-all duration-base ease-standard"
+          style={{ width: `${((currentIndex + 1) / STEPS.length) * 100}%` }}
+        />
+      </div>
     </nav>
   );
 }

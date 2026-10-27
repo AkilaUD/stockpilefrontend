@@ -8,7 +8,7 @@ import { getCategoryTree } from "@/lib/api/catalogue-server";
 import { HUB_LINKS, SUPPLIER_LINKS, UTILITY_LINKS } from "@/lib/navigation/navigation";
 
 /**
- * Public masthead — Material Atlas (DESIGN.md).
+ * Public masthead — Modern Construction Procurement (DESIGN.md).
  * Three rows: compact utility · dark command masthead · department + hub bar.
  * Category tree is server-fetched; client islands own no data.
  */
@@ -23,7 +23,7 @@ export async function SiteHeader() {
   }
 
   return (
-    <header className="sticky top-0 z-header border-b border-line bg-surface-page">
+    <header className="sticky top-0 z-header border-b border-line bg-surface-page shadow-elev-sm">
       {/* Utility — graphite strip, signal accents via links */}
       <div data-surface="dark" className="bg-surface-inverse text-ink">
         <div className="shell-public flex h-9 items-center justify-between gap-4">

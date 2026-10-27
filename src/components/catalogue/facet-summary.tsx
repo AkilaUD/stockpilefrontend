@@ -53,7 +53,7 @@ export function FacetSummary({ facets, locale, title }: FacetSummaryProps) {
   if (facets.length === 0) return null;
 
   return (
-    <section className="rounded-sm border border-line bg-surface-panel p-5 md:p-6">
+    <section className="rounded-lg border border-line bg-surface-panel p-5 md:p-6">
       <h2 className="font-display text-lg font-bold tracking-tight text-ink">{title}</h2>
       <dl className="mt-5 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {facets.map((facet) => (

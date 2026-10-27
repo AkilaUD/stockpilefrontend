@@ -62,7 +62,7 @@ export default async function SuppliersPage({
         <EmptyState title={t("noMatchesTitle")} description={t("noMatchesBody")} headingLevel="h2" />
       ) : (
         <Reveal>
-          <ul className="catalogue-grid gap-3 md:gap-4">
+          <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3 md:gap-4">
             {data.items.map((supplier) => (
               <SupplierDirectoryCard
                 key={supplier.publicId}

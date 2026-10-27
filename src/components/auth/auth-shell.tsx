@@ -38,7 +38,7 @@ export function AuthShell({
         <AuthAudienceRail active={audience} />
         <h1 className="type-display-lg text-ink">{title}</h1>
         {subtitle && <p className="type-body mt-3 text-ink-muted">{subtitle}</p>}
-        <div className="mt-6 rounded-md border border-line bg-surface-panel shadow-elev-sm">
+        <div className="mt-6 overflow-hidden rounded-lg border border-line border-t-4 border-t-brand-primary bg-surface-panel shadow-elev-sm">
           <div className="p-6 md:p-8">{children}</div>
         </div>
       </div>

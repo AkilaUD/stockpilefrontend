@@ -24,7 +24,7 @@ export function SupplierDirectoryCard({
     <li>
       <Link
         href={`/suppliers/${supplier.slug}`}
-        className="group flex h-full flex-col rounded-sm border border-line bg-surface-panel p-4 transition-colors duration-instant ease-standard hover:border-line-strong hover:bg-surface-recessed focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus md:p-5"
+        className="group flex h-full flex-col rounded-lg border border-line bg-surface-panel p-4 shadow-elev-sm hover:shadow-elev-md transition duration-instant ease-standard hover:border-line-strong hover:bg-surface-recessed focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus md:p-5"
       >
         <div className="flex items-start gap-4">
           {logo ? (
@@ -47,7 +47,7 @@ export function SupplierDirectoryCard({
             </span>
           )}
           <div className="min-w-0 flex-1">
-            <p className="font-display text-lg font-bold tracking-tight text-ink transition-colors duration-instant ease-standard group-hover:text-ink-accent">
+            <p className="font-display text-lg font-bold tracking-tight text-ink transition duration-instant ease-standard group-hover:text-ink-accent">
               {supplier.name}
             </p>
             {locationLine && (

@@ -64,10 +64,9 @@ export function DeskRowLink({
 }
 
 /* ---------------------------------------------------------------------------
-   Material Ledger — an opened order-book sheet: folio header, ruled rows and
-   a totals foot. The sheet is a table-like register, never a card grid.
+   PanelSheet — structured data panel: header, rows and a totals foot.
    ------------------------------------------------------------------------ */
-export function LedgerSheet({
+export function PanelSheet({
   folio,
   title,
   meta,
@@ -83,24 +82,24 @@ export function LedgerSheet({
   className?: ClassValue;
 }) {
   return (
-    <section className={cx("border border-line-strong bg-surface-elevated", className)}>
+    <section className={cx("rounded-lg border border-line bg-surface-elevated shadow-elev-sm", className)}>
       {folio || title ? (
-        <header className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1 border-b-2 border-line-strong px-4 py-3 sm:px-5">
+        <header className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1 border-b border-line px-4 py-3 sm:px-5">
           <div className="flex flex-wrap items-baseline gap-x-3">
-            {folio ? <span className="type-folio text-ink-muted">{folio}</span> : null}
+            {folio ? <span className="type-label text-ink-muted">{folio}</span> : null}
             {title ? <h2 className="type-title-sm text-ink">{title}</h2> : null}
           </div>
           {meta ? <div className="type-meta">{meta}</div> : null}
         </header>
       ) : null}
       <div>{children}</div>
-      {footer ? <footer className="border-t-2 border-line-strong px-4 py-3 sm:px-5">{footer}</footer> : null}
+      {footer ? <footer className="border-t border-line px-4 py-3 sm:px-5">{footer}</footer> : null}
     </section>
   );
 }
 
-/** One ruled ledger line. Entry number, main entry, data cells, stamp/action. */
-export function LedgerRow({
+/** One panel row. Index, main entry, data cells, status/action. */
+export function PanelRow({
   entryNo,
   children,
   stamp,
@@ -121,7 +120,7 @@ export function LedgerRow({
         className,
       )}
     >
-      <span className="type-entry-no pt-0.5 text-ink-muted sm:pt-0">{entryNo}</span>
+      <span className="type-data pt-0.5 text-ink-muted sm:pt-0">{entryNo}</span>
       <div className="min-w-0">{children}</div>
       {stamp || action ? (
         <div className="col-start-2 mt-2 flex flex-wrap items-center gap-2 sm:col-start-3 sm:mt-0 sm:justify-self-end">
@@ -134,7 +133,7 @@ export function LedgerRow({
 }
 
 /** Totals foot — only ever rendered with honestly computed figures. */
-export function LedgerTotals({
+export function PanelTotals({
   label,
   value,
   note,
@@ -145,10 +144,10 @@ export function LedgerTotals({
 }) {
   return (
     <div className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1">
-      <span className="type-folio text-ink-muted">{label}</span>
+      <span className="type-label text-ink-muted">{label}</span>
       <span className="flex flex-wrap items-baseline gap-x-3">
         {note ? <span className="type-meta">{note}</span> : null}
-        <span className="type-total text-ink">{value}</span>
+        <span className="type-money text-ink">{value}</span>
       </span>
     </div>
   );
@@ -163,3 +162,10 @@ export function DeskPageHeader({ title, lede }: { title: string; lede?: string }
     </header>
   );
 }
+
+/** @deprecated Use PanelSheet. */
+export const LedgerSheet = PanelSheet;
+/** @deprecated Use PanelRow. */
+export const LedgerRow = PanelRow;
+/** @deprecated Use PanelTotals. */
+export const LedgerTotals = PanelTotals;

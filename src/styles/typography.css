@@ -2,9 +2,9 @@
    Stockpile.lk — Typography scale
    Source of truth: docs/design-system.md §3.
 
-   Material Atlas type roles (DESIGN.md):
-     Source Serif 4 — editorial display (statements, section titles)
-     Source Sans 3  — UI / body (navigation, forms, tables, data)
+   Modern Construction Procurement type roles (DESIGN.md):
+     Archivo — industrial display (statements, section titles)
+     Inter  — UI / body (navigation, forms, tables, data)
      Noto Sans Sinhala — appended in the body stack for /si coverage
 
    Font variables are assigned in globals.css via @theme from `next/font`
@@ -145,7 +145,7 @@
     font-size: var(--type-display-xl);
     line-height: var(--lh-display-xl);
     letter-spacing: var(--tr-display-xl);
-    font-weight: 600;
+    font-weight: 700;
   }
 
   .type-display-lg {
@@ -214,7 +214,7 @@
      field labels, table column heads, spec chips, SKU, reference codes.
      -------------------------------------------------------------------------- */
   .type-label {
-    font-family: var(--font-mono);
+    font-family: var(--font-body);
     font-size: var(--type-label);
     line-height: 1.3;
     letter-spacing: var(--tr-label);
@@ -224,7 +224,7 @@
   }
 
   .type-micro {
-    font-family: var(--font-mono);
+    font-family: var(--font-body);
     font-size: var(--type-micro);
     line-height: 1.3;
     letter-spacing: var(--tr-micro);
@@ -247,49 +247,6 @@
   .type-quantity {
     font-family: var(--font-mono);
     font-variant-numeric: tabular-nums;
-    white-space: nowrap;
-  }
-
-  /* -----------------------------------------------------------------------------
-     Material Ledger roles — folio/entry numbers, ledger data, stamps, totals.
-     Uppercase transforms only ever apply to Latin via the label/stamp roles;
-     Sinhala copy must use body/meta roles (no uppercase on script text).
-     -------------------------------------------------------------------------- */
-  .type-folio {
-    font-family: var(--font-mono);
-    font-size: var(--type-label);
-    letter-spacing: var(--tr-label);
-    text-transform: uppercase;
-    font-weight: 500;
-  }
-
-  .type-entry-no {
-    font-family: var(--font-mono);
-    font-variant-numeric: tabular-nums;
-    font-size: var(--type-meta);
-    font-weight: 500;
-    white-space: nowrap;
-  }
-
-  .type-ledger-data {
-    font-family: var(--font-mono);
-    font-variant-numeric: tabular-nums;
-    font-size: var(--type-body-sm);
-  }
-
-  .type-stamp {
-    font-family: var(--font-mono);
-    font-size: var(--type-label);
-    letter-spacing: var(--tr-label);
-    text-transform: uppercase;
-    font-weight: 600;
-    white-space: nowrap;
-  }
-
-  .type-total {
-    font-family: var(--font-mono);
-    font-variant-numeric: tabular-nums;
-    font-weight: 600;
     white-space: nowrap;
   }
 

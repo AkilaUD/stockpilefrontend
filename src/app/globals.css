@@ -75,10 +75,10 @@
   --color-info: var(--info);
   --color-focus: var(--focus-ring);
 
-  /* Type families — Material Atlas: Source Serif 4 display + Source Sans 3 UI,
+  /* Type families — Modern Construction Procurement: Archivo display + Inter UI,
      with Noto Sans Sinhala in the body stack for /si. */
-  --font-display: var(--font-source-serif), "Source Serif 4", "Noto Serif", Georgia, serif;
-  --font-body: var(--font-source-sans), var(--font-noto-sinhala), "Source Sans 3", "Noto Sans Sinhala", system-ui, sans-serif;
+  --font-display: var(--font-archivo), "Archivo", var(--font-noto-sinhala), system-ui, sans-serif;
+  --font-body: var(--font-inter), var(--font-noto-sinhala), "Inter", "Noto Sans Sinhala", system-ui, sans-serif;
   --font-mono: var(--font-plex-mono), "IBM Plex Mono", var(--font-noto-sinhala), ui-monospace, monospace;
   /* Tailwind's default `font-sans` would otherwise silently resolve to the
      framework's own stack, so anything written as `font-sans` would be a
@@ -115,10 +115,17 @@
 @layer base {
   html {
     -webkit-text-size-adjust: 100%;
+    overflow-x: clip;
   }
 
   body {
     min-height: 100dvh;
+    overflow-x: clip;
+  }
+
+  /* Sticky masthead must never cover anchored headings. */
+  [id] {
+    scroll-margin-top: 9.5rem;
   }
 
   img,
@@ -599,17 +606,6 @@
 
   .hero-enter-3 {
     animation-delay: 220ms;
-  }
-
-  /* Material Ledger — the live sheet's active entry. A signal wash plus a
-     hard left rule; cycled by GSAP on the homepage, resting state is plain. */
-  [data-sheet-row] {
-    transition: background-color var(--dur-base) var(--motion-ease-standard);
-  }
-
-  [data-sheet-row].ledger-active {
-    background-color: color-mix(in srgb, var(--brand-primary) 16%, transparent);
-    box-shadow: inset 3px 0 0 var(--brand-primary);
   }
 
   @keyframes hero-rise {

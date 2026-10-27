@@ -22,6 +22,7 @@
  * ~100 KB for two fields — see lib/validation/auth.ts.
  */
 
+import { PasswordInput } from "@/components/auth/password-input";
 import { useId, useState, type ChangeEvent, type FormEvent } from "react";
 import { useTranslations } from "next-intl";
 import { Link, useRouter } from "@/i18n/navigation";
@@ -126,9 +127,8 @@ export function LoginForm({ registerHref = "/register" }: { registerHref?: strin
           error={fieldErrors.password}
         >
           {(control) => (
-            <input
+            <PasswordInput
               {...control}
-              type="password"
               autoComplete="current-password"
               value={values.password}
               onChange={setField("password")}

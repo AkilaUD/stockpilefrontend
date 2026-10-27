@@ -10,30 +10,28 @@ import {
 } from "@/lib/api/catalogue-server";
 import { getArticles } from "@/lib/api/content-server";
 import { sortDepartments } from "@/lib/navigation/navigation";
-import { LedgerCover, type FolioStats } from "@/components/home/ledger-cover";
+import { HomeHero, type HeroStats } from "@/components/home/home-hero";
+import { HomeProcurementRibbon } from "@/components/home/home-procurement-ribbon";
+import { HomeDepartmentMosaic } from "@/components/home/home-department-mosaic";
 import { MaterialsListBuilder, type BuilderOption } from "@/components/home/materials-list-builder";
 import {
-  ClosingEntry,
-  DepartmentIndex,
-  FieldNotes,
-  LedgerSectionHead,
-  ProductRegister,
-  SupplierDesk,
-  WorkflowStates,
-} from "@/components/home/ledger-sections";
+  ArticlesSection,
+  ClosingCta,
+  NewestProducts,
+  SupplierSection,
+} from "@/components/home/home-sections";
+import { HomeWorkflowScroll } from "@/components/home/home-workflow-scroll";
 import { HomeFaq } from "@/components/home/home-faq";
-import { HomeGsap } from "@/components/home/home-gsap";
+import { LazyHomeMotion } from "@/components/home/lazy-home-motion";
 import { Skeleton } from "@/components/ui/skeleton";
 
 /**
- * Material Ledger home — the opened order book.
+ * Maximal-impact Modern Construction Procurement home.
  *
- * Cover (folio + live sheet) → the visitor's own materials list → numbered
- * materials index → current register → document-state workflow with a
- * labelled example returns sheet → supplier desk → field-notes annex → FAQ →
- * open closing entry. All counts, entries and suppliers are live catalogue
- * reads; the only figures that are not live are inside the stamped EXAMPLE
- * returns sheet. No invented metrics or testimonials.
+ * Full-bleed hero → procurement ribbon → department mosaic → materials list
+ * → newest products → workflow scroll peak (labelled EXAMPLE comparison) →
+ * suppliers → articles → FAQ → closing CTA. Live catalogue data only;
+ * example comparison stays labelled. No invented metrics.
  */
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
@@ -54,7 +52,7 @@ async function safeRead<T>(read: () => Promise<T>): Promise<T | null> {
   }
 }
 
-function LedgerSkeleton() {
+function SectionSkeleton() {
   return (
     <div className="shell-public py-10" aria-hidden="true">
       <Skeleton className="h-6 w-56" />
@@ -68,22 +66,18 @@ function LedgerSkeleton() {
 }
 
 async function CoverSection({ locale }: { locale: string }) {
-  const data = await safeRead(() =>
-    Promise.all([getCatalogueSummary(), getCategoryTree(), getProductListing({ sort: "newest", page: 1, pageSize: 6 })]),
-  );
-  let stats: FolioStats | null = null;
-  let sheetItems: Awaited<ReturnType<typeof getProductListing>>["items"] = [];
+  const data = await safeRead(() => Promise.all([getCatalogueSummary(), getCategoryTree()]));
+  let stats: HeroStats | null = null;
   if (data) {
-    const [summary, tree, listing] = data;
+    const [summary, tree] = data;
     stats = {
       products: summary.products,
       suppliers: summary.suppliers,
       departments: tree.filter((node) => node.isRoot).length,
       categories: summary.categories,
     };
-    sheetItems = listing.items;
   }
-  return <LedgerCover locale={locale} stats={stats} sheetItems={sheetItems} />;
+  return <HomeHero locale={locale} stats={stats} />;
 }
 
 async function BuilderSection() {
@@ -98,29 +92,29 @@ async function BuilderSection() {
   return <MaterialsListBuilder departments={departments} units={units} />;
 }
 
-async function IndexSection({ locale }: { locale: string }) {
+async function MosaicSection({ locale }: { locale: string }) {
   const tree = await safeRead(() => getCategoryTree());
   if (!tree) return null;
-  const departments = sortDepartments(tree).slice(0, 12);
-  return <DepartmentIndex locale={locale} departments={departments} />;
+  const departments = sortDepartments(tree).slice(0, 8);
+  return <HomeDepartmentMosaic locale={locale} departments={departments} />;
 }
 
 async function RegisterSection({ locale }: { locale: string }) {
   const listing = await safeRead(() => getProductListing({ sort: "newest", page: 1, pageSize: 10 }));
   if (!listing || listing.items.length === 0) return null;
-  return <ProductRegister locale={locale} items={listing.items} />;
+  return <NewestProducts locale={locale} items={listing.items} />;
 }
 
 async function SupplierDeskSection({ locale }: { locale: string }) {
   const directory = await safeRead(() => getSupplierDirectory());
   if (!directory || directory.items.length === 0) return null;
-  return <SupplierDesk locale={locale} suppliers={directory.items.slice(0, 6)} />;
+  return <SupplierSection locale={locale} suppliers={directory.items.slice(0, 6)} />;
 }
 
 async function AnnexSection({ locale }: { locale: string }) {
-  const page = await safeRead(() => getArticles({ page: 1, pageSize: 5, locale }));
+  const page = await safeRead(() => getArticles({ page: 1, pageSize: 3, locale }));
   if (!page || page.items.length === 0) return null;
-  return <FieldNotes locale={locale} articles={page.items} />;
+  return <ArticlesSection locale={locale} articles={page.items} />;
 }
 
 export default async function HomePage({ params }: { params: Promise<{ locale: string }> }) {
@@ -134,14 +128,15 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
   }));
 
   const exampleRows = [
-    { supplier: "A", unitPrice: "Rs 4,850", leadDays: 3, total: "Rs 485,000" },
-    { supplier: "B", unitPrice: "Rs 4,620", leadDays: 5, total: "Rs 462,000" },
-    { supplier: "C", unitPrice: "Rs 4,790", leadDays: 2, total: "Rs 479,000" },
+    { supplier: "A", unitPrice: "Rs 4,850", leadDays: 3, total: "Rs 485,000", lowest: false },
+    { supplier: "B", unitPrice: "Rs 4,620", leadDays: 5, total: "Rs 462,000", lowest: true },
+    { supplier: "C", unitPrice: "Rs 4,790", leadDays: 2, total: "Rs 479,000", lowest: false },
   ].map((row) => ({
     supplier: `${t("benefits.example.supplier")} ${row.supplier}`,
     unitPrice: row.unitPrice,
     leadTime: t("benefits.example.days", { count: row.leadDays }),
     total: row.total,
+    lowest: row.lowest,
   }));
 
   const faqItems = [0, 1, 2, 3, 4, 5].map((index) => ({
@@ -151,36 +146,40 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
 
   return (
     <>
-      <HomeGsap />
+      <LazyHomeMotion />
 
-      <Suspense fallback={<LedgerSkeleton />}>
+      <Suspense fallback={<SectionSkeleton />}>
         <CoverSection locale={locale} />
       </Suspense>
 
+      <HomeProcurementRibbon locale={locale} />
+
       <section className="shell-public py-10 sm:py-12">
-        <Suspense fallback={<LedgerSkeleton />}>
+        <Suspense fallback={<SectionSkeleton />}>
+          <MosaicSection locale={locale} />
+        </Suspense>
+      </section>
+
+      <section className="shell-public py-10 sm:py-12">
+        <Suspense fallback={<SectionSkeleton />}>
           <BuilderSection />
         </Suspense>
       </section>
 
       <section className="shell-public py-10 sm:py-12">
-        <Suspense fallback={<LedgerSkeleton />}>
-          <IndexSection locale={locale} />
-        </Suspense>
-      </section>
-
-      <section className="shell-public py-10 sm:py-12">
-        <Suspense fallback={<LedgerSkeleton />}>
+        <Suspense fallback={<SectionSkeleton />}>
           <RegisterSection locale={locale} />
         </Suspense>
       </section>
 
-      <section className="shell-public py-10 sm:py-12">
-        <LedgerSectionHead folio={t("workflow.folio")} title={t("workflow.title")} lede={t("workflow.lede")} />
-        <WorkflowStates
-          locale={locale}
+      <section className="shell-public py-10 sm:py-14">
+        <HomeWorkflowScroll
+          eyebrow={t("workflow.title")}
+          title={t("benefits.title")}
+          lede={t("workflow.lede")}
           steps={steps}
           example={{
+            stamp: t("workflow.exampleStamp"),
             title: t("benefits.example.title"),
             note: t("benefits.example.note"),
             item: t("benefits.example.item"),
@@ -190,17 +189,19 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
             totalHeader: t("benefits.example.total"),
             rows: exampleRows,
           }}
+          processImageAlt={t("workflow.processPlateCaption")}
+          deskImageAlt={t("workflow.plateAlt")}
         />
       </section>
 
       <section className="shell-public py-10 sm:py-12">
-        <Suspense fallback={<LedgerSkeleton />}>
+        <Suspense fallback={<SectionSkeleton />}>
           <SupplierDeskSection locale={locale} />
         </Suspense>
       </section>
 
       <section className="shell-public py-10 sm:py-12">
-        <Suspense fallback={<LedgerSkeleton />}>
+        <Suspense fallback={<SectionSkeleton />}>
           <AnnexSection locale={locale} />
         </Suspense>
       </section>
@@ -208,7 +209,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
       <HomeFaq title={t("faq.title")} items={faqItems} helpLabel={t("faq.helpLabel")} />
 
       <section className="shell-public pb-14">
-        <ClosingEntry locale={locale} />
+        <ClosingCta locale={locale} />
       </section>
     </>
   );

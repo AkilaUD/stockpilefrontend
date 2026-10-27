@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { IBM_Plex_Mono, Noto_Sans_Sinhala, Source_Sans_3, Source_Serif_4 } from "next/font/google";
+import { Archivo, IBM_Plex_Mono, Inter, Noto_Sans_Sinhala } from "next/font/google";
 import { notFound } from "next/navigation";
 import { connection } from "next/server";
 import { NextIntlClientProvider } from "next-intl";
@@ -10,22 +10,22 @@ import { SessionProvider } from "@/components/providers/session-provider";
 import "../globals.css";
 
 /*
- * Material Atlas type system (frontend/DESIGN.md):
- *   Source Serif 4 — editorial display
- *   Source Sans 3 — UI / body
+ * Modern Construction Procurement type system (frontend/DESIGN.md):
+ *   Archivo — industrial grotesque display / headings
+ *   Inter — UI / body
  *   Noto Sans Sinhala — /si glyph coverage in the body stack
  *
  * next/font self-hosts under /_next/static/media (CSP font-src 'self').
  */
-const sourceSerif = Source_Serif_4({
-  variable: "--font-source-serif",
+const archivo = Archivo({
+  variable: "--font-archivo",
   subsets: ["latin"],
-  weight: ["600", "700"],
+  weight: ["500", "600", "700", "800"],
   display: "swap",
 });
 
-const sourceSans = Source_Sans_3({
-  variable: "--font-source-sans",
+const inter = Inter({
+  variable: "--font-inter",
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
   display: "swap",
@@ -38,8 +38,7 @@ const notoSinhala = Noto_Sans_Sinhala({
   display: "swap",
 });
 
-/* Material Ledger data voice — real tabular mono for SKUs, entry numbers,
-   quantities, prices and folio references (DESIGN.md). */
+/* Tabular mono for SKUs, references, quantities and prices only (DESIGN.md). */
 const plexMono = IBM_Plex_Mono({
   variable: "--font-plex-mono",
   subsets: ["latin"],
@@ -155,7 +154,7 @@ export default async function LocaleLayout({
   return (
     <html
       lang={locale}
-      className={`${sourceSerif.variable} ${sourceSans.variable} ${notoSinhala.variable} ${plexMono.variable}`}
+      className={`${archivo.variable} ${inter.variable} ${notoSinhala.variable} ${plexMono.variable}`}
     >
       {/* suppressHydrationWarning: browser extensions (e.g. Grammarly) inject
           attributes onto <body> post-render, which otherwise tripped the

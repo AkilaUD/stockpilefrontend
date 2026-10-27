@@ -16,6 +16,7 @@
  * options arrive as server-rendered props, so the client fetches no taxonomy.
  */
 
+import { PasswordInput } from "@/components/auth/password-input";
 import { useEffect, useId, useRef, useState, type ChangeEvent, type FormEvent } from "react";
 import { useTranslations } from "next-intl";
 import { Link, useRouter } from "@/i18n/navigation";
@@ -410,9 +411,8 @@ export function SupplierRegisterForm({ departments }: { departments: DepartmentO
           error={fieldErrors.password}
         >
           {(control) => (
-            <input
+            <PasswordInput
               {...control}
-              type="password"
               autoComplete="new-password"
               value={values.password}
               onChange={setField("password")}

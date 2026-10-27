@@ -2,7 +2,7 @@ import type { ProductListItem } from "@/lib/api/catalogue";
 import type { RfqItemValues } from "@/lib/validation/rfq";
 
 /**
- * The visitor's materials list — the working page of the Material Ledger.
+ * The visitor's materials list — a draft list kept on this device.
  *
  * One list, edited on the homepage and carried into the RFQ form. It lives in
  * localStorage because it is the visitor's own draft: no account, no server
@@ -10,7 +10,7 @@ import type { RfqItemValues } from "@/lib/validation/rfq";
  * Every access no-ops safely when storage is unavailable.
  */
 
-export interface LedgerLine {
+export interface MaterialsLine {
   /** Stable local identity (never sent to the API). */
   key: string;
   description: string;
@@ -28,7 +28,7 @@ export interface LedgerLine {
 }
 
 const STORAGE_KEY = "stockpile.materials-list.v1";
-const EMPTY: LedgerLine[] = [];
+const EMPTY: MaterialsLine[] = [];
 
 let counter = 0;
 function nextKey(): string {
@@ -36,7 +36,7 @@ function nextKey(): string {
   return `line-${Date.now().toString(36)}-${counter}`;
 }
 
-export function blankLine(): LedgerLine {
+export function blankLine(): MaterialsLine {
   return {
     key: nextKey(),
     description: "",
@@ -47,9 +47,9 @@ export function blankLine(): LedgerLine {
   };
 }
 
-/** Map a live catalogue product onto a ledger line. RFQ items carry no
+/** Map a live catalogue product onto a list line. RFQ items carry no
  *  product id, so the SKU travels inside the specification (see toRfqItem). */
-export function lineFromProduct(product: ProductListItem): LedgerLine {
+export function lineFromProduct(product: ProductListItem): MaterialsLine {
   return {
     key: nextKey(),
     description: product.name,
@@ -69,7 +69,7 @@ export function lineFromProduct(product: ProductListItem): LedgerLine {
 }
 
 /** Parse an unknown stored value into lines; anything unreadable is empty. */
-export function parseLines(raw: string | null): LedgerLine[] {
+export function parseLines(raw: string | null): MaterialsLine[] {
   if (!raw) return EMPTY;
   try {
     const parsed = JSON.parse(raw) as unknown;
@@ -95,7 +95,7 @@ export function parseLines(raw: string | null): LedgerLine[] {
   }
 }
 
-export function loadLines(): LedgerLine[] {
+export function loadLines(): MaterialsLine[] {
   try {
     return parseLines(window.localStorage.getItem(STORAGE_KEY));
   } catch {
@@ -103,7 +103,7 @@ export function loadLines(): LedgerLine[] {
   }
 }
 
-function persist(lines: LedgerLine[]): void {
+function persist(lines: MaterialsLine[]): void {
   try {
     window.localStorage.setItem(STORAGE_KEY, JSON.stringify(lines));
   } catch {
@@ -112,15 +112,15 @@ function persist(lines: LedgerLine[]): void {
 }
 
 /* --- External store: hero sheet, register rows and the builder share one list. */
-let cache: LedgerLine[] | null = null;
+let cache: MaterialsLine[] | null = null;
 const listeners = new Set<() => void>();
 
-function snapshot(): LedgerLine[] {
+function snapshot(): MaterialsLine[] {
   if (cache === null) cache = loadLines();
   return cache;
 }
 
-function commit(lines: LedgerLine[]): void {
+function commit(lines: MaterialsLine[]): void {
   cache = lines;
   persist(lines);
   listeners.forEach((listener) => listener());
@@ -131,10 +131,10 @@ export const materialsListStore = {
     listeners.add(listener);
     return () => listeners.delete(listener);
   },
-  getSnapshot(): LedgerLine[] {
+  getSnapshot(): MaterialsLine[] {
     return snapshot();
   },
-  getServerSnapshot(): LedgerLine[] {
+  getServerSnapshot(): MaterialsLine[] {
     return EMPTY;
   },
   /** Adds a product once — re-adding a SKU already on the list is a no-op. */
@@ -146,7 +146,7 @@ export const materialsListStore = {
   addBlank(): void {
     commit([...snapshot(), blankLine()]);
   },
-  update(key: string, patch: Partial<LedgerLine>): void {
+  update(key: string, patch: Partial<MaterialsLine>): void {
     commit(snapshot().map((line) => (line.key === key ? { ...line, ...patch } : line)));
   },
   remove(key: string): void {
@@ -156,7 +156,7 @@ export const materialsListStore = {
     const lines = snapshot();
     const index = lines.findIndex((line) => line.key === key);
     if (index < 0) return;
-    const copy: LedgerLine = { ...lines[index], key: nextKey(), sku: undefined };
+    const copy: MaterialsLine = { ...lines[index], key: nextKey(), sku: undefined };
     commit([...lines.slice(0, index + 1), copy, ...lines.slice(index + 1)]);
   },
   clear(): void {
@@ -164,7 +164,7 @@ export const materialsListStore = {
   },
 };
 
-export interface LedgerSubtotal {
+export interface MaterialsSubtotal {
   /** Lines with a public price and a parseable positive quantity. */
   pricedLines: number;
   /** Lines priced on request — deliberately excluded from the figure. */
@@ -179,7 +179,7 @@ export interface LedgerSubtotal {
  * Honest indicative subtotal: only `Public` prices with an amount and a
  * positive quantity contribute. POR lines are counted, never priced as zero.
  */
-export function computeSubtotal(lines: LedgerLine[]): LedgerSubtotal {
+export function computeSubtotal(lines: MaterialsLine[]): MaterialsSubtotal {
   let amount = 0;
   let pricedLines = 0;
   let porLines = 0;
@@ -203,8 +203,8 @@ export function computeSubtotal(lines: LedgerLine[]): LedgerSubtotal {
   return { pricedLines, porLines, awaitingQuantity, amount, currency };
 }
 
-/** One ledger line → one RFQ item. SKU provenance rides in the specification. */
-export function toRfqItem(line: LedgerLine): RfqItemValues {
+/** One list line → one RFQ item. SKU provenance rides in the specification. */
+export function toRfqItem(line: MaterialsLine): RfqItemValues {
   const specParts = [line.specification.trim(), line.sku ? `SKU: ${line.sku}` : ""].filter(Boolean);
   return {
     description: line.description.trim(),
@@ -216,6 +216,6 @@ export function toRfqItem(line: LedgerLine): RfqItemValues {
 }
 
 /** Lines worth carrying into the RFQ form (a description is the minimum). */
-export function toRfqItems(lines: LedgerLine[]): RfqItemValues[] {
+export function toRfqItems(lines: MaterialsLine[]): RfqItemValues[] {
   return lines.filter((line) => line.description.trim().length > 0).map(toRfqItem);
 }

@@ -13,6 +13,8 @@ import { CatalogueShell } from "@/components/catalogue/catalogue-shell";
 import { StatusPill, type StatusTone } from "@/components/ui/status-pill";
 import { Reveal } from "@/components/motion/reveal";
 import { BadgeCheck, FileText, Truck } from "lucide-react";
+import { AddToListButton } from "@/components/home/add-to-list-button";
+import type { ProductListItem } from "@/lib/api/catalogue";
 
 export const dynamicParams = true;
 
@@ -101,7 +103,7 @@ export default async function ProductDetailPage({
             <p className="type-meta tabular text-ink-muted">{t("sku", { sku: detail.sku })}</p>
           </div>
 
-          <div className="rounded-sm border border-line bg-surface-panel p-5 md:p-6">
+          <div className="rounded-lg border border-line bg-surface-panel p-5 md:p-6">
             <div className="flex flex-wrap items-start justify-between gap-4">
               <div className="min-w-0">
                 {pricePublic ? (
@@ -121,17 +123,36 @@ export default async function ProductDetailPage({
               </StatusPill>
             </div>
 
-            {detail.canAddToRfq && (
-              <div className="mt-6 border-t border-line pt-5">
-                <ButtonLink href="/rfq" fullWidth>
-                  {tActions("requestQuote")}
-                </ButtonLink>
-                <p className="mt-2 type-meta text-ink-muted">{t("requestQuoteHint")}</p>
-              </div>
-            )}
+            <div className="mt-6 flex flex-col gap-3 border-t border-line pt-5">
+              <AddToListButton
+                product={{
+                  publicId: detail.publicId,
+                  slug: detail.slug,
+                  name: detail.name,
+                  sku: detail.sku,
+                  supplier: { publicId: detail.supplier.publicId ?? "", slug: detail.supplier.slug, name: detail.supplier.name, verified: Boolean(detail.supplier.verifiedAt) },
+                  category: { slug: "", name: "" },
+                  price: detail.price ?? null,
+                  priceState: detail.price?.state ?? "",
+                  stockState: detail.stock?.state ?? "",
+                  minOrderQuantity: detail.minOrderQuantity ?? null,
+                  leadTimeDays: detail.leadTimeDays ?? null,
+                  itemType: detail.itemType,
+                  attributes: [],
+                } satisfies ProductListItem}
+              />
+              {detail.canAddToRfq && (
+                <div>
+                  <ButtonLink href="/rfq" fullWidth>
+                    {tActions("requestQuote")}
+                  </ButtonLink>
+                  <p className="mt-2 type-meta text-ink-muted">{t("requestQuoteHint")}</p>
+                </div>
+              )}
+            </div>
           </div>
 
-          <dl className="space-y-3 rounded-sm border border-line bg-surface-panel p-5 md:p-6">
+          <dl className="space-y-3 rounded-lg border border-line bg-surface-panel p-5 md:p-6">
             {detail.brand && (
               <div className="flex justify-between gap-4">
                 <dt className="type-body-sm text-ink-muted">{t("brand")}</dt>
@@ -170,7 +191,7 @@ export default async function ProductDetailPage({
             )}
           </dl>
 
-          <div className="rounded-sm border border-line bg-surface-panel p-5 md:p-6">
+          <div className="rounded-lg border border-line bg-surface-panel p-5 md:p-6">
             <p className="font-display text-lg font-bold tracking-tight text-ink">{detail.supplier.name}</p>
             <p className="mt-1 flex items-center gap-1.5 type-body-sm text-ink-muted">
               {detail.supplier.verifiedAt ? (
@@ -205,7 +226,7 @@ export default async function ProductDetailPage({
           <h2 className="font-display text-2xl font-bold tracking-tight text-ink">{t("specifications")}</h2>
           <div className="mt-6 grid gap-8 md:grid-cols-2">
             {detail.specifications.sections.map((section) => (
-              <div key={section.label} className="rounded-sm border border-line bg-surface-panel p-5">
+              <div key={section.label} className="rounded-lg border border-line bg-surface-panel p-5">
                 <h3 className="type-label font-semibold tracking-wide text-ink">{section.label}</h3>
                 <dl className="mt-4 divide-y divide-line">
                   {section.attributes.map((row) => (
@@ -227,7 +248,7 @@ export default async function ProductDetailPage({
       {detail.priceHistory && detail.priceHistory.length > 0 && (
         <section className="mt-14 max-w-2xl">
           <h2 className="font-display text-2xl font-bold tracking-tight text-ink">{t("priceHistory")}</h2>
-          <ul className="mt-4 divide-y divide-line rounded-sm border border-line bg-surface-panel">
+          <ul className="mt-4 divide-y divide-line rounded-lg border border-line bg-surface-panel">
             {detail.priceHistory.map((entry) => (
               <li key={entry.at} className="flex items-center justify-between gap-6 px-5 py-3">
                 <span className="type-body-sm text-ink-muted">{t("onDate", { date: formatDate(entry.at, locale) })}</span>

@@ -12,6 +12,7 @@
  * fields. See lib/validation/auth.ts.
  */
 
+import { PasswordInput } from "@/components/auth/password-input";
 import { useEffect, useId, useRef, useState, type ChangeEvent, type FormEvent } from "react";
 import { useTranslations } from "next-intl";
 import { Link, useRouter } from "@/i18n/navigation";
@@ -204,9 +205,8 @@ export function RegisterForm() {
           error={fieldErrors.password}
         >
           {(control) => (
-            <input
+            <PasswordInput
               {...control}
-              type="password"
               autoComplete="new-password"
               value={values.password}
               onChange={setField("password")}

@@ -34,7 +34,7 @@ export default async function QuotationsAndEstimationsPage({
   setRequestLocale(locale);
   const t = await getTranslations({ locale, namespace: "pages.quotations" });
   const steps = t.raw("steps") as Array<{ label: string; title: string; body: string }>;
-  const rfqMailto = `mailto:${t("email")}?subject=RFQ%20Request`;
+  const rfqMailto = `mailto:${t("email")}?subject=${encodeURIComponent("RFQ Request")}`;
 
   return (
     <InfoPage breadcrumb={t("title")} title={t("title")}>
@@ -47,7 +47,7 @@ export default async function QuotationsAndEstimationsPage({
 
       <ol className="mt-10 grid gap-4 md:grid-cols-3">
         {steps.map((step, index) => (
-          <li key={step.title} className="rounded-md border border-line bg-surface-panel p-6">
+          <li key={step.title} className="rounded-lg border border-line bg-surface-panel p-6 shadow-elev-sm">
             <p className="type-label font-semibold text-ink-accent">
               {index + 1}. {step.label}
             </p>
@@ -57,7 +57,7 @@ export default async function QuotationsAndEstimationsPage({
         ))}
       </ol>
 
-      <div className="mt-10 rounded-md border border-line bg-surface-panel p-6 md:p-8">
+      <div className="mt-10 rounded-lg border border-line bg-surface-panel p-6 shadow-elev-sm md:p-8">
         <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           <ButtonLink
             href="/rfq"
