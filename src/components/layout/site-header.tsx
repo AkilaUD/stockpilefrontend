@@ -83,9 +83,9 @@ export async function SiteHeader() {
         </div>
       </div>
 
-      {/* Hub + departments */}
+      {/* Hub + departments — shared 50px row so SBD + RFQ ends match hub links */}
       <div className="border-t border-line bg-surface-page">
-        <div className="shell-public flex items-stretch">
+        <div className="shell-public flex min-h-[50px] items-stretch">
           <LazyDepartmentMenu tree={tree} />
           <nav
             aria-label={a11y("mainNavigation")}
@@ -103,7 +103,7 @@ export async function SiteHeader() {
           </nav>
           <Link
             href="/rfq"
-            className="hidden items-center bg-brand-primary px-4 type-body-sm font-semibold text-ink-on-signal transition-colors duration-instant ease-standard hover:bg-brand-primary-hover focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-focus sm:flex"
+            className="hidden h-[50px] items-center bg-brand-primary px-4 type-body-sm font-semibold text-ink-on-signal transition-colors duration-instant ease-standard hover:bg-brand-primary-hover focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-focus sm:flex"
           >
             {nav("requestForQuote")}
           </Link>

@@ -37,11 +37,11 @@ export async function HomeHero({
 
   return (
     <section
-      className="relative isolate min-h-[70vh] overflow-hidden lg:min-h-[85vh]"
+      className="relative isolate min-h-[70vh] lg:min-h-[85vh]"
       data-surface="dark"
       data-hero
     >
-      <div className="absolute inset-0" data-hero-bg aria-hidden>
+      <div className="absolute inset-0 overflow-hidden" data-hero-bg aria-hidden>
         <Image
           src="/home/home-hero-materials.jpg"
           alt=""

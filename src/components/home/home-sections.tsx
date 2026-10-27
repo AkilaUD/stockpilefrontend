@@ -79,10 +79,14 @@ export async function SupplierSection({
                 ) : null}
               </p>
               <p className="type-meta mt-1">
-                {supplier.district ?? supplier.location ?? t("supplierDesk.locationPending")}
-                {typeof supplier.productCount === "number"
-                  ? ` · ${t("supplierDesk.products", { count: supplier.productCount })}`
-                  : ""}
+                {[
+                  supplier.district || supplier.location || t("supplierDesk.locationPending"),
+                  typeof supplier.productCount === "number"
+                    ? t("supplierDesk.products", { count: supplier.productCount })
+                    : null,
+                ]
+                  .filter(Boolean)
+                  .join(" · ")}
               </p>
               <Link
                 href={`/suppliers/${supplier.slug}`}

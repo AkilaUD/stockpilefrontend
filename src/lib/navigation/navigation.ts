@@ -56,7 +56,11 @@ export function categoryHref(slug: string): string {
   return `/categories/${encodeURIComponent(slug)}`;
 }
 
-/** Reference row icons for the vertical menu (not every department has one). */
+/**
+ * Reference row icons for the vertical menu (20×20 PNGs — not every department
+ * has one). Do not use these as mosaic/cover photography; add DEPARTMENT_PHOTOS
+ * (≥800px assets) when real department images are available.
+ */
 export const DEPARTMENT_ICONS: Record<string, string> = {
   "building-materials": "/original/departments/building-materials.png",
   bathrooms: "/original/departments/bathrooms.png",
