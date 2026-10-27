@@ -58,8 +58,7 @@ export function categoryHref(slug: string): string {
 
 /**
  * Reference row icons for the vertical menu (20×20 PNGs — not every department
- * has one). Do not use these as mosaic/cover photography; add DEPARTMENT_PHOTOS
- * (≥800px assets) when real department images are available.
+ * has one). Do not use these as mosaic/cover photography.
  */
 export const DEPARTMENT_ICONS: Record<string, string> = {
   "building-materials": "/original/departments/building-materials.png",
@@ -70,6 +69,22 @@ export const DEPARTMENT_ICONS: Record<string, string> = {
   hardware: "/original/departments/hardware.png",
   plumbing: "/original/departments/plumbing.png",
   "roofing-ceiling": "/original/departments/roofing-ceiling.png",
+};
+
+/** Full-bleed mosaic photography for home department tiles (≥ photo scale). */
+export const DEPARTMENT_PHOTOS: Record<string, string> = {
+  "building-materials": "/home/departments/building-materials.jpg",
+  bathrooms: "/home/departments/bathrooms.jpg",
+  "door-windows": "/home/departments/door-windows.jpg",
+  electrical: "/home/departments/electrical.jpg",
+  flooring: "/home/departments/flooring.jpg",
+  hardware: "/home/departments/hardware.jpg",
+  plumbing: "/home/departments/plumbing.jpg",
+  "roofing-ceiling": "/home/departments/roofing-ceiling.jpg",
+  "tools-equipment": "/home/departments/tools-equipment.jpg",
+  "landscape-external-works": "/home/departments/landscape-external-works.jpg",
+  services: "/home/departments/services.jpg",
+  training: "/home/departments/training.jpg",
 };
 
 export interface NavLink {
